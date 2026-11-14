@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-30 (Asia/Shanghai)",
+  "source_root": "/home/asus/work/mjlab_lego2_work",
+  "status": {
+    "local": "CPU diagnostics and targeted checks passed",
+    "remote": "待确认：未执行同步/校验",
+    "training": "未运行",
+    "warp_dynamics": "待确认：当前执行环境无可用CUDA"
+  },
+  "backup_manifest": "docs/codex/backups/20261030_phase0_before_v1/manifest.json",
+  "unchanged_existing_source_asset_dependency_files": 434,
+  "checks": {
+    "ruff": "format and check passed for new tool and test",
+    "pyright": "0 errors, 0 warnings for new tool and test",
+    "ty": "All checks passed for new tool and test",
+    "compileall": "passed for new tool and test",
+    "pytest_command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 FORCE_CPU=1 uv run --no-sync pytest -q tests/test_lego2_action_diagnostics.py tests/test_asset_zoo.py -k \"diagnostic or Lego2\"",
+    "pytest_result": "6 passed, 2 deselected",
+    "configuration_load": "6 old train/play env configs and 3 agent configs passed",
+    "registered_lego2_tasks": [
+      "Mjlab-Platform-Climb-Lego2",
+      "Mjlab-Velocity-Flat-Lego2",
+      "Mjlab-Velocity-Rough-Lego2"
+    ],
+    "diagnostics": {
+      "joint_perturbations": 16,
+      "static_step_poses": 6,
+      "native_cpu_pd_trials": 3,
+      "scan_points_per_joint": 41
+    }
+  },
+  "local_report": "docs/codex/diagnostics/20261030_phase0_local_v1.json",
+  "local_report_sha256": "af59b551bf6114c28b03daedff8a12bbffe7aeeadef0131fd4f4beb10a1e8ce5",
+  "execution_environment": {
+    "UV_CACHE_DIR": "/tmp/lego2_phase0_uv_cache",
+    "MPLCONFIGDIR": "/tmp/lego2_phase0_mpl",
+    "XDG_CACHE_HOME": "/tmp/lego2_phase0_cache",
+    "dependency_sync": false
+  },
+  "preserved": [
+    "existing task/asset/training source bytes",
+    "local dependency files",
+    "old training results; no remote connection"
+  ],
+  "evidence_limits": [
+    "Synthetic actions, not checkpoint 9999 policy trajectories.",
+    "FK grids do not filter collisions; only selected soft-limit poses are checked.",
+    "Static poses do not validate an approach path or sufficient support/torque.",
+    "Raw [-1,1] is a comparison window, not an implemented action clamp.",
+    "URDF velocity values are declarations; current built-ins have no speed cap.",
+    "Native CPU flat-floor PD does not validate Warp contacts or climbing."
+  ],
+  "scope": "Targeted validation only; no commit, PR, full-repository formatting or full training test suite",
+  "local_link_check": {
+    "markdown_files": 8,
+    "local_targets_checked": 120,
+    "broken_targets": [],
+    "network_urls_checked": false
+  },
+  "remote_command_syntax": {
+    "bash_blocks": 2,
+    "embedded_configuration_code": "syntax passed; same source loading verified locally"
+  },
+  "package_check": {
+    "explicit_files": 24,
+    "member_names_and_bytes": "roundtrip passed",
+    "contains_training_source_assets_or_logs": false
+  }
+}

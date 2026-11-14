@@ -1,0 +1,229 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________________ test_inference_checkpoint_contract ______________________
+
+stage3_env = <mjlab.envs.manager_based_rl_env.ManagerBasedRlEnv object at 0x7ccae6bc8ad0>
+tmp_path = PosixPath('/tmp/pytest-of-asus/pytest-0/test_inference_checkpoint_cont0')
+
+    def test_inference_checkpoint_contract(stage3_env, tmp_path):
+      env = stage3_env
+      agent = load_rl_cfg("Mjlab-Blind-Pit-Lego2")
+      wrapper = RslRlVecEnvWrapper(env, clip_actions=agent.clip_actions)
+      runner_cls = load_runner_cls("Mjlab-Blind-Pit-Lego2")
+      assert runner_cls is not None
+      runner = runner_cls(wrapper, asdict(agent), device=env.device)
+      # Temporary random weights only: exercise save/load/inference without PPO.
+      checkpoint = tmp_path / "untrained.pt"
+      runner.save(str(checkpoint))
+      runner.load(
+        str(checkpoint), load_cfg={"actor": True}, strict=True, map_location=env.device
+      )
+      obs, _ = wrapper.reset()
+      with torch.inference_mode():
+        action = runner.get_inference_policy(device=env.device)(obs)
+        assert action.shape == (2, 12) and torch.isfinite(action).all()
+        wrapper.step(action)
+      # Evaluator resets between episodes outside the inference context.
+>     obs, _ = wrapper.reset()
+               ^^^^^^^^^^^^^^^
+
+tests/test_lego2_blind_pit_stage3.py:244: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/mjlab/rl/vecenv_wrapper.py:69: in reset
+    obs_dict, extras = self.env.reset()
+                       ^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:371: in reset
+    self._reset_idx(env_ids)
+src/mjlab/envs/manager_based_rl_env.py:602: in _reset_idx
+    info = self.metrics_manager.reset(env_ids)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/managers/metrics_manager.py:155: in reset
+    term_cfg.func.reset(env_ids=env_ids)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mjlab.tasks.velocity.config.lego2.blind_pit_metrics.PitProgress object at 0x7ccabd60acf0>
+env_ids = tensor([0, 1])
+
+    def reset(self, env_ids: torch.Tensor | slice | None = None) -> None:
+      ids = slice(None) if env_ids is None else env_ids
+      # 只清被重置的行；其他环境的连续支撑时长和已达成事件必须保留。
+      self.hold[ids] = 0
+      self.passed[ids] = False
+      self.last_step[ids] = -1
+      for value in self.values.values():
+>       value[ids] = 0
+        ^^^^^^^^^^
+E       RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+
+src/mjlab/tasks/velocity/config/lego2/blind_pit_metrics.py:90: RuntimeError
+---------------------------- Captured stdout setup -----------------------------
+Setting seed: 7
+
++--------------------------------+
+|        Base Environment        |
++------------------------+-------+
+| Property               | Value |
++------------------------+-------+
+| Number of environments | 2     |
+| Environment device     | cpu   |
+| Environment seed       | 7     |
+| Physics step-size      | 0.005 |
+| Environment step-size  | 0.02  |
++------------------------+-------+
+
+[INFO] <EventManager> contains 1 active terms.
++-------------------------------------+
+| Active Event Terms in Mode: 'reset' |
++--------+----------------------------+
+| Index  | Name                       |
++--------+----------------------------+
+|   0    | reset_base                 |
+|   1    | reset_robot_joints         |
++--------+----------------------------+
+
+[INFO] <CommandManager> contains 1 active terms.
++----------------------------------------+
+|          Active Command Terms          |
++-------+-------+------------------------+
+| Index | Name  |          Type          |
++-------+-------+------------------------+
+|   0   | twist | UniformVelocityCommand |
++-------+-------+------------------------+
+
+[INFO] <ActionManager> contains 2 active terms.
++---------------------------------+
+| Active Action Terms (shape: 12) |
++-------+-----------+-------------+
+| Index | Name      |   Dimension |
++-------+-----------+-------------+
+|   0   | joint_pos |           8 |
+|   1   | joint_vel |           4 |
++-------+-----------+-------------+
+
+[INFO] <ObservationManager> contains 2 groups.
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'actor' (shape: (144,)) |
++--------+-------------------------+-------------------------+
+| Index  | Name                    |          Shape          |
++--------+-------------------------+-------------------------+
+|   0    | base_ang_vel            |     (15,)  ← 5×(3,)     |
+|   1    | projected_gravity       |     (15,)  ← 5×(3,)     |
+|   2    | joint_pos               |     (40,)  ← 5×(8,)     |
+|   3    | joint_vel               |     (60,)  ← 5×(12,)    |
+|   4    | actions                 |          (12,)          |
+|   5    | command                 |           (2,)          |
++--------+-------------------------+-------------------------+
++-------------------------------------------------------------+
+| Active Observation Terms in Group: 'critic' (shape: (254,)) |
++----------+-----------------------------------+--------------+
+|  Index   | Name                              |    Shape     |
++----------+-----------------------------------+--------------+
+|    0     | base_lin_vel                      |     (3,)     |
+|    1     | base_ang_vel                      |     (3,)     |
+|    2     | projected_gravity                 |     (3,)     |
+|    3     | joint_pos                         |     (8,)     |
+|    4     | joint_vel                         |    (12,)     |
+|    5     | actions                           |    (12,)     |
+|    6     | command                           |     (2,)     |
+|    7     | height_scan                       |    (187,)    |
+|    8     | foot_height                       |     (4,)     |
+|    9     | foot_air_time                     |     (4,)     |
+|    10    | foot_contact                      |     (4,)     |
+|    11    | foot_contact_forces               |    (12,)     |
++----------+-----------------------------------+--------------+
+
+[INFO] <TerminationManager> contains 4 active terms.
++----------------------------------+
+|     Active Termination Terms     |
++-------+---------------+----------+
+| Index | Name          | Time Out |
++-------+---------------+----------+
+|   0   | time_out      |   True   |
+|   1   | fell_over     |  False   |
+|   2   | nan           |  False   |
+|   3   | tile_boundary |   True   |
++-------+---------------+----------+
+
+[INFO] <RewardManager> contains 11 active terms.
++-----------------------------------------+
+|           Active Reward Terms           |
++-------+----------------------+----------+
+| Index | Name                 |   Weight |
++-------+----------------------+----------+
+|   0   | track_lin_vel_xy_exp |      3.0 |
+|   1   | track_ang_vel_z_exp  |      1.5 |
+|   2   | lin_vel_z_l2         |     -0.3 |
+|   3   | ang_vel_xy_l2        |    -0.05 |
+|   4   | flat_orientation_l2  |     -0.5 |
+|   5   | joint_torques_l2     | -2.5e-05 |
+|   6   | joint_acc_l2         | -2.5e-07 |
+|   7   | joint_acc_wheel_l2   | -2.5e-09 |
+|   8   | action_rate_l2       |    -0.01 |
+|   9   | action_rate_wheel_l2 |    -0.01 |
+|   10  | joint_pos_limits     |     -5.0 |
++-------+----------------------+----------+
+
+[INFO] <NullCurriculumManager> (inactive)
+[INFO] <MetricsManager> contains 8 active terms.
++-----------------------------------+
+|        Active Metrics Terms       |
++-------+---------------------------+
+| Index | Name                      |
++-------+---------------------------+
+|   0   | mean_action_acc           |
+|   1   | ang_vel_z_rel_error       |
+|   2   | pit_nonfoot_contact_count |
+|   3   | pit_root_out              |
+|   4   | pit_front_up              |
+|   5   | pit_rear_up               |
+|   6   | pit_complete              |
+|   7   | pit_stable_pass           |
++-------+---------------------------+
+
+[INFO] <NullRecorderManager> (inactive)
+---------------------------- Captured stderr setup -----------------------------
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+----------------------------- Captured stdout call -----------------------------
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=144, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=12, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=254, out_features=512, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=512, out_features=256, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=256, out_features=128, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=128, out_features=1, bias=True)
+  )
+)
+=============================== warnings summary ===============================
+tests/test_lego2_blind_pit_stage3.py::test_inference_checkpoint_contract
+  /home/asus/work/mjlab_lego2_work/src/mjlab/rl/runner.py:47: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter will be the default. To switch now, set dynamo=True in torch.onnx.export. This new exporter supports features like exporting LLMs with DynamicCache. We encourage you to try it and share feedback to help improve the experience. Learn more about the new export logic: https://pytorch.org/docs/stable/onnx_dynamo.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html.
+    torch.onnx.export(
+
+tests/test_lego2_blind_pit_stage3.py::test_inference_checkpoint_contract
+  /home/asus/work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/torch/onnx/_internal/torchscript_exporter/utils.py:217: DeprecationWarning: The feature will be removed. Please remove usage of this function
+    setup_onnx_logging(verbose) as log_ctx,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_lego2_blind_pit_stage3.py::test_inference_checkpoint_contract
+1 failed, 4 deselected, 2 warnings in 20.84s

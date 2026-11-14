@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>阶段0：动作、足端与CPU响应诊断 &#8212; mjlab Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/twemoji.css" />
+    <link rel="stylesheet" type="text/css" href="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css?v=53359634" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=3ea80bc3" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js"></script>
+    <script src="../_static/twemoji.js"></script>
+    <script src="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js?v=ec35c6c9"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'codex/PHASE0_DIAGNOSTICS_20261030';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 14, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">mjlab Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item">
+<div class="sidebar-version-switcher">
+  <label class="sidebar-version-label" for="version-select">Version</label>
+  <select id="version-select" class="sidebar-version-select" onchange="location = this.value;">
+    <option value="PHASE0_DIAGNOSTICS_20261030.html" selected>main</option>
+  </select>
+</div>
+</div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../source/installation.html">Installation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../source/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../source/tutorials/cartpole.html">Cartpole: Building Your First Environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/contributing.html">Contributing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../source/architecture_overview.html">Architecture Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../source/entity/index.html">Entity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../source/entity/entity_data.html">Entity Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/entity/per_world_mesh.html">Heterogeneous Worlds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/actuators.html">Actuators</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../source/sensors/index.html">Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../source/sensors/raycast_sensor.html">RayCast Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/sensors/rgbd_camera.html">RGB-D Camera</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/scene.html">Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/terrain.html">Terrain</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Manager Layer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../source/environment_config.html">Environment Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/observations.html">Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/actions.html">Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/rewards.html">Rewards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/terminations.html">Terminations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/events.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/randomization.html">Domain Randomization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/curriculum.html">Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/recorders.html">Recorders</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Training &amp; Debugging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../source/training/rsl_rl.html">Training with RSL-RL</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../source/training/motion_imitation.html">Motion Imitation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/viewers.html">Viewers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/training/distributed_training.html">Distributed Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/training/cloud.html">Cloud Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/debugging/nan_guard.html">NaN Guard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/debugging/export_scene.html">Export Scene</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../source/api/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/envs.html">mjlab.envs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/scene.html">mjlab.scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/sim.html">mjlab.sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/entity.html">mjlab.entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/actuator.html">mjlab.actuator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/sensor.html">mjlab.sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/managers.html">mjlab.managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/terrains.html">mjlab.terrains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/rl.html">mjlab.rl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/viewer.html">mjlab.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/tasks.html">mjlab.tasks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../source/motivation.html">Why mjlab?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/migration_isaac_lab.html">Migrating from Isaac Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/faq.html">FAQ &amp; Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/research.html">Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/edit/main/docs/codex/PHASE0_DIAGNOSTICS_20261030.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/issues/new?title=Issue%20on%20page%20%2Fcodex/PHASE0_DIAGNOSTICS_20261030.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/codex/PHASE0_DIAGNOSTICS_20261030.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>阶段0：动作、足端与CPU响应诊断</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. 改动和回退</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2. 核心代码如何工作</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3. 实际名称映射：未发现前后腿互换</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4. 缩放、关节与驱动范围</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5. 前腿可达范围与实际响应</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6. 已完成的本地验证</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7. 下一步</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="cpu">
+<h1>阶段0：动作、足端与CPU响应诊断<a class="headerlink" href="#cpu" title="Link to this heading">#</a></h1>
+<p>日期：2026-10-30（Asia/Shanghai）。源码根目录：
+<code class="docutils literal notranslate"><span class="pre">/home/asus/work/mjlab_lego2_work</span></code>。</p>
+<p>状态：<strong>诊断工具、名称映射、CPU运动学和原生MuJoCo PD本地验收通过；
+远程同步/校验待执行，Warp动态接触与旧策略轨迹待确认。</strong>
+阶段1尚未实施，本批无PPO训练。依据为<a class="reference internal" href="REFACTOR_PLAN.html"><span class="std std-doc">正式计划</span></a>阶段0；
+用户本轮明确授权从阶段0开始实施，取代上一轮仅做文档核查的临时边界。</p>
+<section id="id1">
+<h2>1. 改动和回退<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>新增<a class="reference download internal" download="" href="../_downloads/81518042cf68b02286334371d71effb8/inspect_lego2_actions.py"><span class="xref download myst">诊断工具</span></a>及
+<a class="reference download internal" download="" href="../_downloads/8b216b036ce5f0feb930e7e67f478763/test_lego2_action_diagnostics.py"><span class="xref download myst">集成测试</span></a>。</p></li>
+<li><p>新增本记录、<a class="reference download internal" download="" href="../_downloads/4ca3963b5873556d6f061cdfa66b25ae/20261030_phase0_local_v1.json"><span class="xref download myst">原始数值</span></a>、
+<a class="reference internal" href="REMOTE_PHASE0_20261030.html"><span class="std std-doc">远程同步/校验说明</span></a>并维护连续性文档和changelog。</p></li>
+<li><p>原文件在<a class="reference download internal" download="" href="../_downloads/c1371da72d296f8e42c5fbad845b24f6/manifest.json"><span class="xref download myst">批前备份</span></a>，
+按源码相对路径保存。该工作副本没有可用Git元数据，因此以备份和SHA-256核对。</p></li>
+<li><p>与批前清单比较，原有434个源码/测试/资产/依赖文件逐字节不变。
+未修改旧三任务、共享资产、PPO、奖励或训练产物，也未连接远程执行操作。</p></li>
+</ul>
+<p>原始JSON包含实际加载的源码/资产hash、名称索引、目标探针、逐关节扰动、
+运动学扫描及逐控制帧PD轨迹；不能用本地结果代替远程结果。</p>
+</section>
+<section id="id2">
+<h2>2. 核心代码如何工作<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">build_inspection()</span></code>从当前Platform-Climb训练配置复制一个独立诊断scene，
+只把地形换成z=0平面、环境数设为1，保留机器人、动作、足端传感器声明和仿真选项。
+它不创建PPO、奖励、课程或随机化manager，也不改原任务配置。</p>
+<p><code class="docutils literal notranslate"><span class="pre">Inspection.control()</span></code>依次调用真实的ActionManager分片、ActionTerm缩放/偏置、
+Entity目标写入和built-in actuator路由，再读取实际ctrl。没有另外手写一套
+动作映射来“证明”自己的映射。实际<code class="docutils literal notranslate"><span class="pre">target_names</span></code>/<code class="docutils literal notranslate"><span class="pre">target_ids</span></code>和actuator传动joint
+会互相核对，发现不一致直接报错。</p>
+<p><code class="docutils literal notranslate"><span class="pre">perturb_joints()</span></code>保持root和其他关节不动，逐关节±0.1 rad计算轮心位移；
+<code class="docutils literal notranslate"><span class="pre">scan_front_legs()</span></code>扫描两前腿的HFE/KFE组合。轮底使用碰撞圆柱的真实中心和
+世界轴向支撑距离计算，包含轮轴倾斜影响，不把轮心高度当净空。</p>
+<p>扫描分别记录raw∈[-1,1]比较窗口、软范围、硬范围。随后在临时模型中加入
+3/15/30 cm台阶，只对选出的软范围姿态检查接触穿透。完整扫描未逐姿态过滤碰撞；
+静态无穿透也没有证明接近路径、驱动力或承重稳定性。</p>
+<p><code class="docutils literal notranslate"><span class="pre">pd_trials()</span></code>每次重新落地0.5 s，再独立执行0.4 s中立/收前腿/收后腿探针。
+前腿raw为HFE=+0.5、KFE=-1，后腿镜像为HFE=-0.5、KFE=+1；轮速目标均为0。
+这是诊断输入，不是准备写进策略的手工轨迹。每帧保存动作、目标、实角/实速、
+力矩、root、轮底和水平/竖直地面接触力；饱和率按每个物理步统计。
+响应/力矩/饱和汇总只覆盖0.4 s脉冲段，0.5 s落地段仅保存其结束时轮位作为基线。</p>
+</section>
+<section id="id3">
+<h2>3. 实际名称映射：未发现前后腿互换<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>action切片</p></th>
+<th class="head"><p>joint顺序</p></th>
+<th class="head"><p>Entity局部target_ids</p></th>
+<th class="head"><p>全局ctrl IDs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0:4</p></td>
+<td><p>LF_HFE、LF_KFE、RF_HFE、RF_KFE</p></td>
+<td><p>3、4、0、1</p></td>
+<td><p>2、3、0、1</p></td>
+</tr>
+<tr class="row-odd"><td><p>4:8</p></td>
+<td><p>LH_HFE、LH_KFE、RH_HFE、RH_KFE</p></td>
+<td><p>9、10、6、7</p></td>
+<td><p>6、7、4、5</p></td>
+</tr>
+<tr class="row-even"><td><p>8:12</p></td>
+<td><p>LF_Wheel、RF_Wheel、LH_Wheel、RH_Wheel</p></td>
+<td><p>5、2、11、8</p></td>
+<td><p>9、8、11、10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>实际<code class="docutils literal notranslate"><span class="pre">ContactSensor.primary_names</span></code>为RF/LF/RH/LH的foot_collision；
+高度frame为RF/LF/RH/LH的site。两者同序，前两项确实是前轮。
+每个site与其轮碰撞圆柱中心重合，默认姿态RF/LF位于root前方，RH/LH位于后方。
+16个逐关节扰动均只移动同名前缀的轮心，没有未解释的索引冲突。</p>
+<p>所有HFE/KFE轴均为局部(0,1,0)。前腿默认角为(+0.72,-1.44)，
+后腿为(-0.72,+1.44)。前KFE减0.1 rad，轮心升17.40 mm；
+后KFE加0.1 rad，同样升17.40 mm。不能统一前后腿角度符号。</p>
+</section>
+<section id="id4">
+<h2>4. 缩放、关节与驱动范围<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>腿目标=默认角+0.45×raw；轮速目标=5×raw。action clip和RL clip均为None。
+硬关节范围是物理约束，软范围用于正则；两者都不会自动把动作目标裁进范围。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>量</p></th>
+<th class="head"><p>前腿</p></th>
+<th class="head"><p>后腿</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>HFE硬范围(rad)</p></td>
+<td><p>[-1.57,1.57]</p></td>
+<td><p>[-1.57,1.57]</p></td>
+</tr>
+<tr class="row-odd"><td><p>HFE软范围(rad)</p></td>
+<td><p>[-1.413,1.413]</p></td>
+<td><p>[-1.413,1.413]</p></td>
+</tr>
+<tr class="row-even"><td><p>KFE硬范围(rad)</p></td>
+<td><p>[-2.618,-0.873]</p></td>
+<td><p>[0.873,2.618]</p></td>
+</tr>
+<tr class="row-odd"><td><p>KFE软范围(rad)</p></td>
+<td><p>[-2.53075,-0.96025]</p></td>
+<td><p>[0.96025,2.53075]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>探针示例：前HFE raw=3时实际ctrl=2.07 rad；前KFE raw=3时ctrl=-0.09 rad，
+均越过硬范围。它们是<strong>合成动作</strong>，不能据此声称checkpoint9999实际发生过越限。
+本批仅记录，没有添加[-1,1]裁剪或改scale。</p>
+<p>腿PD=100/5，actuator力矩范围±150 Nm；轮速度增益1，actuator范围±65 Nm。
+XML joint总驱动力矩范围分别±189/±66 Nm，当前每关节一个actuator时有效限制
+由更小的actuator范围主导。URDF声明腿12.9、轮76.79 rad/s，但当前加载的
+MJCF/built-in驱动没有实现这些速度上限或DC力矩-转速包络，不能称其已限速。</p>
+</section>
+<section id="id5">
+<h2>5. 前腿可达范围与实际响应<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>扫描条件：root固定(0,0,0.47)、姿态单位四元数；地面z=0；轮半径0.115 m。
+默认轮底高48.10 mm，落地后不能继续沿用这个悬空初始条件。
+假想台沿在root前方x=0.5 m，要求<strong>整个轮子</strong>越过该竖线且轮底高于台面1 cm。
+这个位置是诊断几何参数，不是训练奖励或实际受阻root位置。</p>
+<p>41×41网格中，两个前腿的软范围候选相同：</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>台阶高度</p></th>
+<th class="head"><p>HFE/KFE(rad)</p></th>
+<th class="head"><p>raw HFE/KFE</p></th>
+<th class="head"><p>轮底高度</p></th>
+<th class="head"><p>轮后缘x</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3/15 cm</p></td>
+<td><p>-0.21195/-1.43140</p></td>
+<td><p>-2.071/0.019</p></td>
+<td><p>0.19772 m</p></td>
+<td><p>0.51301 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>30 cm</p></td>
+<td><p>-0.35325/-1.74550</p></td>
+<td><p>-2.385/-0.679</p></td>
+<td><p>0.31538 m</p></td>
+<td><p>0.51353 m</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这六个单前腿静态姿态在加入台阶的CPU模型中均未检测到超过0.1 mm的穿透。
+它们不是连续轨迹，也没有证明双前腿同时抬起后的机身支撑或30 cm真实越障。
+raw∈[-1,1]比较窗口内，固定root的最高轮底约0.19535 m，但没有整轮越过上述
+x=0.5 m台沿的样本；移动root或调整台沿位置会改变这个结果，不能据此认定机械不可达。</p>
+<p>自由机身平地PD结果（单位为world坐标）：</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>探针</p></th>
+<th class="head"><p>脉冲末root z</p></th>
+<th class="head"><p>最大腿力矩</p></th>
+<th class="head"><p>全actuator饱和率</p></th>
+<th class="head"><p>指定轮最大离地</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>中立</p></td>
+<td><p>0.37654 m</p></td>
+<td><p>22.02 Nm</p></td>
+<td><p>0</p></td>
+<td><p>约0（接触软穿透约0.15 mm）</p></td>
+</tr>
+<tr class="row-odd"><td><p>收前腿</p></td>
+<td><p>0.32587 m</p></td>
+<td><p>35.63 Nm</p></td>
+<td><p>0</p></td>
+<td><p>RF约7.56 mm，随后重新承重</p></td>
+</tr>
+<tr class="row-even"><td><p>收后腿</p></td>
+<td><p>0.32563 m</p></td>
+<td><p>35.70 Nm</p></td>
+<td><p>0</p></td>
+<td><p>RH约7.54 mm，随后重新承重</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>前/后指定关节的实际响应方向与目标一致；载荷下末端HFE误差约0.046 rad，
+KFE误差约0.238 rad。收前/后腿时最大关节速度约5.34 rad/s。
+<strong>该小探针没有触发力矩饱和，不等于碰台时或旧策略永远不饱和。</strong>
+前后响应接近，暂不支持“前腿接口独有失效”的判断；自由机身收腿会改变root高度，
+不能直接把固定root扫描高度当实际离地能力，也不能凭这个脉冲判定需要改PD增益。</p>
+</section>
+<section id="id6">
+<h2>6. 已完成的本地验证<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>全部使用既有<code class="docutils literal notranslate"><span class="pre">.venv</span></code>和<code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">--no-sync</span></code>，无依赖安装/锁文件改动：</p>
+<ul class="simple">
+<li><p>新工具与测试的Ruff格式、lint、Pyright、ty、compileall通过。</p></li>
+<li><p>5项诊断集成测试及Lego2资产编译：<code class="docutils literal notranslate"><span class="pre">6</span> <span class="pre">passed,</span> <span class="pre">2</span> <span class="pre">deselected</span></code>。</p></li>
+<li><p>完整41点诊断已保存，含6个台阶静态姿态检查及3条PD试验轨迹。</p></li>
+<li><p>三个旧任务的train/play共6个配置及3个agent配置可加载；注册仍只有原三个Lego2任务。</p></li>
+<li><p>434个已有源码/资产/测试/依赖文件与批前SHA-256完全相同。</p></li>
+</ul>
+<p>当前受限执行环境无法访问CUDA；本批动态部分是原生MuJoCo CPU，未执行Warp step、
+GUI、PPO或checkpoint回放。Warp初始化提示无CUDA、圆柱碰撞对的MULTICCD支持警告
+已如实记录，不能据CPU接触结果认定GPU接触已通过。</p>
+<p><code class="docutils literal notranslate"><span class="pre">list-envs</span></code>控制台入口把任务数量当退出码（源码main返回数量）；验证使用
+<code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">--no-sync</span> <span class="pre">python</span> <span class="pre">-m</span> <span class="pre">mjlab.scripts.list_envs</span> <span class="pre">--keyword</span> <span class="pre">Lego2</span></code>正常退出。
+未为此修改原脚本。缓存目录通过本次命令环境变量放在<code class="docutils literal notranslate"><span class="pre">/tmp</span></code>，不改用户全局配置。</p>
+</section>
+<section id="id7">
+<h2>7. 下一步<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p>先按<a class="reference internal" href="REMOTE_PHASE0_20261030.html"><span class="std std-doc">远程说明</span></a>备份、同步和核验本批明确文件，
+检查当前业务源码/资产hash并只读归档旧run文件清单。远程尚未执行，不能标记已同步。
+核验结果一致后进入阶段1独立盲走任务/原生历史，继续逐批讲解和本地验收。
+少环境Warp动态接触在后续环境验收中补验；旧9999策略的真实动作、碰壁水平接触、
+目标越限和力矩饱和仍待轨迹证据，不据本批探针指定旧训练失败的唯一原因。</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. 改动和回退</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2. 核心代码如何工作</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3. 实际名称映射：未发现前后腿互换</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4. 缩放、关节与驱动范围</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5. 前腿可达范围与实际响应</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6. 已完成的本地验证</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7. 下一步</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The mjlab Developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, The mjlab Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 14, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,755 @@
+{
+  "method": "Read downloaded evidence; XML forward kinematics, no simulation/PPO",
+  "checkpoint": "/home/ajifang/zrq/mjlab_lego2/logs/rsl_rl/lego2_blind_pit/2026-11-01_20-17-22_phase3_low_1024x1000_v1_20261101_201712_2200851/model_1198.pt",
+  "checkpoint_sha256": "7780cf0d2557c86f51c0486f870e7d471b13703777e9cee5e1854427def05027",
+  "checkpoint_file_downloaded": false,
+  "seed": 7,
+  "source_matches": {
+    "src/mjlab/tasks/velocity/config/lego2/__init__.py": true,
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_curriculums.py": true,
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": true,
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_metrics.py": true,
+    "src/mjlab/tasks/velocity/config/lego2/env_cfgs.py": true,
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_env_cfg.py": true,
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_metrics.py": true,
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_rewards.py": true,
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_terminations.py": true,
+    "src/mjlab/tasks/velocity/config/lego2/rl_cfg.py": true,
+    "src/mjlab/asset_zoo/robots/lego2/xmls/lego2.xml": true,
+    "src/mjlab/asset_zoo/robots/lego2/urdf/urdf_legowheel2.urdf": true,
+    "src/mjlab/asset_zoo/robots/lego2/lego2_constants.py": true,
+    "scripts/tools/evaluate_lego2_blind_pit.py": true
+  },
+  "input_sha256": {
+    "checkpoint.sha256": "1b705a9ad9d9c0178f9b15faf0d817f897bf2bcfe7ce488de5681ec1925d5b39",
+    "report.json": "1cf976b6cec4c6d2d1db178bfd761bcb54de451d97c3be6ccfde99408b9a7960",
+    "trace_0.300000.jsonl": "7ebe5e285935b9a01a530079eddff124f6c9a56bfa71cde0b505bd8576b9bda5"
+  },
+  "analysis_script_sha256": "e7963ae0f4f830c8e8f8f871429bb11f5fb74d581664a1086312bba081e7d613",
+  "dt_s": 0.02,
+  "origin_world_m": [
+    -5.0,
+    0.0,
+    -0.3
+  ],
+  "limits": [
+    "Actual GPU runtime model/config was not downloaded; reconstruct from matching sources",
+    "Trace omits contact positions, cannot fully reconstruct contact_on_top",
+    "Missing contact or weak force cannot distinguish real unloading from sensor/solver behavior",
+    "Joint target violations and saturation are correlations, not proof of a cause",
+    "Kinematics establishes wheel clearance from side walls, not absence of body-wall contacts"
+  ],
+  "episodes": [
+    {
+      "episode_zero_based": 0,
+      "episode_display": 1,
+      "passed": true,
+      "steps": 619,
+      "duration_s": 12.38,
+      "command_vx_m_s": 0.35453516244888306,
+      "first_stage_time_s": {
+        "root_out": 5.84,
+        "front_up": 4.8,
+        "rear_up": 7.5600000000000005,
+        "complete": 7.5600000000000005,
+        "stable_now": 7.5600000000000005,
+        "stable_pass": 8.74
+      },
+      "max_stable_run_s": 0.88,
+      "complete_steps": 220,
+      "max_tilt_deg": 11.366020386439867,
+      "root_end_local_xy_m": [
+        4.004888474941254,
+        0.12287284433841705
+      ],
+      "max_abs_root_y_m": 0.12287284433841705,
+      "minimum_wheel_side_clearance_m": 1.0830882615811368,
+      "maximum_wheel_bottom_above_floor_m": [
+        0.5364488841789257,
+        0.3027618843157222,
+        0.3040521230623245,
+        0.30006076027435924
+      ],
+      "outside_and_top_steps": 242,
+      "outside_top_without_all_support_steps": 22,
+      "outside_top_missing_contact_steps_by_wheel": [
+        5,
+        14,
+        3,
+        1
+      ],
+      "outside_top_weak_vertical_force_steps_by_wheel": [
+        5,
+        14,
+        3,
+        1
+      ],
+      "target_over_hard_limit_steps_by_joint": {
+        "LF_HFE": 0,
+        "LF_KFE": 10,
+        "RF_HFE": 0,
+        "RF_KFE": 10,
+        "LH_HFE": 0,
+        "LH_KFE": 37,
+        "RH_HFE": 0,
+        "RH_KFE": 15
+      },
+      "any_target_over_hard_limit_steps": 66,
+      "any_saturation_steps": 0,
+      "peak_abs_actuator_force_nm": {
+        "RF_HFE": 36.70608139038086,
+        "RF_KFE": 49.2347297668457,
+        "LF_HFE": 55.839778900146484,
+        "LF_KFE": 78.08843994140625,
+        "RH_HFE": 45.875633239746094,
+        "RH_KFE": 46.225318908691406,
+        "LH_HFE": 47.192806243896484,
+        "LH_KFE": 38.71514892578125,
+        "RF_Wheel": 9.821283340454102,
+        "LF_Wheel": 20.806568145751953,
+        "RH_Wheel": 14.351978302001953,
+        "LH_Wheel": 12.813112258911133
+      }
+    },
+    {
+      "episode_zero_based": 1,
+      "episode_display": 2,
+      "passed": false,
+      "steps": 1000,
+      "duration_s": 20.0,
+      "command_vx_m_s": 0.31953173875808716,
+      "first_stage_time_s": {
+        "root_out": null,
+        "front_up": null,
+        "rear_up": null,
+        "complete": null,
+        "stable_now": null,
+        "stable_pass": null
+      },
+      "max_stable_run_s": 0.0,
+      "complete_steps": 0,
+      "max_tilt_deg": 12.09637555419528,
+      "root_end_local_xy_m": [
+        0.9943661689758301,
+        0.1578647494316101
+      ],
+      "max_abs_root_y_m": 0.18334457278251648,
+      "minimum_wheel_side_clearance_m": 0.9289801724839654,
+      "maximum_wheel_bottom_above_floor_m": [
+        0.07537369455373177,
+        0.2354795748764237,
+        0.04104747024550076,
+        0.1672137271984821
+      ],
+      "outside_and_top_steps": 0,
+      "outside_top_without_all_support_steps": 0,
+      "outside_top_missing_contact_steps_by_wheel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "outside_top_weak_vertical_force_steps_by_wheel": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "target_over_hard_limit_steps_by_joint": {
+        "LF_HFE": 0,
+        "LF_KFE": 9,
+        "RF_HFE": 0,
+        "RF_KFE": 22,
+        "LH_HFE": 0,
+        "LH_KFE": 149,
+        "RH_HFE": 0,
+        "RH_KFE": 24
+      },
+      "any_target_over_hard_limit_steps": 198,
+      "any_saturation_steps": 0,
+      "peak_abs_actuator_force_nm": {
+        "RF_HFE": 47.32931900024414,
+        "RF_KFE": 48.10601806640625,
+        "LF_HFE": 58.5946159362793,
+        "LF_KFE": 91.33384704589844,
+        "RH_HFE": 33.89764404296875,
+        "RH_KFE": 62.268836975097656,
+        "LH_HFE": 83.27629852294922,
+        "LH_KFE": 58.124290466308594,
+        "RF_Wheel": 17.61777114868164,
+        "LF_Wheel": 23.38233184814453,
+        "RH_Wheel": 13.486276626586914,
+        "LH_Wheel": 12.077021598815918
+      }
+    },
+    {
+      "episode_zero_based": 2,
+      "episode_display": 3,
+      "passed": false,
+      "steps": 858,
+      "duration_s": 17.16,
+      "command_vx_m_s": 0.3004603683948517,
+      "first_stage_time_s": {
+        "root_out": 8.98,
+        "front_up": 7.66,
+        "rear_up": 11.42,
+        "complete": 11.42,
+        "stable_now": 11.42,
+        "stable_pass": null
+      },
+      "max_stable_run_s": 0.22,
+      "complete_steps": 193,
+      "max_tilt_deg": 15.503964352376142,
+      "root_end_local_xy_m": [
+        4.0022478103637695,
+        0.5435779690742493
+      ],
+      "max_abs_root_y_m": 0.5435779690742493,
+      "minimum_wheel_side_clearance_m": 0.6328051621065957,
+      "maximum_wheel_bottom_above_floor_m": [
+        0.5952486302879412,
+        0.30114934835898405,
+        0.3271056206384566,
+        0.3000003007337428
+      ],
+      "outside_and_top_steps": 288,
+      "outside_top_without_all_support_steps": 95,
+      "outside_top_missing_contact_steps_by_wheel": [
+        27,
+        50,
+        22,
+        13
+      ],
+      "outside_top_weak_vertical_force_steps_by_wheel": [
+        27,
+        50,
+        22,
+        13
+      ],
+      "target_over_hard_limit_steps_by_joint": {
+        "LF_HFE": 0,
+        "LF_KFE": 8,
+        "RF_HFE": 0,
+        "RF_KFE": 11,
+        "LH_HFE": 0,
+        "LH_KFE": 126,
+        "RH_HFE": 0,
+        "RH_KFE": 123
+      },
+      "any_target_over_hard_limit_steps": 263,
+      "any_saturation_steps": 0,
+      "peak_abs_actuator_force_nm": {
+        "RF_HFE": 40.68872833251953,
+        "RF_KFE": 42.83272933959961,
+        "LF_HFE": 53.262420654296875,
+        "LF_KFE": 60.62653350830078,
+        "RH_HFE": 62.09429931640625,
+        "RH_KFE": 32.5970344543457,
+        "LH_HFE": 58.37641906738281,
+        "LH_KFE": 29.400896072387695,
+        "RF_Wheel": 8.12474250793457,
+        "LF_Wheel": 18.54134750366211,
+        "RH_Wheel": 12.600394248962402,
+        "LH_Wheel": 12.222528457641602
+      }
+    },
+    {
+      "episode_zero_based": 3,
+      "episode_display": 4,
+      "passed": true,
+      "steps": 526,
+      "duration_s": 10.52,
+      "command_vx_m_s": 0.38998255133628845,
+      "first_stage_time_s": {
+        "root_out": 4.5200000000000005,
+        "front_up": 3.7,
+        "rear_up": 6.0600000000000005,
+        "complete": 6.0600000000000005,
+        "stable_now": 6.0600000000000005,
+        "stable_pass": 6.54
+      },
+      "max_stable_run_s": 0.9,
+      "complete_steps": 213,
+      "max_tilt_deg": 10.991374994093597,
+      "root_end_local_xy_m": [
+        4.010740101337433,
+        0.048105016350746155
+      ],
+      "max_abs_root_y_m": 0.0848938524723053,
+      "minimum_wheel_side_clearance_m": 1.1251242701091444,
+      "maximum_wheel_bottom_above_floor_m": [
+        0.5341022835294942,
+        0.30096139623500795,
+        0.31008590144397474,
+        0.29999818271482237
+      ],
+      "outside_and_top_steps": 224,
+      "outside_top_without_all_support_steps": 11,
+      "outside_top_missing_contact_steps_by_wheel": [
+        2,
+        7,
+        1,
+        1
+      ],
+      "outside_top_weak_vertical_force_steps_by_wheel": [
+        2,
+        7,
+        1,
+        1
+      ],
+      "target_over_hard_limit_steps_by_joint": {
+        "LF_HFE": 0,
+        "LF_KFE": 11,
+        "RF_HFE": 0,
+        "RF_KFE": 9,
+        "LH_HFE": 0,
+        "LH_KFE": 25,
+        "RH_HFE": 0,
+        "RH_KFE": 15
+      },
+      "any_target_over_hard_limit_steps": 55,
+      "any_saturation_steps": 0,
+      "peak_abs_actuator_force_nm": {
+        "RF_HFE": 33.89573669433594,
+        "RF_KFE": 43.21901321411133,
+        "LF_HFE": 58.56444549560547,
+        "LF_KFE": 72.7276611328125,
+        "RH_HFE": 47.27051544189453,
+        "RH_KFE": 39.688385009765625,
+        "LH_HFE": 49.18375778198242,
+        "LH_KFE": 33.91581726074219,
+        "RF_Wheel": 9.581578254699707,
+        "LF_Wheel": 20.021448135375977,
+        "RH_Wheel": 15.379725456237793,
+        "LH_Wheel": 13.323488235473633
+      }
+    },
+    {
+      "episode_zero_based": 4,
+      "episode_display": 5,
+      "passed": true,
+      "steps": 390,
+      "duration_s": 7.8,
+      "command_vx_m_s": 0.5362254977226257,
+      "first_stage_time_s": {
+        "root_out": 3.22,
+        "front_up": 2.72,
+        "rear_up": 4.4,
+        "complete": 4.4,
+        "stable_now": 4.4,
+        "stable_pass": 4.88
+      },
+      "max_stable_run_s": 1.06,
+      "complete_steps": 164,
+      "max_tilt_deg": 10.924668360922087,
+      "root_end_local_xy_m": [
+        4.008327782154083,
+        -0.02562474086880684
+      ],
+      "max_abs_root_y_m": 0.02562474086880684,
+      "minimum_wheel_side_clearance_m": 1.1918691145329035,
+      "maximum_wheel_bottom_above_floor_m": [
+        0.4982811059431549,
+        0.3121574520944659,
+        0.3000224522861592,
+        0.2998336374895369
+      ],
+      "outside_and_top_steps": 171,
+      "outside_top_without_all_support_steps": 7,
+      "outside_top_missing_contact_steps_by_wheel": [
+        1,
+        2,
+        1,
+        3
+      ],
+      "outside_top_weak_vertical_force_steps_by_wheel": [
+        1,
+        2,
+        1,
+        3
+      ],
+      "target_over_hard_limit_steps_by_joint": {
+        "LF_HFE": 0,
+        "LF_KFE": 12,
+        "RF_HFE": 0,
+        "RF_KFE": 8,
+        "LH_HFE": 0,
+        "LH_KFE": 20,
+        "RH_HFE": 0,
+        "RH_KFE": 16
+      },
+      "any_target_over_hard_limit_steps": 51,
+      "any_saturation_steps": 0,
+      "peak_abs_actuator_force_nm": {
+        "RF_HFE": 44.069271087646484,
+        "RF_KFE": 52.62457275390625,
+        "LF_HFE": 56.00471115112305,
+        "LF_KFE": 48.50019073486328,
+        "RH_HFE": 40.636531829833984,
+        "RH_KFE": 49.083106994628906,
+        "LH_HFE": 56.166664123535156,
+        "LH_KFE": 37.175716400146484,
+        "RF_Wheel": 9.523801803588867,
+        "LF_Wheel": 9.884893417358398,
+        "RH_Wheel": 17.189746856689453,
+        "LH_Wheel": 14.742711067199707
+      }
+    },
+    {
+      "episode_zero_based": 5,
+      "episode_display": 6,
+      "passed": true,
+      "steps": 392,
+      "duration_s": 7.84,
+      "command_vx_m_s": 0.5209898948669434,
+      "first_stage_time_s": {
+        "root_out": 3.16,
+        "front_up": 2.66,
+        "rear_up": 4.36,
+        "complete": 4.36,
+        "stable_now": 4.36,
+        "stable_pass": 6.08
+      },
+      "max_stable_run_s": 0.76,
+      "complete_steps": 164,
+      "max_tilt_deg": 11.196844016219494,
+      "root_end_local_xy_m": [
+        4.009314060211182,
+        -0.13729019463062286
+      ],
+      "max_abs_root_y_m": 0.13729019463062286,
+      "minimum_wheel_side_clearance_m": 1.0847110731829126,
+      "maximum_wheel_bottom_above_floor_m": [
+        0.4746720212868907,
+        0.3111077573986688,
+        0.29995562753698923,
+        0.29982623158860666
+      ],
+      "outside_and_top_steps": 175,
+      "outside_top_without_all_support_steps": 11,
+      "outside_top_missing_contact_steps_by_wheel": [
+        3,
+        2,
+        3,
+        3
+      ],
+      "outside_top_weak_vertical_force_steps_by_wheel": [
+        3,
+        2,
+        3,
+        3
+      ],
+      "target_over_hard_limit_steps_by_joint": {
+        "LF_HFE": 0,
+        "LF_KFE": 12,
+        "RF_HFE": 0,
+        "RF_KFE": 9,
+        "LH_HFE": 0,
+        "LH_KFE": 28,
+        "RH_HFE": 0,
+        "RH_KFE": 11
+      },
+      "any_target_over_hard_limit_steps": 54,
+      "any_saturation_steps": 0,
+      "peak_abs_actuator_force_nm": {
+        "RF_HFE": 43.14505386352539,
+        "RF_KFE": 52.53701400756836,
+        "LF_HFE": 59.12584686279297,
+        "LF_KFE": 48.45643615722656,
+        "RH_HFE": 40.3205451965332,
+        "RH_KFE": 44.442501068115234,
+        "LH_HFE": 55.41748809814453,
+        "LH_KFE": 42.52503204345703,
+        "RF_Wheel": 9.315816879272461,
+        "LF_Wheel": 14.89015007019043,
+        "RH_Wheel": 19.158489227294922,
+        "LH_Wheel": 14.780006408691406
+      }
+    },
+    {
+      "episode_zero_based": 6,
+      "episode_display": 7,
+      "passed": true,
+      "steps": 425,
+      "duration_s": 8.5,
+      "command_vx_m_s": 0.46753132343292236,
+      "first_stage_time_s": {
+        "root_out": 3.38,
+        "front_up": 2.8000000000000003,
+        "rear_up": 4.72,
+        "complete": 4.72,
+        "stable_now": 4.72,
+        "stable_pass": 5.2
+      },
+      "max_stable_run_s": 0.86,
+      "complete_steps": 184,
+      "max_tilt_deg": 11.138320987608804,
+      "root_end_local_xy_m": [
+        4.00766521692276,
+        0.07552392780780792
+      ],
+      "max_abs_root_y_m": 0.07552392780780792,
+      "minimum_wheel_side_clearance_m": 1.1349480210243847,
+      "maximum_wheel_bottom_above_floor_m": [
+        0.5031940368794707,
+        0.3064988116947626,
+        0.29997617723573283,
+        0.29994965452021033
+      ],
+      "outside_and_top_steps": 190,
+      "outside_top_without_all_support_steps": 6,
+      "outside_top_missing_contact_steps_by_wheel": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "outside_top_weak_vertical_force_steps_by_wheel": [
+        3,
+        1,
+        1,
+        1
+      ],
+      "target_over_hard_limit_steps_by_joint": {
+        "LF_HFE": 0,
+        "LF_KFE": 12,
+        "RF_HFE": 0,
+        "RF_KFE": 10,
+        "LH_HFE": 0,
+        "LH_KFE": 14,
+        "RH_HFE": 0,
+        "RH_KFE": 14
+      },
+      "any_target_over_hard_limit_steps": 44,
+      "any_saturation_steps": 0,
+      "peak_abs_actuator_force_nm": {
+        "RF_HFE": 38.66115188598633,
+        "RF_KFE": 46.950443267822266,
+        "LF_HFE": 56.181068420410156,
+        "LF_KFE": 53.690765380859375,
+        "RH_HFE": 42.30801010131836,
+        "RH_KFE": 39.22172546386719,
+        "LH_HFE": 53.5182991027832,
+        "LH_KFE": 46.58061981201172,
+        "RF_Wheel": 9.565464973449707,
+        "LF_Wheel": 16.80880355834961,
+        "RH_Wheel": 17.52916717529297,
+        "LH_Wheel": 14.420866966247559
+      }
+    },
+    {
+      "episode_zero_based": 7,
+      "episode_display": 8,
+      "passed": true,
+      "steps": 481,
+      "duration_s": 9.620000000000001,
+      "command_vx_m_s": 0.4157535433769226,
+      "first_stage_time_s": {
+        "root_out": 3.96,
+        "front_up": 3.2800000000000002,
+        "rear_up": 5.44,
+        "complete": 5.44,
+        "stable_now": 5.44,
+        "stable_pass": 6.32
+      },
+      "max_stable_run_s": 1.16,
+      "complete_steps": 204,
+      "max_tilt_deg": 11.077875471650708,
+      "root_end_local_xy_m": [
+        4.002482771873474,
+        0.214375302195549
+      ],
+      "max_abs_root_y_m": 0.214375302195549,
+      "minimum_wheel_side_clearance_m": 0.9945644008220721,
+      "maximum_wheel_bottom_above_floor_m": [
+        0.5157204814365783,
+        0.308534139669094,
+        0.3031496779175457,
+        0.2999621978436215
+      ],
+      "outside_and_top_steps": 210,
+      "outside_top_without_all_support_steps": 6,
+      "outside_top_missing_contact_steps_by_wheel": [
+        3,
+        3,
+        0,
+        1
+      ],
+      "outside_top_weak_vertical_force_steps_by_wheel": [
+        3,
+        3,
+        0,
+        1
+      ],
+      "target_over_hard_limit_steps_by_joint": {
+        "LF_HFE": 0,
+        "LF_KFE": 11,
+        "RF_HFE": 0,
+        "RF_KFE": 10,
+        "LH_HFE": 0,
+        "LH_KFE": 4,
+        "RH_HFE": 0,
+        "RH_KFE": 14
+      },
+      "any_target_over_hard_limit_steps": 34,
+      "any_saturation_steps": 0,
+      "peak_abs_actuator_force_nm": {
+        "RF_HFE": 36.35470199584961,
+        "RF_KFE": 44.87162399291992,
+        "LF_HFE": 52.61479568481445,
+        "LF_KFE": 52.57863235473633,
+        "RH_HFE": 41.023799896240234,
+        "RH_KFE": 40.172950744628906,
+        "LH_HFE": 50.8675651550293,
+        "LH_KFE": 49.10106658935547,
+        "RF_Wheel": 9.43422794342041,
+        "LF_Wheel": 14.331573486328125,
+        "RH_Wheel": 16.037601470947266,
+        "LH_Wheel": 13.763073921203613
+      }
+    },
+    {
+      "episode_zero_based": 8,
+      "episode_display": 9,
+      "passed": true,
+      "steps": 408,
+      "duration_s": 8.16,
+      "command_vx_m_s": 0.5234121084213257,
+      "first_stage_time_s": {
+        "root_out": 3.46,
+        "front_up": 2.92,
+        "rear_up": 4.66,
+        "complete": 4.66,
+        "stable_now": 4.66,
+        "stable_pass": 5.14
+      },
+      "max_stable_run_s": 1.2,
+      "complete_steps": 166,
+      "max_tilt_deg": 10.757074766331892,
+      "root_end_local_xy_m": [
+        4.012002229690552,
+        0.027579225599765778
+      ],
+      "max_abs_root_y_m": 0.09933874756097794,
+      "minimum_wheel_side_clearance_m": 1.0985235860444165,
+      "maximum_wheel_bottom_above_floor_m": [
+        0.48874747941442526,
+        0.31007182903540076,
+        0.29996861282379433,
+        0.29996775817973975
+      ],
+      "outside_and_top_steps": 176,
+      "outside_top_without_all_support_steps": 10,
+      "outside_top_missing_contact_steps_by_wheel": [
+        2,
+        2,
+        5,
+        1
+      ],
+      "outside_top_weak_vertical_force_steps_by_wheel": [
+        2,
+        2,
+        5,
+        1
+      ],
+      "target_over_hard_limit_steps_by_joint": {
+        "LF_HFE": 0,
+        "LF_KFE": 12,
+        "RF_HFE": 0,
+        "RF_KFE": 8,
+        "LH_HFE": 0,
+        "LH_KFE": 23,
+        "RH_HFE": 0,
+        "RH_KFE": 12
+      },
+      "any_target_over_hard_limit_steps": 50,
+      "any_saturation_steps": 0,
+      "peak_abs_actuator_force_nm": {
+        "RF_HFE": 43.6138916015625,
+        "RF_KFE": 53.26012420654297,
+        "LF_HFE": 59.67501449584961,
+        "LF_KFE": 48.54799270629883,
+        "RH_HFE": 42.32505798339844,
+        "RH_KFE": 46.30827713012695,
+        "LH_HFE": 55.30702209472656,
+        "LH_KFE": 38.08089065551758,
+        "RF_Wheel": 9.058725357055664,
+        "LF_Wheel": 10.895040512084961,
+        "RH_Wheel": 19.277061462402344,
+        "LH_Wheel": 14.728630065917969
+      }
+    },
+    {
+      "episode_zero_based": 9,
+      "episode_display": 10,
+      "passed": true,
+      "steps": 498,
+      "duration_s": 9.96,
+      "command_vx_m_s": 0.40422871708869934,
+      "first_stage_time_s": {
+        "root_out": 4.16,
+        "front_up": 3.46,
+        "rear_up": 5.66,
+        "complete": 5.66,
+        "stable_now": 5.66,
+        "stable_pass": 6.140000000000001
+      },
+      "max_stable_run_s": 1.34,
+      "complete_steps": 207,
+      "max_tilt_deg": 11.28775741846804,
+      "root_end_local_xy_m": [
+        4.00666868686676,
+        0.10356107354164124
+      ],
+      "max_abs_root_y_m": 0.10356107354164124,
+      "minimum_wheel_side_clearance_m": 1.1078274419343166,
+      "maximum_wheel_bottom_above_floor_m": [
+        0.5147652368131791,
+        0.30392144624577205,
+        0.2999189285587142,
+        0.29988465637878636
+      ],
+      "outside_and_top_steps": 216,
+      "outside_top_without_all_support_steps": 9,
+      "outside_top_missing_contact_steps_by_wheel": [
+        2,
+        3,
+        2,
+        2
+      ],
+      "outside_top_weak_vertical_force_steps_by_wheel": [
+        2,
+        3,
+        2,
+        2
+      ],
+      "target_over_hard_limit_steps_by_joint": {
+        "LF_HFE": 0,
+        "LF_KFE": 12,
+        "RF_HFE": 0,
+        "RF_KFE": 10,
+        "LH_HFE": 0,
+        "LH_KFE": 11,
+        "RH_HFE": 0,
+        "RH_KFE": 13
+      },
+      "any_target_over_hard_limit_steps": 40,
+      "any_saturation_steps": 0,
+      "peak_abs_actuator_force_nm": {
+        "RF_HFE": 36.531394958496094,
+        "RF_KFE": 44.62957000732422,
+        "LF_HFE": 52.45842742919922,
+        "LF_KFE": 50.364898681640625,
+        "RH_HFE": 40.55483627319336,
+        "RH_KFE": 41.0165901184082,
+        "LH_HFE": 50.162899017333984,
+        "LH_KFE": 45.52875900268555,
+        "RF_Wheel": 9.727615356445312,
+        "LF_Wheel": 12.501802444458008,
+        "RH_Wheel": 15.734264373779297,
+        "LH_Wheel": 13.597587585449219
+      }
+    }
+  ],
+  "maximum_wheel_bottom_fk_error_m": 1.4490620736662407e-07
+}

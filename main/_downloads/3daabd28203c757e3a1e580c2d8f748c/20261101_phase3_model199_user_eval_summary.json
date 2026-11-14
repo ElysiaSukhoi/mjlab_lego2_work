@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-01 Asia/Shanghai",
+  "evidence_source": "user-pasted final launcher summary; raw report/trace not downloaded",
+  "checkpoint": "/home/ajifang/zrq/mjlab_lego2/logs/rsl_rl/lego2_blind_pit/2026-10-31_21-58-03_phase3_smoke_128x200_v1_20261031_215751_2154252/model_199.pt",
+  "checkpoint_sha256": "901cc02246fcd47517a0791ceec4513cc6725a1d8d0786955ab3c945ddb1b2f4",
+  "evidence_dir": "/home/ajifang/zrq/backups/phase3_eval_20261101_172748_2195875",
+  "status": "evaluation summary completed; numeric script exit code not provided",
+  "heights": [
+    {
+      "height_m": 0.03,
+      "n": 10,
+      "passed": 5,
+      "pass_rate": 0.5,
+      "root_out": 10,
+      "front_up": 10,
+      "rear_up": 7,
+      "complete": 7,
+      "fell_over": 0,
+      "failed": 0,
+      "stalled": 3,
+      "mean_speed_rmse": 0.173761692315679
+    },
+    {
+      "height_m": 0.06,
+      "n": 10,
+      "passed": 1,
+      "pass_rate": 0.1,
+      "root_out": 10,
+      "front_up": 10,
+      "rear_up": 7,
+      "complete": 7,
+      "fell_over": 0,
+      "failed": 0,
+      "stalled": 3,
+      "mean_speed_rmse": 0.312183466094233
+    },
+    {
+      "height_m": 0.09,
+      "n": 10,
+      "passed": 0,
+      "pass_rate": 0.0,
+      "root_out": 4,
+      "front_up": 4,
+      "rear_up": 0,
+      "complete": 0,
+      "fell_over": 0,
+      "failed": 0,
+      "stalled": 10,
+      "mean_speed_rmse": 0.42347593239897846
+    }
+  ]
+}

@@ -1,0 +1,1150 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>训练实验记录 &#8212; mjlab Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/twemoji.css" />
+    <link rel="stylesheet" type="text/css" href="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css?v=53359634" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=3ea80bc3" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js"></script>
+    <script src="../_static/twemoji.js"></script>
+    <script src="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js?v=ec35c6c9"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'codex/EXPERIMENT_LOG';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 14, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">mjlab Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item">
+<div class="sidebar-version-switcher">
+  <label class="sidebar-version-label" for="version-select">Version</label>
+  <select id="version-select" class="sidebar-version-select" onchange="location = this.value;">
+    <option value="EXPERIMENT_LOG.html" selected>main</option>
+  </select>
+</div>
+</div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../source/installation.html">Installation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../source/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../source/tutorials/cartpole.html">Cartpole: Building Your First Environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/contributing.html">Contributing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../source/architecture_overview.html">Architecture Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../source/entity/index.html">Entity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../source/entity/entity_data.html">Entity Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/entity/per_world_mesh.html">Heterogeneous Worlds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/actuators.html">Actuators</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../source/sensors/index.html">Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../source/sensors/raycast_sensor.html">RayCast Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/sensors/rgbd_camera.html">RGB-D Camera</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/scene.html">Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/terrain.html">Terrain</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Manager Layer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../source/environment_config.html">Environment Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/observations.html">Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/actions.html">Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/rewards.html">Rewards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/terminations.html">Terminations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/events.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/randomization.html">Domain Randomization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/curriculum.html">Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/recorders.html">Recorders</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Training &amp; Debugging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../source/training/rsl_rl.html">Training with RSL-RL</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../source/training/motion_imitation.html">Motion Imitation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/viewers.html">Viewers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/training/distributed_training.html">Distributed Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/training/cloud.html">Cloud Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/debugging/nan_guard.html">NaN Guard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/debugging/export_scene.html">Export Scene</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../source/api/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/envs.html">mjlab.envs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/scene.html">mjlab.scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/sim.html">mjlab.sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/entity.html">mjlab.entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/actuator.html">mjlab.actuator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/sensor.html">mjlab.sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/managers.html">mjlab.managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/terrains.html">mjlab.terrains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/rl.html">mjlab.rl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/viewer.html">mjlab.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../source/api/tasks.html">mjlab.tasks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../source/motivation.html">Why mjlab?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/migration_isaac_lab.html">Migrating from Isaac Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/faq.html">FAQ &amp; Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/research.html">Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../source/changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/edit/main/docs/codex/EXPERIMENT_LOG.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/issues/new?title=Issue%20on%20page%20%2Fcodex/EXPERIMENT_LOG.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/codex/EXPERIMENT_LOG.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>训练实验记录</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2026-08-25至2026-09-07：继承的早期实验档案</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zrq-first-run">2026-09-22：zrq_first_run历史指令线索（执行结果待确认）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rough-v1">2026-10-12：Rough V1 基线</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#platform-climb">2026-10-15 至 2026-10-20：Platform-Climb 基线与诊断</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mm">300 mm、短训与续训</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">300 mm、接触诊断</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">150 mm、几何阈值修正后的诊断</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">150 mm、前足抬升奖励</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">150 mm、前足抬升后的较大规模运行</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oom">4096 环境 OOM 尝试</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2026-10-21：前足接触后继续前移奖励（代码阶段，训练待验证）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">历史待验证项与当前研究边界</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2026-10-29：全量回放反馈与研究暂停点</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">记录规则</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoint-9999">2026-10-30：全量训练checkpoint 9999的重复失败反馈</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v2">2026-10-30：正式计划v2与接口就绪核查（非训练实验）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run">2026-10-31：指定旧run文件定位更正（非新增训练）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterations">2026-10-31：阶段3首次流程短训128环境/200 iterations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2026-11-01：阶段3固定高度评估因指标缓存异常中止</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2026-11-01：固定高度评估仍在推进的用户回传（未完成）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-199-pt">2026-11-01：model_199.pt固定高度初筛完成（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2026-11-01：1024环境低阶续训正常结束（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-1198-pt">2026-11-01：model_1198.pt低高度复评完成（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2026-11-14：高高度初筛完成（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cm">2026-11-14：高高度原始证据及30 cm轨迹离线核查</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>训练实验记录<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>资料位置与关联见<a class="reference internal" href="README.html"><span class="std std-doc">统一资料索引</span></a>；当前交接入口见<a class="reference internal" href="HANDOFF.html"><span class="std std-doc">HANDOFF.md</span></a>。
+原始日志数值保留；早期行为解释中的撤回/更正已紧邻标出，不能当当前成功证据。</p>
+<p>实验结论仅按已确认的完成或中止状态记录。另行保留有来源的历史指令线索，明确标注执行状态待确认，不能当作完成训练。缺少可靠run、checkpoint或原始日志时不补猜。</p>
+<p>资产版本说明：2026-10-27之前的已列实验基于圆柱惯量修复前MJCF；
+后续全量run及回放所用资产的对应仍待确认，不能一概归入同一版本。
+本地现已修正 hip/FOOT 圆柱惯量轴向和 FOOT 近似质心，详见
+<a class="reference internal" href="INERTIA_AUDIT_20261027.html"><span class="std std-doc">惯量核查报告</span></a>。修复后的训练尚未确认完成，
+不能将 CPU 编译/数值验证记为登顶训练实验；后续记录应附资产版本与实际 run 参数。</p>
+<section id="id2">
+<h2>2026-08-25至2026-09-07：继承的早期实验档案<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>来源：<span class="xref myst">源码根目录原人工日志</span>，按原文日期覆盖Flat与Rough的早期试验。
+这是继承的历史记录，不是本轮复现实验；原文和<code class="docutils literal notranslate"><span class="pre">log_viewer.html</span></code>均原样保留。</p></li>
+<li><p>Flat记录含skid转向、默认姿态/接触/平滑项消融；Rough记录含地形拼接、
+terrain/command/friction课程及轮速协同配置的演变，日期目录和具体参数保留在原日志。</p></li>
+<li><p>原文多处训练、sim2sim或sim2real仍标“待测”；另有约model_8100、5450等中断记录。
+不将这些条目统一标为训练完成、部署通过或本项目已复现。</p></li>
+<li><p>历史日期目录、checkpoint文件是否仍存在以及与当前资产的关系均待远程核查；
+此处只建立档案索引，不复制整份原始表格或改写其观察结论。</p></li>
+</ul>
+</section>
+<section id="zrq-first-run">
+<h2>2026-09-22：zrq_first_run历史指令线索（执行结果待确认）<a class="headerlink" href="#zrq-first-run" title="Link to this heading">#</a></h2>
+<p>2026-10-31经用户批准，从两份旧说明迁入；本次没有启动训练或回放。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>项目</p></th>
+<th class="head"><p>原文记载及证据范围</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>来源</p></td>
+<td><p><a class="reference internal" href="#/home/asus/work/mjlab_doc_quarantine/20261031_approved_cleanup_b5b1f0c3/files/Jiche_Project/%E7%B2%97%E7%B3%99%E5%9C%B0%E9%9D%A2%E9%80%9F%E5%BA%A6%E8%B7%9F%E8%B8%AA/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%AE%AD%E7%BB%83%E7%9B%B8%E5%85%B3%E6%8C%87%E4%BB%A4.txt"><span class="xref myst">第一次训练指令原文</span></a>；旧路径<code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project/粗糙地面速度跟踪/第一次训练相关指令.txt</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>任务/run</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Mjlab-Velocity-Rough-Lego2</span></code>；<code class="docutils literal notranslate"><span class="pre">zrq_first_run</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>指令意图</p></td>
+<td><p>4096环境、max_iterations=10000、TensorBoard；原指令未写resume参数，不能据此推断实际优化器状态</p></td>
+</tr>
+<tr class="row-odd"><td><p>日期目录线索</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">logs/rsl_rl/lego2_velocity/rough/2026-09-22_20-49-03_zrq_first_run/</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>checkpoint线索</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">logs/rsl_rl/lego2_velocity/rough/2026-09-22_20-49-03_zrq_first_run/model_9999.pt</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>完成/续训/资产对应</p></td>
+<td><p><strong>待确认</strong>；原文称其为最终模型，本轮未连接服务器验证文件、实际迭代量、配置、NaN/OOM或结果</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a class="reference internal" href="#/home/asus/work/mjlab_doc_quarantine/20261031_approved_cleanup_b5b1f0c3/files/Jiche_Project/%E7%B2%97%E7%B3%99%E5%9C%B0%E9%9D%A2%E9%80%9F%E5%BA%A6%E8%B7%9F%E8%B8%AA/%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90.txt"><span class="xref myst">旧核心代码解析原文</span></a>还提及256环境、10轮短测及
+61,440条累计step。只确认该历史文字记载，run目录、原始event及配置版本待确认，
+不作为新增完成实验或速度跟踪/登顶成功证据。</p>
+<p>原指令包含<code class="docutils literal notranslate"><span class="pre">\\//</span></code>式讲解注释，不能直接当作验证过的shell脚本执行。
+通用控制/PPO解释已按当前源码整合至<a class="reference internal" href="PROJECT_CONTEXT.html"><span class="std std-doc">PROJECT_CONTEXT</span></a>；
+保留的部署手册及当前SSH/screen约定不由旧示例覆盖。
+上述原文的SHA-256、移出前路径和可恢复位置均在<a class="reference internal" href="#/home/asus/work/mjlab_doc_quarantine/20261031_approved_cleanup_b5b1f0c3/manifest.json"><span class="xref myst">恢复清单</span></a>中，
+其余粗糙地面曲线分析和历史交接保持原样，未据其估读值补写本run结果。</p>
+</section>
+<section id="rough-v1">
+<h2>2026-10-12：Rough V1 基线<a class="headerlink" href="#rough-v1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>任务：<code class="docutils literal notranslate"><span class="pre">Mjlab-Velocity-Rough-Lego2</span></code></p></li>
+<li><p>参数：4096 环境，10000 iterations，run <code class="docutils literal notranslate"><span class="pre">high_platform_300mm_v1</span></code>，TensorBoard logger。</p></li>
+<li><p>checkpoint：<code class="docutils literal notranslate"><span class="pre">logs/rsl_rl/lego2_velocity/rough/2026-10-12_20-28-29_high_platform_300mm_v1/model_9999.pt</span></code></p></li>
+<li><p>结果：有一定越障能力，但平地抬腿、高台卡边和偶发成功；<code class="docutils literal notranslate"><span class="pre">Episode_Reward/upward</span></code> 不是登顶成功指标。</p></li>
+</ul>
+</section>
+<section id="platform-climb">
+<h2>2026-10-15 至 2026-10-20：Platform-Climb 基线与诊断<a class="headerlink" href="#platform-climb" title="Link to this heading">#</a></h2>
+<section id="mm">
+<h3>300 mm、短训与续训<a class="headerlink" href="#mm" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>任务：<code class="docutils literal notranslate"><span class="pre">Mjlab-Platform-Climb-Lego2</span></code>，128 环境，约 200 iterations；之后有一次不改代码的续训。</p></li>
+<li><p>结果：无 NaN、无 CUDA OOM、无翻倒；<code class="docutils literal notranslate"><span class="pre">platform_approach_mean</span></code> 约 <code class="docutils literal notranslate"><span class="pre">0.6733</span></code>，续训约 <code class="docutils literal notranslate"><span class="pre">0.7507</span></code>；顶部奖励、顶部指标和成功终止均为 0。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>300 mm、接触诊断<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">platform_front_contact_count_max=2</span></code>，<code class="docutils literal notranslate"><span class="pre">platform_contact_count_max=4</span></code>，<code class="docutils literal notranslate"><span class="pre">platform_root_z_max=0.1705</span></code>。</p></li>
+<li><p>当时解释：前足接触台阶但机身未抬升。<strong>后续更正</strong>：接触计数不区分低地、墙面和台面，
+不能单独证明碰到台壁；根部高度应与对应回放/坐标一起判断。原始数值保留。</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>150 mm、几何阈值修正后的诊断<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">platform_root_x_max=-1.8044</span></code>，<code class="docutils literal notranslate"><span class="pre">platform_root_z_max=0.3197</span></code>，前足接触最大 2、总接触最大 4。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">platform_edge_lift=0</span></code>，顶部到达/稳定/成功均为 0。</p></li>
+<li><p>结论：降低高度后仍未自动形成抬升动作，下一步增加局部引导。</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>150 mm、前足抬升奖励<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>修改：<code class="docutils literal notranslate"><span class="pre">platform_edge_lift</span></code> 低根部参考下移 0.05 m；新增 <code class="docutils literal notranslate"><span class="pre">platform_front_lift</span></code>，权重 <code class="docutils literal notranslate"><span class="pre">0.75</span></code>，只在 <code class="docutils literal notranslate"><span class="pre">x∈[-2.1,-1.5]</span></code> 使用 <code class="docutils literal notranslate"><span class="pre">foot_height_scan</span></code> 前足高度。</p></li>
+<li><p>结果：<code class="docutils literal notranslate"><span class="pre">platform_approach_mean=0.8790</span></code>；<code class="docutils literal notranslate"><span class="pre">platform_edge_lift_mean=0.0007</span></code>；<code class="docutils literal notranslate"><span class="pre">platform_front_lift_mean=0.3268</span></code>；前足奖励均值约 <code class="docutils literal notranslate"><span class="pre">0.2268</span></code>；顶部到达、稳定和成功仍为 0。</p></li>
+<li><p>当时解释为“前足抬升被诱导”。<strong>该解释已撤回</strong>：轮心正常着地也可能获得正奖励，
+此组均值不能证明主动抬前腿；仍保留未登顶的观察及原始数值。</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>150 mm、前足抬升后的较大规模运行<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>结果：<code class="docutils literal notranslate"><span class="pre">platform_root_x_max=-1.6119</span></code>，<code class="docutils literal notranslate"><span class="pre">platform_root_z_max=0.3255</span></code>，前足接触最大 2，总接触最大约 3.1667，<code class="docutils literal notranslate"><span class="pre">platform_edge_lift_mean=0.1048</span></code>，<code class="docutils literal notranslate"><span class="pre">platform_front_lift_mean=0.5188</span></code>；顶部到达、稳定和成功均为 0。</p></li>
+<li><p>当时据此提出接触耦合奖励。<strong>后续更正</strong>：这些批量均值不证明前足已抬升或台面支撑；
+root-x的统计距边缘约0.11m不代表每个机器人都停在该点。旧路线保留归档，不据此续加shaping。</p></li>
+<li><p>run 名称、精确迭代数、checkpoint 路径：<strong>待确认</strong>。</p></li>
+</ul>
+</section>
+<section id="oom">
+<h3>4096 环境 OOM 尝试<a class="headerlink" href="#oom" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>在 CUDA Graph 创建阶段出现 <code class="docutils literal notranslate"><span class="pre">Warp</span> <span class="pre">CUDA</span> <span class="pre">error</span> <span class="pre">2:</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">memory</span></code>。</p></li>
+<li><p>结论：先用 2048，必要时 1024；这次没有证据表明是奖励或地形代码错误。</p></li>
+<li><p>精确命令、显存采样和 checkpoint：<strong>待确认</strong>。</p></li>
+</ul>
+</section>
+</section>
+<section id="id7">
+<h2>2026-10-21：前足接触后继续前移奖励（代码阶段，训练待验证）<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>目标：解决机器人前足已经抬升/接触平台，但 root x 停在边缘前约 <code class="docutils literal notranslate"><span class="pre">0.11</span> <span class="pre">m</span></code> 的问题。</p></li>
+<li><p>本地修改：在 <code class="docutils literal notranslate"><span class="pre">platform_climb_rewards.py</span></code> 新增 <code class="docutils literal notranslate"><span class="pre">platform_front_contact_advance</span></code>；在 <code class="docutils literal notranslate"><span class="pre">platform_climb_env_cfg.py</span></code> 注册为权重 <code class="docutils literal notranslate"><span class="pre">1.5</span></code>，x 门控范围 <code class="docutils literal notranslate"><span class="pre">(-2.1,-1.0)</span></code>，接触传感器为 <code class="docutils literal notranslate"><span class="pre">feet_ground_contact</span></code>，力阈值为 <code class="docutils literal notranslate"><span class="pre">1.0</span></code>。</p></li>
+<li><p>信号定义：<code class="docutils literal notranslate"><span class="pre">edge_progress</span> <span class="pre">×</span> <span class="pre">front_contact_fraction</span></code>。只在前足接触时提供额外的边缘前移信号，并把门控范围延伸到边缘之后。</p></li>
+<li><p>本地状态：编译、任务注册、配置加载、参数断言和合成接触数值测试通过。</p></li>
+<li><p>远程同步状态：<strong>待确认</strong>。run 名称、环境数、迭代数、checkpoint、NaN/OOM 和顶部成功指标：<strong>待确认</strong>。</p></li>
+<li><p>训练决策：奖励/配置发生变化，因此不从旧 checkpoint 续训；先进行新的 150 mm 短 run。</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>历史待验证项与当前研究边界<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>2026-10-28 用户指定回放已训练的 run <code class="docutils literal notranslate"><span class="pre">platform_climb_front_lift_full_150mm_2048_v1</span></code>，
+暂不进行下一步训练。2026-10-30用户确认视频对应全量训练checkpoint编号9999；
+实际日期目录、完整参数以及与该run和上述日志的精确对应仍待确认，不凭run名称推定环境数。</p>
+<p><code class="docutils literal notranslate"><span class="pre">platform_front_contact_advance</span></code>的远程同步/实验归属仍未确认，作为旧路线历史待验证项保留；
+当前重构不再安排继续该shaping实验，不把它当作下一条训练指令。</p>
+</section>
+<section id="id9">
+<h2>2026-10-29：全量回放反馈与研究暂停点<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>用户确认URDF/资产纠偏完成且远程已同步；没有提供新增修改文件或逐文件版本。</p></li>
+<li><p>用户查看全量训练回放，认为效果不理想，提供
+<code class="docutils literal notranslate"><span class="pre">/home/asus/视频/录屏/录屏</span> <span class="pre">2026年10月28日</span> <span class="pre">21时58分42秒.webm</span></code>（约10.1s）。
+抽帧未见完整稳定通过，不能由片段推算成功率。</p></li>
+<li><p>2026-10-28已指定run <code class="docutils literal notranslate"><span class="pre">platform_climb_front_lift_full_150mm_2048_v1</span></code>，但本视频与
+该run、环境数/iterations、训练和回放资产的对应仍待确认；编号9999已于10月30日由用户确认。</p></li>
+<li><p>更正旧结论：front_lift是轮心高度门控，普通着地也可能得分；接触计数不区分台面；
+contact_advance为位置×接触，不保证正在前移。旧日志均值不是主动抬腿或台面支撑的证明。</p></li>
+<li><p>用户明确先研究盲走＋坑式＋初始高度课程＋通用速度奖励路线，本轮没有新训练实验。
+研究报告和源码来源记录在外层Jiche_Project；不把参考项目结果计为本项目实验结果。</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>记录规则<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<p>每次实验至少记录任务 ID、环境数、iterations、run 名称、是否续训、关键 checkpoint、NaN/OOM、顶部指标和下一步结论。日志只报告实际观察到的量，不把接近奖励或 <code class="docutils literal notranslate"><span class="pre">upward</span></code> 当作成功率。</p>
+</section>
+<section id="checkpoint-9999">
+<h2>2026-10-30：全量训练checkpoint 9999的重复失败反馈<a class="headerlink" href="#checkpoint-9999" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>证据来源：用户确认，非新增本地/远程训练。视频使用全量训练编号9999的checkpoint。</p></li>
+<li><p>用户多次Reset均无法通过；每次碰台后前轮完全无法抬起，后腿反而抬起。</p></li>
+<li><p>测试总次数未提供，不能计算精确成功率；记录为多次测试均失败的可重复行为模式。</p></li>
+<li><p>原始项目actor不输入height_scan；用户后来注释掉删除语句，才使后续版本保留扫描。</p></li>
+<li><p>更正旧解读：奖励均值增大不等于前腿已学会抬升；不把此轮失败归结为仅需延长相同配置。</p></li>
+<li><p>checkpoint完整目录、实际env/agent配置、训练和回放资产对应仍待核对。</p></li>
+<li><p>后续候选：重构前先核对足端/动作映射、关节符号与限幅及前腿运动学可行性，
+配合既定盲走、坑式高度课程和通用奖励路线讨论。尚未证实映射错误或某项惩罚是主因。</p></li>
+<li><p>本轮仅更新文档，没有改业务代码或启动训练。</p></li>
+</ul>
+</section>
+<section id="v2">
+<h2>2026-10-30：正式计划v2与接口就绪核查（非训练实验）<a class="headerlink" href="#v2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>正式计划见<a class="reference internal" href="REFACTOR_PLAN.html"><span class="std std-doc">REFACTOR_PLAN.md</span></a>，接口检查见
+<a class="reference internal" href="IMPLEMENTATION_READINESS_20261030.html"><span class="std std-doc">就绪核查</span></a>；阶段0～5未实施，无新任务run/checkpoint。</p></li>
+<li><p>已只读核对本地注册、历史、动作、地形/课程、reset和奖励接口，无需用户补传源码。</p></li>
+<li><p>用现有uv环境CPU检查候选3/15/30cm坑几何/原点、历史buffer局部reset回填，均通过。
+这些不属于PPO训练、完整环境验收或越障能力结果，未运行GPU训练。</p></li>
+<li><p>保留checkpoint9999多次失败反馈与版本待确认信息；起始奖励表和课程参数仅为未验证提案。</p></li>
+</ul>
+</section>
+<section id="run">
+<h2>2026-10-31：指定旧run文件定位更正（非新增训练）<a class="headerlink" href="#run" title="Link to this heading">#</a></h2>
+<p>证据为用户回传的远程find输出，非本轮自行访问远程。此前“完整目录待确认”
+已对以下指定run文件得到补充；不改写旧训练原始结果或推定未读取的参数。</p>
+<ul class="simple">
+<li><p>checkpoint：<code class="docutils literal notranslate"><span class="pre">logs/rsl_rl/lego2_platform_climb/2026-10-20_22-08-39_platform_climb_front_lift_full_150mm_2048_v1/model_9999.pt</span></code>。</p></li>
+<li><p>同一run目录存在<code class="docutils literal notranslate"><span class="pre">params/env.yaml</span></code>及<code class="docutils literal notranslate"><span class="pre">params/agent.yaml</span></code>；内容尚未读取。</p></li>
+<li><p>实际环境数/训练命令/资产版本、该文件与视频的逐一对应仍待确认，
+不因目录含2048、150mm或checkpoint编号而推定实际配置/训练完成量。</p></li>
+<li><p>本轮没有开训、续训或回放。阶段0远程CPU流程通过的当前状态归CURRENT_STATUS维护，
+不把CPU诊断计为新的训练实验或越障成功。</p></li>
+</ul>
+</section>
+<section id="iterations">
+<h2>2026-10-31：阶段3首次流程短训128环境/200 iterations<a class="headerlink" href="#iterations" title="Link to this heading">#</a></h2>
+<p>证据来源为用户回传训练末段日志、实际文件清单及脚本退出码，未自行访问远程或读取完整stdout。
+任务<code class="docutils literal notranslate"><span class="pre">Mjlab-Blind-Pit-Lego2</span></code>；对应已校验启动脚本参数为128环境、rollout24、200 iterations、
+seed7、TensorBoard、resume=False，首训即启用高度课程。实际params内容尚未回传核对。</p>
+<ul class="simple">
+<li><p>实际run：<code class="docutils literal notranslate"><span class="pre">logs/rsl_rl/lego2_blind_pit/2026-10-31_21-58-03_phase3_smoke_128x200_v1_20261031_215751_2154252</span></code>。</p></li>
+<li><p>已存在checkpoint：<code class="docutils literal notranslate"><span class="pre">model_0.pt</span></code>、<code class="docutils literal notranslate"><span class="pre">model_50.pt</span></code>、<code class="docutils literal notranslate"><span class="pre">model_100.pt</span></code>、<code class="docutils literal notranslate"><span class="pre">model_150.pt</span></code>、<code class="docutils literal notranslate"><span class="pre">model_199.pt</span></code>；
+同run的<code class="docutils literal notranslate"><span class="pre">params/env.yaml</span></code>与<code class="docutils literal notranslate"><span class="pre">params/agent.yaml</span></code>存在。下一次评估使用实际<code class="docutils literal notranslate"><span class="pre">model_199.pt</span></code>。</p></li>
+<li><p>远程证据目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_smoke_20261031_215751_2154252</span></code>。</p></li>
+<li><p>用户回传进程退出码0、ETA 0、elapsed 0:05:48，流程短训正常结束。
+按脚本规模推算采样量128×24×200=614400；完整stdout的Total timesteps尚未回传，未独立核验。</p></li>
+<li><p>末段课程日志：mean=0.1540、max=1、demoted=0.1429；这是等级统计，不是稳定通过率。</p></li>
+<li><p>末段指标：pit_front_up=0.1292、pit_complete=0.0241、pit_stable_pass=0；
+前两者是支撑阶段时间占比，不能当作12.92%/2.41%的episode成功率。
+stable_pass=0是本次回传日志窗口，不足以断言整个run从未出现成功。</p></li>
+<li><p>末段终止：tile_boundary=0.8571、nan=0、fell_over=0；边界truncate不等于完整稳定出坑。</p></li>
+<li><p>末段非足碰撞通道均值0.0586、yaw误差0.0803；腿力矩成本-0.1893、腿加速度-0.0986、
+腿动作变化-0.0918。它们是日志汇总，未读受阻事件轨迹，不据此直接调整奖励或限幅。</p></li>
+<li><p>没有OOM/NaN中止的用户回报，退出正常；完整日志、实时显存峰值和checkpoint hash仍待核验。</p></li>
+</ul>
+<p>结论：训练/保存流程已跑通，低阶稳定越障能力待固定高度评估；保留本run和全部旧结果。
+下一步对<code class="docutils literal notranslate"><span class="pre">model_199.pt</span></code>在3/6/9 cm各10个完整episode做初筛，关闭课程、保留终止及0.5 s稳定定义，
+记录真实n/通过/前后轮支撑/失败/停滞和轨迹后再决定低阶能力训练；此评估尚未执行。</p>
+</section>
+<section id="id11">
+<h2>2026-11-01：阶段3固定高度评估因指标缓存异常中止<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>证据：用户回传evaluate_lego2_blind_pit.py → wrapper.reset → MetricsManager.reset →
+PitProgress.reset堆栈，报“Inplace update to inference tensor outside InferenceMode”。
+用户称其为烟雾测试脚本；按堆栈确认失败发生在固定高度评估工具的reset路径。</p></li>
+<li><p>此次评估已尝试但异常中止；失败评估目录、实际已完成episode数与完整report均未回传，标为待确认。
+不把残留trace片段当作3/6/9 cm完整评估或填入成功率，不推定失败发生在哪个episode/高度。</p></li>
+<li><p>原128环境/200 iterations短训退出码0及model_199.pt存在的记录仍有效；本轮没有重训或删除旧结果。</p></li>
+<li><p>本地复现并修复指标缓存生命周期；本地零动作/临时随机权重检查只作软件回归，
+不计为真实model_199.pt策略的越障评估。修复验收范围归CURRENT_STATUS维护。</p></li>
+<li><p>下一步先部署修复并核验，再以同一model_199.pt和同一稳定定义，在新输出目录重新完成固定高度初筛。</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2>2026-11-01：固定高度评估仍在推进的用户回传（未完成）<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_eval_20261101_172748_2195875</span></code>。</p></li>
+<li><p>进程命令确认使用本次model_199.pt、cuda:0、3/6/9 cm各10个episode、seed7；未指定max_steps。</p></li>
+<li><p>用户快照：Python PID2195929运行25:56，CPU100%；同PID GPU显存924 MiB，GPU利用率13%。</p></li>
+<li><p>相隔20秒，3 cm trace均5994行、6 cm均9297行，9 cm由8482增至8792行，总行数23773→24083。
+因此确认该观察窗口内评估持续推进，约15.5步/s；终端静默不能据此判为卡死。</p></li>
+<li><p>已进入最后高度；行数不是成功episode数，也不提供通过率。最终退出码、summary/report仍待回传。</p></li>
+<li><p>本轮没有自行连接远程、停止/重启评估或修改业务代码；继续等待该进程完成，保留所有原目录。</p></li>
+</ul>
+</section>
+<section id="model-199-pt">
+<h2>2026-11-01：model_199.pt固定高度初筛完成（用户回传）<a class="headerlink" href="#model-199-pt" title="Link to this heading">#</a></h2>
+<p>证据为用户回传最终summary及“评估结束”行；原始report/trace未下载，脚本数字退出码未回传。
+对应3/6/9 cm、每高度10个完整episode、seed7的同一评估，保留旧失败目录。</p>
+<ul class="simple">
+<li><p>checkpoint：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/mjlab_lego2/logs/rsl_rl/lego2_blind_pit/2026-10-31_21-58-03_phase3_smoke_128x200_v1_20261031_215751_2154252/model_199.pt</span></code>。</p></li>
+<li><p>用户回传SHA256：<code class="docutils literal notranslate"><span class="pre">901cc02246fcd47517a0791ceec4513cc6725a1d8d0786955ab3c945ddb1b2f4</span></code>。</p></li>
+<li><p>证据目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_eval_20261101_172748_2195875</span></code>。</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/3daabd28203c757e3a1e580c2d8f748c/20261101_phase3_model199_user_eval_summary.json"><span class="xref download myst">结构化回传</span></a>仅转录summary，未伪装为原始report。</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>高度</p></th>
+<th class="head"><p>n</p></th>
+<th class="head"><p>稳定通过</p></th>
+<th class="head"><p>root离坑</p></th>
+<th class="head"><p>前轮上沿</p></th>
+<th class="head"><p>后轮上沿</p></th>
+<th class="head"><p>完整出坑</p></th>
+<th class="head"><p>翻倒/失败</p></th>
+<th class="head"><p>停滞</p></th>
+<th class="head"><p>mean speed RMSE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3 cm</p></td>
+<td><p>10</p></td>
+<td><p>5（50%）</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>7</p></td>
+<td><p>7</p></td>
+<td><p>0/0</p></td>
+<td><p>3</p></td>
+<td><p>0.173761692315679</p></td>
+</tr>
+<tr class="row-odd"><td><p>6 cm</p></td>
+<td><p>10</p></td>
+<td><p>1（10%）</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>7</p></td>
+<td><p>7</p></td>
+<td><p>0/0</p></td>
+<td><p>3</p></td>
+<td><p>0.312183466094233</p></td>
+</tr>
+<tr class="row-even"><td><p>9 cm</p></td>
+<td><p>10</p></td>
+<td><p>0（0%）</p></td>
+<td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0/0</p></td>
+<td><p>10</p></td>
+<td><p>0.42347593239897846</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>本表前后轮/完整出坑是episode内曾达到该阶段的次数，区别于训练日志的时间占比。
+6 cm完整出坑7次、稳定通过1次，说明连续0.5 s有效支撑及倾角条件尚难稳定满足；
+究竟是接触保持、姿态或检测边界，需要事件轨迹确认，不能仅凭summary定因。
+9 cm后轮上沿为0、全部停滞，尚未形成该高度完整稳定通过能力；不推定前腿机械不可达。
+每高度仅10个样本、单seed，结果为初筛，不宣称收敛或具备300 mm能力。</p>
+<p>下一步按阶段3做低阶能力验证：同任务/观测/动作/奖励/资产，从本checkpoint恢复权重和优化器，
+新建run，1024环境新增1000 iterations；课程重新由3 cm起步，之后同条件固定高度评估。
+该续训脚本仅准备并本地核对参数，尚未执行；不预填新run/checkpoint或新增采样完成量。</p>
+</section>
+<section id="id13">
+<h2>2026-11-01：1024环境低阶续训正常结束（用户回传）<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>实际run：<code class="docutils literal notranslate"><span class="pre">logs/rsl_rl/lego2_blind_pit/2026-11-01_20-17-22_phase3_low_1024x1000_v1_20261101_201712_2200851</span></code>。</p></li>
+<li><p>用户回传model_200.pt至model_1150.pt间多个checkpoint、末尾model_1198.pt，
+同run的params/env.yaml及params/agent.yaml存在，启动脚本退出码0。</p></li>
+<li><p>证据目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_low_20261101_201712_2200851</span></code>。</p></li>
+<li><p>对应已校验脚本：从上一轮model_199.pt恢复，1024环境、rollout24、新增1000 iterations、seed7；
+保持观测/动作/奖励/资产和高度课程，新建run保留父模型。
+已知runner从恢复的编号起新增指定更新次数，因此1198的末尾编号符合脚本预期，非从零1198次。</p></li>
+<li><p>计划新增采样量1024×24×1000=24576000；完整stdout/Total timesteps、实际params内容未读取，
+不把计划推算冒充独立核实的采样量。此次未回传末段奖励/课程/失败指标、elapsed或峰值显存。</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/5a55376b0a531c5e7de3af160355e06b/20261101_phase3_low_user_receipt.json"><span class="xref download myst">结构化回执</span></a>只转录用户证据；新checkpoint SHA尚待评估时记录。</p></li>
+<li><p>结论：续训/保存流程正常结束，尚不能说明越障能力已提升；下一步对model_1198.pt重做同条件
+3/6/9 cm各10个完整episode初筛，与model_199.pt的5/10、1/10、0/10比较。
+本轮没有自行访问远程、启动评估或新一轮训练；所有旧结果保留。</p></li>
+</ul>
+</section>
+<section id="model-1198-pt">
+<h2>2026-11-01：model_1198.pt低高度复评完成（用户回传）<a class="headerlink" href="#model-1198-pt" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>checkpoint：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/mjlab_lego2/logs/rsl_rl/lego2_blind_pit/2026-11-01_20-17-22_phase3_low_1024x1000_v1_20261101_201712_2200851/model_1198.pt</span></code>。</p></li>
+<li><p>用户回传SHA256：<code class="docutils literal notranslate"><span class="pre">7780cf0d2557c86f51c0486f870e7d471b13703777e9cee5e1854427def05027</span></code>。</p></li>
+<li><p>评估证据目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_eval1198_20261101_210150_2202384</span></code>。</p></li>
+<li><p>同条件3/6/9 cm、每高度10个完整episode、seed7。证据为最终summary及“评估结束”行，
+原始report/trace未下载，数字退出码未单独回传；
+<a class="reference download internal" download="" href="../_downloads/a46ca7a3fd57344a1010a30091d2e2a2/20261101_phase3_model1198_user_eval_summary.json"><span class="xref download myst">结构化摘要</span></a>只转录用户输出。</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>高度</p></th>
+<th class="head"><p>父模型model_199稳定通过</p></th>
+<th class="head"><p>model_1198稳定通过</p></th>
+<th class="head"><p>父模型速度RMSE</p></th>
+<th class="head"><p>model_1198速度RMSE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3 cm</p></td>
+<td><p>5/10</p></td>
+<td><p>10/10</p></td>
+<td><p>0.173761692315679</p></td>
+<td><p>0.07241831920391109</p></td>
+</tr>
+<tr class="row-odd"><td><p>6 cm</p></td>
+<td><p>1/10</p></td>
+<td><p>10/10</p></td>
+<td><p>0.312183466094233</p></td>
+<td><p>0.06240884230790049</p></td>
+</tr>
+<tr class="row-even"><td><p>9 cm</p></td>
+<td><p>0/10</p></td>
+<td><p>10/10</p></td>
+<td><p>0.42347593239897846</p></td>
+<td><p>0.053261255794071996</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>本次各高度root_out/front_up/rear_up/complete均10/10，fell_over/failed/stalled均0/10。
+结果支持现有通用奖励和课程路线能形成低阶越障能力，暂不因低阶瓶颈引入阶段4或平地预训练。
+每高度只有10次、单seed，并不证明真实成功率必为100%、全高度收敛或达到300 mm；
+尚无独立直线高台/平地保留能力/多seed泛化结果，也没有本次策略真实回放轨迹的人工核查。</p>
+<p>下一步先用同一model_1198.pt摸底12/15/20/30 cm，各10个完整episode、seed7，保留稳定0.5 s定义。
+据能力边界决定继续课程训练还是事件诊断；该高高度评估仅准备脚本，尚未执行。
+当前不改模型/观测/动作/奖励/资产，不直接启动更大训练；旧模型和全部评估结果保留。</p>
+</section>
+<section id="id14">
+<h2>2026-11-14：高高度初筛完成（用户回传）<a class="headerlink" href="#id14" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>证据目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_upper1198_20261114_214623_3270561</span></code>。</p></li>
+<li><p>用户贴出四个高度最终summary及“评估结束”行；原始report/trace及数字退出码未回传。</p></li>
+<li><p>本次粘贴未含checkpoint路径、SHA和seed；按已发
+<a class="reference internal" href="#artifacts/evaluate_phase3_upper_1198_20261101.sh"><span class="xref myst">评估入口</span></a>预期为同model_1198.pt、seed7，
+预期SHA为<code class="docutils literal notranslate"><span class="pre">7780cf0d2557c86f51c0486f870e7d471b13703777e9cee5e1854427def05027</span></code>，
+待原始report核对，不能冒充本次已回传或独立读取的hash。</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/cc051511054d0c1b090b563ffd9ba41f/20261114_phase3_model1198_upper_user_summary.json"><span class="xref download myst">结构化摘要</span></a>仅转录用户证据。</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>高度</p></th>
+<th class="head"><p>n</p></th>
+<th class="head"><p>稳定通过</p></th>
+<th class="head"><p>root离坑</p></th>
+<th class="head"><p>前轮上沿</p></th>
+<th class="head"><p>后轮上沿</p></th>
+<th class="head"><p>完整出坑</p></th>
+<th class="head"><p>翻倒</p></th>
+<th class="head"><p>failed</p></th>
+<th class="head"><p>停滞</p></th>
+<th class="head"><p>mean speed RMSE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>12 cm</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0.04810981028233111</p></td>
+</tr>
+<tr class="row-odd"><td><p>15 cm</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0.045089428042688943</p></td>
+</tr>
+<tr class="row-even"><td><p>20 cm</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0.044076157799581316</p></td>
+</tr>
+<tr class="row-odd"><td><p>30 cm</p></td>
+<td><p>10</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>9</p></td>
+<td><p>9</p></td>
+<td><p>9</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0.10854789592697618</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>结论：当前坑式评估已有30 cm稳定通过样本；低/中高度初筛支持继续现有通用奖励和课程。
+30 cm完整出坑9次、稳定通过8次，说明单次达到支撑阶段与连续0.5 s稳定判据仍有差别；
+无法从汇总计数确定未出坑、停滞、两个未通过样本的对应关系或确切原因。
+不把8/10外推为真实80%成功率，不把无翻倒/failed当作全部成功，亦不据此宣布直线300 mm高台验收。</p>
+<p>下一步先取回report、30 cm轨迹和checkpoint hash，检查样本、退出方向/坑角借力、
+有效支撑/倾角持续时间及动作。随后推进计划中的每高度至少100次（3/5/10/15/20/30 cm）、
+有条件多seed、独立直线高台及平地保持能力测试；是否追加训练由核查结果决定。
+本轮未改奖励/任务/资产/模型、未新增训练或自行访问远程；旧结果保留，阶段4仍未触发。</p>
+</section>
+<section id="cm">
+<h2>2026-11-14：高高度原始证据及30 cm轨迹离线核查<a class="headerlink" href="#cm" title="Link to this heading">#</a></h2>
+<p>用户下载<a class="reference download internal" download="" href="../_downloads/d1ab847350fa0b9dfc885d9e27b7244c/report.json"><span class="xref download myst">原始report</span></a>、同目录trace_0.300000.jsonl与checkpoint.sha256。
+实读确认：model_1198.pt完整路径与上条预期相同，seed7、cuda:0、checkpoint SHA为
+<code class="docutils literal notranslate"><span class="pre">7780cf0d2557c86f51c0486f870e7d471b13703777e9cee5e1854427def05027</span></code>，
+与独立checkpoint.sha256文本一致；未下载模型本体，非本地重新散列模型权重。
+report记录14项源码/资产hash均与本地匹配；四高度summary吻合，30 cm十次trace步数、
+阶段事件、最终通过标记及重算speed RMSE均与report一致。</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#artifacts/analyze_phase3_upper1198_20261114.py"><span class="xref myst">分析脚本</span></a>、
+<a class="reference download internal" download="" href="../_downloads/43e4b6bef6fccfadf3d0f7482e1303f3/20261114_phase3_upper1198_analysis.json"><span class="xref download myst">分析JSON</span></a>及<a class="reference download internal" download="" href="../_downloads/193885449b668a7399816f098a7534ce/20261114_phase3_upper1198_analysis.png"><span class="xref download myst">图</span></a>保存可复核过程。</p></li>
+<li><p>匹配源码的控制dt=0.02 s；两行单列固定坑的level0原点为(-5,0,-0.3) m。
+仅用MuJoCo运动学重建轮几何，不推进仿真；轮底与trace的最大误差1.449e-7 m。</p></li>
+<li><p>全10次四轮Y侧向包络距坑侧壁均至少0.6328 m，路径从+x正面出坑，未见轮子坑角借力。
+这不替代独立高台测试，也不全面排除trace未记录的机身/非轮接触。</p></li>
+</ul>
+<p>下表使用1起编号（原始episode为0起）：</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>样本</p></th>
+<th class="head"><p>vx (m/s)</p></th>
+<th class="head"><p>表现</p></th>
+<th class="head"><p>最大连续稳定支撑</p></th>
+<th class="head"><p>最大倾角</p></th>
+<th class="head"><p>结束</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>第2次（id=1）</p></td>
+<td><p>0.3195317388</p></td>
+<td><p>无前轮/后轮/完整上沿，最终root相对坑中心x=0.9944 m</p></td>
+<td><p>0 s</p></td>
+<td><p>12.096°</p></td>
+<td><p>20 s超时、stalled</p></td>
+</tr>
+<tr class="row-odd"><td><p>第3次（id=2）</p></td>
+<td><p>0.3004603684</p></td>
+<td><p>11.42 s首次完整出坑，最终root相对坑中心x=4.0022 m</p></td>
+<td><p>0.22 s</p></td>
+<td><p>15.504°</p></td>
+<td><p>17.16 s地块边界截断，非stalled</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>第2次RF/LF轮底相对坑底最高0.0754/0.2355 m，均低于30 cm台面；低速前轮抬升/通过未形成。
+第3次完整支撑共193个采样点；几何上四轮均出坑且轮底距台面&lt;2.5 cm共288步，
+其中95步至少一轮未满足有效支撑，RF/LF/RH/LH缺失接触通道分别27/50/22/13步（可同时发生）。
+这些步均可由found=0且对应force=0解释；倾角未接近45°，主要不通过项是支撑连续性。
+trace未记contact.pos，且仅控制帧采样，不能断言真实跳跃/卸载、传感器漏检或GPU接触求解具体根因。</p>
+<p>十次记录采样点均无力矩饱和；目标越硬限均发生在膝关节，两未通过样本分别198/263步，
+成功样本也有34～66步。目标越限是待跟踪现象，不能直接认定它或力矩上限是失败原因。
+两未通过样本恰为最低vx，八次成功vx范围0.3545～0.5362 m/s，但速度与初态扰动混杂，
+仅形成低速相关假设，不能证明因果。下一批建议30 cm固定vx=0.30/0.40/0.50 m/s、
+配对初态/seed的小批对照和回放，奖励/课程/判据保持，入口尚未实现或远程执行。</p>
+<p>本批本地Ruff/格式/ty/Pyright检查分析脚本通过，运行内置一致性断言通过；无仿真/PPO或远程操作。
+阶段4未触发，不因本次8/10自动追加大训练；正式大样本/多seed条件/独立高台/平地验证仍待实施。</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2026-08-25至2026-09-07：继承的早期实验档案</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zrq-first-run">2026-09-22：zrq_first_run历史指令线索（执行结果待确认）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rough-v1">2026-10-12：Rough V1 基线</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#platform-climb">2026-10-15 至 2026-10-20：Platform-Climb 基线与诊断</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mm">300 mm、短训与续训</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">300 mm、接触诊断</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">150 mm、几何阈值修正后的诊断</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">150 mm、前足抬升奖励</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">150 mm、前足抬升后的较大规模运行</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oom">4096 环境 OOM 尝试</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2026-10-21：前足接触后继续前移奖励（代码阶段，训练待验证）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">历史待验证项与当前研究边界</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2026-10-29：全量回放反馈与研究暂停点</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">记录规则</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkpoint-9999">2026-10-30：全量训练checkpoint 9999的重复失败反馈</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v2">2026-10-30：正式计划v2与接口就绪核查（非训练实验）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run">2026-10-31：指定旧run文件定位更正（非新增训练）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterations">2026-10-31：阶段3首次流程短训128环境/200 iterations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2026-11-01：阶段3固定高度评估因指标缓存异常中止</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2026-11-01：固定高度评估仍在推进的用户回传（未完成）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-199-pt">2026-11-01：model_199.pt固定高度初筛完成（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2026-11-01：1024环境低阶续训正常结束（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-1198-pt">2026-11-01：model_1198.pt低高度复评完成（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2026-11-14：高高度初筛完成（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cm">2026-11-14：高高度原始证据及30 cm轨迹离线核查</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The mjlab Developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, The mjlab Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 14, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,741 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lego2 惯量核查与第一批修复 &#8212; mjlab Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/twemoji.css" />
+    <link rel="stylesheet" type="text/css" href="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css?v=53359634" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=3ea80bc3" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js"></script>
+    <script src="../../../../../_static/twemoji.js"></script>
+    <script src="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js?v=ec35c6c9"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'codex/backups/20261030_handoff_link_audit/docs/codex/INERTIA_AUDIT_20261027';</script>
+    <link rel="icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 14, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">mjlab Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item">
+<div class="sidebar-version-switcher">
+  <label class="sidebar-version-label" for="version-select">Version</label>
+  <select id="version-select" class="sidebar-version-select" onchange="location = this.value;">
+    <option value="INERTIA_AUDIT_20261027.html" selected>main</option>
+  </select>
+</div>
+</div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/installation.html">Installation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../source/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/tutorials/cartpole.html">Cartpole: Building Your First Environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/contributing.html">Contributing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/architecture_overview.html">Architecture Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../source/entity/index.html">Entity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/entity/entity_data.html">Entity Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/entity/per_world_mesh.html">Heterogeneous Worlds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/actuators.html">Actuators</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../source/sensors/index.html">Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/sensors/raycast_sensor.html">RayCast Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/sensors/rgbd_camera.html">RGB-D Camera</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/scene.html">Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/terrain.html">Terrain</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Manager Layer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/environment_config.html">Environment Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/observations.html">Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/actions.html">Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/rewards.html">Rewards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/terminations.html">Terminations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/events.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/randomization.html">Domain Randomization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/curriculum.html">Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/recorders.html">Recorders</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Training &amp; Debugging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../source/training/rsl_rl.html">Training with RSL-RL</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/training/motion_imitation.html">Motion Imitation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/viewers.html">Viewers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/training/distributed_training.html">Distributed Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/training/cloud.html">Cloud Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/debugging/nan_guard.html">NaN Guard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/debugging/export_scene.html">Export Scene</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../source/api/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/envs.html">mjlab.envs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/scene.html">mjlab.scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/sim.html">mjlab.sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/entity.html">mjlab.entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/actuator.html">mjlab.actuator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/sensor.html">mjlab.sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/managers.html">mjlab.managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/terrains.html">mjlab.terrains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/rl.html">mjlab.rl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/viewer.html">mjlab.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/tasks.html">mjlab.tasks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/motivation.html">Why mjlab?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/migration_isaac_lab.html">Migrating from Isaac Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/faq.html">FAQ &amp; Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/research.html">Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/edit/main/docs/codex/backups/20261030_handoff_link_audit/docs/codex/INERTIA_AUDIT_20261027.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/issues/new?title=Issue%20on%20page%20%2Fcodex/backups/20261030_handoff_link_audit/docs/codex/INERTIA_AUDIT_20261027.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../../_sources/codex/backups/20261030_handoff_link_audit/docs/codex/INERTIA_AUDIT_20261027.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lego2 惯量核查与第一批修复</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">结论与证据范围</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">轮子：已确认的模型内部不一致及修复</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">髋部：同类圆柱近似轴向问题</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">腿部和其他待确认问题（本次未改）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">变更、备份与验证</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">后续实验边界</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">参考</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="lego2">
+<h1>Lego2 惯量核查与第一批修复<a class="headerlink" href="#lego2" title="Link to this heading">#</a></h1>
+<p>日期：2026-10-27（Asia/Shanghai）。状态：本地静态/CPU 验证通过，远程同步和训练待确认。</p>
+<section id="id1">
+<h2>结论与证据范围<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>用户在 Robot Viewer 发现轮子惯量方向与轮面相差约 90°，并怀疑腿部惯量。
+本次检查了本地 URDF、MJCF、机器人加载入口、碰撞几何和 STL，并与只读远程
+快照比对。修复前 URDF/MJCF 与 <code class="docutils literal notranslate"><span class="pre">20261015_204549</span></code> 快照逐字节一致，问题不是
+最近高台奖励修改时引入的。</p>
+<p>训练入口 <code class="docutils literal notranslate"><span class="pre">lego2_constants.py</span></code> 的 <code class="docutils literal notranslate"><span class="pre">LEGO2_XML</span></code> 和 <code class="docutils literal notranslate"><span class="pre">get_spec()</span></code> 加载
+<code class="docutils literal notranslate"><span class="pre">xmls/lego2.xml</span></code>，不在训练时动态转换 URDF。因此只改 URDF 不能修正训练动力学。
+本次在两种格式中同步修复，且未改奖励、PPO、动作、地形、关节、碰撞尺寸或质量。
+由于该资产被 Rough/Flat/Platform-Climb 共用，三个任务的动力学都会受影响。</p>
+<p>惯量可视化通常是等效惯量盒/椭球，并非真实几何。大腿包含电机、连杆和偏置，
+不必轴对称；非零惯性积也不必然错误。不能仅凭外观把所有惯性积设为零。</p>
+</section>
+<section id="id2">
+<h2>轮子：已确认的模型内部不一致及修复<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>四个轮子的旋转关节轴为局部 <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">1</span> <span class="pre">0</span></code>。圆柱几何由局部 Z 轴绕 X 轴旋转 90°，
+圆柱轴线与局部 Y 平行。原惯量没有相应旋转，且惯性质心位于关节原点。</p>
+<p>原数值恰好是质量 <code class="docutils literal notranslate"><span class="pre">m=1.6</span> <span class="pre">kg</span></code>、半径 <code class="docutils literal notranslate"><span class="pre">r=0.115</span> <span class="pre">m</span></code>、全宽 <code class="docutils literal notranslate"><span class="pre">L=0.052</span> <span class="pre">m</span></code>
+的均匀实心圆柱公式：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I_axis = m*r²/2 = 0.01058 kg·m²
+I_transverse = m*(3*r² + L²)/12 = 0.005650533333333333 kg·m²
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>项目</p></th>
+<th class="head"><p>修复前</p></th>
+<th class="head"><p>修复后（沿用均匀圆柱近似）</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ixx</p></td>
+<td><p>0.005650533333333333</p></td>
+<td><p>0.005650533333333333</p></td>
+</tr>
+<tr class="row-odd"><td><p>Iyy</p></td>
+<td><p>0.005650533333333333</p></td>
+<td><p>0.01058</p></td>
+</tr>
+<tr class="row-even"><td><p>Izz</p></td>
+<td><p>0.01058</p></td>
+<td><p>0.005650533333333333</p></td>
+</tr>
+<tr class="row-odd"><td><p>RF/RH 质心</p></td>
+<td><p>(0, 0, 0)</p></td>
+<td><p>(0, -0.062, 0)</p></td>
+</tr>
+<tr class="row-even"><td><p>LF/LH 质心</p></td>
+<td><p>(0, 0, 0)</p></td>
+<td><p>(0, 0.062, 0)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>惯量围绕新质心给出，所以保持上述中心惯量，不向该张量再加平行轴项；
+MuJoCo 会在动力学装配中处理质心相对关节的位移。
+62 mm 是模型圆柱的中心偏移；本次据此使原有近似自洽，<strong>不是实物质心测量值</strong>。
+若 FOOT 包含偏置电机/轮毂等非均匀组件，仍需按完整组件 CAD 数据重新标定。</p>
+<p>RF 的 MJCF 核心修改：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;inertial</span><span class="w"> </span><span class="na">pos=</span><span class="s">&quot;0 -0.062 0&quot;</span><span class="w"> </span><span class="na">mass=</span><span class="s">&quot;1.6&quot;</span>
+<span class="w">  </span><span class="na">fullinertia=</span><span class="s">&quot;0.005650533333333333 0.01058 0.005650533333333333 0 0 0&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>URDF 对应修改为：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;inertial&gt;</span>
+<span class="w">  </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 -0.062 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;mass</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;1.6&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;inertia</span><span class="w"> </span><span class="na">ixx=</span><span class="s">&quot;0.005650533333333333&quot;</span><span class="w"> </span><span class="na">ixy=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">ixz=</span><span class="s">&quot;0&quot;</span>
+<span class="w">    </span><span class="na">iyy=</span><span class="s">&quot;0.0105800000000000&quot;</span><span class="w"> </span><span class="na">iyz=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">izz=</span><span class="s">&quot;0.005650533333333333&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/inertial&gt;</span>
+</pre></div>
+</div>
+<p>惯量已写在 link/body 坐标系中，所以惯性坐标系保持零旋转，避免再旋转一次。</p>
+</section>
+<section id="id3">
+<h2>髋部：同类圆柱近似轴向问题<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>四个 hip 原数值也恰好符合均匀圆柱，<code class="docutils literal notranslate"><span class="pre">m=1.25</span> <span class="pre">kg</span></code>、<code class="docutils literal notranslate"><span class="pre">r=0.05</span> <span class="pre">m</span></code>、全长 <code class="docutils literal notranslate"><span class="pre">0.075</span> <span class="pre">m</span></code>。
+碰撞圆柱轴线沿 Y，但原惯量的轴向分量在 Z。第一批同步改为：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Ixx=0.0013671875, Iyy=0.0015625, Izz=0.0013671875 kg·m²
+</pre></div>
+</div>
+<p>髋部原质心位置未改。髋部质心与碰撞圆柱中心本身不重合，真实髋部质量分布仍待
+CAD 确认；本次仅将原来的圆柱近似惯量方向对齐，不宣称它已是精确实物模型。</p>
+</section>
+<section id="id4">
+<h2>腿部和其他待确认问题（本次未改）<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>四条 thigh 使用相同完整惯量张量；四条 calf 也分别使用相同张量。
+对应 link/body 的惯性质心均为 <code class="docutils literal notranslate"><span class="pre">(0,0,0)</span></code>，即关节原点。</p></li>
+<li><p>STL 大致呈左右/前后镜像，但所有腿的非零惯性积符号也相同。
+镜像质量分布原则上需要 <code class="docutils literal notranslate"><span class="pre">I'=S</span> <span class="pre">I</span> <span class="pre">Sᵀ</span></code>，不能无条件复制同一矩阵。
+目前不能确认哪一条腿原始数值可靠，也不能仅凭几何证明真实内部组件镜像，
+因此本次不凭猜测翻转符号或移动腿部质心。</p></li>
+<li><p>本地 trimesh 检查的四个 thigh 和抽查的轮子 STL 均为非封闭网格。
+STL 也没有电机/材料密度信息，不能直接用均匀 STL 体积积分替代实物惯量。</p></li>
+<li><p>正质量刚体的现有 thigh/calf 张量满足正定与惯量三角不等式。
+这仅说明数学可用，不能证明其物理值、参考点或坐标系正确。</p></li>
+<li><p>URDF 的 <code class="docutils literal notranslate"><span class="pre">Lidar_Fixed_Link</span></code> 为 <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">kg</span></code>、零惯量；<code class="docutils literal notranslate"><span class="pre">Lidar_part_Link</span></code> 为零质量/零惯量。
+MJCF 则将雷达作为 base 的几何，没有单独雷达刚体。
+URDF 各 link 质量合计 <code class="docutils literal notranslate"><span class="pre">51.176</span> <span class="pre">kg</span></code>，MJCF 为 <code class="docutils literal notranslate"><span class="pre">49.176</span> <span class="pre">kg</span></code>。
+base 质量是否已包含雷达、转换时是否遗漏：<strong>待确认</strong>，本次未改。</p></li>
+</ol>
+<p>需要用户提供完整 thigh/calf/hip/FOOT 组件的 CAD 质量属性：每个 link 的质量、
+质心 XYZ、关于质心的六个惯量分量、这些分量所用坐标系及其相对 link 的变换、
+单位（m/mm、kg、kg·m²/kg·mm²）。明确 CAD 是否含电机/减速器，不能只给
+STL 外观。四个 link 数据或可验证的镜像关系均可。</p>
+</section>
+<section id="id5">
+<h2>变更、备份与验证<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>修复文件：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>src/mjlab/asset_zoo/robots/lego2/urdf/urdf_legowheel2.urdf
+src/mjlab/asset_zoo/robots/lego2/xmls/lego2.xml
+</pre></div>
+</div>
+<p>新增 CPU 验证工具：<code class="docutils literal notranslate"><span class="pre">scripts/tools/check_lego2_inertia.py</span></code>。
+URDF 的 CRLF 换行保留，避免整个文件被格式化。原文件完整备份及 SHA-256 在：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>docs/codex/backups/20261027_lego2_inertia_before_v1/
+</pre></div>
+</div>
+<p>备份按源码相对路径保存；恢复时仅将该目录中两个资产复制回相同相对路径。
+未修改只读远程快照、依赖锁文件或已有训练结果。</p>
+<p>已执行：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">--no-sync</span> <span class="pre">python</span> <span class="pre">scripts/tools/check_lego2_inertia.py</span></code>：8 个圆柱张量、
+URDF/MJCF 一致性、4 个轮子质心/旋转轴检查通过。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PYTEST_DISABLE_PLUGIN_AUTOLOAD=1</span> <span class="pre">FORCE_CPU=1</span> <span class="pre">uv</span> <span class="pre">run</span> <span class="pre">--no-sync</span> <span class="pre">pytest</span> <span class="pre">-q</span> <span class="pre">tests/test_asset_zoo.py</span> <span class="pre">-k</span> <span class="pre">Lego2</span></code>：1 passed，训练资产 Entity 编译通过。
+首次普通 pytest 被环境中的 ROS launch_testing 插件和缺失 lark 阻断，
+已通过仅对本次命令禁用第三方插件自动加载排除干扰，未修改 ROS 或依赖。</p></li>
+<li><p>新脚本 Ruff 格式和 lint 通过；三个 Lego2 任务注册仍可加载。</p></li>
+<li><p>新脚本 Pyright：0 errors，0 warnings。校验器对原始快照会按预期失败，
+对修正后资产通过，避免只做“能加载”的弱检查。</p></li>
+<li><p>与备份比较：总质量 <code class="docutils literal notranslate"><span class="pre">49.176</span> <span class="pre">kg</span></code>、<code class="docutils literal notranslate"><span class="pre">nq=19</span></code>、<code class="docutils literal notranslate"><span class="pre">nv=18</span></code>、关节和全部碰撞几何不变。</p></li>
+<li><p>20 个配置的正向运动学对照一致，质量矩阵正定，正向动力学有限。
+非 hip/FOOT 的惯性质心和张量保持不变。</p></li>
+</ul>
+<p>没有运行 GPU 训练、MuJoCo Warp 动态接触验证或实物验证，因此不能断言已解决
+登顶失败或 EPA warning。远程同步和新动力学下的小规模试训仍待完成。</p>
+<p>修复后的 SHA-256（用于与远程文件核对）：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>9502149ed6a95a7d7e5453c1d5a8b085ddd7afbbf4c93de7d0780b42a81f1443  xmls/lego2.xml
+6c05b612f365d1740cffd3892817b86ada05f6821e414d11ef07a60debe8baef  urdf/urdf_legowheel2.urdf
+</pre></div>
+</div>
+<p>图中蓝色为等效惯量椭球，橙色为当前圆柱外形；椭球边界不要求贴合圆柱边界。</p>
+<p><img alt="RF 轮子惯量修复前后" src="codex/backups/20261030_handoff_link_audit/docs/codex/assets/lego2_wheel_inertia_before_after.png" /></p>
+</section>
+<section id="id6">
+<h2>后续实验边界<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>本轮只改变共享资产动力学；保留当前高台奖励配置作为对照。
+先同步资产和 CPU 校验工具，远程校验后做单环境回放/小规模训练；保留旧 checkpoint，
+新实验使用新 run 名称并记录资产版本。旧 checkpoint 可供旧动力学对照，不能把
+修复前后结果混在同一条实验曲线中。完整长训应等待资产质量属性进一步确认。</p>
+</section>
+<section id="id7">
+<h2>参考<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://mujoco.readthedocs.io/en/latest/XMLreference.html#body-inertial">MuJoCo XML inertial 说明</a>：
+fullinertia 按 body 方向给出，编译时转换成质心主轴张量。</p></li>
+<li><p><a class="reference external" href="https://mujoco.readthedocs.io/en/latest/overview.html">MuJoCo 模型坐标系与等效惯量显示</a>：
+惯性坐标系位于质心并沿惯性主轴；惯量显示不是物体外形网格。</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">结论与证据范围</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">轮子：已确认的模型内部不一致及修复</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">髋部：同类圆柱近似轴向问题</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">腿部和其他待确认问题（本次未改）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">变更、备份与验证</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">后续实验边界</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">参考</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The mjlab Developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, The mjlab Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 14, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

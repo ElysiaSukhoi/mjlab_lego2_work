@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Codex 交接与操作手册 &#8212; mjlab Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/twemoji.css" />
+    <link rel="stylesheet" type="text/css" href="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css?v=53359634" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=3ea80bc3" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js"></script>
+    <script src="../../../_static/twemoji.js"></script>
+    <script src="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js?v=ec35c6c9"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'codex/backups/20261029_context_before_refactor_plan/HANDOFF';</script>
+    <link rel="icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 14, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">mjlab Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item">
+<div class="sidebar-version-switcher">
+  <label class="sidebar-version-label" for="version-select">Version</label>
+  <select id="version-select" class="sidebar-version-select" onchange="location = this.value;">
+    <option value="HANDOFF.html" selected>main</option>
+  </select>
+</div>
+</div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../source/installation.html">Installation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/tutorials/cartpole.html">Cartpole: Building Your First Environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/contributing.html">Contributing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../source/architecture_overview.html">Architecture Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/entity/index.html">Entity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/entity/entity_data.html">Entity Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/entity/per_world_mesh.html">Heterogeneous Worlds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/actuators.html">Actuators</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/sensors/index.html">Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/sensors/raycast_sensor.html">RayCast Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/sensors/rgbd_camera.html">RGB-D Camera</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/scene.html">Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/terrain.html">Terrain</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Manager Layer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../source/environment_config.html">Environment Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/observations.html">Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/actions.html">Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/rewards.html">Rewards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/terminations.html">Terminations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/events.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/randomization.html">Domain Randomization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/curriculum.html">Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/recorders.html">Recorders</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Training &amp; Debugging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/training/rsl_rl.html">Training with RSL-RL</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/training/motion_imitation.html">Motion Imitation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/viewers.html">Viewers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/training/distributed_training.html">Distributed Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/training/cloud.html">Cloud Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/debugging/nan_guard.html">NaN Guard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/debugging/export_scene.html">Export Scene</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/api/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/envs.html">mjlab.envs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/scene.html">mjlab.scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/sim.html">mjlab.sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/entity.html">mjlab.entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/actuator.html">mjlab.actuator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/sensor.html">mjlab.sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/managers.html">mjlab.managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/terrains.html">mjlab.terrains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/rl.html">mjlab.rl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/viewer.html">mjlab.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/tasks.html">mjlab.tasks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../source/motivation.html">Why mjlab?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/migration_isaac_lab.html">Migrating from Isaac Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/faq.html">FAQ &amp; Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/research.html">Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/edit/main/docs/codex/backups/20261029_context_before_refactor_plan/HANDOFF.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/issues/new?title=Issue%20on%20page%20%2Fcodex/backups/20261029_context_before_refactor_plan/HANDOFF.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/codex/backups/20261029_context_before_refactor_plan/HANDOFF.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Codex 交接与操作手册</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">当前边界（2026-10-29）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">新聊天的读取顺序</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">开始工作前</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">远程长训练</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">监控与回放</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2026-10-28 当前操作：只回放已有高台策略</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">下一次工作的具体起点</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">状态标签</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="codex">
+<h1>Codex 交接与操作手册<a class="headerlink" href="#codex" title="Link to this heading">#</a></h1>
+<p>更新时间：2026-10-29（Asia/Shanghai）</p>
+<section id="id1">
+<h2>当前边界（2026-10-29）<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>用户已确认资产纠偏完成且远程同步。<strong>本轮只做方案研究，禁止自行改训练业务代码或开训</strong>。
+当前目标是盲走；下一步先讨论报告，再制定详细重构规划。旧操作示例仅供未来获准实施时参考。
+研究报告：<code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project/高台训练/2026-10-29_盲走轮足高台开源对比报告.md</span></code>。
+源码来源：<code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project/OpenSource/SOURCES_20261029.md</span></code>。</p>
+</section>
+<section id="id2">
+<h2>新聊天的读取顺序<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>先读本文件，再读 <code class="docutils literal notranslate"><span class="pre">CURRENT_STATUS.md</span></code>、<code class="docutils literal notranslate"><span class="pre">DECISIONS.md</span></code>、<code class="docutils literal notranslate"><span class="pre">PROJECT_CONTEXT.md</span></code> 和
+<code class="docutils literal notranslate"><span class="pre">EXPERIMENT_LOG.md</span></code>。当前需额外读取 <code class="docutils literal notranslate"><span class="pre">INERTIA_AUDIT_20261027.md</span></code>。早期说明保留在
+外层项目的指引手册和交接 txt 中，旧记录中提及的 <code class="docutils literal notranslate"><span class="pre">task.txt</span></code>/<code class="docutils literal notranslate"><span class="pre">task_2.txt</span></code> 是否仍存在
+需先检查，不能把旧文档路径当作已确认可用。</p>
+</section>
+<section id="id3">
+<h2>开始工作前<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>本地：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/home/asus/work/mjlab_lego2_work
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>compileall<span class="w"> </span>-q<span class="w"> </span>&lt;本次修改的.py文件&gt;
+uv<span class="w"> </span>run<span class="w"> </span>list-envs<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;Mjlab-(Platform-Climb|Velocity-(Flat|Rough))-Lego2&#39;</span>
+</pre></div>
+</div>
+<p>远程：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">10395</span><span class="w"> </span>ajifang@27.128.203.222
+<span class="nb">cd</span><span class="w"> </span>~/zrq/mjlab_lego2
+</pre></div>
+</div>
+<p>同步时只传本次明确修改的文件，并先在远程保留可回滚副本。不要使用未经确认的 <code class="docutils literal notranslate"><span class="pre">rsync</span> <span class="pre">--delete</span></code>。远程同步后执行同样的 <code class="docutils literal notranslate"><span class="pre">compileall</span></code>、<code class="docutils literal notranslate"><span class="pre">list-envs</span></code> 和配置加载校验；本地校验由 Codex 完成，用户只需要执行远程命令并回传输出。</p>
+</section>
+<section id="id4">
+<h2>远程长训练<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>新训练必须在远程 screen 会话 <code class="docutils literal notranslate"><span class="pre">zrq</span></code> 中启动：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>screen<span class="w"> </span>-S<span class="w"> </span>zrq
+<span class="nb">cd</span><span class="w"> </span>~/zrq/mjlab_lego2
+uv<span class="w"> </span>run<span class="w"> </span>train<span class="w"> </span>Mjlab-Platform-Climb-Lego2<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--env.scene.num-envs<span class="w"> </span><span class="m">2048</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--agent.max-iterations<span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--agent.run-name<span class="w"> </span>&lt;新的_run_name&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--agent.logger<span class="w"> </span>tensorboard
+</pre></div>
+</div>
+<p>按 <code class="docutils literal notranslate"><span class="pre">Ctrl-A</span></code>、<code class="docutils literal notranslate"><span class="pre">D</span></code> 脱离；查看用 <code class="docutils literal notranslate"><span class="pre">screen</span> <span class="pre">-r</span> <span class="pre">zrq</span></code>。如需续训，先确认 checkpoint，再使用 Tyro 接受的大小写布尔值：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>--agent.resume<span class="w"> </span>True
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--agent.load-run</span></code>、<code class="docutils literal notranslate"><span class="pre">--agent.load-checkpoint</span></code> 的实际路径必须从远程 <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">logs/rsl_rl/lego2_platform_climb</span> <span class="pre">-name</span> <span class="pre">'model_*.pt'</span></code> 确认，不能凭日期猜测。</p>
+</section>
+<section id="id5">
+<h2>监控与回放<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>远程启动 TensorBoard：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>run<span class="w"> </span>tensorboard<span class="w"> </span>--logdir<span class="w"> </span>logs/rsl_rl/lego2_velocity<span class="w"> </span>--bind_all
+</pre></div>
+</div>
+<p>本地另开终端建立隧道：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-N<span class="w"> </span>-p<span class="w"> </span><span class="m">10395</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-L<span class="w"> </span><span class="m">8080</span>:localhost:8080<span class="w"> </span>-L<span class="w"> </span><span class="m">6006</span>:localhost:6006<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>ajifang@27.128.203.222
+</pre></div>
+</div>
+<p>浏览器访问 <code class="docutils literal notranslate"><span class="pre">http://localhost:8080</span></code>（Viser）和 <code class="docutils literal notranslate"><span class="pre">http://localhost:6006</span></code>（TensorBoard）。回放命令的 checkpoint 必须先在远程确认。</p>
+<section id="id6">
+<h3>2026-10-28 当前操作：只回放已有高台策略<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>用户明确要求先不训练。已在本地通过 <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">--no-sync</span> <span class="pre">play</span> <span class="pre">Mjlab-Platform-Climb-Lego2</span> <span class="pre">--help</span></code> 核实 CLI 参数，未启动仿真或远程操作。</p>
+<p>本轮用户指定目标 run：<code class="docutils literal notranslate"><span class="pre">platform_climb_front_lift_full_150mm_2048_v1</span></code>。
+只在该 run 内查找实际 checkpoint，不猜测时间目录或 <code class="docutils literal notranslate"><span class="pre">model_9999.pt</span></code>。
+在远程 <code class="docutils literal notranslate"><span class="pre">zrq</span></code> 会话的空闲窗口执行以下命令；如有多个同名后缀的日期目录，
+按排序选择最新目录中的最大 checkpoint 编号。没有匹配时不启动回放：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/zrq/mjlab_lego2
+<span class="nv">CHECKPOINT</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>find<span class="w"> </span>logs/rsl_rl/lego2_platform_climb<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-path<span class="w"> </span><span class="s1">&#39;*_platform_climb_front_lift_full_150mm_2048_v1/model_*.pt&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-V<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CHECKPOINT</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;回放 checkpoint：%s\n&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CHECKPOINT</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span>uv<span class="w"> </span>run<span class="w"> </span>play<span class="w"> </span>Mjlab-Platform-Climb-Lego2<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--checkpoint-file<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CHECKPOINT</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num-envs<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--viewer<span class="w"> </span>viser
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;未找到该实验的 checkpoint，暂未启动回放。&#39;</span>
+<span class="k">fi</span>
+</pre></div>
+</div>
+<p>本地另开终端建立仅回放用的 SSH 隧道：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-N<span class="w"> </span>-o<span class="w"> </span><span class="nv">ExitOnForwardFailure</span><span class="o">=</span>yes<span class="w"> </span>-p<span class="w"> </span><span class="m">10395</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-L<span class="w"> </span><span class="m">8080</span>:localhost:8080<span class="w"> </span>ajifang@27.128.203.222
+</pre></div>
+</div>
+<p>浏览器打开 <code class="docutils literal notranslate"><span class="pre">http://localhost:8080</span></code>。若 Viser 实际监听其他端口，隧道右侧服务器
+端口需按启动日志调整；已有 8080 隧道则直接复用。</p>
+<p><code class="docutils literal notranslate"><span class="pre">play</span></code> 加载当前源码的 play 配置/资产，不会自动恢复 checkpoint 训练时的模型。
+若远程已替换惯量，旧 checkpoint 配新惯量的表现不能当作旧实验的原样复现。
+2026-10-29 用户确认远程资产已同步；具体训练/回放版本对应仍待确认。观察接近、前足跨边缘、机身/后足是否登顶、
+有无穿透或弹飞；记录回放所用 checkpoint 和资产版本，不生成新训练结果。</p>
+</section>
+</section>
+<section id="id7">
+<h2>下一次工作的具体起点<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p>先读2026-10-29研究报告，不再按旧“同步contact_advance后继续训练”的指令推进。
+讨论重点：actor必须移除扫描但可保留critic训练特权；本体历史是否作为最小盲走基线；
+中央单级坑从最低可行高度起课程；距离升级阈值须匹配坑尺寸、速度、episode时长；
+删除固定地图坐标奖励，必要时只做通用局部接触反应对照。尚未实施这些候选变更。</p>
+<p>最近全量回放未见稳定通过，视频仅约10秒，不能计算成功率。实际checkpoint及资产版本
+对应待确认。旧奖励的轮心高度基准和静止领分风险已在报告中纠正，不能延续旧日志解释。</p>
+<p>本地训练代码位于 <code class="docutils literal notranslate"><span class="pre">/home/asus/work/mjlab_lego2_work</span></code>；外层项目已迁移到
+<code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project</span></code>。参考仓库无需安装，不能覆盖用户已有robotlab/Isaaclab环境。
+未来获准实施后仍由Codex完成本地校验，用户只执行远程同步和校验；讲解应结合核心代码。
+远程训练统一screen <code class="docutils literal notranslate"><span class="pre">zrq</span></code>，但当前不启动任何训练。</p>
+</section>
+<section id="id8">
+<h2>状态标签<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>记录时明确使用：<code class="docutils literal notranslate"><span class="pre">本地已验证</span></code>、<code class="docutils literal notranslate"><span class="pre">已同步远程</span></code>、<code class="docutils literal notranslate"><span class="pre">远程已验证</span></code>、<code class="docutils literal notranslate"><span class="pre">训练已验证</span></code>、<code class="docutils literal notranslate"><span class="pre">待确认</span></code>。这能防止把本地代码、远程代码和训练产物混为同一版本。</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">当前边界（2026-10-29）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">新聊天的读取顺序</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">开始工作前</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">远程长训练</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">监控与回放</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2026-10-28 当前操作：只回放已有高台策略</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">下一次工作的具体起点</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">状态标签</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The mjlab Developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, The mjlab Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 14, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

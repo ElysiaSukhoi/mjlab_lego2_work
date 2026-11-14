@@ -1,0 +1,998 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>盲走轮足高台训练：开源代码对比与方向建议 &#8212; mjlab Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/twemoji.css" />
+    <link rel="stylesheet" type="text/css" href="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css?v=53359634" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=3ea80bc3" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js"></script>
+    <script src="../../../../../_static/twemoji.js"></script>
+    <script src="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js?v=ec35c6c9"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'codex/backups/20261030_handoff_link_audit/external/高台训练/2026-10-29_盲走轮足高台开源对比报告';</script>
+    <link rel="icon" href="../../../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 14, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">mjlab Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item">
+<div class="sidebar-version-switcher">
+  <label class="sidebar-version-label" for="version-select">Version</label>
+  <select id="version-select" class="sidebar-version-select" onchange="location = this.value;">
+    <option value="2026-10-29_盲走轮足高台开源对比报告.html" selected>main</option>
+  </select>
+</div>
+</div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/installation.html">Installation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../source/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/tutorials/cartpole.html">Cartpole: Building Your First Environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/contributing.html">Contributing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/architecture_overview.html">Architecture Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../source/entity/index.html">Entity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/entity/entity_data.html">Entity Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/entity/per_world_mesh.html">Heterogeneous Worlds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/actuators.html">Actuators</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../source/sensors/index.html">Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/sensors/raycast_sensor.html">RayCast Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/sensors/rgbd_camera.html">RGB-D Camera</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/scene.html">Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/terrain.html">Terrain</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Manager Layer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/environment_config.html">Environment Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/observations.html">Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/actions.html">Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/rewards.html">Rewards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/terminations.html">Terminations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/events.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/randomization.html">Domain Randomization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/curriculum.html">Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/recorders.html">Recorders</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Training &amp; Debugging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../source/training/rsl_rl.html">Training with RSL-RL</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/training/motion_imitation.html">Motion Imitation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/viewers.html">Viewers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/training/distributed_training.html">Distributed Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/training/cloud.html">Cloud Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/debugging/nan_guard.html">NaN Guard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/debugging/export_scene.html">Export Scene</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../../source/api/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/envs.html">mjlab.envs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/scene.html">mjlab.scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/sim.html">mjlab.sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/entity.html">mjlab.entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/actuator.html">mjlab.actuator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/sensor.html">mjlab.sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/managers.html">mjlab.managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/terrains.html">mjlab.terrains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/rl.html">mjlab.rl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/viewer.html">mjlab.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../source/api/tasks.html">mjlab.tasks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/motivation.html">Why mjlab?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/migration_isaac_lab.html">Migrating from Isaac Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/faq.html">FAQ &amp; Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/research.html">Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../source/changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/edit/main/docs/codex/backups/20261030_handoff_link_audit/external/高台训练/2026-10-29_盲走轮足高台开源对比报告.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/issues/new?title=Issue%20on%20page%20%2Fcodex/backups/20261030_handoff_link_audit/external/高台训练/2026-10-29_盲走轮足高台开源对比报告.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../../_sources/codex/backups/20261030_handoff_link_audit/external/高台训练/2026-10-29_盲走轮足高台开源对比报告.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>盲走轮足高台训练：开源代码对比与方向建议</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 结论先行</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2. 资料、下载与版本</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dreamwaq-highplatform">3. Dreamwaq-highplatform：真正值得迁移的组合</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.1 地形与课程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#z">3.2 奖励不是“接触后奖励正 z”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.3 它的盲走依赖历史与估计，不只依赖坑</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cm">3.4 “80 cm”有怎样的证据</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">4. 其他项目的交叉对比</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#locowheeledlegged">4.1 LocoWheeledLegged：历史盲走与轮腿分开的通用代价</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deeprobotics-m20">4.2 DeepRobotics 官方 M20：通用奖励也存在条件门控</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-lab">4.3 robot_lab：最小通用轮足基线</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">4.4 两篇高相关论文：支持方向，但不是可直接移植的开源配方</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lego2">5. 对当前 Lego2 方案需要明确纠正的地方</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actor">5.1 当前本地 actor 仍看见地形</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">5.2 有些专项奖励可在卡住时持续得分</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">5.3 前轮高度基准用错了语义</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">5.4 视频与资产版本不能混为因果证据</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6. 用户三条重构思路的可行性和边界</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">7. 后续规划应围绕哪些选择（尚未实施）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">8. 本轮产物与边界</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>盲走轮足高台训练：开源代码对比与方向建议<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>日期：2026-10-29；用户澄清更新：2026-10-30。阶段：总体思路探索，<strong>未修改训练业务代码、未启动训练、未安装参考项目依赖</strong>。</p>
+<section id="id2">
+<h2>1. 结论先行<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>建议支持用户提出的重构方向：<strong>本体感知盲走、中央坑式台阶、从训练开始启用高度课程、以速度跟踪为主要目标，删除依赖固定平台坐标的接近/抬升奖励</strong>。</p>
+<p>但需要补上“actor 输入与历史/记忆”这条主线；仅换地形和奖励不能把当前策略变成盲走。也不能把“尽量复用现有奖励”理解为“绝对不允许轮足接触反应设计”。建议先验证最小现有奖励基线，必要时再单独对比通用的局部接触反应项；不继续堆叠固定 x 坐标阶段奖励。</p>
+<p>本次最重要的纠正：当前 <code class="docutils literal notranslate"><span class="pre">platform_front_lift</span></code> 的正值不能证明主动抬腿，<code class="docutils literal notranslate"><span class="pre">platform_front_contact_advance</span></code> 的正值也不能证明前移。此前对这些日志的解读过强，详见第 5 节。</p>
+<p>证据分为：<strong>本地源码已核查、附带日志已读取、作者论文/演示报告、迁移推断、待确认</strong>。没有在本机复现任何参考项目的爬台能力。</p>
+</section>
+<section id="id3">
+<h2>2. 资料、下载与版本<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>实际已有目录为 <code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project</span></code>，用户输入的 <code class="docutils literal notranslate"><span class="pre">Jicha_Project</span></code> 未发现；旧中文项目目录已迁移到这里。本地训练源码仍为 <code class="docutils literal notranslate"><span class="pre">/home/asus/work/mjlab_lego2_work</span></code>。</p>
+<p>本次保留用户已有 Dreamwaq 文件，新增以下三个只读研究副本；采用浅克隆与稀疏检出，保留 Git 来源和提交，不初始化模型子模块、不改变现有 robot_lab/IsaacLab/uv 环境。仓库自带代码仅静态阅读。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>项目</p></th>
+<th class="head"><p>本地目录（均在 OpenSource 下）</p></th>
+<th class="head"><p>核查版本</p></th>
+<th class="head"><p>用途</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>用户提供的 Dreamwaq-highplatform</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Dreamwaq-highplatform</span></code></p></td>
+<td><p>无 <code class="docutils literal notranslate"><span class="pre">.git</span></code>，精确提交待确认</p></td>
+<td><p>坑式高台、课程、历史估计的主要参考</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/zhaozijie2022/LocoWheeledLegged">LocoWheeledLegged</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LocoWheeledLegged</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">015b8230b1a21331ab6d2b054a2ef8f1e435db84</span></code></p></td>
+<td><p>Go2W 盲走历史输入和通用奖励</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/DeepRoboticsLab/rl_training">DeepRobotics 官方 rl_training</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DeepRobotics_rl_training</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">9c0e710421b165a444b2c73e5a9d65ee3fafa299</span></code></p></td>
+<td><p>官方 M20 轮足奖励、课程及条件正则</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/fan-ziqi/robot_lab">robot_lab</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">robot_lab</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">26acb225aad129e222da7a34ba11f39e29b73e39</span></code></p></td>
+<td><p>Go2W/M20 通用速度跟踪基线</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Dreamwaq 的同名候选上游为 <a class="reference external" href="https://github.com/yusongmin1/Dreamwaq/tree/highplatform">yusongmin1/Dreamwaq 的 highplatform 分支</a>，但本地包增加了其他机型/CTS 等内容，不能认定与在线分支逐文件一致。</p>
+<p>另检索了 <a class="reference external" href="https://github.com/ShengqianChen/DreamWaQ_Go2W">DreamWaQ_Go2W</a>、<a class="reference external" href="https://github.com/clearlab-sustech/Wheel-Legged-Gym">Wheel-Legged-Gym</a>、CTBC、MUJICA。前者与已选 LocoWheeledLegged 路线重叠；Wheel-Legged-Gym 主要双轮足；后两者本轮未找到可核查的完整训练源码，作为论文参考，<strong>不冒充已下载、可复现的高台训练项目</strong>。</p>
+</section>
+<section id="dreamwaq-highplatform">
+<h2>3. Dreamwaq-highplatform：真正值得迁移的组合<a class="headerlink" href="#dreamwaq-highplatform" title="Link to this heading">#</a></h2>
+<p>以下相对路径均以 <code class="docutils literal notranslate"><span class="pre">OpenSource/Dreamwaq-highplatform/</span></code> 为根。</p>
+<section id="id4">
+<h3>3.1 地形与课程<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>实际入口为 <code class="docutils literal notranslate"><span class="pre">legged_gym/envs/__init__.py:45</span></code> 注册的 <code class="docutils literal notranslate"><span class="pre">m20</span></code>。主要配置是
+<code class="docutils literal notranslate"><span class="pre">legged_gym/envs/M20/m20_config.py</span></code>，实现为 <code class="docutils literal notranslate"><span class="pre">m20.py</span></code>，地形为 <code class="docutils literal notranslate"><span class="pre">legged_gym/utils/terrain.py</span></code>。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>项目</p></th>
+<th class="head"><p>本地源码实际值</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>地块 / 坑底</p></td>
+<td><p>8×8 m / 中央 4×4 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>外围与坑底</p></td>
+<td><p>外围 z=0，坑底 z=-h，env origin 在坑底</p></td>
+</tr>
+<tr class="row-even"><td><p>地形分布</p></td>
+<td><p>混合坡、楼梯、障碍；高台坑占 15%，并非全是坑</p></td>
+</tr>
+<tr class="row-odd"><td><p>课程</p></td>
+<td><p>从开始启用，40 级；<code class="docutils literal notranslate"><span class="pre">difficulty=i/40</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>标称坑深</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">h=0.20+0.80*difficulty</span></code>，第 0～39 级约 0.20～0.98 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>初始等级</p></td>
+<td><p>随机 0～20，即约 0.20～0.60 m，并非全部最低级</p></td>
+</tr>
+<tr class="row-even"><td><p>出生</p></td>
+<td><p>默认 root + 坑底 origin；XY 各扰动 ±0.5 m，yaw 保持默认</p></td>
+</tr>
+<tr class="row-odd"><td><p>高台命令</p></td>
+<td><p>单独采样 vx∈[0,1]、vy=0、heading=0</p></td>
+</tr>
+<tr class="row-even"><td><p>升级</p></td>
+<td><p>root 到地块中心的 XY 距离 &gt;4 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>降级</p></td>
+<td><p>距离 &lt; 命令速度范数×episode 时长×0.5，且未升级</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>证据：<code class="docutils literal notranslate"><span class="pre">m20_config.py:5–57</span></code>；<code class="docutils literal notranslate"><span class="pre">terrain.py:56–63,93–148,164–171</span></code>；
+<code class="docutils literal notranslate"><span class="pre">m20.py:397–412,451–466,489–509,829–835</span></code>。</p>
+<p>特别注意：课程距离是到 <strong>env origin 地块中心</strong> 的距离，不是到带随机偏移的实际出生点。达到最高等级后会随机回到其他等级，保留较易样本。高台时 heading 偏差约超过 30°会终止，并关闭 push；不是完全没有专项训练组织。</p>
+<p>方坑半宽 2 m，坑内最大中心距离为 <code class="docutils literal notranslate"><span class="pre">2√2≈2.83</span> <span class="pre">m</span></code>，因此 4 m 阈值在不穿模、正确出生的条件下，确实要求走出坑。这解释了为什么“距离升级”在这里比原先任意出生/随机地形的任务更有意义，但它仍不是稳定登顶成功率。</p>
+</section>
+<section id="z">
+<h3>3.2 奖励不是“接触后奖励正 z”<a class="headerlink" href="#z" title="Link to this heading">#</a></h3>
+<p>当前启用项见 <code class="docutils literal notranslate"><span class="pre">m20_config.py:141–169</span></code>、<code class="docutils literal notranslate"><span class="pre">m20.py:937–1060</span></code>。选取关键原始权重：</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>奖励/代价</p></th>
+<th class="head text-right"><p>权重</p></th>
+<th class="head"><p>意义</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>tracking_lin_vel</p></td>
+<td class="text-right"><p>+3</p></td>
+<td><p>XY 速度跟踪</p></td>
+</tr>
+<tr class="row-odd"><td><p>tracking_ang_vel</p></td>
+<td class="text-right"><p>+1.5</p></td>
+<td><p>yaw-rate 跟踪</p></td>
+</tr>
+<tr class="row-even"><td><p>lin_vel_z</p></td>
+<td class="text-right"><p>-2</p></td>
+<td><p>机体系 z 速度平方惩罚</p></td>
+</tr>
+<tr class="row-odd"><td><p>orientation / ang_vel_xy</p></td>
+<td class="text-right"><p>-0.2 / -0.05</p></td>
+<td><p>平姿与滚转/俯仰角速度约束</p></td>
+</tr>
+<tr class="row-even"><td><p>base_height</p></td>
+<td class="text-right"><p>-5</p></td>
+<td><p>对扫描平均地面高度的机身高度误差</p></td>
+</tr>
+<tr class="row-odd"><td><p>action_rate</p></td>
+<td class="text-right"><p>-0.01</p></td>
+<td><p>动作差分代价</p></td>
+</tr>
+<tr class="row-even"><td><p>torques / dof_acc</p></td>
+<td class="text-right"><p>-4e-5 / -2.5e-7</p></td>
+<td><p>力矩/加速度正则</p></td>
+</tr>
+<tr class="row-odd"><td><p>hip_default / run_still</p></td>
+<td class="text-right"><p>-0.25 / -0.15</p></td>
+<td><p>默认腿姿态约束</p></td>
+</tr>
+<tr class="row-even"><td><p>highplatform_yaw</p></td>
+<td class="text-right"><p>-3.5</p></td>
+<td><p><strong>仅高台环境</strong>的 heading 误差惩罚</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>没有启用接近奖励、登顶奖金、前轮搭台奖金、正 z 运动或显式抬腿奖励。
+但 <code class="docutils literal notranslate"><span class="pre">highplatform_yaw</span></code> 是专项项，不能说它完全没有高台特化设计。源码中某些注释
+声称高台屏蔽 base_height/angular tracking，实际没有屏蔽，应以执行代码为准。</p>
+<p>值得借鉴的是轮腿代价分离：一般关节速度成本里轮速先乘 0.1 再平方，相同角速度下
+轮子成本为腿的 1/100，避免把持续滚动误当不良动作。全部非零权重还乘控制周期
+0.02 s，不能跨机器人只照抄权重数字。</p>
+</section>
+<section id="id5">
+<h3>3.3 它的盲走依赖历史与估计，不只依赖坑<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>默认 <code class="docutils literal notranslate"><span class="pre">m20</span></code> 的 actor 当前观测为 57 维本体量，包含命令、角速度、重力投影、
+关节量和动作，不直接输入高度图或真实基座线速度。5 帧历史（285 维）经 VAE
+得到显式速度/腿接触估计与隐变量；高度扫描只进入 critic 的特权观测。</p>
+<p>证据：<code class="docutils literal notranslate"><span class="pre">m20.py:228–254</span></code>；<code class="docutils literal notranslate"><span class="pre">rsl_rl/rsl_rl/modules/actor_critic_dreamwaq.py:119–133</span></code>；
+<code class="docutils literal notranslate"><span class="pre">rsl_rl/rsl_rl/algorithms/ppo_dreamwaq.py:191–204</span></code>。</p>
+<p>这是 DreamWaQ 的重要组成部分。不能把本地无历史的 MLP 去掉扫描后，与它当作同一
+信息条件；同时也不意味着现在必须重写成 DreamWaQ 算法，历史堆叠是较小的候选。
+项目还存在 <code class="docutils literal notranslate"><span class="pre">m20_cts</span></code> teacher/student 变体，不能将所有 task 都笼统称纯盲走。</p>
+</section>
+<section id="cm">
+<h3>3.4 “80 cm”有怎样的证据<a class="headerlink" href="#cm" title="Link to this heading">#</a></h3>
+<p>附带 <code class="docutils literal notranslate"><span class="pre">logs/M20/Oct27_15-50-05_/model_28000.pt</span></code> 与 TensorBoard 文件。
+只读解析日志（未反序列化未知 checkpoint）得到 28052 个迭代点；最终高台平均
+等级约 28.3304，该均值最高约 30.4908。<strong>若训练配置就是当前公式</strong>，分别对应
+标称平均坑深约 0.7666 m、0.8098 m。没有保存参数快照证明版本对应，也没有
+80 cm 的严格成功率指标，因此不能把它写成“80 cm 稳定成功率已复现”。</p>
+<p>M20 为 16 动作（含四个 HAA），Lego2 当前为 12 动作，机器人尺寸、关节和驱动力也
+不同。该高度只能作为参考项目证据，不能直接承诺 Lego2 同样可达。</p>
+<p>回放还需小心：<code class="docutils literal notranslate"><span class="pre">play_highplatform.py:25–29</span></code> 关闭课程并只选高台，而
+<code class="docutils literal notranslate"><span class="pre">terrain.py:52</span></code> 的 randomized difficulty 固定为 1，因此可能直接生成约 1 m 坑，
+并非训练时的初始等级。B2W 变体地形比例与高台分类逻辑还不一致，不建议以其为首个复现入口。</p>
+</section>
+</section>
+<section id="id6">
+<h2>4. 其他项目的交叉对比<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<section id="locowheeledlegged">
+<h3>4.1 LocoWheeledLegged：历史盲走与轮腿分开的通用代价<a class="headerlink" href="#locowheeledlegged" title="Link to this heading">#</a></h3>
+<p>核心文件：<code class="docutils literal notranslate"><span class="pre">locowheeledlegged/config/go2w/locomotion_env_cfg.py</span></code>。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">:52–87</span></code>：8×8 m 地块、10 级、多种混合地形；上下楼梯每级台阶范围
+0.05～0.23 m、步宽 0.3 m。<strong>多级楼梯不等于单级 80 cm 高台</strong>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">:175–235</span></code>：actor 的角速度、重力和关节量堆叠 6 帧，去除 height_scan 和
+base_lin_vel；critic 可读高度/线速度。是值得参考的较简单本体历史路线。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">:275–356</span></code>：x/y/yaw 分别跟踪，权重均 0.75；z 速度成本 -2、平姿 -0.5，
+腿/轮加速度成本分别 -2.5e-7/-2.5e-9；没有独立的爬升奖金。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">:573–612</span></code>：命令范围课程与地形课程从开始启用。<code class="docutils literal notranslate"><span class="pre">mdp/curriculums.py:19–45</span></code>
+用距离升降级。初始最高地形级别 5，同样不等于全部最低级。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mdp/rewards.py:138–159</span></code> 的高度成本对世界地面高度直接截断，不能未经坐标检查
+迁移到更深坑；这里只借鉴结构，不原样搬运实现。</p></li>
+</ul>
+<p>适合作为“普通 PPO＋本体历史＋非对称 critic＋少量通用奖励”的对照，不是本轮已证实的极高台方案。</p>
+</section>
+<section id="deeprobotics-m20">
+<h3>4.2 DeepRobotics 官方 M20：通用奖励也存在条件门控<a class="headerlink" href="#deeprobotics-m20" title="Link to this heading">#</a></h3>
+<p>路径前缀 <code class="docutils literal notranslate"><span class="pre">source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/</span></code>。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config/wheeled/deeprobotics_m20/rough_env_cfg.py:109–110</span></code>：actor 不输入地形扫描
+和真实线速度，critic 保留扫描；本地未配置 actor 历史/估计器。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">velocity_env_cfg.py:39,52–56,891,945–947</span></code>：继承外部 IsaacLab 混合 rough 地形，
+地形课程启用、初始最高级 5；<strong>当前仓库并非坑式高台专项</strong>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mdp/curriculums.py:35–46</span></code>：距离超地块长度一半升级，低于期望距离一半降级；
+同时更新正则项课程系数。</p></li>
+<li><p>M20 cfg <code class="docutils literal notranslate"><span class="pre">:162–165,235–264</span></code>：线速/yaw 跟踪 5/3；z 速度 -2；平姿 -50；高度项 0。
+普通 airtime/foot-height 为 0。另一个权重 50 的 airtime 是<strong>转向命令门控</strong>，
+不能误读为撞台阶后抬腿奖励。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">:195–214</span></code> 配合 <code class="docutils literal notranslate"><span class="pre">mdp/rewards.py:270–284</span></code>：训练端扫描平均高度相对 origin
+超过 0.06 m 时，部分默认腿姿态惩罚缩到 0.1 倍。它是特权地形门控，
+不是物理接触门控，且不是所有惩罚均被缩放。</p></li>
+</ul>
+<p>它支持“按状态适当放松姿态正则”的思路，但不能把大平姿权重或特殊转向项直接
+搬到 Lego2。官方身份也不能替代高台成功评测。</p>
+</section>
+<section id="robot-lab">
+<h3>4.3 robot_lab：最小通用轮足基线<a class="headerlink" href="#robot-lab" title="Link to this heading">#</a></h3>
+<p>路径前缀 <code class="docutils literal notranslate"><span class="pre">source/robot_lab/robot_lab/tasks/manager_based/locomotion/velocity/</span></code>。</p>
+<ul class="simple">
+<li><p>Go2W <code class="docutils literal notranslate"><span class="pre">config/wheeled/unitree_go2w/rough_env_cfg.py:96–97</span></code>：去掉 actor 的
+height_scan/base_lin_vel；critic 保留扫描，没有显式 actor 历史设置。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">:141–144,159–162,193–217</span></code>：XY/yaw 跟踪 3/1.5，z 速度 -2；平姿与高度项
+均为 0，轮腿加速度分开；airtime、foot height、gait、stumble、slide 当前均为 0。
+upward=1 奖励直立，不能理解为向上爬升。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">velocity_env_cfg.py:49–53,664,725–727</span></code>：混合 rough、初始最高级 5、从头启用
+地形课程。具体 <code class="docutils literal notranslate"><span class="pre">terrain_levels_vel</span></code> 从 IsaacLab 外部导入，未把外部实现当成本仓库
+已核查的公式。当前主线含 Newton 相关接口，不应为研究而覆盖现有环境。</p></li>
+</ul>
+<p>价值在于检查“必要奖励是否真的需要那么多”，而不是证明不用抬腿奖就一定能爬极高台。</p>
+</section>
+<section id="id7">
+<h3>4.4 两篇高相关论文：支持方向，但不是可直接移植的开源配方<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://arxiv.org/html/2509.02986v3">CTBC 原文</a> 面向双轮足：按水平接触力过滤后
+触发抬腿，配合逐渐退火的动作前馈。它支持“遇阻后反应式抬腿”的合理性，
+但并非简单把 z² 奖励权重改正，也不是四轮 Lego2 的直接复现配方。本轮只找到
+项目页面，未核实到完整训练源码。</p>
+<p><a class="reference external" href="https://arxiv.org/html/2605.13058v1">MUJICA 原文</a> 面向 Go2-W：高台采用凹坑，
+课程分级，爬台技能主要跟踪平移速度；同时引入状态估计、多技能标识、P3O 和电机
+约束。作者报告实机 80 cm/1 m 平台能力。这支持坑式和速度主导路线，但其完整架构
+远超几项奖励，本轮未找到可核查的完整训练代码，因此只列论文证据。</p>
+</section>
+</section>
+<section id="lego2">
+<h2>5. 对当前 Lego2 方案需要明确纠正的地方<a class="headerlink" href="#lego2" title="Link to this heading">#</a></h2>
+<p>当前本地源码根目录：<code class="docutils literal notranslate"><span class="pre">/home/asus/work/mjlab_lego2_work</span></code>。本轮只读，未替换训练配置。</p>
+<section id="actor">
+<h3>5.1 当前本地 actor 仍看见地形<a class="headerlink" href="#actor" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">src/mjlab/tasks/velocity/velocity_env_cfg.py:105–110</span></code> 给 actor 配置 height_scan；
+<code class="docutils literal notranslate"><span class="pre">config/lego2/env_cfgs.py:281–284</span></code> 删除扫描项的语句目前被注释。用户于2026-10-30
+澄清：原始Lego2配置不向actor提供height_scan，是用户后来注释掉删除语句，才保留了
+扫描输入。Platform配置继承这一修改状态；不能把它描述成原始项目默认开启高度扫描。
+当前本地actor为无历史MLP且含扫描，因此该修改版本不能称为盲走。
+远程实际训练时仍应以保存的 <code class="docutils literal notranslate"><span class="pre">params/env.yaml</span></code> 为准，不能只凭本地推定所有旧模型输入。</p>
+<p>建议盲走契约：<strong>部署 actor 只读可获得的本体量/历史/估计值；训练 critic、奖励和
+评估可以使用地形真值</strong>。如果连训练端真值也禁止，需要另行明确，不是默认定义。</p>
+</section>
+<section id="id8">
+<h3>5.2 有些专项奖励可在卡住时持续得分<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">platform_climb_rewards.py:16–34</span></code> 的 approach 是归一化位置，而非进度增量。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">:126–160</span></code> 的 contact_advance 也是位置值×前轮接触比例，没有前向速度或位置差。</p></li>
+<li><p>前轮接触传感器不区分低地、墙面、台面；静止顶墙也可能得分。</p></li>
+</ul>
+<p>所以此前“新奖励会鼓励接触后继续前移”的预期没有充分由函数保证。建议在新方案中
+撤销这些固定地图位置奖励，几何诊断可继续保留。</p>
+</section>
+<section id="id9">
+<h3>5.3 前轮高度基准用错了语义<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">platform_front_lift:97–122</span></code> 读取 <code class="docutils literal notranslate"><span class="pre">foot_height_scan</span></code>。该传感器是 site 到地形的垂距，
+site 位于<strong>轮心</strong>，并非轮底净空（<code class="docutils literal notranslate"><span class="pre">sensor/terrain_height_sensor.py:26–37,62–84</span></code>；
+机器人 MJCF 的 RF/LF sites）。轮半径为 0.115 m，而当前 target/top 为 0.05/0.20 m。
+在理想平地着地时，未乘位置门控的奖励就可约为：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(0.115 - 0.05) / (0.20 - 0.05) ≈ 0.433
+</pre></div>
+</div>
+<p>因此 <code class="docutils literal notranslate"><span class="pre">platform_front_lift_mean=0.5188</span></code> <strong>不是主动抬腿的可靠证据</strong>。本轮已将此点作为
+研究结论记录，不按用户要求之外直接修复或继续调权。</p>
+</section>
+<section id="id10">
+<h3>5.4 视频与资产版本不能混为因果证据<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>用户已明确惯量纠偏完成、远程已同步；本轮按此事实接续，不重复要求同步惯量。
+约10.1s视频中未见完整稳定通过。2026-10-30用户进一步确认：视频来自全量训练
+checkpoint编号9999，多次Reset均无法通过；每次接触台阶后前轮完全无法抬起、
+后腿反而抬起。因此这是用户反复观察到的失败模式，不仅是单个视频片段的印象，
+也不能再据front_lift均值认定前腿已经学到主动抬升。测试总次数未提供，
+不据此计算精确成功率。checkpoint完整路径、训练/回放资产对应和实际命令仍待确认。
+后续应先核对传感器/动作前后腿映射、关节符号与限幅、前腿运动学可达性，
+再讨论奖励/课程；目前没有证据证明前后腿映射错误或某一项惩罚是唯一原因。</p>
+</section>
+</section>
+<section id="id11">
+<h2>6. 用户三条重构思路的可行性和边界<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>初步方向</p></th>
+<th class="head"><p>判断</p></th>
+<th class="head"><p>应补充的条件</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>中央挖坑、从坑底爬出</p></td>
+<td><p>可行，Dreamwaq/MUJICA 均支持</p></td>
+<td><p>出生必须在坑底；原点高度、坑尺寸、通过距离联合核查</p></td>
+</tr>
+<tr class="row-odd"><td><p>离中心足够远升级</p></td>
+<td><p>对封闭坑可行</p></td>
+<td><p>阈值必须超坑内最大半径并留出机身通过空间；不把翻倒滑出当稳定成功</p></td>
+</tr>
+<tr class="row-even"><td><p>一开始启用高度课程</p></td>
+<td><p>建议采用</p></td>
+<td><p>起点须按 Lego2 能力设低；不能照搬 M20 的 20 cm 初始坑深或随机到 60 cm</p></td>
+</tr>
+<tr class="row-odd"><td><p>速度跟踪主导、删接近奖励</p></td>
+<td><p>建议采用</p></td>
+<td><p>让正则适配轮式滚动和必要抬腿，不照搬足式腾空步态</p></td>
+</tr>
+<tr class="row-even"><td><p>尽量复用现有奖励</p></td>
+<td><p>可行且便于定位</p></td>
+<td><p>“已有函数”不等于语义正确；先核查坐标、接触、轮心/轮底定义</p></td>
+</tr>
+<tr class="row-odd"><td><p>绝对不增加任何行为门控</p></td>
+<td><p>不建议当硬约束</p></td>
+<td><p>必要时允许不依赖地图坐标的最小通用接触反应，并做消融</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>坑地形无需先重写 primitive。</strong> 当前 mjlab 已有
+<code class="docutils literal notranslate"><span class="pre">BoxInvertedPyramidStairsTerrainCfg</span></code>（<code class="docutils literal notranslate"><span class="pre">terrains/primitive_terrains.py:276–449</span></code>）。
+当阶数 n=0 时，它就是中央单级坑；返回 origin 在坑底。已有 10×10 m、border=3.5、
+platform_width=3、step_width=2 的组合会得到 3×3 m 坑。
+坑任务不能继续使用现有平台 reset 中额外减 platform_height 的逻辑，否则会再下降一次。</p>
+<p>关于“鼓励 z 运动和抬腿”：当前 <code class="docutils literal notranslate"><span class="pre">lin_vel_z_l2</span></code> 是 <strong>body-z 速度平方</strong>，翻成正权会
+同时奖励上、下大速度，俯仰时还不等于世界竖直运动；<code class="docutils literal notranslate"><span class="pre">upward</span></code> 则只奖励直立。
+已有 air-time/clearance/swing-height 也不是现成的轮撞台阶正向抬升函数，正常滚动
+的轮心也在移动，直接套足式摆动净空会出问题。</p>
+<p>较合理的探索顺序是先建立通用速度跟踪低高度基线；如果确实在坑壁停滞，再单独
+比较“有移动指令＋持续水平阻挡接触”时的短时、限幅抬升/抬轮激励或相关代价放宽。
+该候选不得依赖固定边缘 x、坑深或绝对平台位置，也不能把普通承重接触等同撞墙。
+训练奖励可使用仿真接触真值；部署 actor/action 若使用接触状态，则必须有可实现的
+传感器或本体历史估计，不能偷偷读模拟器真值。</p>
+<p>即使采用正 world-z 激励，也仍属于新的行为引导，需要防止原地跳跃领分，并检查
+跨时间是否产生有效前进；不能强求抬升瞬间同时保持很高前速，以免压制正常蓄力。</p>
+<p>课程距离还必须匹配命令和 episode 时长。例如 0.3 m/s、20 s 的理论行程只有 6 m，
+若升级要求 5 m，留给受阻/抬升的时间很少。没有达到远处升级线不等于没爬出坑。
+坑式训练后应另用直线单级高台评估，排除坑角两面借力；课程内表现不等于目标场景泛化。</p>
+</section>
+<section id="id12">
+<h2>7. 后续规划应围绕哪些选择（尚未实施）<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p>后续再制定具体文件修改清单。本阶段建议先统一以下设计，而不是立即大规模训练：</p>
+<ol class="arabic simple">
+<li><p><strong>观测契约</strong>：盲走 actor＋本体历史，critic 可保留地形特权信息；普通历史堆叠
+和完整 DreamWaQ 估计器是不同工程量，先选可验证的最小路线。</p></li>
+<li><p><strong>环境契约</strong>：中央单级坑、低难度初始课程、正确坑底出生、明确行进命令；保留
+一部分易地形样本，独立记录坑高、跟踪误差、通过与失败，课程等级不是成功率。</p></li>
+<li><p><strong>奖励基线</strong>：速度跟踪＋必要的轮腿分离正则；删除固定位置 shaping。先证明低阶
+可学，再用对照实验决定是否需要通用接触反应。评估指标可以专项，奖励尽量通用。</p></li>
+<li><p><strong>证据可比性</strong>：固定修正后资产版本，保存 env/agent 参数、新 run/checkpoint，
+在同难度和多次 reset 下评估成功率；训练地形和回放地形必须一致。</p></li>
+</ol>
+<p>本报告按常规盲走定义（部署 actor 本体感知、训练端可用真值）讨论；若项目另有
+更严格限制，后续规划再调整。视频checkpoint编号9999已确认；其完整路径/资产版本与训练参数、
+Lego2 最低可行坑深和最终训练上限仍待确认，无需现在改代码。</p>
+</section>
+<section id="id13">
+<h2>8. 本轮产物与边界<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>三个参考仓库已下载；来源、提交、稀疏目录和范围另存于
+<code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project/OpenSource/SOURCES_20261029.md</span></code>。</p></li>
+<li><p>保留用户已有 <code class="docutils literal notranslate"><span class="pre">Dreamwaq高台训练代码分析.md</span></code>，本报告作为补充，不覆盖旧报告。</p></li>
+<li><p>更新训练源码根目录 <code class="docutils literal notranslate"><span class="pre">docs/codex</span></code> 的当前状态、决策、实验记录与交接起点；
+不再持续更新旧的单一聊天记录文件。</p></li>
+<li><p>没有改奖励、地形、观测、算法或机器人资产；没有启动本地/远程训练。</p></li>
+<li><p>未将参考项目的演示高度认定为本项目能力，未将这次研究认定为训练实验成功。</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 结论先行</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2. 资料、下载与版本</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dreamwaq-highplatform">3. Dreamwaq-highplatform：真正值得迁移的组合</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.1 地形与课程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#z">3.2 奖励不是“接触后奖励正 z”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.3 它的盲走依赖历史与估计，不只依赖坑</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cm">3.4 “80 cm”有怎样的证据</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">4. 其他项目的交叉对比</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#locowheeledlegged">4.1 LocoWheeledLegged：历史盲走与轮腿分开的通用代价</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deeprobotics-m20">4.2 DeepRobotics 官方 M20：通用奖励也存在条件门控</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#robot-lab">4.3 robot_lab：最小通用轮足基线</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">4.4 两篇高相关论文：支持方向，但不是可直接移植的开源配方</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lego2">5. 对当前 Lego2 方案需要明确纠正的地方</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actor">5.1 当前本地 actor 仍看见地形</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">5.2 有些专项奖励可在卡住时持续得分</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">5.3 前轮高度基准用错了语义</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">5.4 视频与资产版本不能混为因果证据</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6. 用户三条重构思路的可行性和边界</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">7. 后续规划应围绕哪些选择（尚未实施）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">8. 本轮产物与边界</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The mjlab Developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, The mjlab Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 14, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

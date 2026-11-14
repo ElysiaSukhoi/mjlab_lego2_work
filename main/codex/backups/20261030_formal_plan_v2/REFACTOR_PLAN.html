@@ -1,0 +1,734 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lego2 盲走坑式越障：大体修改规划 &#8212; mjlab Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/twemoji.css" />
+    <link rel="stylesheet" type="text/css" href="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/css/all.min.css?v=53359634" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=3ea80bc3" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js"></script>
+    <script src="../../../_static/twemoji.js"></script>
+    <script src="/home/runner/work/mjlab_lego2_work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/sphinxcontrib/icon/node_modules/@fortawesome/fontawesome-free/js/all.min.js?v=ec35c6c9"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'codex/backups/20261030_formal_plan_v2/REFACTOR_PLAN';</script>
+    <link rel="icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Nov 14, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">mjlab Documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item">
+<div class="sidebar-version-switcher">
+  <label class="sidebar-version-label" for="version-select">Version</label>
+  <select id="version-select" class="sidebar-version-select" onchange="location = this.value;">
+    <option value="REFACTOR_PLAN.html" selected>main</option>
+  </select>
+</div>
+</div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../source/installation.html">Installation Guide</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/tutorials/cartpole.html">Cartpole: Building Your First Environment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/contributing.html">Contributing</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../source/architecture_overview.html">Architecture Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/entity/index.html">Entity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/entity/entity_data.html">Entity Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/entity/per_world_mesh.html">Heterogeneous Worlds</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/actuators.html">Actuators</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/sensors/index.html">Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/sensors/raycast_sensor.html">RayCast Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/sensors/rgbd_camera.html">RGB-D Camera</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/scene.html">Scene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/terrain.html">Terrain</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The Manager Layer</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../source/environment_config.html">Environment Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/observations.html">Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/actions.html">Actions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/rewards.html">Rewards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/terminations.html">Terminations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/commands.html">Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/events.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/randomization.html">Domain Randomization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/curriculum.html">Curriculum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/metrics.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/recorders.html">Recorders</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Training &amp; Debugging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/training/rsl_rl.html">Training with RSL-RL</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/training/motion_imitation.html">Motion Imitation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/viewers.html">Viewers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/training/distributed_training.html">Distributed Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/training/cloud.html">Cloud Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/debugging/nan_guard.html">NaN Guard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/debugging/export_scene.html">Export Scene</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../source/api/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/envs.html">mjlab.envs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/scene.html">mjlab.scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/sim.html">mjlab.sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/entity.html">mjlab.entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/actuator.html">mjlab.actuator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/sensor.html">mjlab.sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/managers.html">mjlab.managers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/terrains.html">mjlab.terrains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/rl.html">mjlab.rl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/viewer.html">mjlab.viewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../source/api/tasks.html">mjlab.tasks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Further Reading</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../source/motivation.html">Why mjlab?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/migration_isaac_lab.html">Migrating from Isaac Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/faq.html">FAQ &amp; Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/research.html">Research</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/changelog.html">Changelog</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/edit/main/docs/codex/backups/20261030_formal_plan_v2/REFACTOR_PLAN.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mujocolab/mjlab/issues/new?title=Issue%20on%20page%20%2Fcodex/backups/20261030_formal_plan_v2/REFACTOR_PLAN.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/codex/backups/20261030_formal_plan_v2/REFACTOR_PLAN.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lego2 盲走坑式越障：大体修改规划</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">总体路线</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">阶段1：独立任务与盲走观测</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">阶段2：中央坑、坑底出生、指令与高度课程一起接通</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">阶段3：精简奖励、评估指标和第一轮短训</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">阶段4：仅在基线不足时调整通用接触反应</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">阶段5：完整训练、泛化评估与后续扩展</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">文件组织与工作约定</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2026-10-30实施前补充核对（尚未实施）</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="lego2">
+<h1>Lego2 盲走坑式越障：大体修改规划<a class="headerlink" href="#lego2" title="Link to this heading">#</a></h1>
+<p>日期：2026-10-29。状态：<strong>规划已制定，尚未实施，不启动训练</strong>。</p>
+<p>依据：用户确认的盲走目标、坑式地形与初始高度课程方向，以及
+<code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project/高台训练/2026-10-29_盲走轮足高台开源对比报告.md</span></code>。
+本规划按部署 actor 只用本体信息、训练 critic/奖励可用仿真真值的定义展开。</p>
+<section id="id1">
+<h2>总体路线<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>保留原有 Rough/Flat 和旧 Platform-Climb 任务作为对照；新增独立盲走坑式任务，
+采用修正后资产、普通 PPO＋本体历史、从低高度起步的课程和速度跟踪主奖励。
+前三个阶段组成可训练的最小基线，随后开始短训；不是等所有优化都完成才训练。
+第4阶段是基于证据的可选调整，第5阶段才进入完整规模训练与泛化评估。</p>
+<p>本地仍为 <code class="docutils literal notranslate"><span class="pre">/home/asus/work/mjlab_lego2_work</span></code>；远程仍为 <code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2</span></code>。
+用户已经确认资产纠偏完成、远程同步，无需重复做同一资产修复。</p>
+</section>
+<section id="id2">
+<h2>阶段1：独立任务与盲走观测<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p><strong>修改范围</strong></p>
+<ul class="simple">
+<li><p>新建独立配置入口，候选名 <code class="docutils literal notranslate"><span class="pre">Mjlab-Blind-Pit-Lego2</span></code>，不覆盖旧 Platform-Climb。</p></li>
+<li><p>为新任务显式配置 actor：角速度、重力投影、关节状态、上一动作和速度命令，
+移除 height_scan/地形坐标/目标平台位置，真实线速度不直接作为 actor 输入。</p></li>
+<li><p>加入约5帧的本体历史；先用普通历史堆叠＋原PPO/MLP，不直接移植完整DreamWaQ/VAE。</p></li>
+<li><p>critic 可保留高度扫描和其他训练特权观测；这些信息不进入部署actor或其历史。</p></li>
+<li><p>保持12维动作、动作缩放、控制频率、PPO损失和网络隐藏层等基本设置，暂不同时调算法。</p></li>
+<li><p>对新任务的注册、观测配置使用独立对象，验证不会改变旧任务的观测维数。</p></li>
+</ul>
+<p><strong>验收</strong></p>
+<p>检查配置与实际actor输入；历史维数和reset清零正确，批量reset不会把上个episode历史带入；
+旧任务能正常加载。只做编译、配置和少量环境检查，不长训。</p>
+<p><strong>影响</strong></p>
+<p>观测维数改变，旧checkpoint不能直接续训；新任务从新run初始化。此处只保留原PPO框架，
+不承诺历史堆叠本身就能复现DreamWaQ的性能。</p>
+</section>
+<section id="id3">
+<h2>阶段2：中央坑、坑底出生、指令与高度课程一起接通<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p><strong>修改范围</strong></p>
+<ul class="simple">
+<li><p>复用现有 <code class="docutils literal notranslate"><span class="pre">BoxInvertedPyramidStairsTerrainCfg</span></code>，生成中央单级坑，避免误生成多级台阶。</p></li>
+<li><p>env origin 位于坑底，reset基于该origin，不再额外减一次坑深；禁止随机出生在坑沿。</p></li>
+<li><p>初版采用正向移动和有限出生扰动，集中验证出坑动作；全向指令与随机朝向后续再扩展。</p></li>
+<li><p>从第一次正式训练开始启用高度课程，初始只分配最低等级，成功后升级、失败后降级；
+保留较容易样本，防止只留最高难度。</p></li>
+<li><p>距离作为课程升级主依据，但要联合坑几何、机身包络与跌倒状态核查，避免角落未出坑
+或翻倒滑出被误认为有效通过。</p></li>
+</ul>
+<p><strong>建议起始参数（实施前仍需几何/运行验证，不是已确认最优值）</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>项目</p></th>
+<th class="head"><p>候选设置</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>地块 / 坑底</p></td>
+<td><p>10×10 m / 中央3×3 m，复用已有单级坑组合</p></td>
+</tr>
+<tr class="row-odd"><td><p>初始训练高度范围</p></td>
+<td><p>0.03～0.30 m，10级，初始等级0</p></td>
+</tr>
+<tr class="row-even"><td><p>平移命令</p></td>
+<td><p>vx约0.3～0.6 m/s，vy=0；朝向保持使用已有命令机制</p></td>
+</tr>
+<tr class="row-odd"><td><p>episode</p></td>
+<td><p>暂沿用20 s，并与行程检查匹配</p></td>
+</tr>
+<tr class="row-even"><td><p>升级距离</p></td>
+<td><p>距坑中心约3 m作为候选；不机械复用地块一半的5 m</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>3×3 m方坑的半对角线约2.12 m；3 m候选阈值需进一步确认可让机身/轮足整体通过。
+距离升级线不能要求机器人在低速指令下几乎无停顿地跑完整个episode。
+300 mm沿用此前目标作为首个训练上限参考，不把其他机器人80 cm演示直接当Lego2目标。</p>
+<p><strong>验收</strong></p>
+<p>从生成几何核对各级坑深/台面；重复reset都在坑底、无穿透；用合成状态验证升降级、
+首次reset、最高级和跌倒场景；Viser抽查几个等级。此阶段不以策略表现评价几何正确性。</p>
+</section>
+<section id="id4">
+<h2>阶段3：精简奖励、评估指标和第一轮短训<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p><strong>修改范围</strong></p>
+<ul class="simple">
+<li><p>新任务不注册旧的 <code class="docutils literal notranslate"><span class="pre">platform_approach</span></code>、<code class="docutils literal notranslate"><span class="pre">platform_edge_lift</span></code>、<code class="docutils literal notranslate"><span class="pre">platform_front_lift</span></code>、
+<code class="docutils literal notranslate"><span class="pre">platform_front_contact_advance</span></code>、<code class="docutils literal notranslate"><span class="pre">platform_top_bonus</span></code>。旧任务源码保留供回滚对照。</p></li>
+<li><p>移除旧平台坐标限定的成功终止；保留超时、翻倒/非法接触、越界等基本终止。</p></li>
+<li><p>以现有线速度/角速度跟踪为主，配少量必要的姿态、动作变化、关节限制与能耗正则，
+轮腿分别处理；先核对函数定义、坐标、dt与动作尺度，再定权重。</p></li>
+<li><p>默认腿姿态、固定机身高度、强制多轮贴地和侧壁碰撞代价不能共同把必要抬升压死。
+初版不强制固定世界机身高度；已有air-time/clearance不因名字合适就直接开启。</p></li>
+<li><p>几何通过、台沿有效支撑、稳定保持、跟踪误差、停滞、跌倒和各高度成功率保留为
+<strong>评估指标</strong>，不全部变成训练奖励；高度与净空必须区分轮心和轮底。</p></li>
+<li><p>初期随机化保持克制，资产/动作/PPO设置冻结，便于定位奖励与课程的影响。</p></li>
+</ul>
+<p><strong>验收与训练</strong></p>
+<p>先完成本地合成数值/配置/小环境验证，再给远程同步和校验指令。
+第一次远程短训就开启第2阶段的高度课程：</p>
+<ul class="simple">
+<li><p>约128～256环境、200～500 iterations可作流程冒烟，检查数值、reset、显存与记录。</p></li>
+<li><p>流程稳定后约1024～2048环境、1000～3000 iterations观察低阶通过与课程趋势；
+具体规模按当时显存决定，不把这些轮次当收敛保证或成败硬阈值。</p></li>
+</ul>
+<p>验收重点是最低级有真实通过、没有明显平地无意义抬轮、没有奖励增大却原地不动，
+以及课程升降是否与回放一致。若最低级也失败，先核查接触、驱动、动作与定义，
+不直接用更多样本或更多奖励掩盖问题。</p>
+</section>
+<section id="id5">
+<h2>阶段4：仅在基线不足时调整通用接触反应<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p><strong>进入条件</strong>：第3阶段配置/动力学正常，但出现可重复的坑壁停滞或抬轮不足。</p>
+<p>优先按状态检查已有姿态/动作代价是否妨碍必要运动，尝试有针对性的放松。
+若仍缺少探索信号，再研究最小通用扩展：“有移动命令＋持续水平阻挡接触”时，
+给予短时、限幅的抬轮/世界z向上运动激励；不依赖固定x坐标或绝对坑深。</p>
+<p>不能将 <code class="docutils literal notranslate"><span class="pre">lin_vel_z_l2</span></code> 翻成正权冒充上抬奖，因为它是机体系z速度平方，连下落也会奖励。
+普通承重接触也不能充当撞墙；防止原地跳跃刷分，并观察跨时间是否获得有效前进，
+不要求抬升瞬间一定高速向前。若动作/actor要用接触状态，应有部署可实现的估计来源。</p>
+<p><strong>验收</strong>：保持第3阶段为对照，每次只改变一组机制，比较通过率、停滞、跌倒与平地滚动。
+无收益则撤销，不继续叠加。同样的地形与评估条件下再判断历史估计器是否值得增加，
+不在这一阶段同时替换PPO算法。</p>
+</section>
+<section id="id6">
+<h2>阶段5：完整训练、泛化评估与后续扩展<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p><strong>进入条件</strong>：低阶通过可靠，课程能够推进，回放行为符合轮腿协同且无明显刷分。</p>
+<ul class="simple">
+<li><p>再扩大到显存允许的完整规模；4096环境不是必须目标，不能重复在已有显存占用时硬开。</p></li>
+<li><p>10000 iterations作为与旧基线比较的参考，记录环境数×rollout×迭代数的样本量；
+以固定高度评估与课程趋势决定继续训练，不仅看总reward。</p></li>
+<li><p>为同一配置的长训允许从其checkpoint继续；观测、资产或奖励目标变更则另开实验，
+明确是重训或有意微调，不混成同一基线。</p></li>
+<li><p>逐步恢复域随机化、指令范围和出生扰动，避免与首次学爬沿同时引入全部难度。</p></li>
+<li><p>在独立的直线单级高台上评估5/10/15/20/30 cm等固定高度；每高度足够多次reset，
+建议最终至少100次并记录样本数，有条件再做多随机种子。排除坑角借力与训练场景记忆。</p></li>
+</ul>
+<p>验收依据是固定高度上的通过率/支撑稳定性、速度跟踪、跌倒/停滞和对资产版本一致的
+回放。完成前不宣称已达300 mm；更高目标另做运动学与驱动可行性评估。</p>
+</section>
+<section id="id7">
+<h2>文件组织与工作约定<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<p>候选文件组织为新任务配置（如 <code class="docutils literal notranslate"><span class="pre">config/lego2/blind_pit_env_cfg.py</span></code>）、注册入口，以及
+必要的通用课程/评估扩展。具体名称和接口在对应阶段实施时核对，不预先复制一整套
+平台专项reward模块。优先复用通用MDP；新增项只服务明确且可验证的缺口。</p>
+<p>每阶段都先解释修改与核心代码，由Codex完成本地uv校验，再提供用户远程同步/校验命令。
+远程实验统一使用screen <code class="docutils literal notranslate"><span class="pre">zrq</span></code>，保留旧源码/模型；记录实际env/agent配置、资产版本、
+run名称、checkpoint和评估结果。重要阶段更新CURRENT_STATUS，决策变化更新DECISIONS，
+实验结束更新EXPERIMENT_LOG，交接起点更新HANDOFF。</p>
+<p><strong>本轮完成范围仅为此规划及上下文文档更新；下一次进入实施时从阶段1开始。</strong></p>
+</section>
+<section id="id8">
+<h2>2026-10-30实施前补充核对（尚未实施）<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>用户确认原始项目不向actor提供height_scan，当前保留扫描是后续用户修改；
+因此阶段1应明确恢复盲走输入约束，而不是将原始项目说成视觉策略。
+全量checkpoint 9999多次回放均失败，且每次为前轮无法抬起、后腿反而抬起。
+后续代码实施前先用最小检查核对RF/LF、RH/LH的传感器索引与动作映射、
+HFE/KFE符号、目标位置和限幅，并验证前腿可达净空。当前不能认定接口颠倒，
+也不能只把失败归因于样本量或奖励权重。该检查不改变五阶段路线，不授权立即开训。</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">总体路线</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">阶段1：独立任务与盲走观测</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">阶段2：中央坑、坑底出生、指令与高度课程一起接通</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">阶段3：精简奖励、评估指标和第一轮短训</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">阶段4：仅在基线不足时调整通用接触反应</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">阶段5：完整训练、泛化评估与后续扩展</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">文件组织与工作约定</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2026-10-30实施前补充核对（尚未实施）</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The mjlab Developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, The mjlab Developers.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Nov 14, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

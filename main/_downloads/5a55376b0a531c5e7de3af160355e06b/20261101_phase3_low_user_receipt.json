@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-01 Asia/Shanghai",
+  "source": "user-pasted checkpoint/params file list and launcher exit status",
+  "run": "logs/rsl_rl/lego2_blind_pit/2026-11-01_20-17-22_phase3_low_1024x1000_v1_20261101_201712_2200851",
+  "checkpoint": "logs/rsl_rl/lego2_blind_pit/2026-11-01_20-17-22_phase3_low_1024x1000_v1_20261101_201712_2200851/model_1198.pt",
+  "checkpoint_sha256": null,
+  "params_files": [
+    "logs/rsl_rl/lego2_blind_pit/2026-11-01_20-17-22_phase3_low_1024x1000_v1_20261101_201712_2200851/params/env.yaml",
+    "logs/rsl_rl/lego2_blind_pit/2026-11-01_20-17-22_phase3_low_1024x1000_v1_20261101_201712_2200851/params/agent.yaml"
+  ],
+  "evidence_dir": "/home/ajifang/zrq/backups/phase3_low_20261101_201712_2200851",
+  "exit_code": 0,
+  "settings_from_previously_validated_launcher": {
+    "num_envs": 1024,
+    "additional_iterations": 1000,
+    "rollout": 24,
+    "seed": 7,
+    "resume": true,
+    "parent_checkpoint": "model_199.pt",
+    "planned_additional_samples": 24576000
+  },
+  "actual_total_timesteps_verified": false,
+  "post_training_evaluation": "pending",
+  "metrics_not_provided": true
+}
