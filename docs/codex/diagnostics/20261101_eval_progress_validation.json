@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-01 Asia/Shanghai",
+  "status": "progress output verified locally; remote running process still needs observation",
+  "changes": [
+    "checkpoint loading markers",
+    "reset/start/end markers per episode",
+    "first step, every 100 steps or 15s progress after completed step",
+    "flush trace at progress and episode completion"
+  ],
+  "local_check": {
+    "device": "cpu",
+    "mode": "zero_action_diagnostic",
+    "heights_m": [
+      0.03,
+      0.06
+    ],
+    "episodes_each": 2,
+    "max_steps": 2,
+    "n_each": 0,
+    "observed_progress_sets": 4
+  },
+  "checks": [
+    "Ruff",
+    "format",
+    "targeted Pyright",
+    "bash syntax"
+  ],
+  "remote_access": false,
+  "remote_hang_confirmed": false,
+  "training": false,
+  "script_sha256": "d409dce20da0bfb6c32bbe46988258ea386b9802a1562220ee0abf2a8fe0ff79"
+}

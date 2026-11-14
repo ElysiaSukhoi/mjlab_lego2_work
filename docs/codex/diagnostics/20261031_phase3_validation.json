@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-31 Asia/Shanghai",
+  "stage": 3,
+  "status": "local CPU passed; remote CPU/GPU and first PPO smoke pending",
+  "tests": {
+    "passed": 33,
+    "seconds": 8.19,
+    "warnings": "2 existing ONNX export deprecation warnings"
+  },
+  "targeted_checks": [
+    "Ruff",
+    "format",
+    "Pyright",
+    "ty",
+    "compileall"
+  ],
+  "whole_project_checks": {
+    "ty": "8 pre-existing errors and 2 warnings in untouched files",
+    "pyright": "9 pre-existing errors in untouched files"
+  },
+  "unchanged_previous_hashes": 26,
+  "actor_dim": 144,
+  "critic_dim": 254,
+  "actions": 12,
+  "zero_action_full_report": "20261031_phase3_eval/full/report.json",
+  "zero_action_capped_report": "20261031_phase3_eval/capped/report.json",
+  "synthetic_checkpoint": "random weights save/load/inference only; temporary test fixture; no learning",
+  "training": false,
+  "remote_access": false,
+  "local_gpu": "driver unavailable",
+  "source_sha256": {
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": "9cdc8dae577d75c1fe80f44e4dcb8c5f93c35ec677ee1a3dbaa42b7f80cdfd65",
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_metrics.py": "83bf31e35a6bf56ea13f77ef9f088a111b79bee3f3bcbdac6fd791c33310b1df",
+    "scripts/tools/evaluate_lego2_blind_pit.py": "571451c6fd25bd921563f058714288b7402a2176d0994125761a03337cbfbeea",
+    "tests/test_lego2_blind_pit_stage3.py": "608568b8dd3298189ed27217ce81873b140b61d5587ba6c3bf4eb9f4cadc00f8"
+  },
+  "limitations": [
+    "Real rim tests use manual placement, not autonomous climbing",
+    "Zero-action reports are tool diagnostics, not trained policy results",
+    "No new checkpoint or run for PPO; first smoke remains pending"
+  ]
+}

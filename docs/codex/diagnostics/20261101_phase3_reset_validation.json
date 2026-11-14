@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-01 Asia/Shanghai",
+  "status": "local CPU passed; remote patch/recheck pending",
+  "user_decision": "continue original pit curriculum; same-144-input flat pretraining is conditional fallback only",
+  "root_cause": "persistent values replaced by inference tensors; reset outside inference_mode mutates them",
+  "fix": "lazy normal buffer allocation inside inference_mode(False), subsequent writes scoped to fresh envs",
+  "before_test": {
+    "failed": 1,
+    "same_runtime_error": true,
+    "seconds": 20.84
+  },
+  "after_targeted_test": {
+    "passed": 7,
+    "seconds": 5.31,
+    "warnings": 4
+  },
+  "after_regression": {
+    "passed": 35,
+    "seconds": 12.61,
+    "warnings": "four existing ONNX export deprecation warnings"
+  },
+  "checks": [
+    "Ruff",
+    "format",
+    "Pyright targeted",
+    "ty targeted",
+    "compileall",
+    "shell syntax"
+  ],
+  "evaluator": {
+    "mode": "zero_action_diagnostic",
+    "heights": [
+      {
+        "height_m": 0.03,
+        "n": 2,
+        "steps": [
+          1000,
+          1000
+        ]
+      },
+      {
+        "height_m": 0.06,
+        "n": 2,
+        "steps": [
+          1000,
+          1000
+        ]
+      },
+      {
+        "height_m": 0.09,
+        "n": 2,
+        "steps": [
+          1000,
+          1000
+        ]
+      }
+    ]
+  },
+  "temporary_model_test": "random weights save/load/inference only; no PPO learning",
+  "ppo_training": false,
+  "trained_model_199_evaluation_completed": false,
+  "local_gpu": "driver unavailable",
+  "remote_access": false,
+  "source_sha256": {
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_metrics.py": "b312a6999ec2ae7eba7d1b2772a6633c755dc01df603233e672b637a417c913e",
+    "tests/test_lego2_blind_pit_stage3.py": "d59e22d45d5e475198e39bb876eb9b907eadc66f4d2c8eda22701a42bba39773"
+  }
+}

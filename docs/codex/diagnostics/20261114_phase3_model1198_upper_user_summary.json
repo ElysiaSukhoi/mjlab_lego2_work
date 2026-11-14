@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-14 Asia/Shanghai",
+  "source": "user-pasted final summary; raw report and traces not downloaded",
+  "evidence_dir": "/home/ajifang/zrq/backups/phase3_upper1198_20261114_214623_3270561",
+  "status": "user reports evaluation ended; numeric exit code not provided",
+  "expected_checkpoint": "model_1198.pt",
+  "expected_checkpoint_sha256": "7780cf0d2557c86f51c0486f870e7d471b13703777e9cee5e1854427def05027",
+  "checkpoint_provenance": "Expected from issued launcher and previous evaluation; current pasted summary omits checkpoint, SHA256 and seed. Await report verification.",
+  "expected_seed": 7,
+  "heights": [
+    {
+      "height_m": 0.12,
+      "n": 10,
+      "passed": 10,
+      "pass_rate": 1.0,
+      "root_out": 10,
+      "front_up": 10,
+      "rear_up": 10,
+      "complete": 10,
+      "fell_over": 0,
+      "failed": 0,
+      "stalled": 0,
+      "mean_speed_rmse": 0.04810981028233111
+    },
+    {
+      "height_m": 0.15,
+      "n": 10,
+      "passed": 10,
+      "pass_rate": 1.0,
+      "root_out": 10,
+      "front_up": 10,
+      "rear_up": 10,
+      "complete": 10,
+      "fell_over": 0,
+      "failed": 0,
+      "stalled": 0,
+      "mean_speed_rmse": 0.045089428042688943
+    },
+    {
+      "height_m": 0.2,
+      "n": 10,
+      "passed": 10,
+      "pass_rate": 1.0,
+      "root_out": 10,
+      "front_up": 10,
+      "rear_up": 10,
+      "complete": 10,
+      "fell_over": 0,
+      "failed": 0,
+      "stalled": 0,
+      "mean_speed_rmse": 0.044076157799581316
+    },
+    {
+      "height_m": 0.3,
+      "n": 10,
+      "passed": 8,
+      "pass_rate": 0.8,
+      "root_out": 9,
+      "front_up": 9,
+      "rear_up": 9,
+      "complete": 9,
+      "fell_over": 0,
+      "failed": 0,
+      "stalled": 1,
+      "mean_speed_rmse": 0.10854789592697618
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "CLAUDE.md": "0302e1483f6060aef1653e6fb14d7d00eca898a81c6e0e231db540feb7f64e12",
+  "docs/source/changelog.rst": "ef8505c39785ad7e52c5504e3153d3170dd912f02ea08b624c5a8f6bf23c0e24",
+  "src/mjlab/tasks/velocity/config/lego2/__init__.py": "b4893d71ba3288fe7c1c6480ac25f1d1f22505ce4e1d0a57d487ea96013db437",
+  "src/mjlab/tasks/velocity/config/lego2/blind_pit_curriculums.py": "b2b19581d733c40f99a836682277b74cb715b0ef8dec05190317c081ade7753a",
+  "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": "75f465cf42a9237f0a1f73a8534d44be5b4fa8c83bb019a70acb4e012d15abb3"
+}

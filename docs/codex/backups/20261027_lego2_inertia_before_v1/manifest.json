@@ -1,0 +1,7 @@
+{
+  "purpose": "Original URDF/MJCF before cylinder-axis and wheel-COM correction; restore each relative file to project root.",
+  "files": {
+    "src/mjlab/asset_zoo/robots/lego2/urdf/urdf_legowheel2.urdf": "140839d473091eaf57c760de8e0828b3f8baef45eab257de8aa68d08975efa0e",
+    "src/mjlab/asset_zoo/robots/lego2/xmls/lego2.xml": "ca75216ab43e156d33c32d34be30e46e36ac08745485d10e36bae25c0a389be9"
+  }
+}

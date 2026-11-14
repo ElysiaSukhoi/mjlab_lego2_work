@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-31 (Asia/Shanghai)",
+  "status": "本地CPU小场景验收通过；远程待验证；无训练",
+  "task_id": "Mjlab-Blind-Pit-Lego2",
+  "experiment_name": "lego2_blind_pit",
+  "actor": {
+    "terms": [
+      "base_ang_vel",
+      "projected_gravity",
+      "joint_pos",
+      "joint_vel",
+      "actions",
+      "command"
+    ],
+    "term_dimensions": [
+      15,
+      15,
+      40,
+      60,
+      12,
+      2
+    ],
+    "dimension": 144,
+    "history_order": "term-major; oldest to newest within term",
+    "history_length": [
+      5,
+      5,
+      5,
+      5,
+      0,
+      0
+    ]
+  },
+  "critic_dimension": 254,
+  "integration": {
+    "backend": "MuJoCo-Warp CPU",
+    "num_envs": 2,
+    "control_steps": 3,
+    "seed": 7,
+    "overrides": "plane terrain, reset_scene_to_default, no rewards/metrics/curriculum/terminations; original action/command/observations/sensors retained",
+    "checks": [
+      "actual 144 actor and 254 critic",
+      "applied action in current observation only",
+      "history values in term-major oldest-to-newest order",
+      "reset env history backfills new first frame",
+      "non-reset env observation unchanged"
+    ]
+  },
+  "tests": {
+    "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 FORCE_CPU=1 uv run --no-sync pytest -q tests/test_lego2_blind_pit.py tests/test_observation_history.py tests/test_observation_manager.py",
+    "result": "22 passed in 2.14s",
+    "new_test_cases": 4
+  },
+  "static_checks": [
+    "Ruff format/check passed",
+    "Pyright 0 errors/0 warnings",
+    "ty passed",
+    "compileall passed"
+  ],
+  "compatibility": {
+    "old_env_configs": 6,
+    "old_agent_configs": 3,
+    "fingerprints_unchanged": true,
+    "phase0_input_files": 26,
+    "only_changed_existing_input": "src/mjlab/tasks/velocity/config/lego2/__init__.py"
+  },
+  "code_sha256": {
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": "efa9bab681bc26610a294e120863a1885c9461ff307a7415ef60704493dd00e4",
+    "src/mjlab/tasks/velocity/config/lego2/__init__.py": "e8a0334fe4da4afed934e60d94d0feedcdee70f208125c0269c751442a4f95f1",
+    "tests/test_lego2_blind_pit.py": "6f8df72c217abb17173f4e4967fa0f30dc5a014231bac2964e23f02651f12b12",
+    "docs/source/changelog.rst": "bf9cc47467ee946adf32ee40a96b9085a882902b3dceba632dec697b99d4ca27"
+  },
+  "limits": [
+    "No GPU accessible in current execution environment",
+    "No full Rough grid or pit validation",
+    "Stage 2/3 terrain, command, curriculum and reward work pending",
+    "No PPO/checkpoint/resume; old training outputs preserved"
+  ]
+}

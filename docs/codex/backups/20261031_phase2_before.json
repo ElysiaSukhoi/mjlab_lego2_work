@@ -1,0 +1,22 @@
+{
+  "old_config_fingerprints": {
+    "Mjlab-Platform-Climb-Lego2:False": "f86677e394d0f7a2d7c24156a5261a4f200c6c700d8f197c60b767916c25d006",
+    "Mjlab-Platform-Climb-Lego2:True": "b33c87468a3f58dd4e6e73dd6db189147a206560a8686ea312879027174c0286",
+    "Mjlab-Platform-Climb-Lego2:rl": "f54f42f2ff6d8655eddeb644cac42a8446f8c5d783421cc0c56c7a42d6334a23",
+    "Mjlab-Velocity-Flat-Lego2:False": "816c2cd1d5cef4df6f735aaa1f0be4215fd8e30ee2b66c449539c216a491d280",
+    "Mjlab-Velocity-Flat-Lego2:True": "50c5009c28d38f8f0267fcedd90ba78b2b2fa618c93a70c7d7e8021051da8348",
+    "Mjlab-Velocity-Flat-Lego2:rl": "dde5f342de269b3908c74acf5e8d3648cdb503f49bb4bbe530de5cf5efddd31b",
+    "Mjlab-Velocity-Rough-Lego2:False": "23630a659ae9a96d73ec571ee74b2eddbb9f040a2ea4a3305e8a84690b419c05",
+    "Mjlab-Velocity-Rough-Lego2:True": "3166a7e14b061c023aa343a3a5c387abcca6863e2a8fddfe7a76821a5c953fff",
+    "Mjlab-Velocity-Rough-Lego2:rl": "b214f77c2e7e8e1991779be97b86c7183158b9bc13dfed5b67705c3e5f3a6690"
+  },
+  "prerequisite_sha256": {
+    "src/mjlab/tasks/velocity/config/lego2/__init__.py": "e8a0334fe4da4afed934e60d94d0feedcdee70f208125c0269c751442a4f95f1",
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": "efa9bab681bc26610a294e120863a1885c9461ff307a7415ef60704493dd00e4",
+    "tests/test_lego2_blind_pit.py": "6f8df72c217abb17173f4e4967fa0f30dc5a014231bac2964e23f02651f12b12"
+  },
+  "modified_file_sha256": {
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": "efa9bab681bc26610a294e120863a1885c9461ff307a7415ef60704493dd00e4",
+    "docs/source/changelog.rst": "bf9cc47467ee946adf32ee40a96b9085a882902b3dceba632dec697b99d4ca27"
+  }
+}

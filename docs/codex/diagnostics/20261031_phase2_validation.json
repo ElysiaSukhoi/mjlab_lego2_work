@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-31 (Asia/Shanghai)",
+  "stage": 2,
+  "status": "本地CPU与Viser验收通过，远程CPU/GPU待确认；无PPO训练",
+  "task": "Mjlab-Blind-Pit-Lego2",
+  "actor_dim": 144,
+  "critic_dim": 254,
+  "terrain_rays": [
+    {
+      "row": 0,
+      "origin": [
+        -45.0,
+        0.0,
+        -0.029999999329447746
+      ],
+      "floor_z": -0.029999999999999805,
+      "rim_z": 0.0,
+      "measured_depth": 0.029999999999999805
+    },
+    {
+      "row": 1,
+      "origin": [
+        -35.0,
+        0.0,
+        -0.05999999865889549
+      ],
+      "floor_z": -0.06000000000000005,
+      "rim_z": 2.220446049250313e-16,
+      "measured_depth": 0.060000000000000275
+    },
+    {
+      "row": 2,
+      "origin": [
+        -25.0,
+        0.0,
+        -0.09000000357627869
+      ],
+      "floor_z": -0.08999999999999986,
+      "rim_z": 0.0,
+      "measured_depth": 0.08999999999999986
+    },
+    {
+      "row": 3,
+      "origin": [
+        -15.0,
+        0.0,
+        -0.11999999731779099
+      ],
+      "floor_z": -0.1200000000000001,
+      "rim_z": 0.0,
+      "measured_depth": 0.1200000000000001
+    },
+    {
+      "row": 4,
+      "origin": [
+        -5.0,
+        0.0,
+        -0.15000000596046448
+      ],
+      "floor_z": -0.1499999999999999,
+      "rim_z": 0.0,
+      "measured_depth": 0.1499999999999999
+    },
+    {
+      "row": 5,
+      "origin": [
+        5.0,
+        0.0,
+        -0.18000000715255737
+      ],
+      "floor_z": -0.18000000000000016,
+      "rim_z": 2.220446049250313e-16,
+      "measured_depth": 0.18000000000000038
+    },
+    {
+      "row": 6,
+      "origin": [
+        15.0,
+        0.0,
+        -0.20999999344348907
+      ],
+      "floor_z": -0.20999999999999996,
+      "rim_z": 0.0,
+      "measured_depth": 0.20999999999999996
+    },
+    {
+      "row": 7,
+      "origin": [
+        25.0,
+        0.0,
+        -0.23999999463558197
+      ],
+      "floor_z": -0.23999999999999977,
+      "rim_z": 0.0,
+      "measured_depth": 0.23999999999999977
+    },
+    {
+      "row": 8,
+      "origin": [
+        35.0,
+        0.0,
+        -0.27000001072883606
+      ],
+      "floor_z": -0.27000000000000046,
+      "rim_z": 2.220446049250313e-16,
+      "measured_depth": 0.2700000000000007
+    },
+    {
+      "row": 9,
+      "origin": [
+        45.0,
+        0.0,
+        -0.30000001192092896
+      ],
+      "floor_z": -0.30000000000000027,
+      "rim_z": 0.0,
+      "measured_depth": 0.30000000000000027
+    }
+  ],
+  "parameters": {
+    "tile_size_m": [
+      10,
+      10
+    ],
+    "pit_size_m": [
+      3,
+      3
+    ],
+    "initial_level": 0,
+    "birth_origin": "pit floor plus default root height 0.47 m; no second subtraction",
+    "birth_xy_range_m": [
+      -0.15,
+      0.15
+    ],
+    "birth_yaw_range_rad": [
+      -0.05,
+      0.05
+    ],
+    "initial_velocity": 0,
+    "episode_seconds": 20,
+    "vx_range_m_s": [
+      0.3,
+      0.6
+    ],
+    "heading_target_rad": 0,
+    "heading_gain": 0.5,
+    "yaw_rate_limit_rad_s": [
+      -0.5,
+      0.5
+    ],
+    "wheel_slide_friction": 0.4,
+    "promotion_distance_m": 3,
+    "root_boundary_m": 4,
+    "wheel_boundary_m": 4.9
+  },
+  "curriculum": {
+    "support": "all wheels fully outside pit, within assigned tile, wheel bottom/contact at rim, downward primary->terrain normal, vertical force >1 N",
+    "failure": "termination or nonfinite robot state overrides promotion",
+    "demotion": "failed or less than half vx * actual episode time, unless promoted",
+    "reset": "only completed episode rows; initial/mid-episode manual reset frozen; play curriculum off",
+    "highest_level": "existing random revisit within 0..9"
+  },
+  "local_validation": {
+    "backend": "MuJoCo-Warp CPU",
+    "num_envs": 2,
+    "height_rows": 10,
+    "birth_samples_per_height": 2,
+    "settle_steps_before_promotion_probe": 40,
+    "control_dt_seconds": 0.02,
+    "tests": "28 passed in 5.17s",
+    "new_stage2_tests": 6,
+    "type_lint_compile": [
+      "Ruff format/check passed",
+      "Pyright: 0 errors, 0 warnings",
+      "ty: All checks passed",
+      "compileall passed"
+    ],
+    "cases": [
+      "all ten native ray depths and floor origins",
+      "per-row births with wheel bottom above floor and envelope within pit",
+      "default joints/zero velocities and heading feedback",
+      "side-wall/air/pit-bottom/partial-wheel/neighbor/horizontal-force/contact-height rejection",
+      "actual rim contact followed by one-env promotion before auto-reset",
+      "other-env origin and partial reset isolation",
+      "manual mid-episode reset freeze",
+      "failure priority and demotion",
+      "minimum-level clamp and maximum-level random revisit",
+      "local boundary truncation inside full terrain footprint",
+      "stage1 actor history and white list regression",
+      "non-foot contact diagnostic is finite even on initial reset before any step"
+    ],
+    "reward_metrics_overrides": "rewards and legacy metrics disabled; pit_nonfoot_contact_count diagnostic metric retained"
+  },
+  "viser": {
+    "command": "uv run --no-sync play Mjlab-Blind-Pit-Lego2 --agent zero --num-envs 1 --device cpu --viewer viser",
+    "checked": [
+      "pit-floor birth",
+      "manual Reset and pause",
+      "single pit geometry and wheel envelope in visible scene"
+    ],
+    "screenshot": "docs/codex/diagnostics/20261031_phase2_viser.jpg",
+    "server": "stopped after inspection",
+    "mode": "zero-action dummy, no checkpoint or training logger"
+  },
+  "compatibility": {
+    "old_env_config_fingerprints_unchanged": 6,
+    "old_agent_config_fingerprints_unchanged": 3,
+    "prerequisite_entries": 29,
+    "unchanged_prerequisite_entries": 27,
+    "changed_existing_prerequisites": [
+      "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py",
+      "docs/source/changelog.rst"
+    ]
+  },
+  "code_sha256": {
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": "e6990d3edd37e704cdb266f16086ad050128143b1a460eb47828db95784ea058",
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_curriculums.py": "997b46582f9c25fdf188191b03d359d178c4df5f5d24a79b1f0baee658e4b413",
+    "tests/test_lego2_blind_pit_terrain.py": "28cd456fd2fc4bff48c92b3fbce4280b001a572e3b3c7ac73d5ab2de703f6a7a"
+  },
+  "limits": [
+    "Promotion probe teleports the robot to the rim and forces timeout; not learned traversal",
+    "No GPU accessible locally; remote GPU check pending",
+    "Legacy Rough rewards still inherited; stage3 reward/evaluation work pending",
+    "No PPO, no old-weight resume, no new checkpoint or old-result deletion"
+  ],
+  "delivery_version": "v2 (v1 preparation snapshot preserved, not for deployment)",
+  "nonfoot_metric": {
+    "name": "pit_nonfoot_contact_count",
+    "unit": "mean contacting geom channels per episode step",
+    "upright_scale": false,
+    "reward_or_termination": false
+  }
+}

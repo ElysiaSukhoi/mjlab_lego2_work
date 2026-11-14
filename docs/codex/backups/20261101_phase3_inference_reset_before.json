@@ -1,0 +1,5 @@
+{
+  "src/mjlab/tasks/velocity/config/lego2/blind_pit_metrics.py": "83bf31e35a6bf56ea13f77ef9f088a111b79bee3f3bcbdac6fd791c33310b1df",
+  "tests/test_lego2_blind_pit_stage3.py": "608568b8dd3298189ed27217ce81873b140b61d5587ba6c3bf4eb9f4cadc00f8",
+  "docs/source/changelog.rst": "8f026524dbb2d4455e935e02414d2da4fe370481016189514530e4c484ae6a7f"
+}

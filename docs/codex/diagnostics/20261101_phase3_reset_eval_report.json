@@ -1,0 +1,143 @@
+{
+  "mode": "zero_action_diagnostic",
+  "seed": 7,
+  "device": "cpu",
+  "checkpoint": null,
+  "checkpoint_sha256": null,
+  "source_sha256": {
+    "src/mjlab/tasks/velocity/config/lego2/__init__.py": "b4893d71ba3288fe7c1c6480ac25f1d1f22505ce4e1d0a57d487ea96013db437",
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_curriculums.py": "b2b19581d733c40f99a836682277b74cb715b0ef8dec05190317c081ade7753a",
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": "9cdc8dae577d75c1fe80f44e4dcb8c5f93c35ec677ee1a3dbaa42b7f80cdfd65",
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_metrics.py": "b312a6999ec2ae7eba7d1b2772a6633c755dc01df603233e672b637a417c913e",
+    "src/mjlab/tasks/velocity/config/lego2/env_cfgs.py": "76e12c772072d35bd5a7942bfc66b56ed470ad2299d413604742d8366a0878b2",
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_env_cfg.py": "e80d877d1655aa1ef53c6172b5ef7c9f9041f9de14359d5acdab96388e3d18ca",
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_metrics.py": "022cfa2d3c98144be6d2deb12f38bb8feb31dabbf0d671e700866ed25d5e2a81",
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_rewards.py": "3c1f4d5b93ec0e4901e42d7b97120fde2f0565379a56eb2a1036bb63930a1cce",
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_terminations.py": "0e9fe8113630d59b2770cd07487babd9c87607b62369d7cdafcb40e990c9d9ed",
+    "src/mjlab/tasks/velocity/config/lego2/rl_cfg.py": "72e1b033d621f3f4af52374e0c045aebc4e961e28ec018953ce5daa964a637ac",
+    "src/mjlab/asset_zoo/robots/lego2/xmls/lego2.xml": "9502149ed6a95a7d7e5453c1d5a8b085ddd7afbbf4c93de7d0780b42a81f1443",
+    "src/mjlab/asset_zoo/robots/lego2/urdf/urdf_legowheel2.urdf": "6c05b612f365d1740cffd3892817b86ada05f6821e414d11ef07a60debe8baef",
+    "src/mjlab/asset_zoo/robots/lego2/lego2_constants.py": "fb9a761b3a2331c0fcace613ed9855f8d019b68cd4ac1ed21ff0d84e0ba703f8",
+    "scripts/tools/evaluate_lego2_blind_pit.py": "571451c6fd25bd921563f058714288b7402a2176d0994125761a03337cbfbeea"
+  },
+  "definition": "four wheels rim-supported, tilt<45deg continuously >=0.5s",
+  "heights": [
+    {
+      "height_m": 0.03,
+      "requested_n": 2,
+      "n": 2,
+      "passed": 0,
+      "pass_rate": 0.0,
+      "samples": [
+        {
+          "episode": 0,
+          "completed": true,
+          "steps": 1000,
+          "passed": false,
+          "root_out": false,
+          "front_up": false,
+          "rear_up": false,
+          "complete": false,
+          "fell_over": false,
+          "failed": false,
+          "truncated": true,
+          "stalled": true,
+          "speed_rmse": 0.38822103034343647
+        },
+        {
+          "episode": 1,
+          "completed": true,
+          "steps": 1000,
+          "passed": false,
+          "root_out": false,
+          "front_up": false,
+          "rear_up": false,
+          "complete": false,
+          "fell_over": false,
+          "failed": false,
+          "truncated": true,
+          "stalled": true,
+          "speed_rmse": 0.4254142679522188
+        }
+      ]
+    },
+    {
+      "height_m": 0.06,
+      "requested_n": 2,
+      "n": 2,
+      "passed": 0,
+      "pass_rate": 0.0,
+      "samples": [
+        {
+          "episode": 0,
+          "completed": true,
+          "steps": 1000,
+          "passed": false,
+          "root_out": false,
+          "front_up": false,
+          "rear_up": false,
+          "complete": false,
+          "fell_over": false,
+          "failed": false,
+          "truncated": true,
+          "stalled": true,
+          "speed_rmse": 0.3882118553765992
+        },
+        {
+          "episode": 1,
+          "completed": true,
+          "steps": 1000,
+          "passed": false,
+          "root_out": false,
+          "front_up": false,
+          "rear_up": false,
+          "complete": false,
+          "fell_over": false,
+          "failed": false,
+          "truncated": true,
+          "stalled": true,
+          "speed_rmse": 0.4254241503841253
+        }
+      ]
+    },
+    {
+      "height_m": 0.09,
+      "requested_n": 2,
+      "n": 2,
+      "passed": 0,
+      "pass_rate": 0.0,
+      "samples": [
+        {
+          "episode": 0,
+          "completed": true,
+          "steps": 1000,
+          "passed": false,
+          "root_out": false,
+          "front_up": false,
+          "rear_up": false,
+          "complete": false,
+          "fell_over": false,
+          "failed": false,
+          "truncated": true,
+          "stalled": true,
+          "speed_rmse": 0.3882005262028792
+        },
+        {
+          "episode": 1,
+          "completed": true,
+          "steps": 1000,
+          "passed": false,
+          "root_out": false,
+          "front_up": false,
+          "rear_up": false,
+          "complete": false,
+          "fell_over": false,
+          "failed": false,
+          "truncated": true,
+          "stalled": true,
+          "speed_rmse": 0.4254201139872546
+        }
+      ]
+    }
+  ]
+}

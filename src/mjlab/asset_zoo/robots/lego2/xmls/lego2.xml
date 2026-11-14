@@ -1,0 +1,226 @@
+<mujoco model="lego2">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+
+  <default>
+    <default class="lego2">
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2" density="0"/>
+      </default>
+      <default class="collision">
+        <geom group="3" contype="1" conaffinity="1"/>
+      </default>
+      <site group="5" size="0.01" rgba="1 0 0 1"/>
+    </default>
+  </default>
+
+  <asset>
+    <material name="body" rgba="1 1 1 1"/>
+    <material name="hip" rgba="0.5098 0.5098 0.5098 1"/>
+    <material name="leg" rgba="0.235 0.235 0.235 1"/>
+    <material name="lidar" rgba="0 0 0.545 1"/>
+    <material name="lidar_part" rgba="0.666 0.666 0.666 1"/>
+    <material name="wheel" rgba="1 0.5 0 1"/>
+
+    <mesh name="base_link" file="base_link.STL"/>
+    <mesh name="RF_hip" file="RF_hip.STL"/>
+    <mesh name="RF_thigh" file="RF_thigh.STL"/>
+    <mesh name="RF_calf" file="RF_calf.STL"/>
+    <mesh name="LF_hip" file="LF_hip.STL"/>
+    <mesh name="LF_thigh" file="LF_thigh.STL"/>
+    <mesh name="LF_calf" file="LF_calf.STL"/>
+    <mesh name="RH_hip" file="RH_hip.STL"/>
+    <mesh name="RH_thigh" file="RH_thigh.STL"/>
+    <mesh name="RH_calf" file="RH_calf.STL"/>
+    <mesh name="LH_hip" file="LH_hip.STL"/>
+    <mesh name="LH_thigh" file="LH_thigh.STL"/>
+    <mesh name="LH_calf" file="LH_calf.STL"/>
+    <mesh name="Lidar_Fixed_Link" file="Lidar_Fixed_Link.STL"/>
+    <mesh name="Lidar_part_Link" file="Lidar_part_Link.STL"/>
+  </asset>
+
+  <!-- Cylinder inertias retain the existing uniform-solid-cylinder approximation.
+       Hip/wheel cylinder axes are local Y. Wheel COM follows its cylinder center;
+       these are geometry-based approximations, not calibrated CAD mass properties. -->
+  <worldbody>
+    <body name="base" pos="0 0 0.32" childclass="lego2">
+      <light pos="0 0 2" mode="trackcom"/>
+      <camera name="tracking" pos="1.2 -1.5 0.5" xyaxes="0.78 0.626 0 -0.16 0.2 0.967" mode="trackcom"/>
+      <camera name="top" pos="-1.2 0 1.2" xyaxes="0 -1 0 0.7 0 0.7" mode="trackcom"/>
+      <camera name="side" pos="0 -1.5 0.4" xyaxes="1 0 0 0 1 2" mode="trackcom"/>
+      <camera name="back" pos="-1.5 0 0.4" xyaxes="0 -1 0 1 0 2" mode="trackcom"/>
+      <inertial pos="0 0 0" mass="15.664"
+        fullinertia="0.18632093866666666 0.37391973866666666 0.46519673866666666 0 0 0"/>
+      <freejoint name="floating_base_joint"/>
+      <geom class="visual" mesh="base_link" material="body"/>
+      <geom name="base_collision" class="collision" type="box" size="0.25 0.163 0.0955" pos="0 0 0.0955"/>
+      <site name="imu" pos="0 0 0"/>
+      <geom class="visual" mesh="Lidar_Fixed_Link" material="lidar"/>
+      <geom class="visual" mesh="Lidar_part_Link" material="lidar_part"/>
+      <geom name="lidar_collision" class="collision" type="cylinder" size="0.09 0.075" pos="0.322 0 0.21"/>
+
+      <!-- RF -->
+      <body name="RF_hip" pos="0.32608 -0.037129 0.069">
+        <inertial pos="0.000257379708290095 -0.0801036243844498 -0.000157234071201023" mass="1.25"
+          fullinertia="0.0013671875 0.0015625 0.0013671875 0 0 0"/>
+        <geom class="visual" mesh="RF_hip" material="hip"/>
+        <geom name="RF_hip_collision" class="collision" type="cylinder" size="0.05 0.0375"
+          pos="0 -0.0375 0" quat="0.70710678118 0.70710678118 0 0"/>
+        <body name="RF_thigh" pos="0 -0.14885 0">
+          <inertial pos="0 0 0" mass="2.928"
+            fullinertia="0.016908312 0.014890135 0.005072962 0 -0.001056675 -0.003404967"/>
+          <joint name="RF_HFE" axis="0 1 0" range="-1.57 1.57" actuatorfrcrange="-189 189"/>
+          <geom class="visual" mesh="RF_thigh" material="leg"/>
+          <geom name="RF_thigh_collision1" class="collision" type="cylinder" size="0.05 0.0375"
+            pos="0 0.0372125 0" quat="0.70710678118 0.70710678118 0 0"/>
+          <geom name="RF_thigh_collision2" class="collision" type="box" size="0.16 0.025 0.036"
+            pos="0 -0.025 -0.125" quat="0.670882 0 0.741564 0"/>
+          <body name="RF_calf" pos="0 0 -0.25">
+            <inertial pos="0 0 0" mass="2.6"
+              fullinertia="0.013215290 0.015915945 0.003734347 0.000111724 -0.000758185 -0.000611658"/>
+            <joint name="RF_KFE" axis="0 1 0" range="-2.618 -0.873" actuatorfrcrange="-189 189"/>
+            <geom class="visual" mesh="RF_calf" material="leg" pos="0 -0.05 0"/>
+            <geom name="RF_calf_collision1" class="collision" type="box" size="0.13 0.0115 0.025"
+              pos="0 -0.025 -0.125" quat="0.70710678118 0 0.70710678118 0"/>
+            <geom name="RF_calf_collision2" class="collision" type="cylinder" size="0.066 0.0275"
+              pos="0 -0.0275 -0.26" quat="0.70710678118 0.70710678118 0 0"/>
+            <body name="RF_FOOT" pos="0 0 -0.25">
+              <inertial pos="0 -0.062 0" mass="1.6"
+                fullinertia="0.005650533333333333 0.01058 0.005650533333333333 0 0 0"/>
+              <joint name="RF_Wheel" axis="0 1 0" actuatorfrcrange="-66 66"/>
+              <geom class="visual" type="cylinder" size="0.115 0.026" pos="0 -0.062 0" quat="0.70710678118 0.70710678118 0 0" material="wheel"/>
+              <geom name="RF_foot_collision" class="collision" type="cylinder" size="0.115 0.026"
+                pos="0 -0.062 0" quat="0.70710678118 0.70710678118 0 0" material="wheel"
+                friction="0.4 0.005 0.0001"/>
+              <site name="RF" pos="0 -0.062 0"/>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- LF -->
+      <body name="LF_hip" pos="0.32608 0.039271 0.069">
+        <inertial pos="0.00025738 0.080104 0.00015723" mass="1.25"
+          fullinertia="0.0013671875 0.0015625 0.0013671875 0 0 0"/>
+        <geom class="visual" mesh="LF_hip" material="hip"/>
+        <geom name="LF_hip_collision" class="collision" type="cylinder" size="0.05 0.0375"
+          pos="0 0.0375 0" quat="0.70710678118 0.70710678118 0 0"/>
+        <body name="LF_thigh" pos="0 0.14885 0">
+          <inertial pos="0 0 0" mass="2.928"
+            fullinertia="0.016908312 0.014890135 0.005072962 0 -0.001056675 -0.003404967"/>
+          <joint name="LF_HFE" axis="0 1 0" range="-1.57 1.57" actuatorfrcrange="-189 189"/>
+          <geom class="visual" mesh="LF_thigh" material="leg"/>
+          <geom name="LF_thigh_collision1" class="collision" type="cylinder" size="0.05 0.0375"
+            pos="0 -0.0372125 0" quat="0.70710678118 0.70710678118 0 0"/>
+          <geom name="LF_thigh_collision2" class="collision" type="box" size="0.16 0.025 0.036"
+            pos="0 0.025 -0.125" quat="0.670882 0 0.741564 0"/>
+          <body name="LF_calf" pos="0 0 -0.25">
+            <inertial pos="0 0 0" mass="2.6"
+              fullinertia="0.013215290 0.015915945 0.003734347 0.000111724 -0.000758185 -0.000611658"/>
+            <joint name="LF_KFE" axis="0 1 0" range="-2.618 -0.873" actuatorfrcrange="-189 189"/>
+            <geom class="visual" mesh="LF_calf" material="leg" pos="0 0.05 0"/>
+            <geom name="LF_calf_collision1" class="collision" type="box" size="0.13 0.0115 0.025"
+              pos="0 0.025 -0.125" quat="0.70710678118 0 0.70710678118 0"/>
+            <geom name="LF_calf_collision2" class="collision" type="cylinder" size="0.066 0.0275"
+              pos="0 0.0275 -0.26" quat="0.70710678118 0.70710678118 0 0"/>
+            <body name="LF_FOOT" pos="0 0 -0.25">
+              <inertial pos="0 0.062 0" mass="1.6"
+                fullinertia="0.005650533333333333 0.01058 0.005650533333333333 0 0 0"/>
+              <joint name="LF_Wheel" axis="0 1 0" actuatorfrcrange="-66 66"/>
+              <geom class="visual" type="cylinder" size="0.115 0.026" pos="0 0.062 0" quat="0.70710678118 0.70710678118 0 0" material="wheel"/>
+              <geom name="LF_foot_collision" class="collision" type="cylinder" size="0.115 0.026"
+                pos="0 0.062 0" quat="0.70710678118 0.70710678118 0 0" material="wheel"
+                friction="0.4 0.005 0.0001"/>
+              <site name="LF" pos="0 0.062 0"/>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- RH -->
+      <body name="RH_hip" pos="-0.32392 -0.037129 0.069">
+        <inertial pos="-0.000257379842626859 -0.0801036245382516 0.000157234059079289" mass="1.25"
+          fullinertia="0.0013671875 0.0015625 0.0013671875 0 0 0"/>
+        <geom class="visual" mesh="RH_hip" material="hip"/>
+        <geom name="RH_hip_collision" class="collision" type="cylinder" size="0.05 0.0375"
+          pos="0 -0.0375 0" quat="0.70710678118 0.70710678118 0 0"/>
+        <body name="RH_thigh" pos="0 -0.14885 0">
+          <inertial pos="0 0 0" mass="2.928"
+            fullinertia="0.016908312 0.014890135 0.005072962 0 -0.001056675 -0.003404967"/>
+          <joint name="RH_HFE" axis="0 1 0" range="-1.57 1.57" actuatorfrcrange="-189 189"/>
+          <geom class="visual" mesh="RH_thigh" material="leg"/>
+          <geom name="RH_thigh_collision1" class="collision" type="cylinder" size="0.05 0.0375"
+            pos="0 0.0372125 0" quat="0.70710678118 0.70710678118 0 0"/>
+          <geom name="RH_thigh_collision2" class="collision" type="box" size="0.16 0.025 0.036"
+            pos="0 -0.025 -0.125" quat="0.670882 0 0.741564 0"/>
+          <body name="RH_calf" pos="0 0 -0.25">
+            <inertial pos="0 0 0" mass="2.6"
+              fullinertia="0.013215290 0.015915945 0.003734347 0.000111724 -0.000758185 -0.000611658"/>
+            <joint name="RH_KFE" axis="0 1 0" range="0.873 2.618" actuatorfrcrange="-189 189"/>
+            <geom class="visual" mesh="RH_calf" material="leg" pos="0 -0.05 0"/>
+            <geom name="RH_calf_collision1" class="collision" type="box" size="0.13 0.0115 0.025"
+              pos="0 -0.025 -0.125" quat="0.70710678118 0 0.70710678118 0"/>
+            <geom name="RH_calf_collision2" class="collision" type="cylinder" size="0.066 0.0275"
+              pos="0 -0.0275 -0.26" quat="0.70710678118 0.70710678118 0 0"/>
+            <body name="RH_FOOT" pos="0 0 -0.25">
+              <inertial pos="0 -0.062 0" mass="1.6"
+                fullinertia="0.005650533333333333 0.01058 0.005650533333333333 0 0 0"/>
+              <joint name="RH_Wheel" axis="0 1 0" actuatorfrcrange="-66 66"/>
+              <geom class="visual" type="cylinder" size="0.115 0.026" pos="0 -0.062 0" quat="0.70710678118 0.70710678118 0 0" material="wheel"/>
+              <geom name="RH_foot_collision" class="collision" type="cylinder" size="0.115 0.026"
+                pos="0 -0.062 0" quat="0.70710678118 0.70710678118 0 0" material="wheel"
+                friction="0.4 0.005 0.0001"/>
+              <site name="RH" pos="0 -0.062 0"/>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- LH -->
+      <body name="LH_hip" pos="-0.32392 0.039271 0.069">
+        <inertial pos="-0.00025738 0.080104 -0.00015723" mass="1.25"
+          fullinertia="0.0013671875 0.0015625 0.0013671875 0 0 0"/>
+        <geom class="visual" mesh="LH_hip" material="hip"/>
+        <geom name="LH_hip_collision" class="collision" type="cylinder" size="0.05 0.0375"
+          pos="0 0.0375 0" quat="0.70710678118 0.70710678118 0 0"/>
+        <body name="LH_thigh" pos="0 0.14885 0">
+          <inertial pos="0 0 0" mass="2.928"
+            fullinertia="0.016908312 0.014890135 0.005072962 0 -0.001056675 -0.003404967"/>
+          <joint name="LH_HFE" axis="0 1 0" range="-1.57 1.57" actuatorfrcrange="-189 189"/>
+          <geom class="visual" mesh="LH_thigh" material="leg"/>
+          <geom name="LH_thigh_collision1" class="collision" type="cylinder" size="0.05 0.0375"
+            pos="0 -0.0372125 0" quat="0.70710678118 0.70710678118 0 0"/>
+          <geom name="LH_thigh_collision2" class="collision" type="box" size="0.16 0.025 0.036"
+            pos="0 0.025 -0.125" quat="0.670882 0 0.741564 0"/>
+          <body name="LH_calf" pos="0 0 -0.25">
+            <inertial pos="0 0 0" mass="2.6"
+              fullinertia="0.013215290 0.015915945 0.003734347 0.000111724 -0.000758185 -0.000611658"/>
+            <joint name="LH_KFE" axis="0 1 0" range="0.873 2.618" actuatorfrcrange="-189 189"/>
+            <geom class="visual" mesh="LH_calf" material="leg" pos="0 0.05 0"/>
+            <geom name="LH_calf_collision1" class="collision" type="box" size="0.13 0.0115 0.025"
+              pos="0 0.025 -0.125" quat="0.70710678118 0 0.70710678118 0"/>
+            <geom name="LH_calf_collision2" class="collision" type="cylinder" size="0.066 0.0275"
+              pos="0 0.0275 -0.26" quat="0.70710678118 0.70710678118 0 0"/>
+            <body name="LH_FOOT" pos="0 0 -0.25">
+              <inertial pos="0 0.062 0" mass="1.6"
+                fullinertia="0.005650533333333333 0.01058 0.005650533333333333 0 0 0"/>
+              <joint name="LH_Wheel" axis="0 1 0" actuatorfrcrange="-66 66"/>
+              <geom class="visual" type="cylinder" size="0.115 0.026" pos="0 0.062 0" quat="0.70710678118 0.70710678118 0 0" material="wheel"/>
+              <geom name="LH_foot_collision" class="collision" type="cylinder" size="0.115 0.026"
+                pos="0 0.062 0" quat="0.70710678118 0.70710678118 0 0" material="wheel"
+                friction="0.4 0.005 0.0001"/>
+              <site name="LH" pos="0 0.062 0"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <sensor>
+    <gyro name="imu_ang_vel" site="imu"/>
+    <velocimeter name="imu_lin_vel" site="imu"/>
+    <accelerometer name="imu_lin_acc" site="imu"/>
+    <framezaxis name="imu_upvector" objtype="body" objname="world" reftype="site" refname="imu"/>
+    <subtreeangmom name="root_angmom" body="base"/>
+  </sensor>
+</mujoco>
