@@ -483,7 +483,7 @@ document.write(`
                   
   <section id="lego2">
 <h1>Lego2 项目交接<a class="headerlink" href="#lego2" title="Link to this heading">#</a></h1>
-<p>更新时间：2026-11-15（Asia/Shanghai）。唯一交接入口，先读<span class="xref myst">AGENTS</span>。</p>
+<p>更新时间：2026-11-14（Asia/Shanghai）。唯一交接入口，先读<span class="xref myst">AGENTS</span>。</p>
 <section id="id1">
 <h2>当前目标<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>本体盲走轮足越障，目标参考300 mm；中央坑、首训即启用低高度课程。
@@ -509,12 +509,6 @@ document.write(`
 已完整出坑，但接触通道间歇未检出，连续支撑最长0.22 s，最大倾角15.5°，到边界截断。
 运动学重建轮底与trace吻合，轮子距两侧壁至少0.633 m，未见轮子坑角借力。
 数值/方法/限制归EXPERIMENT_LOG最新条目与分析JSON。本批未改src或训练，只做离线分析。</p>
-<p>2026-11-15用户已提交be4f42a（首版接入准备）；原目录Git查询回传为非仓库。
-首版远程clone遭HTTP/2中断，核查目录为git_bootstrap_20261115_utkVcK，尚未生成comparison.json。
-用户要求拆分下载与验收，首版/v2固定SHA入口停用；第一步仅HTTP/1.1浅克隆或候选目录快进更新。
-不预设期望commit，下载后记录实际版本；回传后再给源码比对/环境/验收指令。
-第一步7项本地核验通过，包括无需改脚本获取新提交；远程尚未重试，未创建环境或切换训练入口。
-完整流程归PROJECT_CONTEXT，不直接复用旧.venv的editable安装，也不在旧目录init/pull。</p>
 </section>
 <section id="id4">
 <h2>当前问题<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
@@ -522,7 +516,6 @@ document.write(`
 <li><p>30 cm未通过的两类表现已定位；低速依赖和接触中断原因仍待固定速度/回放对照，正式验收未完成。</p></li>
 <li><p>高高度report和30 cm trace已下载；其余高度trace、数字退出码和独立修复核验回执未回传。</p></li>
 <li><p>全项目ty/Pyright仍有旧文件类型错误；本批定向检查通过，不声称全库通过。</p></li>
-<li><p>用户已推送GitHub，截图显示Actions多项失败；本地已读CI配置，具体失败日志待获取，未改工作流。</p></li>
 <li><p>完整训练stdout/Total timesteps/实际params未读取；30 cm结果只支持当前坑式初筛，不替代正式验收。</p></li>
 <li><p>旧失败根因/旧参数资产对应、EPA警告影响、CAD质量属性仍待确认。</p></li>
 <li><p>旧报告/索引只作历史支撑；最新同步和实验状态以本页及CURRENT_STATUS为准。</p></li>
@@ -531,8 +524,6 @@ document.write(`
 <section id="id5">
 <h2>下一步任务<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>上传<a class="reference download internal" download="" href="../_downloads/ee74680b34c07cdf4b8a4080692c3b44/sync_remote_git_stage1_20261115.sh"><span class="xref download myst">第一步下载入口</span></a>并执行，
-回传实际commit/状态和记录目录；据实际版本再给第二步比对/环境/验收指令，保持旧结果。</p></li>
 <li><p>准备30 cm固定vx=0.30/0.40/0.50 m/s、相同初态和seed的小批对照及回放，入口尚未实现。</p></li>
 <li><p>核对低速受阻/台面接触间歇是否可重复；必要时补接触点/非轮接触，保持现有0.5 s判据。</p></li>
 <li><p>再决定训练预算及正式每高度至少100次/独立直线高台/平地验证。
@@ -542,9 +533,7 @@ document.write(`
 <section id="git">
 <h2>Git 与实验状态<a class="headerlink" href="#git" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>本地main及origin/main跟踪引用为be4f42a；本批两步同步入口/核验/文档待提交，Codex不自动commit/push。
-GitHub代码已显示，CI失败根因待日志确认；Codex未自行访问训练服务器。</p></li>
-<li><p>服务器原目录非Git仓库；首次克隆下载中断，新下载入口待执行，尚未安装新环境或开始训练。</p></li>
+<li><p>本地无Git元数据，不初始化、不commit/push；Codex未自行访问远程，用户已回传首次短训及一次低阶续训。</p></li>
 <li><p>阶段2远程证据：
 <code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase2_20261031_211214_2150255/check_20261031_211214_2150255</span></code>。</p></li>
 <li><p>阶段3远程备份：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_20261031_214701_2152912</span></code>，

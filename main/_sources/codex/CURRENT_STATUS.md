@@ -1,6 +1,6 @@
 # 当前状态
 
-更新时间：2026-11-15（Asia/Shanghai）。唯一跨会话入口：[HANDOFF.md](HANDOFF.md)。
+更新时间：2026-11-14（Asia/Shanghai）。唯一跨会话入口：[HANDOFF.md](HANDOFF.md)。
 
 ## 当前阶段
 
@@ -129,36 +129,7 @@ trace也缺少非轮接触/接触点坐标，不能声称全面排除所有机�
 
 ## Git、同步与实验边界
 
-本地main及origin/main跟踪引用现为be4f42a（远程服务器git pull），用户已提交此前接入准备；
-首版接入准备前工作区干净，当前有本批脚本/验证记录/文档更改，Codex未commit/push。
-用户截图显示GitHub已有代码，Actions为10失败、2成功、1跳过、6取消；推送认证已解决。
-已只读核对ci.yml和docker.yml，检查覆盖全库格式/类型/多Python版本测试/打包与Docker。
-尚未读取远程失败步骤日志，不能从检查名称推断具体根因；本轮未修改工作流/源码或重跑CI。
-Codex不自动commit/push，本轮未自行执行PPO或访问远程服务器。
-
-2026-11-15按用户意向，后续采用本地→GitHub→训练服务器的代码同步流程，
-长期流程及首次接入前置检查见PROJECT_CONTEXT，依据归DECISIONS最新条目。
-发现docs/codex/artifacts脚本/清单此前全部被artifacts/规则忽略且未跟踪；
-本批只为.sh/.py/.sha256/*_files.txt放行，压缩包/logs/.venv仍忽略。
-9项Git忽略规则核验及git diff --check通过；未执行仿真、修改运行源码、commit/push或服务器接入。
-已有轻量脚本已由用户提交进14038e3；服务器端GitHub访问认证仍待验证。
-CI失败不撤销上传，但运行影响待日志定因；每批本地验证和远程小场景验收仍保留。
-
-用户回传服务器原目录`~/zrq/mjlab_lego2`不是Git仓库，不能直接pull。
-首版[接入入口](artifacts/bootstrap_remote_git_20261115.sh)已远程执行到clone阶段，
-用户回传curl 92 HTTP/2 CANCEL、unexpected disconnect、EOF，下载未完成，尚无comparison.json。
-失败核查目录：`/home/ajifang/zrq/backups/git_bootstrap_20261115_utkVcK`；
-按脚本顺序已经过旧源码归档命令，但未读取远程归档及hash原件，不冒充已独立核验。
-保留首版脚本/验证/失败现场；原目录、.venv和logs/checkpoint未由脚本修改，尚未切换训练入口。
-
-v2仅在本地准备/核验，未回传远程执行；本次用户要求下载与版本验收拆分，首版/v2固定SHA入口均停用。
-改用[第一步下载入口](artifacts/sync_remote_git_stage1_20261115.sh)：
-临时HTTP/1.1、depth=1克隆至`~/zrq/mjlab_lego2_git_http1`；已有干净候选仓库时pull --ff-only。
-不写死期望commit，仅记录实际HEAD/origin/main/状态至receipt.txt；不做源码hash比对、安装环境或训练。
-[7项本地核验](diagnostics/20261115_git_stage1_local_validation.json)确认首次克隆、无需修改脚本快进到
-新提交、重复执行通过；有未审阅改动、非仓库目标、旧目录本身或其子目录时停止。
-旧源码/模拟checkpoint/旧环境/失败现场保持不变。Bash语法与diff检查通过；远程HTTP/1.1链路尚未验证。
-下一步用户上传执行第一步，回传receipt.txt终端版本信息/记录目录，之后再给比对和验收指令。
+本地无Git元数据，不初始化、不commit/push。Codex本轮未自行执行PPO或访问远程。
 用户已回传首次短训及一次低阶续训结果，记录于EXPERIMENT_LOG；旧日志/checkpoint和本次新run均保留。
 阶段3包纳入本地src注释及最新交接；AGENTS→CLAUDE链接及长期中文注释规范本地保留，
 CLAUDE不在远程训练增量清单内。旧v1/v2包、hash和原验证JSON保留历史用途，不能覆盖当前交接。

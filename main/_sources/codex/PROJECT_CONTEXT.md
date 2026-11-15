@@ -3,7 +3,7 @@
 本文件保存长期项目事实；当前阶段和同步状态见 [CURRENT_STATUS.md](CURRENT_STATUS.md)。
 跨会话唯一交接入口为 [HANDOFF.md](HANDOFF.md)，维护规则见 [AGENTS.md](../../AGENTS.md)。
 
-更新时间：2026-11-15（Asia/Shanghai）。
+更新时间：2026-10-31（Asia/Shanghai）。
 
 ## 项目目标与平台
 
@@ -63,11 +63,9 @@ critic、奖励和评估可以使用训练特权信息。其他机器人80 cm演
 | 用途 | 路径或位置 |
 | --- | --- |
 | 本地日常编辑与uv环境 | `/home/asus/work/mjlab_lego2_work` |
-| GitHub代码中转仓库 | `https://github.com/ElysiaSukhoi/mjlab_lego2_work`（私有） |
 | 外层研究项目 | `/home/asus/work/Jiche_Project`；旧中文项目路径已迁移，非Jicha_Project |
 | 远程SSH | `ajifang@27.128.203.222`，端口 `10395` |
 | 远程训练源码 | `~/zrq/mjlab_lego2` |
-| Git首次接入候选目录 | `~/zrq/mjlab_lego2_git_http1`；先下载/记录实际版本，再安排比对验收，尚非训练入口 |
 | 旧远程只读快照 | `/home/asus/work/Jiche_Project/高台训练/remote_snapshot/20261015_204549/mjlab_lego2` |
 | 历史工作副本，非编辑入口 | `/home/asus/work/Jiche_Project/高台训练/working_copy/mjlab_lego2` |
 | 远程源码备份记录 | `~/zrq/backups/mjlab_lego2_pre_platform_climb_20261015_215244/`，内有 `source.tar.gz` 和 `remote_state.txt` |
@@ -117,38 +115,10 @@ root超过局部4 m或轮子包络到达4.9 m时truncate，此信号不等于越
 
 ## 训练、续训与回放流程
 
-自2026-11-15起，后续默认通过GitHub中转代码：
-按批修改并解释核心代码 → Codex完成本地uv校验并报告范围/未通过项 →
-用户审阅后自行提交并推送GitHub → 服务器下载/快进更新并回传实际commit →
-Codex核对版本与变更后给出源码比对、环境和远程验收指令 →
+通常流程为：按批修改并解释核心代码 → Codex完成本地uv校验 →
+用户按明确文件清单先备份、再同步并执行远程校验 →
 配置与功能验收通过后在screen内按阶段试训 → 记录实际结果后决定下一步。
-Codex不自动commit/push；既有类型检查失败仍按AGENTS规则处理，不因采用Git而降低验收要求。
-首次接入须先只读核对服务器现有源码目录的Git状态。2026-11-15用户回传原目录
-`~/zrq/mjlab_lego2`的Git查询均为“不是git仓库”；该目录目前不具备Git更新能力。
-采用新目录首次克隆：旧目录保留，先归档src/scripts/tests和依赖清单，再核对明确提交及逐文件差异。
-首版`~/zrq/mjlab_lego2_git`克隆遭HTTP/2中断（用户回传），具体网络/代理根因未知。
-按用户明确要求，下载和版本验收分两步：第一步
-`docs/codex/artifacts/sync_remote_git_stage1_20261115.sh`临时HTTP/1.1、depth=1浅克隆至候选目录；
-已有候选目录须为正确来源的干净main，再执行pull --ff-only。下载后只记录实际HEAD/origin/main，
-不写死期望commit、不在这一步做文件hash比对、环境安装或训练。
-第二步在用户回传实际commit/状态后，再核对本地及已推送版本，并给出当次比对/验收指令。
-commit在创建提交时确定，正常fast-forward pull只是接收已有提交，不会重新生成它的hash；
-不因同步脚本本身的新提交而更新脚本内常量。首版/v2固定SHA入口已退为历史用途，不再执行。
-第一步7项本地行为核验通过，尚未远程重试；旧目录/失败现场和HTTP全局配置保持。
-比对结果经核查后再安排独立新环境和训练入口切换；不直接复用旧.venv中的editable安装，
-以免新目录命令仍加载旧源码。旧logs/checkpoint的引用方式届时明确，不自动移动旧结果。
-旧目录不初始化Git，不把.git元数据直接复制到已有源码上；新目录也不覆盖已有未审阅改动。
-接入后在工作区干净、分支及来源核对完成时使用fetch及fast-forward更新；
-记录实际完整commit SHA，不能只凭main分支名认定与本地版本一致。私有仓库的服务器读权限单独配置。
-文档交接、git fetch或pull均不自动触发服务器训练，也不自动解压旧同步包。
-
-Git负责代码、配置、文档和轻量启动脚本/清单；训练logs/checkpoint和服务器.venv保留在服务器。
-当前.gitignore仍忽略logs/和.venv/，docs/codex/artifacts只放行.sh/.py/.sha256/*_files.txt，
-该目录的历史压缩包继续忽略；放行文件须经审阅和git add后才会进入提交。
-已有跟踪的诊断/历史资料不在本次调整中移除。更新前如有本地修改或同名未跟踪文件，先停下核对，
-不使用reset --hard、clean或强制覆盖处理；运行中的训练/评估使用的源码在进程结束前不更新。
-更新代码不自动同步依赖，uv.lock发生变化时另行安排依赖核查；运行前仍执行任务/小场景验证。
-GitHub检查失败不撤销已推送的提交，但其中真实代码/依赖问题可能影响运行，不能将红叉当作训练验证。
+文档交接不会自动触发上述开发或训练。
 
 - 本地终端与远程SSH终端分开标注；远程通过 `ssh -p 10395 ajifang@27.128.203.222`
   连接后进入 `~/zrq/mjlab_lego2`。禁止未经核对的全目录覆盖或 `rsync --delete`。

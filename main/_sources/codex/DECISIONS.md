@@ -189,39 +189,3 @@ PitProgress原先把每步临时结果直接转换为float并保存在values，�
 不扩大整个评估的inference作用域来掩盖缓存约束，不改共享MetricsManager或训练/奖励/观测/资产。
 新增推理模式内外切换、局部/完整reset、自动reset和重复episode回归。
 训练时的旧hash清单保留为版本证据；修复使用新的评估hash清单及新日期启动脚本，避免改写原训练版本。
-
-## 2026-11-15：后续代码同步采用GitHub中转，保留服务器实验数据
-
-依据用户提出的本地→GitHub→训练服务器工作流，后续默认使用私有仓库
-`ElysiaSukhoi/mjlab_lego2_work`中转版本化代码。Codex仍逐批开发、解释和本地验证，
-用户自行审阅/commit/push；服务器端获取指定提交并核对SHA，远程校验后在screen zrq运行。
-首次接入服务器现有目录前必须核对其Git来源/历史、改动和未跟踪文件；接入尚未核实。
-不将git pull等同于依赖更新、模型同步或训练授权，不在运行中的训练/评估目录更新源码。
-
-原.gitignore的artifacts/规则会连同docs/codex/artifacts的小脚本一并忽略，
-本批只为该目录的.sh/.py/.sha256/*_files.txt增加例外，历史压缩包继续忽略。
-logs/、.venv/继续排除，旧实验结果不删除；已跟踪的历史诊断资料不自动清理。
-工作流程细节归PROJECT_CONTEXT；AGENTS的验证、禁止自动commit/push及保护结果约定保持。
-
-2026-11-15首次只读核查回传：服务器`~/zrq/mjlab_lego2`不是Git仓库。
-采用相邻新目录`~/zrq/mjlab_lego2_git`克隆及对比，保留旧目录/环境/结果；
-先归档旧源码并锁定本地已确认的14038e32dff2a301f9cade041015119f2cddf23e，
-输出逐文件差异后再安排新环境和训练入口切换。目前未回传克隆/比对执行结果。
-不把旧.venv直接当作新目录运行环境，其editable依赖可能仍指向旧源码。
-
-同日首版远程克隆报curl 92 HTTP/2 CANCEL、unexpected disconnect及EOF，未形成比对报告。
-首版目录与14038e3固定提交仅保留历史用途，由v2接入方案替代：
-用单次命令`-c http.version=HTTP/1.1`和depth=1浅克隆至另一新目录
-`~/zrq/mjlab_lego2_git_http1`，核对新近用户提交be4f42aaf97bd6e3b42ec9342d7d702750dfa27c。
-不扩大postBuffer或关闭TLS校验，不修改全局Git配置、不删除失败现场。
-本地file://核验只证明脚本分支/保护行为，不能证明服务器HTTP/1.1链路已恢复。
-
-### 同日调整：下载与版本验收拆分，固定SHA入口停用
-
-依据用户明确提出的同步时序要求，以上首版/v2在下载脚本中写死14038e3/be4f42a的做法停用。
-新入口sync_remote_git_stage1_20261115.sh只克隆或对正确来源的干净main做pull --ff-only，
-记录下载后实际HEAD、origin/main和状态。文件hash/源码比对、环境安装与运行验收移到回传版本后的第二步。
-这避免开发者准备脚本后用户又创建新提交所导致的过时常量，不取消运行前的版本可追溯要求。
-Git提交hash由提交对象确定，普通fast-forward pull不重新计算或生成新提交；
-用户需要回传的是服务器实际接收的提交。本地用两个不同已有提交核验无需改脚本即可快进到新版。
-HTTP/1.1及浅克隆措施保留；旧目录/结果/失败现场保留，第二步尚未执行。
