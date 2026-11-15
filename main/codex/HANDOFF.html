@@ -57,7 +57,7 @@
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Nov 14, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 15, 2026"/>
   </head>
   
   
@@ -483,7 +483,7 @@ document.write(`
                   
   <section id="lego2">
 <h1>Lego2 项目交接<a class="headerlink" href="#lego2" title="Link to this heading">#</a></h1>
-<p>更新时间：2026-11-14（Asia/Shanghai）。唯一交接入口，先读<span class="xref myst">AGENTS</span>。</p>
+<p>更新时间：2026-11-15（Asia/Shanghai）。唯一交接入口，先读<span class="xref myst">AGENTS</span>。</p>
 <section id="id1">
 <h2>当前目标<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>本体盲走轮足越障，目标参考300 mm；中央坑、首训即启用低高度课程。
@@ -509,6 +509,9 @@ document.write(`
 已完整出坑，但接触通道间歇未检出，连续支撑最长0.22 s，最大倾角15.5°，到边界截断。
 运动学重建轮底与trace吻合，轮子距两侧壁至少0.633 m，未见轮子坑角借力。
 数值/方法/限制归EXPERIMENT_LOG最新条目与分析JSON。本批未改src或训练，只做离线分析。</p>
+<p>2026-11-15后续同步采用本地→GitHub→服务器；首次服务器接入待只读核查，流程归PROJECT_CONTEXT。
+修正.gitignore以放行docs/codex/artifacts的小脚本/清单，压缩包/logs/.venv仍忽略；
+9项规则与diff空白核验通过。仅修改忽略规则和文档，尚未commit/push或操作服务器。</p>
 </section>
 <section id="id4">
 <h2>当前问题<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
@@ -516,6 +519,7 @@ document.write(`
 <li><p>30 cm未通过的两类表现已定位；低速依赖和接触中断原因仍待固定速度/回放对照，正式验收未完成。</p></li>
 <li><p>高高度report和30 cm trace已下载；其余高度trace、数字退出码和独立修复核验回执未回传。</p></li>
 <li><p>全项目ty/Pyright仍有旧文件类型错误；本批定向检查通过，不声称全库通过。</p></li>
+<li><p>用户已推送GitHub，截图显示Actions多项失败；本地已读CI配置，具体失败日志待获取，未改工作流。</p></li>
 <li><p>完整训练stdout/Total timesteps/实际params未读取；30 cm结果只支持当前坑式初筛，不替代正式验收。</p></li>
 <li><p>旧失败根因/旧参数资产对应、EPA警告影响、CAD质量属性仍待确认。</p></li>
 <li><p>旧报告/索引只作历史支撑；最新同步和实验状态以本页及CURRENT_STATUS为准。</p></li>
@@ -524,6 +528,7 @@ document.write(`
 <section id="id5">
 <h2>下一步任务<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
+<li><p>先只读核对服务器现有源码目录的Git根目录/分支/HEAD/改动与来源，准备首次GitHub接入，保留所有结果。</p></li>
 <li><p>准备30 cm固定vx=0.30/0.40/0.50 m/s、相同初态和seed的小批对照及回放，入口尚未实现。</p></li>
 <li><p>核对低速受阻/台面接触间歇是否可重复；必要时补接触点/非轮接触，保持现有0.5 s判据。</p></li>
 <li><p>再决定训练预算及正式每高度至少100次/独立直线高台/平地验证。
@@ -533,7 +538,8 @@ document.write(`
 <section id="git">
 <h2>Git 与实验状态<a class="headerlink" href="#git" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>本地无Git元数据，不初始化、不commit/push；Codex未自行访问远程，用户已回传首次短训及一次低阶续训。</p></li>
+<li><p>本地已有Git，main/3592c9e（Initial commit）；当前有忽略规则/文档未提交更改，Codex不自动commit/push。
+GitHub代码已显示，CI失败根因待日志确认；Codex未自行访问训练服务器。</p></li>
 <li><p>阶段2远程证据：
 <code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase2_20261031_211214_2150255/check_20261031_211214_2150255</span></code>。</p></li>
 <li><p>阶段3远程备份：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_20261031_214701_2152912</span></code>，
@@ -628,7 +634,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 14, 2026.
+  Last updated on Nov 15, 2026.
   <br/>
 </p>
   </div>

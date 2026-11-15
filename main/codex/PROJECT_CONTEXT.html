@@ -57,7 +57,7 @@
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Nov 14, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 15, 2026"/>
   </head>
   
   
@@ -485,7 +485,7 @@ document.write(`
 <h1>Lego2 高台攀爬项目上下文<a class="headerlink" href="#lego2" title="Link to this heading">#</a></h1>
 <p>本文件保存长期项目事实；当前阶段和同步状态见 <a class="reference internal" href="CURRENT_STATUS.html"><span class="std std-doc">CURRENT_STATUS.md</span></a>。
 跨会话唯一交接入口为 <a class="reference internal" href="HANDOFF.html"><span class="std std-doc">HANDOFF.md</span></a>，维护规则见 <span class="xref myst">AGENTS.md</span>。</p>
-<p>更新时间：2026-10-31（Asia/Shanghai）。</p>
+<p>更新时间：2026-11-15（Asia/Shanghai）。</p>
 <section id="id1">
 <h2>项目目标与平台<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>目标是让 Lego2 四足轮足机器人依靠本体感知稳定越过高台，既有目标参考为300 mm。
@@ -574,22 +574,25 @@ URDF不是训练时的实时转换入口；两格式的资产修复需要分别�
 <tr class="row-even"><td><p>本地日常编辑与uv环境</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">/home/asus/work/mjlab_lego2_work</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>外层研究项目</p></td>
+<tr class="row-odd"><td><p>GitHub代码中转仓库</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://github.com/ElysiaSukhoi/mjlab_lego2_work</span></code>（私有）</p></td>
+</tr>
+<tr class="row-even"><td><p>外层研究项目</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project</span></code>；旧中文项目路径已迁移，非Jicha_Project</p></td>
 </tr>
-<tr class="row-even"><td><p>远程SSH</p></td>
+<tr class="row-odd"><td><p>远程SSH</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">ajifang&#64;27.128.203.222</span></code>，端口 <code class="docutils literal notranslate"><span class="pre">10395</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>远程训练源码</p></td>
+<tr class="row-even"><td><p>远程训练源码</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>旧远程只读快照</p></td>
+<tr class="row-odd"><td><p>旧远程只读快照</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project/高台训练/remote_snapshot/20261015_204549/mjlab_lego2</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>历史工作副本，非编辑入口</p></td>
+<tr class="row-even"><td><p>历史工作副本，非编辑入口</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project/高台训练/working_copy/mjlab_lego2</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>远程源码备份记录</p></td>
+<tr class="row-odd"><td><p>远程源码备份记录</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">~/zrq/backups/mjlab_lego2_pre_platform_climb_20261015_215244/</span></code>，内有 <code class="docutils literal notranslate"><span class="pre">source.tar.gz</span></code> 和 <code class="docutils literal notranslate"><span class="pre">remote_state.txt</span></code></p></td>
 </tr>
 </tbody>
@@ -670,10 +673,23 @@ root超过局部4 m或轮子包络到达4.9 m时truncate，此信号不等于越
 </section>
 <section id="id5">
 <h2>训练、续训与回放流程<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
-<p>通常流程为：按批修改并解释核心代码 → Codex完成本地uv校验 →
-用户按明确文件清单先备份、再同步并执行远程校验 →
+<p>自2026-11-15起，后续默认通过GitHub中转代码：
+按批修改并解释核心代码 → Codex完成本地uv校验并报告范围/未通过项 →
+用户审阅后自行提交并推送GitHub → 服务器获取已确认的同一提交、执行远程校验 →
 配置与功能验收通过后在screen内按阶段试训 → 记录实际结果后决定下一步。
-文档交接不会自动触发上述开发或训练。</p>
+Codex不自动commit/push；既有类型检查失败仍按AGENTS规则处理，不因采用Git而降低验收要求。
+首次把服务器现有目录接入此仓库，须先只读核对Git根目录、分支/HEAD、未提交和未跟踪文件、
+原有origin是否对应目标仓库及是否共享历史，必要时先备份或使用新目录；目前服务器接入状态待确认。
+接入后在工作区干净、分支及来源核对完成时使用fetch及fast-forward更新；
+记录实际完整commit SHA，不能只凭main分支名认定与本地版本一致。私有仓库的服务器读权限单独配置。
+文档交接、git fetch或pull均不自动触发服务器训练，也不自动解压旧同步包。</p>
+<p>Git负责代码、配置、文档和轻量启动脚本/清单；训练logs/checkpoint和服务器.venv保留在服务器。
+当前.gitignore仍忽略logs/和.venv/，docs/codex/artifacts只放行.sh/.py/.sha256/*_files.txt，
+该目录的历史压缩包继续忽略；放行文件须经审阅和git add后才会进入提交。
+已有跟踪的诊断/历史资料不在本次调整中移除。更新前如有本地修改或同名未跟踪文件，先停下核对，
+不使用reset –hard、clean或强制覆盖处理；运行中的训练/评估使用的源码在进程结束前不更新。
+更新代码不自动同步依赖，uv.lock发生变化时另行安排依赖核查；运行前仍执行任务/小场景验证。
+GitHub检查失败不撤销已推送的提交，但其中真实代码/依赖问题可能影响运行，不能将红叉当作训练验证。</p>
 <ul class="simple">
 <li><p>本地终端与远程SSH终端分开标注；远程通过 <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-p</span> <span class="pre">10395</span> <span class="pre">ajifang&#64;27.128.203.222</span></code>
 连接后进入 <code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2</span></code>。禁止未经核对的全目录覆盖或 <code class="docutils literal notranslate"><span class="pre">rsync</span> <span class="pre">--delete</span></code>。</p></li>
@@ -805,7 +821,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 14, 2026.
+  Last updated on Nov 15, 2026.
   <br/>
 </p>
   </div>

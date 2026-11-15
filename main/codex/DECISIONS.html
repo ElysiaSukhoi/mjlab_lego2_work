@@ -57,7 +57,7 @@
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Nov 14, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 15, 2026"/>
   </head>
   
   
@@ -475,6 +475,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2026-10-31：阶段3通用基线与固定高度评估（本地实现，尚未训练）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2026-11-01：继续原计划，平地预训练仅作为瓶颈后的备选</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reset">2026-11-01：推理与reset跨模式的指标缓存修复</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github">2026-11-15：后续代码同步采用GitHub中转，保留服务器实验数据</a></li>
 </ul>
             </nav>
         </div>
@@ -806,6 +807,18 @@ root/前轮/后轮/完整出坑训练指标为时间占比，stable_pass是episo
 新增推理模式内外切换、局部/完整reset、自动reset和重复episode回归。
 训练时的旧hash清单保留为版本证据；修复使用新的评估hash清单及新日期启动脚本，避免改写原训练版本。</p>
 </section>
+<section id="github">
+<h2>2026-11-15：后续代码同步采用GitHub中转，保留服务器实验数据<a class="headerlink" href="#github" title="Link to this heading">#</a></h2>
+<p>依据用户提出的本地→GitHub→训练服务器工作流，后续默认使用私有仓库
+<code class="docutils literal notranslate"><span class="pre">ElysiaSukhoi/mjlab_lego2_work</span></code>中转版本化代码。Codex仍逐批开发、解释和本地验证，
+用户自行审阅/commit/push；服务器端获取指定提交并核对SHA，远程校验后在screen zrq运行。
+首次接入服务器现有目录前必须核对其Git来源/历史、改动和未跟踪文件；接入尚未核实。
+不将git pull等同于依赖更新、模型同步或训练授权，不在运行中的训练/评估目录更新源码。</p>
+<p>原.gitignore的artifacts/规则会连同docs/codex/artifacts的小脚本一并忽略，
+本批只为该目录的.sh/.py/.sha256/*_files.txt增加例外，历史压缩包继续忽略。
+logs/、.venv/继续排除，旧实验结果不删除；已跟踪的历史诊断资料不自动清理。
+工作流程细节归PROJECT_CONTEXT；AGENTS的验证、禁止自动commit/push及保护结果约定保持。</p>
+</section>
 </section>
 
 
@@ -847,6 +860,7 @@ root/前轮/后轮/完整出坑训练指标为时间占比，stable_pass是episo
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2026-10-31：阶段3通用基线与固定高度评估（本地实现，尚未训练）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2026-11-01：继续原计划，平地预训练仅作为瓶颈后的备选</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reset">2026-11-01：推理与reset跨模式的指标缓存修复</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github">2026-11-15：后续代码同步采用GitHub中转，保留服务器实验数据</a></li>
 </ul>
   </nav></div>
 
@@ -880,7 +894,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 14, 2026.
+  Last updated on Nov 15, 2026.
   <br/>
 </p>
   </div>

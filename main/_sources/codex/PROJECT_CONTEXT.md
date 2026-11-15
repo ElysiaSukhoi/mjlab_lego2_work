@@ -3,7 +3,7 @@
 本文件保存长期项目事实；当前阶段和同步状态见 [CURRENT_STATUS.md](CURRENT_STATUS.md)。
 跨会话唯一交接入口为 [HANDOFF.md](HANDOFF.md)，维护规则见 [AGENTS.md](../../AGENTS.md)。
 
-更新时间：2026-10-31（Asia/Shanghai）。
+更新时间：2026-11-15（Asia/Shanghai）。
 
 ## 项目目标与平台
 
@@ -63,6 +63,7 @@ critic、奖励和评估可以使用训练特权信息。其他机器人80 cm演
 | 用途 | 路径或位置 |
 | --- | --- |
 | 本地日常编辑与uv环境 | `/home/asus/work/mjlab_lego2_work` |
+| GitHub代码中转仓库 | `https://github.com/ElysiaSukhoi/mjlab_lego2_work`（私有） |
 | 外层研究项目 | `/home/asus/work/Jiche_Project`；旧中文项目路径已迁移，非Jicha_Project |
 | 远程SSH | `ajifang@27.128.203.222`，端口 `10395` |
 | 远程训练源码 | `~/zrq/mjlab_lego2` |
@@ -115,10 +116,24 @@ root超过局部4 m或轮子包络到达4.9 m时truncate，此信号不等于越
 
 ## 训练、续训与回放流程
 
-通常流程为：按批修改并解释核心代码 → Codex完成本地uv校验 →
-用户按明确文件清单先备份、再同步并执行远程校验 →
+自2026-11-15起，后续默认通过GitHub中转代码：
+按批修改并解释核心代码 → Codex完成本地uv校验并报告范围/未通过项 →
+用户审阅后自行提交并推送GitHub → 服务器获取已确认的同一提交、执行远程校验 →
 配置与功能验收通过后在screen内按阶段试训 → 记录实际结果后决定下一步。
-文档交接不会自动触发上述开发或训练。
+Codex不自动commit/push；既有类型检查失败仍按AGENTS规则处理，不因采用Git而降低验收要求。
+首次把服务器现有目录接入此仓库，须先只读核对Git根目录、分支/HEAD、未提交和未跟踪文件、
+原有origin是否对应目标仓库及是否共享历史，必要时先备份或使用新目录；目前服务器接入状态待确认。
+接入后在工作区干净、分支及来源核对完成时使用fetch及fast-forward更新；
+记录实际完整commit SHA，不能只凭main分支名认定与本地版本一致。私有仓库的服务器读权限单独配置。
+文档交接、git fetch或pull均不自动触发服务器训练，也不自动解压旧同步包。
+
+Git负责代码、配置、文档和轻量启动脚本/清单；训练logs/checkpoint和服务器.venv保留在服务器。
+当前.gitignore仍忽略logs/和.venv/，docs/codex/artifacts只放行.sh/.py/.sha256/*_files.txt，
+该目录的历史压缩包继续忽略；放行文件须经审阅和git add后才会进入提交。
+已有跟踪的诊断/历史资料不在本次调整中移除。更新前如有本地修改或同名未跟踪文件，先停下核对，
+不使用reset --hard、clean或强制覆盖处理；运行中的训练/评估使用的源码在进程结束前不更新。
+更新代码不自动同步依赖，uv.lock发生变化时另行安排依赖核查；运行前仍执行任务/小场景验证。
+GitHub检查失败不撤销已推送的提交，但其中真实代码/依赖问题可能影响运行，不能将红叉当作训练验证。
 
 - 本地终端与远程SSH终端分开标注；远程通过 `ssh -p 10395 ajifang@27.128.203.222`
   连接后进入 `~/zrq/mjlab_lego2`。禁止未经核对的全目录覆盖或 `rsync --delete`。

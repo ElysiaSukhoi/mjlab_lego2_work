@@ -189,3 +189,16 @@ PitProgress原先把每步临时结果直接转换为float并保存在values，�
 不扩大整个评估的inference作用域来掩盖缓存约束，不改共享MetricsManager或训练/奖励/观测/资产。
 新增推理模式内外切换、局部/完整reset、自动reset和重复episode回归。
 训练时的旧hash清单保留为版本证据；修复使用新的评估hash清单及新日期启动脚本，避免改写原训练版本。
+
+## 2026-11-15：后续代码同步采用GitHub中转，保留服务器实验数据
+
+依据用户提出的本地→GitHub→训练服务器工作流，后续默认使用私有仓库
+`ElysiaSukhoi/mjlab_lego2_work`中转版本化代码。Codex仍逐批开发、解释和本地验证，
+用户自行审阅/commit/push；服务器端获取指定提交并核对SHA，远程校验后在screen zrq运行。
+首次接入服务器现有目录前必须核对其Git来源/历史、改动和未跟踪文件；接入尚未核实。
+不将git pull等同于依赖更新、模型同步或训练授权，不在运行中的训练/评估目录更新源码。
+
+原.gitignore的artifacts/规则会连同docs/codex/artifacts的小脚本一并忽略，
+本批只为该目录的.sh/.py/.sha256/*_files.txt增加例外，历史压缩包继续忽略。
+logs/、.venv/继续排除，旧实验结果不删除；已跟踪的历史诊断资料不自动清理。
+工作流程细节归PROJECT_CONTEXT；AGENTS的验证、禁止自动commit/push及保护结果约定保持。

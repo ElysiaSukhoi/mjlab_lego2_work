@@ -57,7 +57,7 @@
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Nov 14, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 15, 2026"/>
   </head>
   
   
@@ -485,7 +485,7 @@ document.write(`
                   
   <section id="id1">
 <h1>当前状态<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p>更新时间：2026-11-14（Asia/Shanghai）。唯一跨会话入口：<a class="reference internal" href="HANDOFF.html"><span class="std std-doc">HANDOFF.md</span></a>。</p>
+<p>更新时间：2026-11-15（Asia/Shanghai）。唯一跨会话入口：<a class="reference internal" href="HANDOFF.html"><span class="std std-doc">HANDOFF.md</span></a>。</p>
 <section id="id2">
 <h2>当前阶段<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p><strong>用户回传12/15/20 cm各10/10稳定通过、30 cm为8/10；高高度原始证据已核对，30 cm未通过样本分为未上沿和连续支撑不足两类；下一步固定速度对照。</strong>
@@ -617,7 +617,18 @@ n=1、通过0、超时/停滞；<a class="reference download internal" download=
 </section>
 <section id="git">
 <h2>Git、同步与实验边界<a class="headerlink" href="#git" title="Link to this heading">#</a></h2>
-<p>本地无Git元数据，不初始化、不commit/push。Codex本轮未自行执行PPO或访问远程。
+<p>本地现有Git元数据，main的HEAD为3592c9e（Initial commit）；首次核对时干净，当前有未提交准备更改。
+用户截图显示GitHub已有代码，Actions为10失败、2成功、1跳过、6取消；推送认证已解决。
+已只读核对ci.yml和docker.yml，检查覆盖全库格式/类型/多Python版本测试/打包与Docker。
+尚未读取远程失败步骤日志，不能从检查名称推断具体根因；本轮未修改工作流/源码或重跑CI。
+Codex不自动commit/push，本轮未自行执行PPO或访问远程服务器。</p>
+<p>2026-11-15按用户意向，后续采用本地→GitHub→训练服务器的代码同步流程，
+长期流程及首次接入前置检查见PROJECT_CONTEXT，依据归DECISIONS最新条目。
+发现docs/codex/artifacts脚本/清单此前全部被artifacts/规则忽略且未跟踪；
+本批只为.sh/.py/.sha256/*_files.txt放行，压缩包/logs/.venv仍忽略。
+9项Git忽略规则核验及git diff –check通过；未执行仿真、修改运行源码、commit/push或服务器接入。
+这些脚本当前只是可加入Git，尚未提交，服务器端Git来源/改动/认证状态仍待只读核查。
+CI失败不撤销上传，但运行影响待日志定因；每批本地验证和远程小场景验收仍保留。
 用户已回传首次短训及一次低阶续训结果，记录于EXPERIMENT_LOG；旧日志/checkpoint和本次新run均保留。
 阶段3包纳入本地src注释及最新交接；AGENTS→CLAUDE链接及长期中文注释规范本地保留，
 CLAUDE不在远程训练增量清单内。旧v1/v2包、hash和原验证JSON保留历史用途，不能覆盖当前交接。
@@ -696,7 +707,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 14, 2026.
+  Last updated on Nov 15, 2026.
   <br/>
 </p>
   </div>

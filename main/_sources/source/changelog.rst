@@ -25,6 +25,13 @@ Added
   raw target probes, CPU kinematics, static step checks, and native MuJoCo PD
   traces. Existing tasks, assets, and training results are preserved.
 
+Changed
+^^^^^^^
+
+- Allow small Lego2 launchers and checksum/file manifests under
+  ``docs/codex/artifacts`` to be tracked for Git-based synchronization,
+  while keeping sync archives, training logs and virtual environments ignored.
+
 Fixed
 ^^^^^
 

@@ -1,6 +1,6 @@
 # 当前状态
 
-更新时间：2026-11-14（Asia/Shanghai）。唯一跨会话入口：[HANDOFF.md](HANDOFF.md)。
+更新时间：2026-11-15（Asia/Shanghai）。唯一跨会话入口：[HANDOFF.md](HANDOFF.md)。
 
 ## 当前阶段
 
@@ -129,7 +129,19 @@ trace也缺少非轮接触/接触点坐标，不能声称全面排除所有机�
 
 ## Git、同步与实验边界
 
-本地无Git元数据，不初始化、不commit/push。Codex本轮未自行执行PPO或访问远程。
+本地现有Git元数据，main的HEAD为3592c9e（Initial commit）；首次核对时干净，当前有未提交准备更改。
+用户截图显示GitHub已有代码，Actions为10失败、2成功、1跳过、6取消；推送认证已解决。
+已只读核对ci.yml和docker.yml，检查覆盖全库格式/类型/多Python版本测试/打包与Docker。
+尚未读取远程失败步骤日志，不能从检查名称推断具体根因；本轮未修改工作流/源码或重跑CI。
+Codex不自动commit/push，本轮未自行执行PPO或访问远程服务器。
+
+2026-11-15按用户意向，后续采用本地→GitHub→训练服务器的代码同步流程，
+长期流程及首次接入前置检查见PROJECT_CONTEXT，依据归DECISIONS最新条目。
+发现docs/codex/artifacts脚本/清单此前全部被artifacts/规则忽略且未跟踪；
+本批只为.sh/.py/.sha256/*_files.txt放行，压缩包/logs/.venv仍忽略。
+9项Git忽略规则核验及git diff --check通过；未执行仿真、修改运行源码、commit/push或服务器接入。
+这些脚本当前只是可加入Git，尚未提交，服务器端Git来源/改动/认证状态仍待只读核查。
+CI失败不撤销上传，但运行影响待日志定因；每批本地验证和远程小场景验收仍保留。
 用户已回传首次短训及一次低阶续训结果，记录于EXPERIMENT_LOG；旧日志/checkpoint和本次新run均保留。
 阶段3包纳入本地src注释及最新交接；AGENTS→CLAUDE链接及长期中文注释规范本地保留，
 CLAUDE不在远程训练增量清单内。旧v1/v2包、hash和原验证JSON保留历史用途，不能覆盖当前交接。
