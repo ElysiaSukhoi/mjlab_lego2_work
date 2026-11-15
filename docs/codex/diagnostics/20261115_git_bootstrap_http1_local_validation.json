@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-15 Asia/Shanghai",
+  "script": "docs/codex/artifacts/bootstrap_remote_git_20261115_v2.sh",
+  "script_sha256": "9da4ed341f0c994676ebf72febb07fec2a1fcec86d3b5446dbbf2c2c54e4b623",
+  "fixture": "/tmp/lego2_http1_bootstrap_test_vf4rlmdg",
+  "tests": [
+    {
+      "case": "shallow_clone_file_transport",
+      "exit_code": 0
+    },
+    {
+      "case": "resume_clean",
+      "exit_code": 0
+    },
+    {
+      "case": "reject_dirty_clone",
+      "exit_code": 1
+    },
+    {
+      "case": "reject_existing_nonrepo",
+      "exit_code": 1
+    }
+  ],
+  "old_files_and_venv_unchanged": true,
+  "failed_clone_preserved": true,
+  "shallow_clone_verified": true,
+  "no_persistent_http_version_config": true,
+  "remote_executed": false,
+  "limits": "file:// transport tests script behavior, not the remote HTTP/2 failure or HTTP/1.1 connectivity"
+}

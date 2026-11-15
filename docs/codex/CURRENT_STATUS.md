@@ -1,138 +1,102 @@
 # 当前状态
 
-更新时间：2026-11-14（Asia/Shanghai）。唯一跨会话入口：[HANDOFF.md](HANDOFF.md)。
+更新时间：2026-11-15（Asia/Shanghai）。唯一跨会话入口：[HANDOFF.md](HANDOFF.md)。
 
 ## 当前阶段
 
-**用户回传12/15/20 cm各10/10稳定通过、30 cm为8/10；高高度原始证据已核对，30 cm未通过样本分为未上沿和连续支撑不足两类；下一步固定速度对照。**
-阶段0～1远程CPU及阶段2远程CPU/GPU已有用户回传通过。
-阶段2验证目录：`/home/ajifang/zrq/backups/phase2_20261031_211214_2150255/check_20261031_211214_2150255`。
-回传为CPU 28 passed（88.93 s），RTX 4090 GPU 3 passed（225.49 s）；没有自行连接远程。
-阶段4未触发；已有30 cm坑式初筛成功样本，阶段5完整训练/正式大样本及直线高台泛化验收未实施。
+**model2197原始配对证据已下载并离线核验：三速度9/10、10/10、8/10成立；三个未通过样本均由轮接触记录间歇使连续支撑不足0.5 s，暂不追加训练。**
+用户当前要求先看Viser实际效果并反馈，再进行下一步；暂不开展子步回放开发或后续训练。
+原model_1198的3/6/9/12/15/20 cm初筛各10/10，30 cm为8/10；尚非正式大样本/直线高台验收。
+阶段0～2及阶段3原核验、首次短训/低阶续训已有用户回传，原始实验路径及参数归
+[EXPERIMENT_LOG](EXPERIMENT_LOG.md)。阶段4未触发，不引入平地预训练或接触引导机制。
 
-此前用户回传[完整阶段3输出](diagnostics/20261031_phase3_remote_receipt.txt)：
-输入/同步hash及任务注册成功，CPU 33 passed（85.19 s），GPU 4 passed、7 deselected（57.20 s），
-RTX 4090空闲23806 MiB；两步固定高度诊断n=0检查成功。两个ONNX弃用提示及已知MULTICCD提示未阻断检查。
-远程备份：`/home/ajifang/zrq/backups/phase3_20261031_214701_2152912`；
-验证目录为其下`check_20261031_214701_2152912`。本轮未自行访问远程。
+## 最新配对结果与解释
 
-## 最新复评结果与解释
+同30 cm/三速度/10组初态，原始报告中的组内/跨模型初态已本地复核，最大差0（排除actor的vx输入）。
+model2197稳定通过9/10、10/10、8/10，父model1198为4/10、10/10、10/10。
+三速度速度RMSE均下降至0.02533/0.02921/0.03117，但稳定通过未全面改善。
+新模型各速度完整出坑均10/10，停滞/翻倒/failed均0。
+0.30 m/s退步seed11，新增通过seed7/9/10/12/13/14；0.50 m/s退步seed11/13；0.40无变动。
+详情归[EXPERIMENT_LOG](EXPERIMENT_LOG.md)最新条目，
+[用户摘要](diagnostics/20261115_phase3_model2197_user_eval_summary.json)不替代原始report。
+原始报告、逐步trace、comparison、两份SHA文本及训练params已下载；模型权重未下载。
+model2197 SHA为`b8bc52a8ee370eb94e359bc71d310f5f1cd0ec013cae9e5982b44fb13b8a54a4`，
+三份新报告与SHA文本一致；不冒充对权重文件本身重新计算hash。
 
-用户已下载[原始report](diagnostics/20261114_phase3_upper1198_remote/report.json)、30 cm逐步trace和checkpoint.sha256。
-已核对model_1198.pt路径/模型哈希与此前记录一致，seed7、cuda:0；14项记录的源码/资产hash均匹配本地。
-未下载checkpoint本体，模型校验是两份远程校验记录的一致性核对，不冒充本地重算模型SHA。
-12/15/20 cm各10/10、30 cm为8/10；原始样本记录及逐步trace相互吻合。
-低高度3/6/9 cm各10/10仍为先前独立批次结果，不混算正式单高度成功率。
+[离线分析](diagnostics/20261115_model2197_comparison_analysis.json)逐帧重建60回合/33718帧，
+阶段、连续计时、锁存通过和RMSE均匹配，轮底FK最大误差1.399e-7 m；六报告记录的源码hash均匹配本地。
+三个未通过样本的首次complete之后均有足够行程时间（约3.9～6.4 s），倾角≤3.25°、轮底距台面≤1.61 mm；
+全部中断帧均可由至少一轮found=0/force=0解释，最长连续支撑分别0.48/0.34/0.28 s。
+两模型均存在RF/LF前大腿box接触台面（力范数>1 N，重建box最低点近台面）；
+该传感器force是接触坐标系，不能把其第3分量称为世界竖直力。
+大腿接触不是新模型独有，也未证明是轮接触间歇的原因；20 ms采样不能区分真实卸载与传感/求解现象。
+先让用户查看30 cm交互回放并反馈；后续再判断是否需要两模型小规模视频/5 ms子步接触核对。
+保持原判据，不先改奖励。
+两模型均保留，各10组初态不是正式大样本/多训练seed/直线高台泛化验收。
 
-[分析JSON](diagnostics/20261114_phase3_upper1198_analysis.json)和[图](diagnostics/20261114_phase3_upper1198_analysis.png)保存本地核查。
-按人读1起编号（原始episode分别1、2）：
-- 第2个episode：vx=0.3195 m/s，20 s超时；前后轮上沿均未达到，root最终仅前进至坑中心+x约0.99 m。
-  前轮RF/LF轮底相对坑底最高约0.075/0.235 m，均未越过0.30 m坑沿；非翻倒退出。
-- 第3个episode：vx=0.3005 m/s，11.42 s首次四轮完整出坑，17.16 s到地块边界截断；
-  连续有效支撑最长0.22 s，小于0.5 s，最大倾角15.50°未触及45°门槛。
-  四轮均几何出坑且轮底接近台面共288步，其中95步至少一轮无有效支撑；
-  对应接触通道短时found=0/force=0，不能单凭此判为真实腾空、传感器问题或求解器问题。
+## 已完成的配对工具与核验
 
-用匹配XML及记录的root/joint姿态做纯运动学重建，轮底与trace最大差1.45e-7 m。
-全部10次轮子Y包络距侧壁最小0.633 m，未见轮子坑角借力；不替代独立直线高台泛化测试，
-trace也缺少非轮接触/接触点坐标，不能声称全面排除所有机身借力。
-记录采样点力矩饱和为0；两未通过样本膝目标越硬限帧数198/263，成功样本也有34～66帧，
-属于待跟踪相关现象，尚不能归因为力矩上限或目标越限。
+- [固定高度工厂](../../src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py)：
+  可选forward_speed只固定评估vx范围，合法范围0.3～0.6 m/s；保留heading反馈。
+  未传参数时保留原评估随机速度，训练工厂不变；新增src关键代码有中文注释。
+- [评估工具](../../scripts/tools/evaluate_lego2_blind_pit.py)：
+  可选逐episode seed=base+episode，记录实际reset状态/actor首帧，避免只凭seed假定已配对。
+  补记接触点、连续支撑时长、相对root位置和非轮接触；原n统计/截断/稳定判据不变。
+- [配对汇总](../../scripts/tools/summarize_lego2_speed_eval.py)：
+  核对三组出生/历史一致，只排除vx输入，wz仍比较；容差1e-6，失败时不给出有效配对结论。
+- [新回归](../../tests/test_lego2_blind_pit_speed_eval.py)：
+  三组用不同截断步数测试下一回合配对；调试片段n=0，且故意改动初态可被汇总器拒绝。
 
-两未通过样本恰为本批最低vx；成功样本vx为0.3545～0.5362 m/s，速度与初始扰动混杂。
-当前建议固定30 cm、vx=0.30/0.40/0.50 m/s配对初态和seed的小批对照，并做回放，
-入口尚未实现/执行；保持奖励、0.5 s判据及原任务不变，不直接加训练或阶段4机制。
-正式每高度至少100次、多seed条件测试、独立直线高台和平地能力仍未完成。
+actor144/critic254、12维动作、奖励权重、训练速度分布、课程、机器人资产及PPO均保持。
+评估工具不更新PPO；已有零动作/随机权重软件核验不当作真实模型策略能力。
 
-## model_199.pt评估基线与解释
+## 本地核验
 
-用户已回传最终summary及“评估结束”；实际checkpoint/hash/证据目录及全部数值归
-[EXPERIMENT_LOG](EXPERIMENT_LOG.md)最新初筛条目维护，
-[结构化回传](diagnostics/20261101_phase3_model199_user_eval_summary.json)只转录用户摘要，非原始report。
-3/6/9 cm分别稳定通过5/10、1/10、0/10；翻倒/failed均为0，停滞分别3/10、3/10、10/10。
-6 cm曾完整四轮出坑7/10，但稳定通过仅1/10；9 cm前轮上沿4/10、后轮上沿0/10。
-说明已有初步低阶能力，稳定保持和更高台阶完整通过仍不足；确切受阻原因需要轨迹，不据此立即改奖励。
-每高度仅10个样本、单seed，不能当作可靠收敛结论或300 mm能力。
+- 本次只读配置核对：普通注册play为3～30 cm十级、初始level0且课程关闭，出生在3 cm，非固定30 cm。
+  已验证临时进程内注册30 cm/0.50 m/s/单环境/自动reset配置，复用标准run_play及model2197；
+  不改源码或原注册任务。Viser本地依赖默认监听8080，实际服务器监听端口以启动日志为准。
+  配置/调用连接已离线核对，未在本机启动GPU回放；实际观看和反馈待用户执行。
+- 新增[离线分析脚本](artifacts/analyze_phase3_paired_comparison_20261115.py)：
+  原归档只读，不解压覆盖源码；60回合一致性断言通过，定向Ruff/格式/ty/Pyright通过。
+  [连续支撑对照图](diagnostics/20261115_model2197_comparison_analysis.png)已渲染检查，无仿真/PPO或远程操作。
+- [阶段1～3及本批CPU测试](diagnostics/20261115_phase3_speed_tests.txt)：19 passed，12.36 s；
+  4个既有ONNX弃用警告。实际配对跨不同回合步数成立，输入维数及checkpoint推理/reset回归通过。
+- 4个新增/修改Python文件定向Ruff/格式/ty/Pyright通过；未声称全库旧类型错误已修复。
+- 真实CLI固定速度/配对seed两步CPU诊断及汇总CLI核对；截断片段不计入n。
+- 本机GPU驱动不可用，验证前可用内存约22 GiB，只做小规模CPU运行。
+- [SSH安装测试](diagnostics/20261115_phase3_speed_sync_validation.json)：
+  旧文件hash通过才安装，先归档旧文件；未知/已更新源码会停止；旧模型/环境/额外源码保持。
+- [改前源码归档](backups/20261115_phase3_speed_eval_before.tar.gz)及
+  [改前hash](backups/20261115_phase3_speed_eval_before.json)保留；旧报告/模型/归档未改写。
 
-此前静默评估已结束；新版入口包含进度工具安装/hash检查，本次用户已回传复评结束。
-高高度report/30 cm trace已下载；其余高度trace、数字退出码及独立reset修复部署/CPU/GPU回执未回传，不推定全部检查通过。
+## 训练/复评状态与下一步
 
-## 本次修复与计划确认
+第二轮续训退出码0、34:02、model2197.pt及params均有用户回传，详情归EXPERIMENT_LOG。
+末尾2197符合恢复1198后新增1000更新；24576000仍为计划采样推算，完整Total timesteps未下载。
+训练pit_complete=0.3408是阶段时间占比，不与固定评估的episode稳定率混用。
+model2197的GPU组内/跨模型配对原始证据已核对，本地模拟报告测试本身仍只证明工具逻辑。
 
-用户确认继续原计划；同144维接口平地预训练仅在有明确瓶颈证据后考虑，当前不迁移旧Flat或开新分支。
-用户回传评估reset报错，本地复现为PitProgress.values在inference_mode内被替换为推理tensor，
-模式外reset原地清零时异常。此前测试推理后直接关闭环境，遗漏了跨模式reset。
-现改为首次分配时关闭推理模式，其后只更新普通缓存的fresh行；关键代码已加中文注释。
-奖励/actor144/critic254/12维动作/资产和稳定0.5 s定义均未改变；无需重新训练model_199.pt。
-本次只修诊断缓存与回归测试，旧训练hash清单和失败评估目录均保留。
+已准备[本地SSH读取入口](artifacts/collect_phase3_comparison_20261115.sh)，
+从两个实际评估目录只读tar取回full报告/逐步轨迹、checkpoint.sha256及新模型comparison/训练params。
+实际归档为`diagnostics/20261115_model2197_comparison_remote/remote_evidence_kO71wR.tar.gz`，
+47个成员，归档SHA256为`501d3b382997b001c98eb8e11a3a24d0670392c497697526852848eb5d4e8aaf`。
+不传模型权重或更改服务器源码/环境/结果；原归档保持不变。
+[本地核验](diagnostics/20261115_phase3_collection_validation.json)包含两次独立下载与中断保留，
+采用模拟SSH，仅证明指令连线/本地归档保护；本次实际下载证据另见离线分析JSON。
 
-## 本批实现与核心代码
-
-- [blind_pit_env_cfg.py](../../src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py)：
-  显式重建11项通用奖励，权重/函数尺度冻结于[DECISIONS](DECISIONS.md)阶段3条目。
-  去掉继承的高度/腿姿态/贴地/滑动及额外能耗成本；不加入坑坐标或登顶奖金。
-  保留阶段2课程、20 s指令/终止、actor144/critic254、12维动作及原PPO参数。
-- [blind_pit_metrics.py](../../src/mjlab/tasks/velocity/config/lego2/blind_pit_metrics.py)：
-  轮子按名称分前后组，复用圆柱包络与有效坑沿支撑过滤。
-  root离坑/前轮上沿/后轮上沿/完整出坑记录时间占比；稳定通过按episode锁存。
-  四轮有效支撑、倾角<45°、无失败连续0.5 s才通过；每控制步只累计一次，partial reset隔离。
-  课程不依赖metrics，诊断不入actor/奖励。关键新增src代码已加中文注释。
-- [evaluate_lego2_blind_pit.py](../../scripts/tools/evaluate_lego2_blind_pit.py)：
-  固定真实深度两行地形、关闭升降级和auto_reset，保留20 s和原终止。
-  每高度精确结算已结束episode；调试max_steps片段不进入n，人工reset不算样本。
-  输出seed、配置、源码/资产/checkpoint hash、每高度通过/失败/翻倒/停滞/速度误差，
-  逐步记录前后轮净空/接触、动作目标/实际角、目标越限、力矩饱和和奖励原值/加权速率/dt贡献。
-  未传checkpoint时明确标为零动作诊断，不当作策略评估结果。
-
-## 本次修复验收
-
-- 改前真实推理后模式外reset复现1项失败；修复后定向7项通过、阶段1～3相关回归35项通过。
-  [修复验证JSON](diagnostics/20261101_phase3_reset_validation.json)、
-  [改前错误](diagnostics/20261101_phase3_reset_before.txt)、
-  [改后测试](diagnostics/20261101_phase3_reset_tests.txt)保存证据；4个既有ONNX弃用警告。
-- Ruff/格式、定向Pyright/ty、编译通过；本批未修改全库旧类型错误所在文件。
-- 原评估工具CPU完整运行3/6/9 cm各2个零动作episode，共6次均完整结束（每次1000步），
-  [报告](diagnostics/20261101_phase3_reset_eval_report.json)确认跨episode及跨高度reset可执行。
-  此为软件回归，不是远程model_199.pt的成功率；没有PPO更新。
-- 本批GPU驱动仍不可用；远程复验脚本另含GPU推理/重置及两高度重复短episode检查。
-- [改前源码归档](backups/20261101_phase3_inference_reset_before.tar.gz)和
-  [改前hash](backups/20261101_phase3_inference_reset_before.json)保留回滚依据。
-
-## 原阶段3本地证据与范围
-
-- [验证JSON](diagnostics/20261031_phase3_validation.json)、
-  [测试输出](diagnostics/20261031_phase3_tests.txt)：33项通过；两个既有ONNX导出弃用警告。
-  涵盖阶段1/2回归、5 cm真实坑深射线、稳定保持/断触/失败帧、同一步重复读取、
-  manager部分reset、腿actuator选择、reward dt积分及随机权重保存/加载/推理（无PPO）。
-- 新增/修改Python文件Ruff、格式、Pyright、ty和编译通过。
-  全项目检查未通过：ty有8错误/2警告，Pyright有9错误，均位于本批未修改的旧文件，
-  包括env_cfgs、通用奖励索引类型及旧测试；不能将定向检查写成全库通过。
-- 26项既有源码/测试/资产hash与阶段2前置清单一致；旧任务/资产未改。
-- [完整零动作诊断](diagnostics/20261031_phase3_eval/full/report.json)：3 cm、1000步、
-  n=1、通过0、超时/停滞；[两步诊断](diagnostics/20261031_phase3_eval/capped/report.json)：n=0。
-  两者仅检查工具流程，未证明任何自主越障能力；真实支撑测试是人工放到坑沿。
-- 本地GPU驱动不可用；修复前阶段3远程GPU核验已有用户回传通过，不替代本次修复复验。
-- [改前源码](backups/20261031_phase3_source_before.tar.gz)与
-  [改前hash](backups/20261031_phase3_before.json)已保存，无新增上下文Markdown。
-
-## 下一步
-
-1. 准备30 cm固定vx=0.30/0.40/0.50 m/s、相同初态/seed的小批对照和策略回放；
-   先核对CLI/配置与模型接口，再给远程指令，当前尚未实施或执行。
-2. 检查低速未上沿与台面接触中断是否可重复；需要时补记接触点和非轮接触，
-   区分真实卸载与检测影响，保持现行稳定通过判据。
-3. 据结果决定续训预算，再推进正式3/5/10/15/20/30 cm每高度至少100次及直线高台/平地验证。
-
-本批新增离线分析脚本、派生JSON/图，并核对原始证据；只运行运动学，无仿真/PPO/远程访问。
-分析脚本Ruff/格式/ty/Pyright通过；10个episode的步数/阶段/通过/速度RMSE与原始report一致。
-未修改src、规范或历史实验结果；全部旧训练和远程原件保留。
+1. 用户通过SSH隧道/Viser观看model2197的30 cm中央坑出坑效果（提供临时进程内固定配置指令）。
+2. 收到用户反馈后，再决定是否实现两模型配对视频/5 ms子步接触核对，不自动放宽原0.5 s判据。
+3. 暂不替换父模型或追加第三轮训练；正式大样本/直线高台/平地能力仍待后续。
 
 ## Git、同步与实验边界
 
-本地无Git元数据，不初始化、不commit/push。Codex本轮未自行执行PPO或访问远程。
-用户已回传首次短训及一次低阶续训结果，记录于EXPERIMENT_LOG；旧日志/checkpoint和本次新run均保留。
-阶段3包纳入本地src注释及最新交接；AGENTS→CLAUDE链接及长期中文注释规范本地保留，
-CLAUDE不在远程训练增量清单内。旧v1/v2包、hash和原验证JSON保留历史用途，不能覆盖当前交接。
-阶段3v1包保留交付时文档快照，旧包不包含本次修复；修复/复验状态以最新交接为准，
-不重打旧包覆盖远程状态。
-旧训练失败根因、旧参数与资产对应、EPA警告影响、CAD仍待确认。
+**GitHub仅供用户自行版本管理；是否commit/push由用户决定。服务器固定采用SCP/SSH直传，
+GitHub连通、CI、提交号或push均不作为机器人开发/同步/验证前置条件。**
+规范归AGENTS链接目标及PROJECT_CONTEXT，DECISIONS已移除冲突的旧操作规则，只留失效历史说明。
+用户回传GitHub已回退initial；本地HEAD与origin/main跟踪引用也为3592c9e，未另行联网核实。
+后续小提交的文件改动仍保留在工作区，本批未commit/push；不要求每批生成Git版本阶段。
+恢复资料仍在`artifacts/git_history_before_20261115_jlp8m7cp/`，禁止自动清理。
+服务器继续使用`~/zrq/mjlab_lego2`及其现有环境；Git候选目录/失败现场保留，不再接入或切换环境。
+训练完成来自用户回传；两模型配对评估原始明细已下载核验。完整训练stdout/Total timesteps仍未下载。
+归档检查：历史`lego2_phase3_20261031_v1.tar.gz`及`lego2_phase3_reset_fix_20261101_v1.tar.gz`
+含旧HANDOFF/CURRENT_STATUS，仅作历史保留，不重放覆盖当前交接；新speed_eval包无上下文快照。

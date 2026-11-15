@@ -1,0 +1,16 @@
+docs/codex/CURRENT_STATUS.md
+docs/codex/DECISIONS.md
+docs/codex/HANDOFF.md
+docs/codex/PROJECT_CONTEXT.md
+docs/codex/REFACTOR_PLAN.md
+docs/codex/artifacts/apply_phase1_remote_20261031.sh
+docs/codex/artifacts/phase1_files.txt
+docs/codex/artifacts/phase1_prerequisites.sha256
+docs/codex/artifacts/phase1_sync.sha256
+docs/codex/backups/20261031_phase1_baseline.json
+docs/codex/backups/20261031_phase1_source_before.tar.gz
+docs/codex/diagnostics/20261031_phase1_validation.json
+docs/source/changelog.rst
+src/mjlab/tasks/velocity/config/lego2/__init__.py
+src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py
+tests/test_lego2_blind_pit.py

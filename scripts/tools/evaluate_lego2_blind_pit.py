@@ -5,6 +5,7 @@ import json
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from typing import Any
 
 import torch
 import tyro
@@ -12,6 +13,7 @@ import tyro
 from mjlab.envs import ManagerBasedRlEnv
 from mjlab.envs.mdp.actions.actions import JointPositionAction
 from mjlab.rl import MjlabOnPolicyRunner, RslRlVecEnvWrapper
+from mjlab.sensor import ContactSensor
 from mjlab.tasks.registry import load_rl_cfg, load_runner_cls
 from mjlab.tasks.velocity.config.lego2.blind_pit_env_cfg import lego2_blind_pit_eval_cfg
 from mjlab.tasks.velocity.config.lego2.blind_pit_metrics import PitProgress
@@ -26,6 +28,9 @@ class EvalConfig:
   episodes: int = 10
   seed: int = 7
   device: str = "cpu"
+  forward_speed: float | None = None
+  # None preserves the original RNG sequence; otherwise reset with base+episode.
+  paired_seed_base: int | None = None
   # Only for tool smoke checks. A capped episode is explicitly excluded from n.
   max_steps: int | None = None
 
@@ -39,8 +44,10 @@ def run(cfg: EvalConfig) -> dict:
     raise ValueError("episodes and max_steps must be positive")
   if len(set(cfg.heights)) != len(cfg.heights):
     raise ValueError("Duplicate heights are not supported")
+  if cfg.paired_seed_base is not None and cfg.paired_seed_base < 0:
+    raise ValueError("paired_seed_base must be nonnegative")
   for height in cfg.heights:
-    lego2_blind_pit_eval_cfg(height)  # Validate all heights before creating files.
+    lego2_blind_pit_eval_cfg(height, cfg.forward_speed)
   if not cfg.heights:
     raise ValueError("At least one height is required")
   if cfg.checkpoint is not None and not cfg.checkpoint.is_file():
@@ -54,9 +61,11 @@ def run(cfg: EvalConfig) -> dict:
     root / "src/mjlab/asset_zoo/robots/lego2/lego2_constants.py",
     Path(__file__).resolve(),
   ]
-  report = {
+  report: dict[str, Any] = {
     "mode": "policy" if cfg.checkpoint else "zero_action_diagnostic",
     "seed": cfg.seed,
+    "fixed_forward_speed_m_s": cfg.forward_speed,
+    "paired_seed_base": cfg.paired_seed_base,
     "device": cfg.device,
     "checkpoint": str(cfg.checkpoint.resolve()) if cfg.checkpoint else None,
     "checkpoint_sha256": sha256(cfg.checkpoint) if cfg.checkpoint else None,
@@ -66,7 +75,7 @@ def run(cfg: EvalConfig) -> dict:
   }
   for height in cfg.heights:
     print(f"Fixed pit depth: {height:.6f} m; requested episodes: {cfg.episodes}")
-    env_cfg = lego2_blind_pit_eval_cfg(height)
+    env_cfg = lego2_blind_pit_eval_cfg(height, cfg.forward_speed)
     env_cfg.scene.num_envs = 1
     env_cfg.seed = cfg.seed
     dump_yaml(cfg.output / f"env_{height:.6f}.yaml", asdict(env_cfg))
@@ -90,6 +99,8 @@ def run(cfg: EvalConfig) -> dict:
         print("[eval] Checkpoint loaded", flush=True)
       progress = PitProgress(env_cfg.metrics["pit_stable_pass"], env)
       robot = env.scene["robot"]
+      nonfoot = env.scene["undesired_ground_contact"]
+      assert isinstance(nonfoot, ContactSensor)
       pos_term = env.action_manager.get_term("joint_pos")
       assert isinstance(pos_term, JointPositionAction)
       ids = pos_term.target_ids
@@ -103,8 +114,21 @@ def run(cfg: EvalConfig) -> dict:
           started = time.monotonic()
           label = f"[eval] height={height:.2f}m episode={episode + 1}/{cfg.episodes}"
           print(f"{label} resetting", flush=True)
+          episode_seed = None
+          if cfg.paired_seed_base is not None:
+            episode_seed = cfg.paired_seed_base + episode
+            wrapper.seed(episode_seed)
           obs, _ = wrapper.reset()
           progress.reset()
+          # 保存真实reset帧；跨速度比较出生/历史，而非仅凭seed宣称已配对。
+          initial_state = {
+            "root_pose_w": robot.data.root_link_pose_w[0].tolist(),
+            "root_lin_vel_w": robot.data.root_link_lin_vel_w[0].tolist(),
+            "root_ang_vel_w": robot.data.root_link_ang_vel_w[0].tolist(),
+            "joint_pos": robot.data.joint_pos[0].tolist(),
+            "joint_vel": robot.data.joint_vel[0].tolist(),
+            "actor_observation": obs["actor"][0].tolist(),
+          }
           reached = dict.fromkeys(
             ("root_out", "front_up", "rear_up", "complete"), False
           )
@@ -142,8 +166,10 @@ def run(cfg: EvalConfig) -> dict:
             }
             weights = {k: env.reward_manager.get_term_cfg(k).weight for k in rates}
             contact = progress.contact.data
+            nonfoot_data = nonfoot.data
             assert contact.found is not None
             assert contact.force is not None and contact.normal is not None
+            assert nonfoot_data.found is not None and nonfoot_data.force is not None
             row = {
               "episode": episode,
               "step": step + 1,
@@ -174,6 +200,16 @@ def run(cfg: EvalConfig) -> dict:
               "contact_force": contact.force[0].tolist(),
               "contact_normal": contact.normal[0].tolist(),
               "contact_found": contact.found[0].tolist(),
+              "contact_pos": contact.pos[0].tolist()
+              if contact.pos is not None
+              else None,
+              "continuous_support_s": float(progress.hold[0]),
+              "nonfoot_names": nonfoot.primary_names,
+              "nonfoot_contact_found": nonfoot_data.found[0].tolist(),
+              "nonfoot_contact_force": nonfoot_data.force[0].tolist(),
+              "root_relative_xy": (
+                robot.data.root_link_pos_w[0, :2] - origins[0, :2]
+              ).tolist(),
               "reward_raw": {k: rates[k] / weights[k] for k in rates},
               "reward_weighted_rate": rates,
               "reward_dt_contribution": {k: v * env.step_dt for k, v in rates.items()},
@@ -199,6 +235,8 @@ def run(cfg: EvalConfig) -> dict:
           samples.append(
             {
               "episode": episode,
+              "reset_seed": episode_seed,
+              "initial_state": initial_state,
               "completed": ended,
               "steps": step + 1,
               "passed": passed if ended else False,

@@ -10,6 +10,13 @@ debug.py
 motions/
 *_rerun*
 artifacts/
+# Keep small, reviewed Lego2 launchers and manifests available for Git sync.
+!/docs/codex/artifacts/
+/docs/codex/artifacts/*
+!/docs/codex/artifacts/*.sh
+!/docs/codex/artifacts/*.py
+!/docs/codex/artifacts/*.sha256
+!/docs/codex/artifacts/*_files.txt
 .venv/
 render_robots.py
 benchmark_results/

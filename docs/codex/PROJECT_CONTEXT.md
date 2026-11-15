@@ -3,7 +3,7 @@
 本文件保存长期项目事实；当前阶段和同步状态见 [CURRENT_STATUS.md](CURRENT_STATUS.md)。
 跨会话唯一交接入口为 [HANDOFF.md](HANDOFF.md)，维护规则见 [AGENTS.md](../../AGENTS.md)。
 
-更新时间：2026-10-31（Asia/Shanghai）。
+更新时间：2026-11-15（Asia/Shanghai）。
 
 ## 项目目标与平台
 
@@ -63,9 +63,11 @@ critic、奖励和评估可以使用训练特权信息。其他机器人80 cm演
 | 用途 | 路径或位置 |
 | --- | --- |
 | 本地日常编辑与uv环境 | `/home/asus/work/mjlab_lego2_work` |
+| 可选GitHub版本管理仓库 | `https://github.com/ElysiaSukhoi/mjlab_lego2_work`（私有）；不作服务器传输中转 |
 | 外层研究项目 | `/home/asus/work/Jiche_Project`；旧中文项目路径已迁移，非Jicha_Project |
 | 远程SSH | `ajifang@27.128.203.222`，端口 `10395` |
 | 远程训练源码 | `~/zrq/mjlab_lego2` |
+| 历史Git接入候选目录 | `~/zrq/mjlab_lego2_git*`；接入计划已停用，已有目录或失败现场保留，不作为训练入口 |
 | 旧远程只读快照 | `/home/asus/work/Jiche_Project/高台训练/remote_snapshot/20261015_204549/mjlab_lego2` |
 | 历史工作副本，非编辑入口 | `/home/asus/work/Jiche_Project/高台训练/working_copy/mjlab_lego2` |
 | 远程源码备份记录 | `~/zrq/backups/mjlab_lego2_pre_platform_climb_20261015_215244/`，内有 `source.tar.gz` 和 `remote_state.txt` |
@@ -115,10 +117,23 @@ root超过局部4 m或轮子包络到达4.9 m时truncate，此信号不等于越
 
 ## 训练、续训与回放流程
 
-通常流程为：按批修改并解释核心代码 → Codex完成本地uv校验 →
-用户按明确文件清单先备份、再同步并执行远程校验 →
+2026-11-15按用户最新要求，服务器同步恢复SSH直传，GitHub仅用于用户自行决定的本地代码版本管理：
+按批修改并解释核心代码 → Codex完成本地uv验证并说明范围/未通过项 →
+提供明确文件清单、旧源码备份与SCP/SSH传输指令 → 服务器核对文件内容校验值、运行远程验证 →
 配置与功能验收通过后在screen内按阶段试训 → 记录实际结果后决定下一步。
-文档交接不会自动触发上述开发或训练。
+是否commit/push及何时进行均由用户决定，不是上述同步或验证的前置条件；Codex不自动commit/push。
+不要求每个小批次建立单独Git版本阶段，也不要求用户回传提交号后才继续机器人工作。
+GitHub连接、CI状态及Git提交号均不充当服务器传输门槛，本地与远程uv验证约定仍保留。
+
+远程编辑/训练入口继续为`~/zrq/mjlab_lego2`，用户已确认该目录无Git元数据，不要求初始化。
+此前GitHub中转、固定SHA bootstrap以及stage1下载方案均已停用，历史脚本/归档/失败现场保留。
+新/更新的远程测试.sh只执行当批验证，不包含Git下载/更新，不硬编码期望commit SHA。
+同步与验证分开；使用传输清单、实际文件SHA256和真实run配置追溯实验，不需要为同步创建提交。
+同步前按清单备份旧源码，传输不覆盖logs/checkpoint/.venv或无关文件，不自动解压旧文档快照。
+代码/观测/资产变更须按实际模型来源核对；运行中的训练或评估使用的源码在进程结束前不更新。
+依赖清单变化时另行安排环境核验，不因传输源码而自动更新依赖。
+GitHub仍可用于本地代码版本管理；轻量脚本/清单可以跟踪，训练logs/.venv及历史同步压缩包仍忽略。
+旧实验结果、已跟踪诊断/历史资料及Git失败现场不自动删除。
 
 - 本地终端与远程SSH终端分开标注；远程通过 `ssh -p 10395 ajifang@27.128.203.222`
   连接后进入 `~/zrq/mjlab_lego2`。禁止未经核对的全目录覆盖或 `rsync --delete`。

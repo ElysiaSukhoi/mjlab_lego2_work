@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-15 Asia/Shanghai",
+  "source": "user-pasted model2197 final summary and cross-model comparison",
+  "checkpoint_expected_from_launcher": "model_2197.pt",
+  "checkpoint_sha256": "not included in pasted excerpt; await downloaded checkpoint.sha256",
+  "evidence_dir": "/home/ajifang/zrq/backups/phase3_eval2197_20261115_201606_3299957",
+  "baseline_evidence_dir": "/home/ajifang/zrq/backups/phase3_speed_20261115_185511_3295996",
+  "height_m": 0.3,
+  "reset_seeds_expected_from_launcher": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "within_model_pairing_verified_user_report": true,
+  "cross_model_pairing_verified_user_report": true,
+  "pairing_tolerance": 1e-06,
+  "results": [
+    {
+      "speed_m_s": 0.3,
+      "n": 10,
+      "passed": 9,
+      "pass_rate": 0.9,
+      "complete": 10,
+      "stalled": 0,
+      "fell_over": 0,
+      "failed": 0,
+      "mean_speed_rmse": 0.02533347966582821
+    },
+    {
+      "speed_m_s": 0.4,
+      "n": 10,
+      "passed": 10,
+      "pass_rate": 1.0,
+      "complete": 10,
+      "stalled": 0,
+      "fell_over": 0,
+      "failed": 0,
+      "mean_speed_rmse": 0.02920764114724614
+    },
+    {
+      "speed_m_s": 0.5,
+      "n": 10,
+      "passed": 8,
+      "pass_rate": 0.8,
+      "complete": 10,
+      "stalled": 0,
+      "fell_over": 0,
+      "failed": 0,
+      "mean_speed_rmse": 0.031171845598559456
+    }
+  ],
+  "comparisons": [
+    {
+      "speed_m_s": 0.3,
+      "old_passed": 4,
+      "new_passed": 9,
+      "n": 10,
+      "improved_seeds": [
+        7,
+        9,
+        10,
+        12,
+        13,
+        14
+      ],
+      "regressed_seeds": [
+        11
+      ]
+    },
+    {
+      "speed_m_s": 0.4,
+      "old_passed": 10,
+      "new_passed": 10,
+      "n": 10,
+      "improved_seeds": [],
+      "regressed_seeds": []
+    },
+    {
+      "speed_m_s": 0.5,
+      "old_passed": 10,
+      "new_passed": 8,
+      "n": 10,
+      "improved_seeds": [],
+      "regressed_seeds": [
+        11,
+        13
+      ]
+    }
+  ],
+  "ppo_updates_during_eval": 0,
+  "limits": [
+    "Raw reports/traces, comparison.json and new model SHA not downloaded",
+    "10 initial states per speed is screening, not a population success probability",
+    "Complete events do not establish 0.5s stable support or explain its interruption"
+  ]
+}

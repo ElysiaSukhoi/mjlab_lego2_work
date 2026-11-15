@@ -1,0 +1,181 @@
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+/home/asus/work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/mujoco_warp/_src/io.py:713: UserWarning: MULTICCD is enabled, but the scene contains CCD pairs without multicontact support: [('CYLINDER', 'CYLINDER'), ('CYLINDER', 'BOX')]. At most 1 contact will be generated for these pairs.
+  warnings.warn(
+Fixed pit depth: 0.300000 m; requested episodes: 1
+Setting seed: 7
+Warp 1.14.0 initialized:
+   CUDA Toolkit 12.9, CUDA driver not available (NVRTC compilation available)
+   Devices:
+     "cpu"      : "x86_64"
+   Kernel cache:
+     /tmp/lego2_phase3_speed_cache/warp/1.14.0
+Module mujoco_warp._src.render_util d9a3176 load on device 'cpu' took 0.76 ms  (cached)
+Module mujoco_warp._src.bvh fb7c74a load on device 'cpu' took 0.18 ms  (cached)
+
++--------------------------------+
+|        Base Environment        |
++------------------------+-------+
+| Property               | Value |
++------------------------+-------+
+| Number of environments | 1     |
+| Environment device     | cpu   |
+| Environment seed       | 7     |
+| Physics step-size      | 0.005 |
+| Environment step-size  | 0.02  |
++------------------------+-------+
+
+[INFO] <EventManager> contains 1 active terms.
++-------------------------------------+
+| Active Event Terms in Mode: 'reset' |
++--------+----------------------------+
+| Index  | Name                       |
++--------+----------------------------+
+|   0    | reset_base                 |
+|   1    | reset_robot_joints         |
++--------+----------------------------+
+
+[INFO] <CommandManager> contains 1 active terms.
++----------------------------------------+
+|          Active Command Terms          |
++-------+-------+------------------------+
+| Index | Name  |          Type          |
++-------+-------+------------------------+
+|   0   | twist | UniformVelocityCommand |
++-------+-------+------------------------+
+
+[INFO] <ActionManager> contains 2 active terms.
++---------------------------------+
+| Active Action Terms (shape: 12) |
++-------+-----------+-------------+
+| Index | Name      |   Dimension |
++-------+-----------+-------------+
+|   0   | joint_pos |           8 |
+|   1   | joint_vel |           4 |
++-------+-----------+-------------+
+
+[INFO] <ObservationManager> contains 2 groups.
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'actor' (shape: (144,)) |
++--------+-------------------------+-------------------------+
+| Index  | Name                    |          Shape          |
++--------+-------------------------+-------------------------+
+|   0    | base_ang_vel            |     (15,)  ← 5×(3,)     |
+|   1    | projected_gravity       |     (15,)  ← 5×(3,)     |
+|   2    | joint_pos               |     (40,)  ← 5×(8,)     |
+|   3    | joint_vel               |     (60,)  ← 5×(12,)    |
+|   4    | actions                 |          (12,)          |
+|   5    | command                 |           (2,)          |
++--------+-------------------------+-------------------------+
++-------------------------------------------------------------+
+| Active Observation Terms in Group: 'critic' (shape: (254,)) |
++----------+-----------------------------------+--------------+
+|  Index   | Name                              |    Shape     |
++----------+-----------------------------------+--------------+
+|    0     | base_lin_vel                      |     (3,)     |
+|    1     | base_ang_vel                      |     (3,)     |
+|    2     | projected_gravity                 |     (3,)     |
+|    3     | joint_pos                         |     (8,)     |
+|    4     | joint_vel                         |    (12,)     |
+|    5     | actions                           |    (12,)     |
+|    6     | command                           |     (2,)     |
+|    7     | height_scan                       |    (187,)    |
+|    8     | foot_height                       |     (4,)     |
+|    9     | foot_air_time                     |     (4,)     |
+|    10    | foot_contact                      |     (4,)     |
+|    11    | foot_contact_forces               |    (12,)     |
++----------+-----------------------------------+--------------+
+
+[INFO] <TerminationManager> contains 4 active terms.
++----------------------------------+
+|     Active Termination Terms     |
++-------+---------------+----------+
+| Index | Name          | Time Out |
++-------+---------------+----------+
+|   0   | time_out      |   True   |
+|   1   | fell_over     |  False   |
+|   2   | nan           |  False   |
+|   3   | tile_boundary |   True   |
++-------+---------------+----------+
+
+[INFO] <RewardManager> contains 11 active terms.
++-----------------------------------------+
+|           Active Reward Terms           |
++-------+----------------------+----------+
+| Index | Name                 |   Weight |
++-------+----------------------+----------+
+|   0   | track_lin_vel_xy_exp |      3.0 |
+|   1   | track_ang_vel_z_exp  |      1.5 |
+|   2   | lin_vel_z_l2         |     -0.3 |
+|   3   | ang_vel_xy_l2        |    -0.05 |
+|   4   | flat_orientation_l2  |     -0.5 |
+|   5   | joint_torques_l2     | -2.5e-05 |
+|   6   | joint_acc_l2         | -2.5e-07 |
+|   7   | joint_acc_wheel_l2   | -2.5e-09 |
+|   8   | action_rate_l2       |    -0.01 |
+|   9   | action_rate_wheel_l2 |    -0.01 |
+|   10  | joint_pos_limits     |     -5.0 |
++-------+----------------------+----------+
+
+[INFO] <NullCurriculumManager> (inactive)
+[INFO] <MetricsManager> contains 8 active terms.
++-----------------------------------+
+|        Active Metrics Terms       |
++-------+---------------------------+
+| Index | Name                      |
++-------+---------------------------+
+|   0   | mean_action_acc           |
+|   1   | ang_vel_z_rel_error       |
+|   2   | pit_nonfoot_contact_count |
+|   3   | pit_root_out              |
+|   4   | pit_front_up              |
+|   5   | pit_rear_up               |
+|   6   | pit_complete              |
+|   7   | pit_stable_pass           |
++-------+---------------------------+
+
+[INFO] <NullRecorderManager> (inactive)
+Module reset_data__locals__reset_xfrc_applied_03030511 6442adb load on device 'cpu' took 0.15 ms  (cached)
+Module reset_data__locals__reset_M_631075dd 270a798 load on device 'cpu' took 0.09 ms  (cached)
+Module reset_data__locals__reset_mocap_6513201c ee8f7ba load on device 'cpu' took 0.09 ms  (cached)
+Module reset_data__locals__reset_contact_5c08f689 9d2cde1 load on device 'cpu' took 0.08 ms  (cached)
+Module reset_data__locals__reset_sleep_50b990da 5427725 load on device 'cpu' took 0.09 ms  (cached)
+Module reset_data__locals__reset_nworld_69a10925 c22681c load on device 'cpu' took 0.08 ms  (cached)
+Module mujoco_warp._src.smooth 60df080 load on device 'cpu' took 0.21 ms  (cached)
+Module _nxn_broadphase__locals__kernel_df6640ed 8a5d6ba load on device 'cpu' took 0.14 ms  (cached)
+Module ccd_kernel_builder__locals__ccd_kernel_696230ed 9256ff1 load on device 'cpu' took 0.15 ms  (cached)
+Module ccd_kernel_builder__locals__ccd_kernel_1bb51816 068dc2c load on device 'cpu' took 0.18 ms  (cached)
+Module ccd_kernel_builder__locals__ccd_kernel_f5a0cb3a bf0e5e7 load on device 'cpu' took 0.17 ms  (cached)
+Module _primitive_narrowphase__locals__primitive_narrowphase_9aaa7d98 f732831 load on device 'cpu' took 0.12 ms  (cached)
+Module mujoco_warp._src.constraint 1055a87 load on device 'cpu' took 0.09 ms  (cached)
+Module _friction_dof__locals__kernel_3c14efda 128ddbb load on device 'cpu' took 0.10 ms  (cached)
+Module _limit_slide_hinge__locals__kernel_4d6c55ab 973480c load on device 'cpu' took 0.09 ms  (cached)
+Module _efc_contact_init__locals__kernel_744a1fda 6b895c4 load on device 'cpu' took 0.09 ms  (cached)
+Module _efc_contact_jac_dense__locals__kernel_760e2e1a 74d0b63 load on device 'cpu' took 0.10 ms  (cached)
+Module _efc_contact_update__locals__kernel_c40b0799 50c07a2 load on device 'cpu' took 0.09 ms  (cached)
+Module mujoco_warp._src.sensor 5b546e1 load on device 'cpu' took 0.13 ms  (cached)
+Module mujoco_warp._src.forward 70f2f91 load on device 'cpu' took 0.12 ms  (cached)
+Module mujoco_warp._src.passive 9ef5a40 load on device 'cpu' took 0.12 ms  (cached)
+Module _qfrc_smooth__locals__kernel_6eb3d958 21660d5 load on device 'cpu' took 0.09 ms  (cached)
+Module mujoco_warp._src.support db2c7c5 load on device 'cpu' took 0.09 ms  (cached)
+Module _tile_cholesky_factorize_solve_block__locals__kernel_419fe7e0 24a0ec6 load on device 'cpu' took 0.10 ms  (cached)
+Module _solve_init_dof__locals__kernel_99a497d1 8d57fe1 load on device 'cpu' took 0.09 ms  (cached)
+Module mujoco_warp._src.solver e3858a2 load on device 'cpu' took 0.14 ms  (cached)
+Module _solve_init_jaref_kernel__locals__kernel_16fae688 3ee4410 load on device 'cpu' took 0.09 ms  (cached)
+Module mul_m_kernel__locals___mul_m_fd2186c4 026f940 load on device 'cpu' took 0.09 ms  (cached)
+Module _update_constraint_efc__locals__kernel_4af8f110 fc7fac2 load on device 'cpu' took 0.09 ms  (cached)
+Module _update_constraint_init_qfrc_constraint_dense__locals__kernel_391cb5b4 a12f83e load on device 'cpu' took 0.09 ms  (cached)
+Module _update_gradient_zero_grad_dot__locals__kernel_cb780630 407be49 load on device 'cpu' took 0.09 ms  (cached)
+Module _update_gradient_grad__locals__kernel_0cbf4927 992aea9 load on device 'cpu' took 0.09 ms  (cached)
+Module _update_gradient_JTDAJ_dense_tiled__locals__kernel_14aab72c 646e6d5 load on device 'cpu' took 0.09 ms  (cached)
+Module _update_gradient_cholesky__locals__kernel_3502583c 488b023 load on device 'cpu' took 0.12 ms  (cached)
+Module _linesearch_iterative_kernel__locals__kernel_d3ea36af e640309 load on device 'cpu' took 0.13 ms  (cached)
+Module _contact_sort__locals__contact_sort_d535624f ec47aa6 load on device 'cpu' took 0.10 ms  (cached)
+Module mujoco_warp._src.ray 3e72851 load on device 'cpu' took 0.11 ms  (cached)
+[eval] height=0.30m episode=1/1 resetting
+Setting seed: 7
+[eval] height=0.30m episode=1/1 running, step budget=2
+Module mujoco_warp._src.derivative 761668c load on device 'cpu' took 0.16 ms  (cached)
+Module _next_time_builder__locals___next_time_95ad6d7a e26b00c load on device 'cpu' took 0.10 ms  (cached)
+[eval] height=0.30m episode=1/1 step=1/2 elapsed=0.1s stable_pass=False
+[eval] height=0.30m episode=1/1 finished steps=2 completed=False passed=False elapsed=0.1s
+[eval] Report saved: docs/codex/diagnostics/20261115_phase3_speed_cli/report.json

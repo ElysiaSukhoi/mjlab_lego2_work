@@ -104,6 +104,11 @@ Added/Changed/Fixed categories. Reference issues with `:issue:\`123\``
   synchronization/check commands, with short explanations. Check device resources
   before simulation and use small local runs. Long remote training uses the
   screen name recorded in PROJECT_CONTEXT.
+- 远程服务器默认恢复SSH直接传输：先完成本地修改/验证，再提供明确文件清单、
+  备份与SCP/SSH同步及远程核验指令；以实际传输文件的内容校验值确认版本，保护旧训练结果。
+  GitHub仅用于本地代码的可选版本管理，是否commit/push及何时进行均由用户决定，
+  服务器同步和验证不以commit、push、GitHub连通或提交SHA为前置条件。
+  新/更新的远程测试.sh不包含Git下载/更新操作，不硬编码期望commit SHA；同步与验证分开。
 - Before a handoff, verify links, current/remote/experiment distinctions, obsolete
   decisions, and changed-file scope. Check whether existing sync archives contain
   older context files; do not let an old bundle overwrite the current handoff.

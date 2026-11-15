@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-15 Asia/Shanghai",
+  "script": "docs/codex/artifacts/sync_remote_git_stage1_20261115.sh",
+  "script_sha256": "5596fb089975e180e4cbfa45be21ddfbe208fef86d21e28530b6d30bf36998a2",
+  "fixture": "/tmp/lego2_git_stage1_test_8x7m25kq",
+  "tests": [
+    {
+      "case": "clone_without_expected_sha_accepts_previous_commit",
+      "exit_code": 0
+    },
+    {
+      "case": "pull_fast_forward_to_new_commit_without_script_change",
+      "exit_code": 0
+    },
+    {
+      "case": "repeat_up_to_date",
+      "exit_code": 0
+    },
+    {
+      "case": "reject_unreviewed_candidate_changes",
+      "exit_code": 1
+    },
+    {
+      "case": "reject_existing_nonrepo",
+      "exit_code": 1
+    },
+    {
+      "case": "reject_old_training_directory",
+      "exit_code": 1
+    },
+    {
+      "case": "reject_child_of_old_training_directory",
+      "exit_code": 1
+    }
+  ],
+  "old_source_logs_venv_unchanged": true,
+  "failed_attempt_preserved": true,
+  "no_expected_commit_in_script": true,
+  "new_commit_received_without_script_edit": true,
+  "no_environment_or_source_comparison": true,
+  "remote_executed": false,
+  "limits": "file:// fixtures exercise Git behavior; server HTTP/1.1 connection remains unverified"
+}

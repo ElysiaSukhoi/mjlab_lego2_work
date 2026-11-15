@@ -1,0 +1,11 @@
+src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py
+scripts/tools/evaluate_lego2_blind_pit.py
+scripts/tools/summarize_lego2_speed_eval.py
+tests/test_lego2_blind_pit.py
+tests/test_lego2_blind_pit_terrain.py
+tests/test_lego2_blind_pit_stage3.py
+tests/test_lego2_blind_pit_speed_eval.py
+docs/codex/artifacts/check_phase3_speed_eval_20261115.sh
+docs/codex/artifacts/phase3_speed_prerequisites_20261115.sha256
+docs/codex/artifacts/phase3_speed_20261115_files.txt
+docs/codex/artifacts/phase3_speed_sources_20261115.sha256

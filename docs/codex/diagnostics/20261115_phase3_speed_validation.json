@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-15 Asia/Shanghai",
+  "source_sha256": {
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": "b6198dc9815c1e426ec6f7c79bf55525a52a5b53a46e317b66ccba728fa77921",
+    "scripts/tools/evaluate_lego2_blind_pit.py": "ba4da0496731fdee3e5507fdee6957312adc615561979e17ef6462412cb6a428",
+    "scripts/tools/summarize_lego2_speed_eval.py": "4263b9db0dcd8fcd85c9357ef8cfed431762d59494121ace75a6a5f4376f164a",
+    "tests/test_lego2_blind_pit_speed_eval.py": "0fc8bf4ecb170cc2d9764ae98276071734cf293f28a71aeeb31dc02745645bf9"
+  },
+  "tests": {
+    "result": "19 passed, 4 existing ONNX warnings in 12.36s",
+    "output": "docs/codex/diagnostics/20261115_phase3_speed_tests.txt"
+  },
+  "targeted_ruff_format_ty_pyright": "passed for four new/modified Python files",
+  "cli_diagnostic": {
+    "heights_m": [
+      0.3
+    ],
+    "fixed_vx_m_s": 0.3,
+    "paired_seed_base": 7,
+    "episodes": 1,
+    "max_steps": 2,
+    "counted_n": 0,
+    "mode": "zero_action_diagnostic"
+  },
+  "pairing_test": "same seed/actual reset state across speeds despite different prior rollout lengths",
+  "sync_validation": "docs/codex/diagnostics/20261115_phase3_speed_sync_validation.json",
+  "bundle": "docs/codex/artifacts/lego2_phase3_speed_eval_20261115_v1.tar.gz",
+  "bundle_sha256": "da1b0d95ee2f66a7c250404294dd0006f55ef8c1040098e58b8a2f58ad8b20cf",
+  "local_gpu": "driver unavailable; CPU only",
+  "remote_executed": false,
+  "ppo_updates": 0,
+  "limits": [
+    "Full-project legacy type errors not repaired; checks are targeted",
+    "No local model1198 weights; remote policy smoke and success rates pending",
+    "10 initial-state seeds per speed is screening, not final robustness certification"
+  ]
+}

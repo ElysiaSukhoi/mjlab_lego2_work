@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-15 Asia/Shanghai",
+  "script": "docs/codex/artifacts/bootstrap_remote_git_20261115.sh",
+  "script_sha256": "ebae9f103dac52b4be36a00bfe23010dd8ca5a11f1a91848cc073d87f5f5dca0",
+  "fixture": "/tmp/lego2_git_bootstrap_test_twyxwh26",
+  "tests": [
+    {
+      "case": "fresh_clone",
+      "exit_code": 0
+    },
+    {
+      "case": "resume_clean",
+      "exit_code": 0
+    },
+    {
+      "case": "reject_dirty_target",
+      "exit_code": 1
+    }
+  ],
+  "old_files_unchanged": true,
+  "old_venv_link_unchanged": true,
+  "no_new_environment_or_training": true,
+  "remote_executed": false,
+  "uses_existing_local_repository_for_clone_test_no_commits_or_pushes": true
+}

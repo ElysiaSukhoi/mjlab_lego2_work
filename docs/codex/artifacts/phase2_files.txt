@@ -1,0 +1,17 @@
+docs/codex/CURRENT_STATUS.md
+docs/codex/DECISIONS.md
+docs/codex/HANDOFF.md
+docs/codex/PROJECT_CONTEXT.md
+docs/codex/REFACTOR_PLAN.md
+docs/codex/artifacts/apply_phase2_remote_20261031.sh
+docs/codex/artifacts/phase2_files.txt
+docs/codex/artifacts/phase2_prerequisites.sha256
+docs/codex/artifacts/phase2_sync.sha256
+docs/codex/backups/20261031_phase2_before.json
+docs/codex/backups/20261031_phase2_source_before.tar.gz
+docs/codex/diagnostics/20261031_phase2_validation.json
+docs/codex/diagnostics/20261031_phase2_viser.jpg
+docs/source/changelog.rst
+src/mjlab/tasks/velocity/config/lego2/blind_pit_curriculums.py
+src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py
+tests/test_lego2_blind_pit_terrain.py
