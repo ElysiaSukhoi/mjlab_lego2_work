@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-15 Asia/Shanghai",
+  "source": "user-pasted final summary, not downloaded report",
+  "evidence_dir": "/home/ajifang/zrq/backups/phase3_speed_20261115_185511_3295996",
+  "checkpoint_expected_from_launcher": "model_1198.pt",
+  "checkpoint_sha256_expected_from_launcher": "7780cf0d2557c86f51c0486f870e7d471b13703777e9cee5e1854427def05027",
+  "checkpoint_provenance": "current pasted excerpt omits model SHA; launcher checks it before evaluation",
+  "pairing_verified_user_report": true,
+  "paired_resets": 10,
+  "pairing_tolerance": 1e-06,
+  "height_m": 0.3,
+  "reset_seeds_expected_from_launcher": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "ppo_updates": 0,
+  "status": "user reports complete; raw reports/traces and numeric exit code not downloaded",
+  "results": [
+    {
+      "speed_m_s": 0.3,
+      "n": 10,
+      "passed": 4,
+      "pass_rate": 0.4,
+      "complete": 5,
+      "stalled": 5,
+      "fell_over": 0,
+      "failed": 0,
+      "mean_speed_rmse": 0.19099997204442862
+    },
+    {
+      "speed_m_s": 0.4,
+      "n": 10,
+      "passed": 10,
+      "pass_rate": 1.0,
+      "complete": 10,
+      "stalled": 0,
+      "fell_over": 0,
+      "failed": 0,
+      "mean_speed_rmse": 0.08419473722306246
+    },
+    {
+      "speed_m_s": 0.5,
+      "n": 10,
+      "passed": 10,
+      "pass_rate": 1.0,
+      "complete": 10,
+      "stalled": 0,
+      "fell_over": 0,
+      "failed": 0,
+      "mean_speed_rmse": 0.05930095785608082
+    }
+  ]
+}

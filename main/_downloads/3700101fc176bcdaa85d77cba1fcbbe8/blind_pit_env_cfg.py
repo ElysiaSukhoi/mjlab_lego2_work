@@ -207,11 +207,23 @@ def lego2_blind_pit_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   return cfg
 
 
-def lego2_blind_pit_eval_cfg(height: float) -> ManagerBasedRlEnvCfg:
+def lego2_blind_pit_eval_cfg(
+  height: float, forward_speed: float | None = None
+) -> ManagerBasedRlEnvCfg:
   """Build a real fixed-depth pit with the same actor and actions as training."""
   if not math.isfinite(height) or not 0 < height <= 0.30:
     raise ValueError("Pit evaluation height must be in (0, 0.30] metres")
+  if forward_speed is not None and (
+    not math.isfinite(forward_speed) or not 0.3 <= forward_speed <= 0.6
+  ):
+    raise ValueError("Fixed forward speed must be in [0.3, 0.6] m/s")
   cfg = lego2_blind_pit_env_cfg(play=True)
+  if forward_speed is not None:
+    # 只收窄评估vx采样范围，单位m/s；不改训练分布、heading反馈或actor输入。
+    # 仍走原命令采样流程，便于同一reset seed在不同速度下生成相同出生状态。
+    command = cfg.commands["twist"]
+    assert isinstance(command, UniformVelocityCommandCfg)
+    command.ranges.lin_vel_x = (forward_speed, forward_speed)
   assert cfg.scene.terrain is not None
   gen = cfg.scene.terrain.terrain_generator
   assert gen is not None

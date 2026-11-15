@@ -1,0 +1,51 @@
+{
+  "date": "2026-11-15 Asia/Shanghai",
+  "script": "docs/codex/artifacts/continue_phase3_baseline_20261115.sh",
+  "script_sha256": "551b7ec79c41082d2fa7be16db4f2aadc91c38a130f92b34711ac3ecf71e209e",
+  "actual_tyro_cli_parse": "passed",
+  "checkpoint_selector": "exact model1198 and exact parent verified",
+  "screen_guard": "passed",
+  "bash_and_embedded_python": "passed",
+  "source_checks": 34,
+  "envs": 1024,
+  "rollout_steps": 24,
+  "additional_iterations": 1000,
+  "planned_new_samples": 24576000,
+  "training_vx_range": [
+    0.3,
+    0.6
+  ],
+  "max_initial_terrain_level": 0,
+  "local_training_started": false,
+  "remote_training_started_by_codex": false,
+  "limits": [
+    "No local model1198 weights or CUDA; preflight GPU/checkpoint checks run remotely",
+    "New run/checkpoint paths and outcomes await actual execution; no convergence guarantee"
+  ],
+  "argv": [
+    "/home/asus/.local/bin/uv",
+    "run",
+    "--no-sync",
+    "train",
+    "Mjlab-Blind-Pit-Lego2",
+    "--env.scene.num-envs",
+    "1024",
+    "--agent.max-iterations",
+    "1000",
+    "--agent.seed",
+    "7",
+    "--agent.resume",
+    "True",
+    "--agent.load-run",
+    "^2026-11-01_20-17-22_phase3_low_1024x1000_v1_20261101_201712_2200851$",
+    "--agent.load-checkpoint",
+    "^model_1198[.]pt$",
+    "--agent.logger",
+    "tensorboard",
+    "--agent.run-name",
+    "local_cli_validation",
+    "--gpu-ids",
+    "[0]"
+  ],
+  "fixture": "/tmp/lego2_continue_checkpoint_selector_9l2w36_d"
+}

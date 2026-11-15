@@ -1,0 +1,4 @@
+{
+  "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": "9cdc8dae577d75c1fe80f44e4dcb8c5f93c35ec677ee1a3dbaa42b7f80cdfd65",
+  "scripts/tools/evaluate_lego2_blind_pit.py": "d409dce20da0bfb6c32bbe46988258ea386b9802a1562220ee0abf2a8fe0ff79"
+}

@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-15 Asia/Shanghai",
+  "script_sha256": "09614a2ad68795749ce779f6c85d5ebb1e04cf851cc908d69bab4f92a89df7ee",
+  "bash_syntax_and_line_lengths": "passed",
+  "stubbed_ssh_transfer_twice": "passed, distinct files",
+  "interruption_preserves_partial": "passed",
+  "existing_downloads_preserved": true,
+  "fixture": "/tmp/lego2_collect_comparison_41sxv1hh",
+  "remote_accessed": false,
+  "limits": "Stubbed SSH validates command wiring/archive preservation, not live server connectivity."
+}

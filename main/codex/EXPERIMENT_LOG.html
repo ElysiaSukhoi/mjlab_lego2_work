@@ -490,6 +490,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-1198-pt">2026-11-01：model_1198.pt低高度复评完成（用户回传）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2026-11-14：高高度初筛完成（用户回传）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cm">2026-11-14：高高度原始证据及30 cm轨迹离线核查</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-119830-cm">2026-11-15：model_1198的30 cm固定速度配对初筛完成（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-2197">2026-11-15：第二轮原基线续训完成，model_2197待复评（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2026-11-15：model_2197配对复评完成，低速改善伴随高速稳定率退步（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2026-11-15：两模型原始配对证据已下载，支撑连续性退步离线核验</a></li>
 </ul>
             </nav>
         </div>
@@ -895,7 +899,7 @@ PitProgress.reset堆栈，报“Inplace update to inference tensor outside Infer
 <li><p>证据目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_upper1198_20261114_214623_3270561</span></code>。</p></li>
 <li><p>用户贴出四个高度最终summary及“评估结束”行；原始report/trace及数字退出码未回传。</p></li>
 <li><p>本次粘贴未含checkpoint路径、SHA和seed；按已发
-<a class="reference internal" href="#artifacts/evaluate_phase3_upper_1198_20261101.sh"><span class="xref myst">评估入口</span></a>预期为同model_1198.pt、seed7，
+<a class="reference download internal" download="" href="../_downloads/96ec0521c271514640f7cac54d7e5d6e/evaluate_phase3_upper_1198_20261101.sh"><span class="xref download myst">评估入口</span></a>预期为同model_1198.pt、seed7，
 预期SHA为<code class="docutils literal notranslate"><span class="pre">7780cf0d2557c86f51c0486f870e7d471b13703777e9cee5e1854427def05027</span></code>，
 待原始report核对，不能冒充本次已回传或独立读取的hash。</p></li>
 <li><p><a class="reference download internal" download="" href="../_downloads/cc051511054d0c1b090b563ffd9ba41f/20261114_phase3_model1198_upper_user_summary.json"><span class="xref download myst">结构化摘要</span></a>仅转录用户证据。</p></li>
@@ -985,7 +989,7 @@ PitProgress.reset堆栈，报“Inplace update to inference tensor outside Infer
 report记录14项源码/资产hash均与本地匹配；四高度summary吻合，30 cm十次trace步数、
 阶段事件、最终通过标记及重算speed RMSE均与report一致。</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#artifacts/analyze_phase3_upper1198_20261114.py"><span class="xref myst">分析脚本</span></a>、
+<li><p><a class="reference download internal" download="" href="../_downloads/c1eb8ccf241dd5d27575330d3a3ccf49/analyze_phase3_upper1198_20261114.py"><span class="xref download myst">分析脚本</span></a>、
 <a class="reference download internal" download="" href="../_downloads/43e4b6bef6fccfadf3d0f7482e1303f3/20261114_phase3_upper1198_analysis.json"><span class="xref download myst">分析JSON</span></a>及<a class="reference download internal" download="" href="../_downloads/193885449b668a7399816f098a7534ce/20261114_phase3_upper1198_analysis.png"><span class="xref download myst">图</span></a>保存可复核过程。</p></li>
 <li><p>匹配源码的控制dt=0.02 s；两行单列固定坑的level0原点为(-5,0,-0.3) m。
 仅用MuJoCo运动学重建轮几何，不推进仿真；轮底与trace的最大误差1.449e-7 m。</p></li>
@@ -1033,6 +1037,243 @@ trace未记contact.pos，且仅控制帧采样，不能断言真实跳跃/卸载
 配对初态/seed的小批对照和回放，奖励/课程/判据保持，入口尚未实现或远程执行。</p>
 <p>本批本地Ruff/格式/ty/Pyright检查分析脚本通过，运行内置一致性断言通过；无仿真/PPO或远程操作。
 阶段4未触发，不因本次8/10自动追加大训练；正式大样本/多seed条件/独立高台/平地验证仍待实施。</p>
+</section>
+<section id="model-119830-cm">
+<h2>2026-11-15：model_1198的30 cm固定速度配对初筛完成（用户回传）<a class="headerlink" href="#model-119830-cm" title="Link to this heading">#</a></h2>
+<p>用户回传三组最终摘要、<code class="docutils literal notranslate"><span class="pre">PASS:</span> <span class="pre">10</span> <span class="pre">paired</span> <span class="pre">resets,</span> <span class="pre">tolerance=1e-6</span></code>及“评估完成/没有PPO更新”。
+证据目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_speed_20261115_185511_3295996</span></code>。
+<a class="reference download internal" download="" href="../_downloads/becec1907aff57323677aab3dd2e307c/20261115_phase3_speed_user_summary.json"><span class="xref download myst">结构化回传</span></a>只转录用户输出，非下载的原始报告。
+按入口预期为同model_1198.pt、内容SHA
+<code class="docutils literal notranslate"><span class="pre">7780cf0d2557c86f51c0486f870e7d471b13703777e9cee5e1854427def05027</span></code>、reset seeds 7～16；
+本次摘录未贴模型hash，原始report/trace/paired_summary及CPU、GPU短片段输出尚未下载。
+入口在完整评估前检查源码/模型与6个两步GPU片段，但不把执行顺序推断冒充独立读取的原始回执。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>vx (m/s)</p></th>
+<th class="head"><p>完整episode n</p></th>
+<th class="head"><p>稳定通过</p></th>
+<th class="head"><p>完整出坑</p></th>
+<th class="head"><p>停滞</p></th>
+<th class="head"><p>翻倒</p></th>
+<th class="head"><p>failed</p></th>
+<th class="head"><p>mean speed RMSE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.30</p></td>
+<td><p>10</p></td>
+<td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>5</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0.19099997204442862</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.40</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0.08419473722306246</p></td>
+</tr>
+<tr class="row-even"><td><p>0.50</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0.05930095785608082</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>相同10组初态下表现随速度改变，低速薄弱项已在本批配对初筛中确认；仍非多训练seed或正式大样本验收。
+0.30 m/s有6次未稳定通过、5次停滞，至少1次曾完整出坑但未满足连续支撑；
+汇总不能确定每个样本的停滞/未出坑对应关系，更不能断言冲量、控制幅度、接触求解或奖励的具体因果。
+保持通用奖励和课程，不在本轮同时改速度分布/机制；阶段4和平地预训练仍未触发。</p>
+<p>下一步准备从model_1198恢复权重/归一化/优化器和迭代状态，新建run，1024环境、rollout24、
+新增1000 iterations、seed7；训练vx保持0.3～0.6 m/s，仿真/历史/课程重新reset，初始最低3 cm。
+计划新增24576000采样量，不是已完成数值；训练尚未执行，不预填实际run或checkpoint路径。
+<a class="reference download internal" download="" href="../_downloads/5088ccf416e38c4e30a82c12d6f9d001/continue_phase3_baseline_20261115.sh"><span class="xref download myst">续训入口</span></a>及
+<a class="reference download internal" download="" href="../_downloads/d2bed1fd4b1d6c04cbcd010dfb783d56/20261115_phase3_continue_launcher_validation.json"><span class="xref download myst">本地参数/选择器核验</span></a>已准备。
+结束后以同样10组配对初态复评0.30/0.40/0.50 m/s，检查低速改善及中高速保留，再决定后续预算。</p>
+</section>
+<section id="model-2197">
+<h2>2026-11-15：第二轮原基线续训完成，model_2197待复评（用户回传）<a class="headerlink" href="#model-2197" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>实际run：<code class="docutils literal notranslate"><span class="pre">logs/rsl_rl/lego2_blind_pit/2026-11-15_19-28-14_phase3_continue_1024x1000_v1_20261115_192803_3297676</span></code>。</p></li>
+<li><p>用户回传model_1200.pt～model_2150.pt间多个checkpoint及末尾model_2197.pt，params/env.yaml、agent.yaml存在。</p></li>
+<li><p>启动入口退出码0，elapsed 0:34:02，末次iteration time 1.72 s。</p></li>
+<li><p>证据目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_continue_20261115_192803_3297676</span></code>。</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/686855365e9f2adb0ccb4c97fd389454/20261115_phase3_continue_user_receipt.json"><span class="xref download myst">结构化回执</span></a>仅转录用户摘录；
+model_2197内容SHA、完整stdout/Total timesteps、实际params内容未下载，SHA留待复评记录。</p></li>
+<li><p>对应已核对入口：从model_1198恢复，1024环境、rollout24、新增1000 updates、seed7，
+训练速度仍0.3～0.6 m/s、原奖励/课程/动作/资产/PPO；课程与仿真重新reset，保留父run。
+runner恢复编号后再执行新增次数，末尾2197符合1198+1000-1，不表示本轮新增2197次。
+24576000是入口的计划采样量，尚无Total timesteps行独立核实。</p></li>
+</ul>
+<p>用户提供末段窗口：pit_complete=0.3408，twist/error_vel_xy=0.0199，time_out=0；
+flat_orientation=-0.0006、joint_torques=-0.0198、wheel joint_acc=-0.0002、yaw tracking reward=0.7246。
+pit_complete为阶段时间占比，不是episode稳定通过率；训练误差与固定速度RMSE的场景/口径不同，
+不能由这些末段值宣称低速问题已解决、模型更强或高台正式验收通过。</p>
+<p>下一步同model_2197做30 cm、vx=0.30/0.40/0.50 m/s各10次、reset seeds7～16配对复评，
+使用原判据并保持原源码；先用6个两步GPU片段确认新模型推理/reset，再进入30个完整episode。
+在新模型组内核对配对后，再核对与父model_1198实际初态，输出每速度新增通过/退步的seed。
+<a class="reference download internal" download="" href="../_downloads/a1450549d88bba91082b60b91f706885/evaluate_phase3_model2197_20261115.sh"><span class="xref download myst">复评入口</span></a>及
+<a class="reference download internal" download="" href="../_downloads/0396396c25e22e3bd43e9f957cac4e75/20261115_phase3_model2197_eval_launcher_validation.json"><span class="xref download myst">本地CLI/合成报告逻辑核验</span></a>已准备。
+合成JSON只用于验证汇总/拒绝错误输入逻辑，不是新模型成功率；远程复评尚未执行。
+本轮未改src/模型/奖励或启动第三轮训练，全部旧结果保留，GitHub不参与服务器传输。</p>
+</section>
+<section id="id15">
+<h2>2026-11-15：model_2197配对复评完成，低速改善伴随高速稳定率退步（用户回传）<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
+<p>用户回传30 cm三速度各10次完整评估，组内及新/父模型初态核对均通过（容差1e-6），无PPO更新。
+证据目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_eval2197_20261115_201606_3299957</span></code>；
+父模型目录：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_speed_20261115_185511_3295996</span></code>。
+<a class="reference download internal" download="" href="../_downloads/2ba3525c2a1b22b90b3f0b5f824a339c/20261115_phase3_model2197_user_eval_summary.json"><span class="xref download myst">结构化摘要</span></a>只转录用户输出。
+原始report/trace/comparison.json及model2197 SHA未下载；本次摘录未含启动时的checkpoint.sha256行。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>vx (m/s)</p></th>
+<th class="head"><p>n</p></th>
+<th class="head"><p>model1198稳定通过</p></th>
+<th class="head"><p>model2197稳定通过</p></th>
+<th class="head"><p>model2197完整出坑</p></th>
+<th class="head"><p>新停滞/翻倒/failed</p></th>
+<th class="head"><p>父模型速度RMSE</p></th>
+<th class="head"><p>新模型速度RMSE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.30</p></td>
+<td><p>10</p></td>
+<td><p>4</p></td>
+<td><p>9</p></td>
+<td><p>10</p></td>
+<td><p>0/0/0</p></td>
+<td><p>0.19099997204442862</p></td>
+<td><p>0.02533347966582821</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.40</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>0/0/0</p></td>
+<td><p>0.08419473722306246</p></td>
+<td><p>0.02920764114724614</p></td>
+</tr>
+<tr class="row-even"><td><p>0.50</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>8</p></td>
+<td><p>10</p></td>
+<td><p>0/0/0</p></td>
+<td><p>0.05930095785608082</p></td>
+<td><p>0.031171845598559456</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>跨模型配对变动：</p>
+<ul class="simple">
+<li><p>0.30 m/s：新增通过seed7/9/10/12/13/14，退步seed11，净增加5次；唯一未稳定通过为seed11。</p></li>
+<li><p>0.40 m/s：无新增或退步，10次均保留稳定通过。</p></li>
+<li><p>0.50 m/s：退步seed11/13，其他8次保留通过。</p></li>
+</ul>
+<p>结论：追加原基线训练在本组配对样本上改善低速完整出坑/速度跟踪，但未均匀改善稳定通过。
+新模型全部30次都曾完整出坑且无停滞/翻倒/failed；3个未稳定通过样本均涉及已达成出坑后，
+仍未满足整个episode内连续0.5 s支撑/倾角/无失败的联合判据。
+不能从summary判定是接触中断、姿态、有效支撑几何还是可用时间，也不能仅凭更低RMSE宣布全面更好。
+不把不同速度合计27/30当作真实部署成功率，且每速度仅10组初态，不是多训练seed/正式大样本验收。</p>
+<p>下一步只读取回新/父模型full报告与轨迹、comparison、模型SHA及训练配置，优先核查seed11/13，
+必要时再对比低速新增通过seed；保留两模型，不立即追加训练或放宽稳定判据。
+<a class="reference download internal" download="" href="../_downloads/ba0565825b6977ef658687c8583148c9/collect_phase3_comparison_20261115.sh"><span class="xref download myst">本地SSH读取入口</span></a>已准备，
+<a class="reference download internal" download="" href="../_downloads/9904a5a52d0c4500969943a2489b987a/20261115_phase3_collection_validation.json"><span class="xref download myst">离线连线/中断保留核验</span></a>通过，实际下载待用户执行。
+该入口只在服务器运行tar读取证据，压缩流写入本地新文件；不装环境、不读模型权重、不启动仿真或更新源码。</p>
+</section>
+<section id="id16">
+<h2>2026-11-15：两模型原始配对证据已下载，支撑连续性退步离线核验<a class="headerlink" href="#id16" title="Link to this heading">#</a></h2>
+<p>用户回传下载完成，本地实际读取归档
+<code class="docutils literal notranslate"><span class="pre">diagnostics/20261115_model2197_comparison_remote/remote_evidence_kO71wR.tar.gz</span></code>，
+SHA256=<code class="docutils literal notranslate"><span class="pre">501d3b382997b001c98eb8e11a3a24d0670392c497697526852848eb5d4e8aaf</span></code>。
+共47个成员，含两模型六组full报告/trace/配置、组内汇总、新模型comparison、两份checkpoint.sha256及新训练params。
+原归档只读，不解压覆盖源码或改写历史报告。</p>
+<ul class="simple">
+<li><p>父模型SHA：<code class="docutils literal notranslate"><span class="pre">7780cf0d2557c86f51c0486f870e7d471b13703777e9cee5e1854427def05027</span></code>。</p></li>
+<li><p>model2197 SHA：<code class="docutils literal notranslate"><span class="pre">b8bc52a8ee370eb94e359bc71d310f5f1cd0ec013cae9e5982b44fb13b8a54a4</span></code>。</p></li>
+<li><p>各自三份report与SHA文本一致；权重文件未下载，不声称本地独立rehash权重。</p></li>
+<li><p>六报告记录的14个源码hash均与本地一致，组内报告摘要hash和跨模型comparison重算匹配。</p></li>
+<li><p>60个完整episode的实际reset状态/144维actor首帧配对最大差0，按原定义只排除vx输入。</p></li>
+<li><p>33718帧按原XML仅做运动学重建，轮底与trace最大误差1.398631988e-7 m；
+root_out/front_up/rear_up/complete/stable_now、连续计时、通过锁存和速度RMSE全部复算匹配。
+控制dt=0.02 s，由保存配置0.005 s×decimation4核对；未启动仿真、推理或PPO。</p></li>
+<li><p>保存训练params确认1024环境、rollout24、max_iterations1000、seed7、resume=true，
+load_run为父run、load_checkpoint为model_1198选择器；训练vx=0.3～0.6、11项奖励权重与六组评估一致。
+这些是保存配置证据，不替代完整训练stdout/Total timesteps，后者仍未下载。</p></li>
+</ul>
+<p><a class="reference download internal" download="" href="../_downloads/c83b83589ea59a69c728705a91fafac7/analyze_phase3_paired_comparison_20261115.py"><span class="xref download myst">分析脚本</span></a>、
+<a class="reference download internal" download="" href="../_downloads/6aca2ac53ccb68afef0cf42000d63ec3/20261115_model2197_comparison_analysis.json"><span class="xref download myst">派生JSON</span></a>、
+<a class="reference download internal" download="" href="../_downloads/e28bd8895501babe75b83066c3259372/20261115_model2197_comparison_analysis.png"><span class="xref download myst">连续支撑对照图</span></a>已生成。
+原始结果与上一条用户回传一致；本条将证据层级提升为原始报告/轨迹离线核验。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>条件</p></th>
+<th class="head"><p>父模型最大连续支撑</p></th>
+<th class="head"><p>model2197最大连续支撑</p></th>
+<th class="head"><p>新模型首次完整出坑</p></th>
+<th class="head"><p>新模型出坑后最大倾角</p></th>
+<th class="head"><p>新模型出坑后缺完整支撑帧/总帧</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>vx=0.30，seed11</p></td>
+<td><p>0.52 s</p></td>
+<td><p>0.48 s</p></td>
+<td><p>6.72 s</p></td>
+<td><p>1.865°</p></td>
+<td><p>59/322</p></td>
+</tr>
+<tr class="row-odd"><td><p>vx=0.50，seed11</p></td>
+<td><p>2.28 s</p></td>
+<td><p>0.34 s</p></td>
+<td><p>3.96 s</p></td>
+<td><p>3.160°</p></td>
+<td><p>35/195</p></td>
+</tr>
+<tr class="row-even"><td><p>vx=0.50，seed13</p></td>
+<td><p>2.82 s</p></td>
+<td><p>0.28 s</p></td>
+<td><p>4.32 s</p></td>
+<td><p>3.249°</p></td>
+<td><p>39/196</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>三个新模型未通过样本在首次complete后，四轮几何出坑/本地块内/轮底高度均保持合格，
+轮底距台面最大绝对值分别1.608/1.568/1.605 mm；有接触时法向、力阈及接触点高度均合格。
+全部59/35/39个中断帧都对应至少一轮found=0且force=0。
+按RF/LF/RH/LH排列的缺失接触帧分别为24/8/27/5、17/0/14/8、15/7/14/3，允许同帧多轮缺失。
+单轮最长连续缺失为1～2个控制帧（20～40 ms）；中断反复清零保持计时。
+两高速父样本同一阶段仅3/2帧缺完整支撑；新模型右前/右后轮的接触间歇更频繁。
+三个新样本从首次complete到结束约6.4/3.9/3.9 s，最终root相对x约4 m触发地块截断，
+不是只剩不足0.5 s可用时间；无翻倒/failed，选中退步条件均无力矩饱和。
+目标越硬限在父模型同条件也存在，不能由这些相关统计认定其为失败原因。</p>
+<p>两模型均有RF/LF_thigh_collision2对地形的非轮接触：
+出坑后力范数&gt;1 N的任一非轮接触帧，新模型为138/322、66/195、47/196，
+父模型为121/278、37/180、43/181。前大腿box最低点重建也接近台面，说明不能忽略非轮接触。
+但它不是新模型独有；高速seed13占比接近，且多数轮接触中断并未与非轮接触出现在同一控制帧，
+不能直接证明“大腿承重导致轮子卸载”。非轮传感器reduce=none、global_frame=false，
+force在接触坐标系，只报告旋转不变范数，不把其第3分量误作世界竖直力或据此计算承重比例。</p>
+<p>结论：低速爬出/跟踪改善已确认；三个退步样本的直接不通过项是四轮有效支撑连续性，
+并非倾角超45°、几何未出坑或没有足够评估时间。真实动力学根因仍待确认：
+20 ms控制帧中的found=0/force=0不能独立区分真实短暂卸载、传感/碰撞处理或接触求解现象。
+保持两模型和原0.5 s判据；下一批建议两模型×上述三个条件小规模配对视频/5 ms子步接触回放，
+核对姿态与非轮接触分担，再决定训练调整。回放入口尚未实现或执行，不记作已完成实验。
+本批分析脚本Ruff/格式/ty/Pyright定向检查通过；不涉及src/奖励/资产修改或第三轮训练。</p>
 </section>
 </section>
 
@@ -1090,6 +1331,10 @@ trace未记contact.pos，且仅控制帧采样，不能断言真实跳跃/卸载
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-1198-pt">2026-11-01：model_1198.pt低高度复评完成（用户回传）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">2026-11-14：高高度初筛完成（用户回传）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cm">2026-11-14：高高度原始证据及30 cm轨迹离线核查</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-119830-cm">2026-11-15：model_1198的30 cm固定速度配对初筛完成（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-2197">2026-11-15：第二轮原基线续训完成，model_2197待复评（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2026-11-15：model_2197配对复评完成，低速改善伴随高速稳定率退步（用户回传）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2026-11-15：两模型原始配对证据已下载，支撑连续性退步离线核验</a></li>
 </ul>
   </nav></div>
 

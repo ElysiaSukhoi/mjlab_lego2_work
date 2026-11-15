@@ -475,6 +475,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2026-10-31：阶段3通用基线与固定高度评估（本地实现，尚未训练）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2026-11-01：继续原计划，平地预训练仅作为瓶颈后的备选</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reset">2026-11-01：推理与reset跨模式的指标缓存修复</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-ssh">2026-11-15：GitHub仅为用户版本管理工具，服务器固定采用SSH直传</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2026-11-15：阶段3固定速度配对初筛，先诊断再决定续训</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2026-11-15：配对初筛后追加一轮原基线训练预算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2026-11-15：保留两模型，先诊断稳定率退步</a></li>
 </ul>
             </nav>
         </div>
@@ -806,6 +810,50 @@ root/前轮/后轮/完整出坑训练指标为时间占比，stable_pass是episo
 新增推理模式内外切换、局部/完整reset、自动reset和重复episode回归。
 训练时的旧hash清单保留为版本证据；修复使用新的评估hash清单及新日期启动脚本，避免改写原训练版本。</p>
 </section>
+<section id="github-ssh">
+<h2>2026-11-15：GitHub仅为用户版本管理工具，服务器固定采用SSH直传<a class="headerlink" href="#github-ssh" title="Link to this heading">#</a></h2>
+<p>用户再次明确：GitHub仅用于其自行进行本地代码版本控制，是否commit/push及何时进行均由用户决定。
+Codex不自动提交或推送，也不要求每个小批次对应一个Git版本阶段。
+服务器继续使用原目录<code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2</span></code>，按文件清单经SCP/SSH备份、传输、校验及运行验证。
+GitHub连通、CI状态、commit/push或提交SHA均不是开发/同步/测试/训练的前置条件。
+同步和测试入口分开；用文件内容SHA256和实际run配置追溯版本，测试脚本不包含Git更新或固定commit常量。</p>
+<p>清理的失效方案：GitHub中转服务器、首次Git克隆/环境迁移、下载后回传SHA、push后提供SHA再同步。
+这些方案已全部取消；旧bootstrap/v2/stage1脚本、核验JSON和失败现场只作历史资料保留，不再执行。
+相互冲突的旧操作指令已从本节移除；原始历史仍可由既有Git bundle/历史脚本恢复，不删除文件或结果。</p>
+<p>用户授权本地main回退3592c9e Initial commit，后4次改动保留为未提交文件。
+完整bundle和712文件/链接核验见CURRENT_STATUS所列恢复目录；Codex未push。
+用户随后回传GitHub也已回退至initial；该回传不要求继续处理Git历史，机器人工作恢复原计划。</p>
+</section>
+<section id="id11">
+<h2>2026-11-15：阶段3固定速度配对初筛，先诊断再决定续训<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<p>依据model_1198的30 cm初筛8/10及原始轨迹：两个未稳定通过样本恰为最低vx，
+但速度与出生扰动混杂，不能直接归因。先固定坑深0.30 m，vx=0.30/0.40/0.50 m/s各10个完整episode。
+各组逐episode重设seed=7+episode，并记录实际reset的根姿态/速度、关节状态和144维actor首帧；
+汇总器在1e-6容差下核对配对，只排除作为对照变量的vx，heading反馈wz仍应一致。
+即使上一回合步数不同，也不能改变下一回合配对状态；已在CPU短片段回归中覆盖此条件。</p>
+<p>只收窄评估vx范围，不改训练分布、actor144/critic254/动作/奖励/课程/资产或原20 s与稳定0.5 s判据。
+轨迹补记接触点、连续有效支撑时长和非轮接触，辅助区分未爬上与接触间歇；不将其作为奖励或actor输入。
+先用真实checkpoint做3速度×2回合×2步GPU软件检查，完整片段不计入成功率；
+配对检查通过后，再用同一model_1198做3×10完整episode；全部结果写新目录，不更新PPO或覆盖旧模型。
+这些是计划和本地软件验证，远程GPU/策略成功率尚未回传；按实际对照结果再决定训练预算。</p>
+</section>
+<section id="id12">
+<h2>2026-11-15：配对初筛后追加一轮原基线训练预算<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p>用户回传30 cm三速度10组配对结果4/10、10/10、10/10，当前模型低速表现不足得到初筛支持。
+仍不以summary断言具体动力学/奖励根因；先保持训练vx范围0.3～0.6、奖励/课程/PPO/资产与接口，
+从model_1198恢复完整训练状态，新建run，1024环境新增1000次更新（计划24576000样本）。
+仿真及课程重新reset、从最低级起步；不把checkpoint编号当新增训练量，不覆盖父run。
+保持原分布以便区分增加基线训练预算的效果，不同时叠加低速重采样、接触引导或平地预训练。
+结束后同10组配对初态复评三速度；若不足再据实际轨迹和收益决定下一批，当前不承诺1000轮会收敛。
+入口已本地核对，尚未远程执行；实际run/checkpoint/训练完成与模型收益等待用户回传。</p>
+</section>
+<section id="id13">
+<h2>2026-11-15：保留两模型，先诊断稳定率退步<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<p>model2197同初态复评低速由4/10升9/10，中速10/10保持，高速由10/10降8/10；全部曾完整出坑。
+不把更低速度RMSE或合计成功数当作全面更优，不自动替换model1198或立刻追加第三轮训练。
+先取回原始轨迹，分析低/高速退步seed11及高速seed13的稳定支撑中断；0.5 s/45°/四轮判据保持。
+证据不足前不改奖励或放宽指标凑通过；正式鲁棒性结论仍需更大样本及独立高台验证。</p>
+</section>
 </section>
 
 
@@ -847,6 +895,10 @@ root/前轮/后轮/完整出坑训练指标为时间占比，stable_pass是episo
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2026-10-31：阶段3通用基线与固定高度评估（本地实现，尚未训练）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2026-11-01：继续原计划，平地预训练仅作为瓶颈后的备选</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reset">2026-11-01：推理与reset跨模式的指标缓存修复</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github-ssh">2026-11-15：GitHub仅为用户版本管理工具，服务器固定采用SSH直传</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">2026-11-15：阶段3固定速度配对初筛，先诊断再决定续训</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">2026-11-15：配对初筛后追加一轮原基线训练预算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">2026-11-15：保留两模型，先诊断稳定率退步</a></li>
 </ul>
   </nav></div>
 

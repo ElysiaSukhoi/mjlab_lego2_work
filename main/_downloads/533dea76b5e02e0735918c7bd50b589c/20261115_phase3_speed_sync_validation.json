@@ -1,0 +1,9 @@
+{
+  "fixture": "/tmp/lego2_speed_sync_test_f7hi22fv",
+  "apply_exit": 0,
+  "mismatched_or_already_updated_source_rejected": true,
+  "original_code_backed_up": true,
+  "logs_venv_remote_only_files_preserved": true,
+  "no_context_snapshots_in_payload": true,
+  "remote_executed": false
+}

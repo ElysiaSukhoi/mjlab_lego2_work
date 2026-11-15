@@ -8,6 +8,17 @@ Upcoming version (not yet released)
 Added
 ^^^^^
 
+- Added read-only SSH collection of paired evaluation reports and traces,
+  retaining interrupted downloads and existing server results.
+
+- Added source-checked Lego2 continuation and paired re-evaluation launchers
+  with a fixed additional training budget, parent checkpoint verification,
+  cross-model reset comparisons and retained baseline results.
+
+- Added fixed-speed blind-pit evaluation with verified paired resets,
+  contact-position and non-foot traces, and an SSH-delivered three-speed
+  comparison that retains existing models and results.
+
 - Added an explicit 11-term generic blind-pit reward baseline, privileged
   wheel-support and stable-pass metrics, and fixed-height evaluation with
   terminal-state action/contact/reward traces and exact episode counts.
@@ -24,6 +35,17 @@ Added
 - Added a standalone Lego2 action and wheel diagnostic with resolved names,
   raw target probes, CPU kinematics, static step checks, and native MuJoCo PD
   traces. Existing tasks, assets, and training results are preserved.
+
+Changed
+^^^^^^^
+
+- Restore direct SSH transfer for remote development, independent of optional
+  user-managed GitHub commits and pushes; keep synchronization and verification
+  separate and preserve existing training outputs.
+
+- Allow small Lego2 launchers and checksum/file manifests under
+  ``docs/codex/artifacts`` to be tracked for optional version control,
+  while keeping sync archives, training logs and virtual environments ignored.
 
 Fixed
 ^^^^^

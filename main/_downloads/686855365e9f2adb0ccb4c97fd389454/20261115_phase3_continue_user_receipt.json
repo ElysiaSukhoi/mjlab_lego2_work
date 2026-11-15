@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-15 Asia/Shanghai",
+  "source": "user-pasted final training excerpt and saved-file listing",
+  "run": "logs/rsl_rl/lego2_blind_pit/2026-11-15_19-28-14_phase3_continue_1024x1000_v1_20261115_192803_3297676",
+  "final_checkpoint": "logs/rsl_rl/lego2_blind_pit/2026-11-15_19-28-14_phase3_continue_1024x1000_v1_20261115_192803_3297676/model_2197.pt",
+  "checkpoint_sha256": "not yet reported",
+  "reported_checkpoint_iterations": [
+    1200,
+    1250,
+    1300,
+    1350,
+    1400,
+    1450,
+    1500,
+    1550,
+    1600,
+    1650,
+    1700,
+    1750,
+    1800,
+    1850,
+    1900,
+    1950,
+    2000,
+    2050,
+    2100,
+    2150,
+    2197
+  ],
+  "params_files_reported": [
+    "logs/rsl_rl/lego2_blind_pit/2026-11-15_19-28-14_phase3_continue_1024x1000_v1_20261115_192803_3297676/params/agent.yaml",
+    "logs/rsl_rl/lego2_blind_pit/2026-11-15_19-28-14_phase3_continue_1024x1000_v1_20261115_192803_3297676/params/env.yaml"
+  ],
+  "exit_code": 0,
+  "elapsed": "0:34:02",
+  "last_iteration_time_s": 1.72,
+  "evidence_dir": "/home/ajifang/zrq/backups/phase3_continue_20261115_192803_3297676",
+  "issued_parameters": {
+    "parent_checkpoint": "model_1198.pt",
+    "num_envs": 1024,
+    "rollout_steps": 24,
+    "additional_iterations": 1000,
+    "seed": 7,
+    "planned_new_samples": 24576000
+  },
+  "last_log_excerpt": {
+    "Episode_Reward/flat_orientation_l2": -0.0006,
+    "Episode_Reward/joint_torques_l2": -0.0198,
+    "Episode_Reward/joint_acc_wheel_l2": -0.0002,
+    "Episode_Metrics/pit_complete": 0.3408,
+    "Metrics/twist/error_vel_xy": 0.0199,
+    "Episode_Reward/track_ang_vel_z_exp": 0.7246,
+    "Episode_Termination/time_out": 0.0
+  },
+  "limits": [
+    "Full stdout/Total timesteps and actual params not downloaded",
+    "pit_complete is a training time-fraction metric, not stable episode success rate",
+    "New policy evaluation and SHA256 are pending"
+  ]
+}

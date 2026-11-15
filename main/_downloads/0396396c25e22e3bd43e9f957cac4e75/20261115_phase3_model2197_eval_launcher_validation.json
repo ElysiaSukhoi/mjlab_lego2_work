@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-15 Asia/Shanghai",
+  "script_sha256": "85451df6ebc1d0343215a010d93348bb4db81c8b6365bddfa8244b6d7ac22ef8",
+  "cli_cases": [
+    {
+      "mode": "gpu_smoke",
+      "speed": 0.3,
+      "episodes": 2,
+      "max_steps": 2
+    },
+    {
+      "mode": "gpu_smoke",
+      "speed": 0.4,
+      "episodes": 2,
+      "max_steps": 2
+    },
+    {
+      "mode": "gpu_smoke",
+      "speed": 0.5,
+      "episodes": 2,
+      "max_steps": 2
+    },
+    {
+      "mode": "full",
+      "speed": 0.3,
+      "episodes": 10,
+      "max_steps": null
+    },
+    {
+      "mode": "full",
+      "speed": 0.4,
+      "episodes": 10,
+      "max_steps": null
+    },
+    {
+      "mode": "full",
+      "speed": 0.5,
+      "episodes": 10,
+      "max_steps": null
+    }
+  ],
+  "cross_model_comparison_fixture": "passed gains/losses",
+  "mismatched_initial_state_rejected": true,
+  "corrupt_report_rejected": true,
+  "checkpoint_parent_params_copy": "passed",
+  "screen_guard": "passed",
+  "bash_and_two_python_chunks": "passed",
+  "fixture": "/tmp/lego2_eval2197_comparison_15w_0oeq",
+  "no_simulation_or_training_started": true,
+  "remote_executed": false,
+  "limits": "Artificial report fixtures verify comparison logic; real model2197 SHA/weights/GPU evaluation pending."
+}
