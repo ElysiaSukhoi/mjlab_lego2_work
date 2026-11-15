@@ -509,9 +509,10 @@ document.write(`
 已完整出坑，但接触通道间歇未检出，连续支撑最长0.22 s，最大倾角15.5°，到边界截断。
 运动学重建轮底与trace吻合，轮子距两侧壁至少0.633 m，未见轮子坑角借力。
 数值/方法/限制归EXPERIMENT_LOG最新条目与分析JSON。本批未改src或训练，只做离线分析。</p>
-<p>2026-11-15后续同步采用本地→GitHub→服务器；首次服务器接入待只读核查，流程归PROJECT_CONTEXT。
-修正.gitignore以放行docs/codex/artifacts的小脚本/清单，压缩包/logs/.venv仍忽略；
-9项规则与diff空白核验通过。仅修改忽略规则和文档，尚未commit/push或操作服务器。</p>
+<p>2026-11-15用户已提交14038e3（轻量脚本/清单及Git同步准备）；原目录Git查询回传为非仓库。
+首次接入入口已准备：归档旧源码，新目录mjlab_lego2_git克隆明确提交并比对；原目录/环境/结果保留。
+本地新建/干净重跑/拒绝脏目录核验通过，未远程执行或创建新环境；暂未切换训练入口。
+完整流程归PROJECT_CONTEXT，不直接复用旧.venv的editable安装，也不在旧目录init/pull。</p>
 </section>
 <section id="id4">
 <h2>当前问题<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
@@ -528,7 +529,8 @@ document.write(`
 <section id="id5">
 <h2>下一步任务<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>先只读核对服务器现有源码目录的Git根目录/分支/HEAD/改动与来源，准备首次GitHub接入，保留所有结果。</p></li>
+<li><p>推送已完成的14038e3，上传<a class="reference download internal" download="" href="../_downloads/9024e852d8cbd015db4c253b882f01a9/bootstrap_remote_git_20261115.sh"><span class="xref download myst">首次接入入口</span></a>并执行，
+回传comparison.json/核查目录；按实际差异安排新环境及训练入口，保持旧结果。</p></li>
 <li><p>准备30 cm固定vx=0.30/0.40/0.50 m/s、相同初态和seed的小批对照及回放，入口尚未实现。</p></li>
 <li><p>核对低速受阻/台面接触间歇是否可重复；必要时补接触点/非轮接触，保持现有0.5 s判据。</p></li>
 <li><p>再决定训练预算及正式每高度至少100次/独立直线高台/平地验证。
@@ -538,8 +540,9 @@ document.write(`
 <section id="git">
 <h2>Git 与实验状态<a class="headerlink" href="#git" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>本地已有Git，main/3592c9e（Initial commit）；当前有忽略规则/文档未提交更改，Codex不自动commit/push。
+<li><p>本地main/14038e3，用户已提交既有同步准备；本批接入脚本/核验/文档待提交，Codex不自动commit/push。
 GitHub代码已显示，CI失败根因待日志确认；Codex未自行访问训练服务器。</p></li>
+<li><p>服务器原目录非Git仓库（用户回传）；相邻Git候选目录首次克隆待执行，尚未安装新环境或开始训练。</p></li>
 <li><p>阶段2远程证据：
 <code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase2_20261031_211214_2150255/check_20261031_211214_2150255</span></code>。</p></li>
 <li><p>阶段3远程备份：<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/phase3_20261031_214701_2152912</span></code>，

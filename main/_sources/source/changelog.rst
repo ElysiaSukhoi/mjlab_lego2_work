@@ -8,6 +8,10 @@ Upcoming version (not yet released)
 Added
 ^^^^^
 
+- Added a staged remote Git bootstrap that archives existing source, clones
+  into a separate directory, verifies the selected commit and reports file
+  differences while preserving the existing environment and training results.
+
 - Added an explicit 11-term generic blind-pit reward baseline, privileged
   wheel-support and stable-pass metrics, and fixed-height evaluation with
   terminal-state action/contact/reward traces and exact episode counts.

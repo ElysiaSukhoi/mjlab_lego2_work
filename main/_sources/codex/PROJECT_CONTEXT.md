@@ -67,6 +67,7 @@ critic、奖励和评估可以使用训练特权信息。其他机器人80 cm演
 | 外层研究项目 | `/home/asus/work/Jiche_Project`；旧中文项目路径已迁移，非Jicha_Project |
 | 远程SSH | `ajifang@27.128.203.222`，端口 `10395` |
 | 远程训练源码 | `~/zrq/mjlab_lego2` |
+| Git首次接入候选目录 | `~/zrq/mjlab_lego2_git`；首次克隆/比对入口已准备，未回传执行，尚非训练入口 |
 | 旧远程只读快照 | `/home/asus/work/Jiche_Project/高台训练/remote_snapshot/20261015_204549/mjlab_lego2` |
 | 历史工作副本，非编辑入口 | `/home/asus/work/Jiche_Project/高台训练/working_copy/mjlab_lego2` |
 | 远程源码备份记录 | `~/zrq/backups/mjlab_lego2_pre_platform_climb_20261015_215244/`，内有 `source.tar.gz` 和 `remote_state.txt` |
@@ -121,8 +122,13 @@ root超过局部4 m或轮子包络到达4.9 m时truncate，此信号不等于越
 用户审阅后自行提交并推送GitHub → 服务器获取已确认的同一提交、执行远程校验 →
 配置与功能验收通过后在screen内按阶段试训 → 记录实际结果后决定下一步。
 Codex不自动commit/push；既有类型检查失败仍按AGENTS规则处理，不因采用Git而降低验收要求。
-首次把服务器现有目录接入此仓库，须先只读核对Git根目录、分支/HEAD、未提交和未跟踪文件、
-原有origin是否对应目标仓库及是否共享历史，必要时先备份或使用新目录；目前服务器接入状态待确认。
+首次接入须先只读核对服务器现有源码目录的Git状态。2026-11-15用户回传原目录
+`~/zrq/mjlab_lego2`的Git查询均为“不是git仓库”；该目录目前不具备Git更新能力。
+采用新目录首次克隆：旧目录保留，先归档src/scripts/tests和依赖清单，再将GitHub代码克隆到
+`~/zrq/mjlab_lego2_git`，核对明确提交及与旧目录的逐文件差异；目前仅本地准备/核验完成。
+比对结果经核查后再安排独立新环境和训练入口切换；不直接复用旧.venv中的editable安装，
+以免新目录命令仍加载旧源码。旧logs/checkpoint的引用方式届时明确，不自动移动旧结果。
+旧目录不初始化Git，不把.git元数据直接复制到已有源码上；新目录也不覆盖已有未审阅改动。
 接入后在工作区干净、分支及来源核对完成时使用fetch及fast-forward更新；
 记录实际完整commit SHA，不能只凭main分支名认定与本地版本一致。私有仓库的服务器读权限单独配置。
 文档交接、git fetch或pull均不自动触发服务器训练，也不自动解压旧同步包。

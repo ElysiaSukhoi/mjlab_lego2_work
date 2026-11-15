@@ -129,7 +129,8 @@ trace也缺少非轮接触/接触点坐标，不能声称全面排除所有机�
 
 ## Git、同步与实验边界
 
-本地现有Git元数据，main的HEAD为3592c9e（Initial commit）；首次核对时干净，当前有未提交准备更改。
+本地main的HEAD现为14038e3（完善Git同步流程并纳入辅助脚本），用户已完成本地提交；
+本次接入准备前工作区干净，当前有本批脚本/验证记录/文档更改，Codex未commit/push。
 用户截图显示GitHub已有代码，Actions为10失败、2成功、1跳过、6取消；推送认证已解决。
 已只读核对ci.yml和docker.yml，检查覆盖全库格式/类型/多Python版本测试/打包与Docker。
 尚未读取远程失败步骤日志，不能从检查名称推断具体根因；本轮未修改工作流/源码或重跑CI。
@@ -140,8 +141,18 @@ Codex不自动commit/push，本轮未自行执行PPO或访问远程服务器。
 发现docs/codex/artifacts脚本/清单此前全部被artifacts/规则忽略且未跟踪；
 本批只为.sh/.py/.sha256/*_files.txt放行，压缩包/logs/.venv仍忽略。
 9项Git忽略规则核验及git diff --check通过；未执行仿真、修改运行源码、commit/push或服务器接入。
-这些脚本当前只是可加入Git，尚未提交，服务器端Git来源/改动/认证状态仍待只读核查。
+已有轻量脚本已由用户提交进14038e3；服务器端GitHub访问认证仍待验证。
 CI失败不撤销上传，但运行影响待日志定因；每批本地验证和远程小场景验收仍保留。
+
+用户回传服务器原目录`~/zrq/mjlab_lego2`不是Git仓库，不能直接pull。
+本批准备[首次接入入口](artifacts/bootstrap_remote_git_20261115.sh)：
+归档旧src/scripts/tests/依赖清单，新目录`~/zrq/mjlab_lego2_git`克隆main，
+核对完整14038e3提交并输出comparison.json；原目录、.venv和logs/checkpoint不变。
+此为新目录代码接入/差异核查，未安装新环境，尚未切换训练入口；远程尚未执行。
+[本地验证](diagnostics/20261115_git_bootstrap_local_validation.json)确认新建/干净重跑通过、
+有未审阅改动时停止，旧源码/模拟checkpoint/环境链接保持不变，Bash及内嵌Python语法通过。
+下一步用户推送已完成的14038e3、上传并运行入口，回传comparison.json和核查目录，
+据实际差异决定新环境与数据引用方式；暂不在旧目录执行init/pull或覆盖源码。
 用户已回传首次短训及一次低阶续训结果，记录于EXPERIMENT_LOG；旧日志/checkpoint和本次新run均保留。
 阶段3包纳入本地src注释及最新交接；AGENTS→CLAUDE链接及长期中文注释规范本地保留，
 CLAUDE不在远程训练增量清单内。旧v1/v2包、hash和原验证JSON保留历史用途，不能覆盖当前交接。
