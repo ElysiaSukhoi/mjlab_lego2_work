@@ -475,7 +475,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2026-10-31：阶段3通用基线与固定高度评估（本地实现，尚未训练）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2026-11-01：继续原计划，平地预训练仅作为瓶颈后的备选</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reset">2026-11-01：推理与reset跨模式的指标缓存修复</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github">2026-11-15：后续代码同步采用GitHub中转，保留服务器实验数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github">2026-11-15：后续代码同步采用GitHub中转，保留服务器实验数据</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sha">同日调整：下载与版本验收拆分，固定SHA入口停用</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -823,6 +826,22 @@ logs/、.venv/继续排除，旧实验结果不删除；已跟踪的历史诊断
 先归档旧源码并锁定本地已确认的14038e32dff2a301f9cade041015119f2cddf23e，
 输出逐文件差异后再安排新环境和训练入口切换。目前未回传克隆/比对执行结果。
 不把旧.venv直接当作新目录运行环境，其editable依赖可能仍指向旧源码。</p>
+<p>同日首版远程克隆报curl 92 HTTP/2 CANCEL、unexpected disconnect及EOF，未形成比对报告。
+首版目录与14038e3固定提交仅保留历史用途，由v2接入方案替代：
+用单次命令<code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">http.version=HTTP/1.1</span></code>和depth=1浅克隆至另一新目录
+<code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2_git_http1</span></code>，核对新近用户提交be4f42aaf97bd6e3b42ec9342d7d702750dfa27c。
+不扩大postBuffer或关闭TLS校验，不修改全局Git配置、不删除失败现场。
+本地file://核验只证明脚本分支/保护行为，不能证明服务器HTTP/1.1链路已恢复。</p>
+<section id="sha">
+<h3>同日调整：下载与版本验收拆分，固定SHA入口停用<a class="headerlink" href="#sha" title="Link to this heading">#</a></h3>
+<p>依据用户明确提出的同步时序要求，以上首版/v2在下载脚本中写死14038e3/be4f42a的做法停用。
+新入口sync_remote_git_stage1_20261115.sh只克隆或对正确来源的干净main做pull –ff-only，
+记录下载后实际HEAD、origin/main和状态。文件hash/源码比对、环境安装与运行验收移到回传版本后的第二步。
+这避免开发者准备脚本后用户又创建新提交所导致的过时常量，不取消运行前的版本可追溯要求。
+Git提交hash由提交对象确定，普通fast-forward pull不重新计算或生成新提交；
+用户需要回传的是服务器实际接收的提交。本地用两个不同已有提交核验无需改脚本即可快进到新版。
+HTTP/1.1及浅克隆措施保留；旧目录/结果/失败现场保留，第二步尚未执行。</p>
+</section>
 </section>
 </section>
 
@@ -865,7 +884,10 @@ logs/、.venv/继续排除，旧实验结果不删除；已跟踪的历史诊断
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2026-10-31：阶段3通用基线与固定高度评估（本地实现，尚未训练）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">2026-11-01：继续原计划，平地预训练仅作为瓶颈后的备选</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reset">2026-11-01：推理与reset跨模式的指标缓存修复</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github">2026-11-15：后续代码同步采用GitHub中转，保留服务器实验数据</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#github">2026-11-15：后续代码同步采用GitHub中转，保留服务器实验数据</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sha">同日调整：下载与版本验收拆分，固定SHA入口停用</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

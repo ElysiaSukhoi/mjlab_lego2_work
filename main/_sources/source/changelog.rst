@@ -35,9 +35,14 @@ Changed
 - Allow small Lego2 launchers and checksum/file manifests under
   ``docs/codex/artifacts`` to be tracked for Git-based synchronization,
   while keeping sync archives, training logs and virtual environments ignored.
+- Separate remote Git download/version recording from source comparison and
+  runtime acceptance, removing hard-coded commit requirements from download.
 
 Fixed
 ^^^^^
+
+- Added an HTTP/1.1 shallow-clone retry entry for interrupted remote Git
+  bootstrap, retaining the previous attempt and verifying the selected commit.
 
 - Added checkpoint, episode and periodic step progress to blind-pit evaluation,
   flushing traces at progress updates so long runs can be monitored.

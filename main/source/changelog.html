@@ -570,11 +570,15 @@ traces. Existing tasks, assets, and training results are preserved.</p></li>
 <li><p>Allow small Lego2 launchers and checksum/file manifests under
 <code class="docutils literal notranslate"><span class="pre">docs/codex/artifacts</span></code> to be tracked for Git-based synchronization,
 while keeping sync archives, training logs and virtual environments ignored.</p></li>
+<li><p>Separate remote Git download/version recording from source comparison and
+runtime acceptance, removing hard-coded commit requirements from download.</p></li>
 </ul>
 </section>
 <section id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Added an HTTP/1.1 shallow-clone retry entry for interrupted remote Git
+bootstrap, retaining the previous attempt and verifying the selected commit.</p></li>
 <li><p>Added checkpoint, episode and periodic step progress to blind-pit evaluation,
 flushing traces at progress updates so long runs can be monitored.</p></li>
 <li><p>Fixed blind-pit metric caches so resets outside PyTorch inference mode
