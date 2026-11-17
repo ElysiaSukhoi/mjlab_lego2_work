@@ -1,0 +1,12 @@
+{
+  "baseline_git_commit": "63f293a",
+  "files": {
+    "src/mjlab/tasks/velocity/config/lego2/__init__.py": "b4893d71ba3288fe7c1c6480ac25f1d1f22505ce4e1d0a57d487ea96013db437",
+    "docs/source/changelog.rst": "cd7d9a26ed5f997fdc53d1f7d289714aa42390b050eca13701e9203024acc1f9"
+  },
+  "new_files_before": {
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_rewards.py": false,
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_reward_v2_env_cfg.py": false,
+    "tests/test_lego2_blind_pit_reward_v2.py": false
+  }
+}

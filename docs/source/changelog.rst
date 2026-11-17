@@ -8,6 +8,20 @@ Upcoming version (not yet released)
 Added
 ^^^^^
 
+- Added read-only collection of reward-v2 continuation and earlier trial evidence
+  for paired quality and cross-run reproducibility review.
+
+- Added reward-v2 full-state continuation to a planned 2200 updates under the
+  new rewards, retaining earlier runs and performing paired quality screening.
+
+- Added audited actor-only Lego2 reward-v2 fine-tuning with fresh critic,
+  optimizer and counters, and paired policy evaluation with clearance and
+  non-wheel contact quality metrics.
+
+- Added an isolated Lego2 blind-pit reward-v2 candidate with a pitch deadband,
+  non-wheel contact costs and a minimum base clearance on locally level ground,
+  retaining the original reward task and all existing training results.
+
 - Added read-only SSH collection of paired evaluation reports and traces,
   retaining interrupted downloads and existing server results.
 
@@ -39,6 +53,10 @@ Added
 Changed
 ^^^^^^^
 
+- Expanded plain Chinese module/function guides and key-parameter comments
+  across Lego2 terrain, rewards, diagnostics, networks, training and evaluation,
+  distinguishing the active blind-pit tasks from the legacy fixed-platform task.
+
 - Restore direct SSH transfer for remote development, independent of optional
   user-managed GitHub commits and pushes; keep synchronization and verification
   separate and preserve existing training outputs.
@@ -49,6 +67,12 @@ Changed
 
 Fixed
 ^^^^^
+
+- Fixed reward-v2 continuation self-backup when launched by a relative path.
+
+- Added a reward-v2 verification recovery launcher using the task-list module
+  entry point, avoiding the console command's task-count exit status, with
+  explicit progress and error reporting.
 
 - Added checkpoint, episode and periodic step progress to blind-pit evaluation,
   flushing traces at progress updates so long runs can be monitored.

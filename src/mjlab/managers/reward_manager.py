@@ -1,4 +1,9 @@
-"""Reward manager for computing reward signals."""
+"""把任务选出的各项奖励合成为每个环境这一控制步的总奖励。
+
+env_cfg给函数、参数和weight；这里逐项计算raw×weight，默认再乘控制周期dt。
+Episode_Reward按最大回合时长归一化，提前结束时不等于实际已走时间的平均值。
+可视化/逐项接口提供加权速率，评估脚本再记录dt贡献；比较日志要分清这两种量。
+"""
 
 from __future__ import annotations
 
@@ -18,7 +23,7 @@ if TYPE_CHECKING:
 
 @dataclass(kw_only=True)
 class RewardTermCfg(ManagerTermBaseCfg):
-  """Configuration for a reward term."""
+  """一项奖励的配置：选计算函数、参数和权重，决定该项如何影响总分。"""
 
   func: Any
   """The callable that computes this reward term's value."""
@@ -28,28 +33,11 @@ class RewardTermCfg(ManagerTermBaseCfg):
 
 
 class RewardManager(ManagerBase):
-  """Manages reward computation by aggregating weighted reward terms.
+  """调用任务配置选好的奖励函数，汇总每步得分并维护回合日志。
 
-  Terms with ``weight == 0`` (or ``None``) are skipped at registration — they are
-  not computed, listed in Active Reward Terms, or logged as ``Episode_Reward/*``.
-  This matches robot_lab ``disable_zero_weight_rewards``.
-
-  Reward Scaling Behavior:
-    By default, rewards are scaled by the environment step duration (dt). This
-    normalizes cumulative episodic rewards across different simulation frequencies.
-    The scaling can be disabled via the ``scale_by_dt`` parameter.
-
-    When ``scale_by_dt=True`` (default):
-      - ``reward_buf`` (returned by ``compute()``) = raw_value * weight * dt
-      - ``_episode_sums`` (cumulative rewards) are scaled by dt
-      - ``Episode_Reward/*`` logged metrics are scaled by dt
-
-    When ``scale_by_dt=False``:
-      - ``reward_buf`` = raw_value * weight (no dt scaling)
-
-    Regardless of the scaling setting:
-      - ``_step_reward`` (via ``get_active_iterable_terms()``) always contains
-        the unscaled reward rate (raw_value * weight)
+  默认总奖励为原始值×权重×dt；权重为0的项不会加入计算和日志。
+  get_active_iterable_terms给出各项加权速率，reset结算Episode_Reward。
+  提前结束回合时，日志仍按配置的最大回合时长归一化。
   """
 
   _env: ManagerBasedRlEnv
@@ -104,6 +92,7 @@ class RewardManager(ManagerBase):
   def reset(
     self, env_ids: torch.Tensor | slice | None = None
   ) -> dict[str, torch.Tensor]:
+    """输出所选环境本回合的奖励日志并清空累计量；日志按最大回合时长归一化。"""
     if env_ids is None:
       env_ids = slice(None)
     extras = {}
@@ -118,6 +107,7 @@ class RewardManager(ManagerBase):
     return extras
 
   def compute(self, dt: float) -> torch.Tensor:
+    """逐项计算奖励、乘任务权重并汇总，默认返回这一控制步乘dt后的总奖励。"""
     self._reward_buf[:] = 0.0
     scale = dt if self._scale_by_dt else 1.0
     for term_idx, (name, term_cfg) in enumerate(

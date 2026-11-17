@@ -1,0 +1,43 @@
+{
+  "evidence_level": "user-pasted partial comparison and trial completion output; raw files not downloaded",
+  "reported_on": "2026-11-16",
+  "remote_evidence_dir": "/home/ajifang/zrq/backups/reward_v2_trial_20261116_AuHs5A",
+  "candidate_checkpoint": "logs/rsl_rl/lego2_blind_pit_reward_v2/20261116_121444_3330412_actor2197_512x300/model_299.pt",
+  "reference_checkpoint_sha256": "b8bc52a8ee370eb94e359bc71d310f5f1cd0ec013cae9e5982b44fb13b8a54a4",
+  "candidate_checkpoint_sha256": "cb06e04dd5528ada05b730b687444ab82a0f0a03ca26c9b5f2e94a0005ea742c",
+  "input_report_sha256": {
+    "paired/parent_0.3/report.json": "e2381dd1890c0e81a057a6dc8f3471f57273805bc5cf9bee86198d1f79bc0a00",
+    "paired/candidate_0.3/report.json": "841935ba555fa958c60941a55d8026d512d53f2a11a4c700adee8dac119a0a8c"
+  },
+  "condition": {"height_m": 0.3, "speed_m_s": 0.3},
+  "reference": {
+    "n": 3,
+    "passed": 1,
+    "complete": 3,
+    "failed": 0,
+    "mean_speed_rmse": 0.025173065371836684,
+    "clearance_eligible_fraction": 0.5824337585868499,
+    "low_fraction_of_eligible_frames": 0.7076663858466723,
+    "nonfoot_fraction_after_first_complete": 0.4045881126173097,
+    "min_root_rim_m_after_first_complete": 0.21527396142482758
+  },
+  "candidate": {
+    "n": 3,
+    "passed": 0,
+    "complete": 0,
+    "failed": 0,
+    "mean_speed_rmse": 0.25235855734231155,
+    "clearance_eligible_fraction": 0.12533333333333332,
+    "low_fraction_of_eligible_frames": 0.0,
+    "nonfoot_fraction_after_first_complete": null,
+    "min_root_rim_m_after_first_complete": null
+  },
+  "trial_completed_by_user_report": true,
+  "limits": [
+    "Only 30 cm at 0.3 m/s comparison was pasted; 0.5 m/s results unknown",
+    "Full stdout, migration audit, checkpoint contents, reset pairing and traces not independently verified locally",
+    "No completion means post-completion null metrics are unavailable, not zero contact",
+    "Zero low-clearance fraction applies only to eligible frames; candidate eligibility is 12.53 percent",
+    "Cannot isolate reward-term effects from fresh critic/optimizer, learning rate, curriculum or short training budget"
+  ]
+}

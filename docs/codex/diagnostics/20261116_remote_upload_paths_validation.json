@@ -1,0 +1,35 @@
+{
+  "relative_path_regression": [
+    {
+      "launch": "relative_parent",
+      "self_backup_verified": true,
+      "expected_source_check_stop": 9
+    },
+    {
+      "launch": "relative_project",
+      "self_backup_verified": true,
+      "expected_source_check_stop": 9
+    },
+    {
+      "launch": "absolute",
+      "self_backup_verified": true,
+      "expected_source_check_stop": 9
+    }
+  ],
+  "cleanup_preview": true,
+  "cleanup_verified": [
+    "identical copy archived",
+    "conflicting original archived without replacing canonical",
+    "missing canonical archived without promoting old script",
+    "unknown files/symlinks/backups preserved",
+    "tar snapshot and manifest verified",
+    "repeat no-op"
+  ],
+  "bash_and_embedded_python_syntax": true,
+  "remote_access": false,
+  "training": false,
+  "current_script_sha256": {
+    "docs/codex/artifacts/continue_reward_v2_2200_20261116.sh": "f2473e5792e24cb055ad42f797386e02f10ca83acc64dd03629a818658889f23",
+    "docs/codex/artifacts/organize_remote_uploads_20261116.sh": "868edcf516d4191106da1cdff9f516b173f0a0f430987b6e675a9b191539f6f5"
+  }
+}

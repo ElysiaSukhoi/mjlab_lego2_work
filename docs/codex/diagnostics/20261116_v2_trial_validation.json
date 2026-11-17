@@ -1,0 +1,71 @@
+{
+  "status": "local validation completed, remote trial NOT run",
+  "payload_files": [
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_warmstart.py",
+    "scripts/tools/train_lego2_blind_pit_reward_v2.py",
+    "scripts/tools/compare_lego2_reward_v2.py",
+    "tests/test_lego2_blind_pit_warmstart.py",
+    "docs/codex/artifacts/run_phase3_reward_v2_trial_20261116.sh",
+    "docs/codex/artifacts/v2_trial_prerequisites_20261116.sha256",
+    "docs/codex/artifacts/v2_trial_20261116_files.txt",
+    "docs/codex/artifacts/v2_trial_sources_20261116.sha256",
+    "scripts/tools/evaluate_lego2_blind_pit.py"
+  ],
+  "source_checks": 50,
+  "release_bundle": "docs/codex/artifacts/lego2_reward_v2_trial_20261116_v2.tar.gz",
+  "bundle_sha256": "b593ff441092af184e7b7a7961c4e1507ea844265f0aeef3577005e593e024d3",
+  "plan": {
+    "parent_checkpoint": "logs/rsl_rl/lego2_blind_pit/2026-11-15_19-28-14_phase3_continue_1024x1000_v1_20261115_192803_3297676/model_2197.pt",
+    "parent_sha256": "b8bc52a8ee370eb94e359bc71d310f5f1cd0ec013cae9e5982b44fb13b8a54a4",
+    "num_envs": 512,
+    "new_iterations": 300,
+    "rollout": 24,
+    "planned_new_samples": 3686400,
+    "seed": 7,
+    "actor_including_normalizer_and_distribution": "transfer",
+    "critic_including_normalizer": "fresh",
+    "optimizer": "fresh",
+    "initial_learning_rate": 0.001,
+    "schedule": "adaptive",
+    "iteration_and_common_step_counter": 0,
+    "terrain_initial_level": 0,
+    "expected_final_checkpoint_basename_not_actual_result": "model_299.pt",
+    "evaluation": [
+      {
+        "height_m": 0.03,
+        "speed_m_s": 0.5
+      },
+      {
+        "height_m": 0.3,
+        "speed_m_s": 0.5
+      },
+      {
+        "height_m": 0.3,
+        "speed_m_s": 0.3
+      }
+    ],
+    "paired_reset_seeds": [
+      11,
+      12,
+      13
+    ],
+    "eval_reward_config": "v2 for both parent and candidate; no PPO updates",
+    "remote_execution": false
+  },
+  "local_validation": {
+    "existing_and_initial_integration_tests": "26 passed, 12.41 s",
+    "final_warmstart_training_and_quality_tests": "3 passed, 4.13 s",
+    "meaning": "synthetic checkpoint; 2 CPU envs, one PPO iteration/48 samples, no real model2197 training",
+    "format_ruff_ty_pyright": "passed",
+    "exact_cli_parsing": "passed",
+    "installer_and_shell_mock_flow": "passed; see 20261116_v2_trial_launcher_validation.json",
+    "gpu_available": false,
+    "available_memory_GiB_approx": 23
+  },
+  "limits": [
+    "Software checks and small planned screen do not prove improved behavior",
+    "Reference is an unchanged parent, not a matched-budget v1 retraining ablation",
+    "No remote run/checkpoint path is prefilled as completed",
+    "Intermediate v1 trial archive is local pre-test material; deliver v2 archive only"
+  ]
+}

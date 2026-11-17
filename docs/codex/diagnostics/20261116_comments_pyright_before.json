@@ -1,0 +1,94 @@
+{
+    "version": "1.1.408",
+    "time": "1794830730348",
+    "generalDiagnostics": [
+        {
+            "file": "/home/asus/work/mjlab_lego2_work/src/mjlab/tasks/velocity/config/lego2/env_cfgs.py",
+            "severity": "error",
+            "message": "Argument of type \"tuple[Literal['.*_HFE'], Literal['.*_KFE']]\" cannot be assigned to parameter \"actuator_names\" of type \"str | list[str] | None\" in function \"__init__\"\n  Type \"tuple[Literal['.*_HFE'], Literal['.*_KFE']]\" is not assignable to type \"str | list[str] | None\"\n    \"tuple[Literal['.*_HFE'], Literal['.*_KFE']]\" is not assignable to \"str\"\n    \"tuple[Literal['.*_HFE'], Literal['.*_KFE']]\" is not assignable to \"list[str]\"\n    \"tuple[Literal['.*_HFE'], Literal['.*_KFE']]\" is not assignable to \"None\"",
+            "range": {
+                "start": {
+                    "line": 426,
+                    "character": 55
+                },
+                "end": {
+                    "line": 426,
+                    "character": 71
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "/home/asus/work/mjlab_lego2_work/src/mjlab/tasks/velocity/mdp/rewards.py",
+            "severity": "error",
+            "message": "Argument of type \"list[int] | slice[Any, Any, Any]\" cannot be assigned to parameter \"obj\" of type \"Sized\" in function \"len\"\n  Type \"list[int] | slice[Any, Any, Any]\" is not assignable to type \"Sized\"\n    \"slice[Any, Any, Any]\" is incompatible with protocol \"Sized\"\n      \"__len__\" is not present",
+            "range": {
+                "start": {
+                    "line": 379,
+                    "character": 12
+                },
+                "end": {
+                    "line": 379,
+                    "character": 30
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "/home/asus/work/mjlab_lego2_work/src/mjlab/tasks/velocity/mdp/rewards.py",
+            "severity": "error",
+            "message": "Argument of type \"list[int] | slice[Any, Any, Any]\" cannot be assigned to parameter \"obj\" of type \"Sized\" in function \"len\"\n  Type \"list[int] | slice[Any, Any, Any]\" is not assignable to type \"Sized\"\n    \"slice[Any, Any, Any]\" is incompatible with protocol \"Sized\"\n      \"__len__\" is not present",
+            "range": {
+                "start": {
+                    "line": 855,
+                    "character": 17
+                },
+                "end": {
+                    "line": 855,
+                    "character": 36
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "/home/asus/work/mjlab_lego2_work/src/mjlab/tasks/velocity/mdp/rewards.py",
+            "severity": "error",
+            "message": "Argument of type \"list[int] | slice[Any, Any, Any]\" cannot be assigned to parameter \"obj\" of type \"Sized\" in function \"len\"\n  Type \"list[int] | slice[Any, Any, Any]\" is not assignable to type \"Sized\"\n    \"slice[Any, Any, Any]\" is incompatible with protocol \"Sized\"\n      \"__len__\" is not present",
+            "range": {
+                "start": {
+                    "line": 870,
+                    "character": 14
+                },
+                "end": {
+                    "line": 870,
+                    "character": 36
+                }
+            },
+            "rule": "reportArgumentType"
+        },
+        {
+            "file": "/home/asus/work/mjlab_lego2_work/src/mjlab/tasks/velocity/mdp/rewards.py",
+            "severity": "error",
+            "message": "Argument of type \"list[int] | slice[Any, Any, Any]\" cannot be assigned to parameter \"obj\" of type \"Sized\" in function \"len\"\n  Type \"list[int] | slice[Any, Any, Any]\" is not assignable to type \"Sized\"\n    \"slice[Any, Any, Any]\" is incompatible with protocol \"Sized\"\n      \"__len__\" is not present",
+            "range": {
+                "start": {
+                    "line": 933,
+                    "character": 17
+                },
+                "end": {
+                    "line": 933,
+                    "character": 36
+                }
+            },
+            "rule": "reportArgumentType"
+        }
+    ],
+    "summary": {
+        "filesAnalyzed": 27,
+        "errorCount": 5,
+        "warningCount": 0,
+        "informationCount": 0,
+        "timeInSec": 2.161
+    }
+}
+

@@ -1,4 +1,9 @@
-"""Metrics manager for logging custom per-step metrics during training."""
+"""把任务观察指标汇总成Episode_Metrics日志，不用于决定动作或加分。
+
+env_cfg通过MetricsTermCfg登记函数和汇总方式：mean是帧平均，last是最后一帧，
+max是最高值，sum是累计值。名称相似的指标也可能采用不同统计口径。
+例如Blind-Pit阶段占比用mean，稳定成功的回合内记忆值用last。
+"""
 
 from __future__ import annotations
 
@@ -19,24 +24,10 @@ REDUCE_OPTIONS = ("last", "max", "mean", "sum")
 
 @dataclass(kw_only=True)
 class MetricsTermCfg(ManagerTermBaseCfg):
-  """Configuration for a metrics term.
+  """一项观察指标的配置，决定计算函数和回合汇总方式。
 
-  Attributes:
-    per_substep: If True, evaluate this term once per physics substep inside
-      the decimation loop and report the per-step mean. Only the integrated
-      state (qpos, qvel, act) is current mid-loop; all derived quantities
-      (xpos, xquat, site_xpos, actuator_force, contacts, ...) are stale.
-
-    reduce: How to aggregate per-step values into an episode metric.
-      - ``"mean"`` (default) reports ``sum / step_count``.
-      - ``"last"`` reports the value from the final step of the episode,
-        useful for binary success metrics that should not be averaged over
-        timesteps.
-      - ``"max"`` reports the highest value seen during the episode, useful
-        for peak metrics like maximum power or contact force.
-      - ``"sum"`` reports the accumulated total over the episode, useful for
-        cumulative quantities like episodic reward or total distance
-        traveled.
+  mean/last/max/sum分别取帧平均、最后值、最高值、累计值。
+  per_substep可在物理子步采样，但派生位置/接触可能尚未刷新；当前坑式指标按控制步读取。
   """
 
   per_substep: bool = False
@@ -44,12 +35,10 @@ class MetricsTermCfg(ManagerTermBaseCfg):
 
 
 class MetricsManager(ManagerBase):
-  """Accumulates per-step metric values, reports episode averages.
+  """累计指标并输出Episode_Metrics，不乘奖励权重或dt。
 
-  Unlike rewards, metrics have no weight, no dt scaling, and no
-  normalization by episode length. Episode values are true per-step
-  averages (sum / step_count), so a metric in [0,1] stays in [0,1]
-  in the logger.
+  mean按实际记录帧数平均；因此0到1的阶段值，其mean表示帧占比。
+  last适合记录回合内已达成的事件，不能与mean的阶段占比混为一谈。
   """
 
   _env: ManagerBasedRlEnv
@@ -122,6 +111,7 @@ class MetricsManager(ManagerBase):
   def reset(
     self, env_ids: torch.Tensor | slice | None = None
   ) -> dict[str, torch.Tensor]:
+    """按每个指标指定的mean/last/max/sum方式结算日志，然后清空所选环境的统计。"""
     if env_ids is None:
       env_ids = slice(None)
     extras = {}

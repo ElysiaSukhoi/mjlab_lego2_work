@@ -1,0 +1,9 @@
+src/mjlab/tasks/velocity/config/lego2/blind_pit_warmstart.py
+scripts/tools/train_lego2_blind_pit_reward_v2.py
+scripts/tools/compare_lego2_reward_v2.py
+tests/test_lego2_blind_pit_warmstart.py
+docs/codex/artifacts/run_phase3_reward_v2_trial_20261116.sh
+docs/codex/artifacts/v2_trial_prerequisites_20261116.sha256
+docs/codex/artifacts/v2_trial_20261116_files.txt
+docs/codex/artifacts/v2_trial_sources_20261116.sha256
+scripts/tools/evaluate_lego2_blind_pit.py

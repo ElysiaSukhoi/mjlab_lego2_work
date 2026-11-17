@@ -1,4 +1,9 @@
-"""Rewards used by the incremental Lego2 platform-climb task."""
+"""旧固定高台任务的专项奖励计算，不用于当前Blind-Pit。
+
+platform_climb_env_cfg.py指定权重、台沿位置和高度，再调用下面的函数。
+这些函数会利用固定台面区域鼓励接近、抬升或进入台面；它们不是当前v2的通用代价。
+返回值由奖励管理器乘权重/时间步长；是否结束回合由terminations模块另行判断。
+"""
 
 from __future__ import annotations
 
@@ -19,13 +24,7 @@ def platform_approach(
   platform_edge_x: float,
   asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
 ) -> torch.Tensor:
-  """Reward normalized forward progress toward the platform's near edge.
-
-  The platform center is the terrain environment origin for the fixed
-  single-platform task.  This term supplies a small dense signal based on the
-  robot's relative x position; it does not decide whether the platform has
-  been climbed successfully.
-  """
+  """按靠近固定台沿的进度给分，鼓励走到台前；不代表已经上台。"""
   asset: Entity = env.scene[asset_cfg.name]
   relative_x = asset.data.root_link_pos_w[:, 0] - env.scene.env_origins[:, 0]
   progress = (relative_x - start_x) / (platform_edge_x - start_x)
@@ -46,7 +45,10 @@ def platform_top_bonus(
   root_z_threshold: float | None = None,
   asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
 ) -> torch.Tensor:
-  """Return a one-step bonus signal for supported entry onto the top."""
+  """当前位置和接触数满足设定台面条件时返回1，每个满足的控制步都可给分。
+
+  连续保持多久才算成功，由platform_success另外判断；这里不记忆首次到达事件。
+  """
   asset: Entity = env.scene[asset_cfg.name]
   relative_pos = asset.data.root_link_pos_w - env.scene.env_origins
   inside_x = (relative_pos[:, 0] >= top_x_range[0]) & (
@@ -54,9 +56,7 @@ def platform_top_bonus(
   )
   inside_y = torch.abs(relative_pos[:, 1]) <= top_y_half_width
   threshold = (
-    platform_height + root_z_margin
-    if root_z_threshold is None
-    else root_z_threshold
+    platform_height + root_z_margin if root_z_threshold is None else root_z_threshold
   )
   above_top = relative_pos[:, 2] >= threshold
   in_top_region = inside_x & inside_y & above_top
@@ -79,16 +79,14 @@ def platform_edge_lift(
   top_root_z: float,
   asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
 ) -> torch.Tensor:
-  """Reward lifting the body after it reaches the platform approach edge."""
+  """进入固定台沿附近后，按机身抬升程度给分，是旧任务的专项引导。"""
   asset: Entity = env.scene[asset_cfg.name]
   relative_pos = asset.data.root_link_pos_w - env.scene.env_origins
   edge_gate = (
     (relative_pos[:, 0] - edge_gate_x_range[0])
     / (edge_gate_x_range[1] - edge_gate_x_range[0])
   ).clamp(0.0, 1.0)
-  lift = ((relative_pos[:, 2] - low_root_z) / (top_root_z - low_root_z)).clamp(
-    0.0, 1.0
-  )
+  lift = ((relative_pos[:, 2] - low_root_z) / (top_root_z - low_root_z)).clamp(0.0, 1.0)
   value = edge_gate * lift
   env.extras["log"]["Metrics/platform_edge_lift_mean"] = value.mean()
   return value
@@ -102,12 +100,14 @@ def platform_front_lift(
   top_height: float,
   asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
 ) -> torch.Tensor:
-  """Reward front-foot clearance while the robot is at the platform edge."""
+  """接近固定台沿时，按前轮附近的离地高度给分。
+
+  取RF/LF两个传感器高度的均值；不能仅凭此分数认定两只前轮已真正上台。
+  """
   asset: Entity = env.scene[asset_cfg.name]
   relative_x = asset.data.root_link_pos_w[:, 0] - env.scene.env_origins[:, 0]
   edge_gate = (
-    (relative_x - edge_gate_x_range[0])
-    / (edge_gate_x_range[1] - edge_gate_x_range[0])
+    (relative_x - edge_gate_x_range[0]) / (edge_gate_x_range[1] - edge_gate_x_range[0])
   ).clamp(0.0, 1.0)
 
   sensor = env.scene[height_sensor_name]
@@ -130,21 +130,14 @@ def platform_front_contact_advance(
   force_threshold: float = 1.0,
   asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
 ) -> torch.Tensor:
-  """Reward forward motion while the front feet are braced at the edge.
+  """前轮有接触时，按机身越过固定台沿区域的进度给分。
 
-  ``platform_front_lift`` encourages the front feet to clear the vertical
-  face, but it does not tell the policy to keep driving the body forward once
-  that clearance has happened.  This term supplies that missing coupling: the
-  reward increases across an x-window that extends past the edge and is gated
-  by the number of contacting front feet.  A robot that merely drives into an
-  empty area therefore receives no extra signal, while a braced front-foot
-  configuration is encouraged to translate over the edge.
+  虽然函数名含advance，计算使用的是相对X位置进度，并未直接检查向前速度。
   """
   asset: Entity = env.scene[asset_cfg.name]
   relative_x = asset.data.root_link_pos_w[:, 0] - env.scene.env_origins[:, 0]
   edge_progress = (
-    (relative_x - edge_gate_x_range[0])
-    / (edge_gate_x_range[1] - edge_gate_x_range[0])
+    (relative_x - edge_gate_x_range[0]) / (edge_gate_x_range[1] - edge_gate_x_range[0])
   ).clamp(0.0, 1.0)
 
   sensor = env.scene[sensor_name]

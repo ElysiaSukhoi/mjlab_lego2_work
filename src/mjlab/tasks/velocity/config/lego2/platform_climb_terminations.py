@@ -1,4 +1,9 @@
-"""Termination terms for the incremental Lego2 platform-climb task."""
+"""旧固定高台任务的成功结束条件。
+
+platform_climb_env_cfg.py传入台面区域、有效接触数和连续保持步数。
+与platform_climb_metrics.py的台面保持检查相似，但这里返回是否结束回合。
+这是旧任务的定义，不能代替Blind-Pit的四轮稳定通过标准。
+"""
 
 from __future__ import annotations
 
@@ -14,7 +19,7 @@ if TYPE_CHECKING:
 
 
 class platform_success:
-  """End an episode after a supported top-platform hold."""
+  """按旧任务的台面区域、接触数和保持步数决定是否成功结束。"""
 
   def __init__(self, cfg, env: ManagerBasedRlEnv):
     del cfg
@@ -40,6 +45,7 @@ class platform_success:
     root_z_threshold: float | None = None,
     asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
   ) -> torch.Tensor:
+    """连续满足配置要求达到hold_steps后，返回结束回合的标记。"""
     asset: Entity = env.scene[asset_cfg.name]
     relative_pos = asset.data.root_link_pos_w - env.scene.env_origins
     inside_x = (relative_pos[:, 0] >= top_x_range[0]) & (
@@ -47,9 +53,7 @@ class platform_success:
     )
     inside_y = torch.abs(relative_pos[:, 1]) <= top_y_half_width
     threshold = (
-      platform_height + root_z_margin
-      if root_z_threshold is None
-      else root_z_threshold
+      platform_height + root_z_margin if root_z_threshold is None else root_z_threshold
     )
     above_top = relative_pos[:, 2] >= threshold
     in_top_region = inside_x & inside_y & above_top

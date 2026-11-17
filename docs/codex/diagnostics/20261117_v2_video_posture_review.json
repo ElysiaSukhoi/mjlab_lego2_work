@@ -1,0 +1,829 @@
+{
+  "video": "/home/asus/\u89c6\u9891/\u5f55\u5c4f/\u5f55\u5c4f 2026\u5e7411\u670817\u65e5 17\u65f621\u520606\u79d2.webm",
+  "video_sha256": "85f7ebfdd3f47ee5c3de8a47d41835943b614beb912335791efcd67d15d53543",
+  "video_duration_s": 20.224607,
+  "video_display_last_step_approx": 222,
+  "video_sim_duration_approx_s": 4.44,
+  "archive_sha256": "775e111e57cf2e9296578f46eadcd058868059b52bccf9c709065bd80b248f4f",
+  "xml_sha256": "9502149ed6a95a7d7e5453c1d5a8b085ddd7afbbf4c93de7d0780b42a81f1443",
+  "method": "MuJoCo kinematics only on saved traces; no simulation/PPO. One-second delay after first complete for settled-window comparisons. All nonwheel collision primitives compared to extrapolated rim plane, not exact terrain-distance query. Video episode not assumed to equal saved trace seeds.",
+  "samples": [
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/parent_0.3/trace_0.300000.jsonl",
+      "episode": 0,
+      "first_front_up_s": 3.7800000000000002,
+      "first_complete_s": 6.62,
+      "climb_phase_nonfoot_frames": 68,
+      "climb_phase_frames": 142,
+      "post_complete_plus_1s": {
+        "frames": 272,
+        "start_s": 7.62,
+        "duration_s": 5.44,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.15599340033694337,
+          "LF": 0.17505125378185438,
+          "RH": -0.1134025305984587,
+          "LH": 0.030893259583884877
+        },
+        "front_lr_dx_abs_mean_m": 0.01905785344491099,
+        "front_lr_dx_abs_max_m": 0.021945682823865803,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 18.9292445107137,
+          "RF_KFE": -127.42036218629495,
+          "LF_HFE": 14.389353277722709,
+          "LF_KFE": -122.81850500686,
+          "RH_HFE": -32.71835592089357,
+          "RH_KFE": 128.9320267849232,
+          "LH_HFE": -77.32887180046063,
+          "LH_KFE": 135.76672026380567
+        },
+        "minimum_joint_hard_limit_margin_deg": 12.46554985266443,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 111,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": -0.0005817444841566752,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.04118064973008493,
+        "max_root_tilt_deg": 1.9020748076234713,
+        "fk_four_wheel_rim_consistency_max_m": 1.5171978252903617e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/parent_0.3/trace_0.300000.jsonl",
+      "episode": 1,
+      "first_front_up_s": 4.78,
+      "first_complete_s": 7.78,
+      "climb_phase_nonfoot_frames": 69,
+      "climb_phase_frames": 150,
+      "post_complete_plus_1s": {
+        "frames": 263,
+        "start_s": 8.78,
+        "duration_s": 5.26,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.1687521978312811,
+          "LF": 0.1731426919152141,
+          "RH": -0.11629378235313004,
+          "LH": 0.03258521485113202
+        },
+        "front_lr_dx_abs_mean_m": 0.00439049408393292,
+        "front_lr_dx_abs_max_m": 0.00611130947732047,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 15.638529455903717,
+          "RF_KFE": -124.80366972104856,
+          "LF_HFE": 14.598535714199825,
+          "LF_KFE": -123.75685030900705,
+          "RH_HFE": -32.19448467512274,
+          "RH_KFE": 125.8445320654406,
+          "LH_HFE": -76.83819039483801,
+          "LH_KFE": 134.33803689811936
+        },
+        "minimum_joint_hard_limit_margin_deg": 12.94751532125721,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 103,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": -0.00039868511360101333,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.04152718468147268,
+        "max_root_tilt_deg": 2.333890744396779,
+        "fk_four_wheel_rim_consistency_max_m": 1.4333468818794604e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/parent_0.3/trace_0.300000.jsonl",
+      "episode": 2,
+      "first_front_up_s": 4.24,
+      "first_complete_s": 7.18,
+      "climb_phase_nonfoot_frames": 65,
+      "climb_phase_frames": 147,
+      "post_complete_plus_1s": {
+        "frames": 272,
+        "start_s": 8.18,
+        "duration_s": 5.44,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.15867806564211345,
+          "LF": 0.17483105744523422,
+          "RH": -0.11413299403201506,
+          "LH": 0.03159760817614659
+        },
+        "front_lr_dx_abs_mean_m": 0.016152991803120628,
+        "front_lr_dx_abs_max_m": 0.018555536956802343,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 18.231209667654305,
+          "RF_KFE": -126.86785392129053,
+          "LF_HFE": 14.38751576536468,
+          "LF_KFE": -122.98136157655279,
+          "RH_HFE": -32.59129973751342,
+          "RH_KFE": 128.22033172046747,
+          "LH_HFE": -77.29946989518487,
+          "LH_KFE": 135.41795151954483
+        },
+        "minimum_joint_hard_limit_margin_deg": 12.464887324314939,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 113,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": -0.0004703824259525806,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.04128820969171977,
+        "max_root_tilt_deg": 1.9867233265020177,
+        "fk_four_wheel_rim_consistency_max_m": 1.3414633491526384e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/candidate_0.5/trace_0.030000.jsonl",
+      "episode": 0,
+      "first_front_up_s": 2.34,
+      "first_complete_s": 3.72,
+      "climb_phase_nonfoot_frames": 0,
+      "climb_phase_frames": 69,
+      "post_complete_plus_1s": {
+        "frames": 177,
+        "start_s": 4.72,
+        "duration_s": 3.54,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.1970767519504718,
+          "LF": 0.11761819464180027,
+          "RH": 0.08511452530197998,
+          "LH": 0.13648411451889464
+        },
+        "front_lr_dx_abs_mean_m": 0.07945855730867159,
+        "front_lr_dx_abs_max_m": 0.07998610667024199,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 11.716474439904129,
+          "RF_KFE": -94.18630775634678,
+          "LF_HFE": 29.883396404850863,
+          "LF_KFE": -105.51250649426652,
+          "RH_HFE": -69.393705040916,
+          "RH_KFE": 105.94645465251223,
+          "LH_HFE": -75.72629293436889,
+          "LH_KFE": 100.76260625360236
+        },
+        "minimum_joint_hard_limit_margin_deg": 14.164859937028583,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 0,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": 0.038769536028783705,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.15087059488182492,
+        "max_root_tilt_deg": 0.8547790487565526,
+        "fk_four_wheel_rim_consistency_max_m": 1.2003615119937638e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/candidate_0.5/trace_0.030000.jsonl",
+      "episode": 1,
+      "first_front_up_s": 2.96,
+      "first_complete_s": 4.26,
+      "climb_phase_nonfoot_frames": 0,
+      "climb_phase_frames": 65,
+      "post_complete_plus_1s": {
+        "frames": 172,
+        "start_s": 5.26,
+        "duration_s": 3.44,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.19657370151903614,
+          "LF": 0.11716102565208258,
+          "RH": 0.08984700978663397,
+          "LH": 0.11975187131889187
+        },
+        "front_lr_dx_abs_mean_m": 0.07941267586695375,
+        "front_lr_dx_abs_max_m": 0.07977677923814894,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 11.84859960587877,
+          "RF_KFE": -94.42641234490584,
+          "LF_HFE": 30.072243487559664,
+          "LF_KFE": -105.94025224307066,
+          "RH_HFE": -71.63584395547736,
+          "RH_KFE": 107.7705169487354,
+          "LH_HFE": -75.52719301788072,
+          "LH_KFE": 104.8190810986677
+        },
+        "minimum_joint_hard_limit_margin_deg": 14.387250896404197,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 0,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": 0.039130808155069724,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.14793711092168288,
+        "max_root_tilt_deg": 0.27976482632557653,
+        "fk_four_wheel_rim_consistency_max_m": 1.1873963864927894e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/candidate_0.5/trace_0.030000.jsonl",
+      "episode": 2,
+      "first_front_up_s": 2.64,
+      "first_complete_s": 3.98,
+      "climb_phase_nonfoot_frames": 0,
+      "climb_phase_frames": 67,
+      "post_complete_plus_1s": {
+        "frames": 177,
+        "start_s": 4.98,
+        "duration_s": 3.54,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.1969472216990128,
+          "LF": 0.11767310902249857,
+          "RH": 0.08620974276450115,
+          "LH": 0.13229669322476983
+        },
+        "front_lr_dx_abs_mean_m": 0.07927411267651414,
+        "front_lr_dx_abs_max_m": 0.07947132682874977,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 11.747612871973086,
+          "RF_KFE": -94.22355324095453,
+          "LF_HFE": 29.887516475288685,
+          "LF_KFE": -105.58186768270625,
+          "RH_HFE": -69.93308064197838,
+          "RH_KFE": 106.40676409950846,
+          "LH_HFE": -75.69557699484174,
+          "LH_KFE": 101.78732710923748
+        },
+        "minimum_joint_hard_limit_margin_deg": 14.187105863155313,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 0,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": 0.03889924745671755,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.15020343696464392,
+        "max_root_tilt_deg": 0.7105183853589107,
+        "fk_four_wheel_rim_consistency_max_m": 1.1998806309643228e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/candidate_0.5/trace_0.300000.jsonl",
+      "episode": 0,
+      "first_front_up_s": 2.36,
+      "first_complete_s": 3.66,
+      "climb_phase_nonfoot_frames": 0,
+      "climb_phase_frames": 65,
+      "post_complete_plus_1s": {
+        "frames": 179,
+        "start_s": 4.66,
+        "duration_s": 3.58,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.1969296772165641,
+          "LF": 0.11764135844349757,
+          "RH": 0.08579615468232957,
+          "LH": 0.1337885682282984
+        },
+        "front_lr_dx_abs_mean_m": 0.0792883187730666,
+        "front_lr_dx_abs_max_m": 0.07965449656152104,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 11.75003073053674,
+          "RF_KFE": -94.21340116687225,
+          "LF_HFE": 29.885382896159328,
+          "LF_KFE": -105.54288427206134,
+          "RH_HFE": -69.73787898956193,
+          "RH_KFE": 106.24575938844443,
+          "LH_HFE": -75.70000114052418,
+          "LH_KFE": 101.41286195781046
+        },
+        "minimum_joint_hard_limit_margin_deg": 14.181006504226493,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 0,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": 0.03747631252801549,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.1504418614493938,
+        "max_root_tilt_deg": 0.7699938684517094,
+        "fk_four_wheel_rim_consistency_max_m": 1.4945883132500004e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/candidate_0.5/trace_0.300000.jsonl",
+      "episode": 1,
+      "first_front_up_s": 2.96,
+      "first_complete_s": 4.24,
+      "climb_phase_nonfoot_frames": 0,
+      "climb_phase_frames": 64,
+      "post_complete_plus_1s": {
+        "frames": 176,
+        "start_s": 5.24,
+        "duration_s": 3.52,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.1966557461985263,
+          "LF": 0.11740224005042045,
+          "RH": 0.08929492449332813,
+          "LH": 0.12190702847715575
+        },
+        "front_lr_dx_abs_mean_m": 0.07925350614810579,
+        "front_lr_dx_abs_max_m": 0.07981682241579893,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 11.826360664721527,
+          "RF_KFE": -94.38128478326449,
+          "LF_HFE": 30.003655529342517,
+          "LF_KFE": -105.85489621466405,
+          "RH_HFE": -71.34933039679572,
+          "RH_KFE": 107.52807193844542,
+          "LH_HFE": -75.56330905464146,
+          "LH_KFE": 104.30069365444838
+        },
+        "minimum_joint_hard_limit_margin_deg": 14.336878251275353,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 0,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": 0.039085756953760015,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.14826167525766842,
+        "max_root_tilt_deg": 0.36637470537647665,
+        "fk_four_wheel_rim_consistency_max_m": 1.42870428876396e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/candidate_0.5/trace_0.300000.jsonl",
+      "episode": 2,
+      "first_front_up_s": 2.64,
+      "first_complete_s": 3.92,
+      "climb_phase_nonfoot_frames": 0,
+      "climb_phase_frames": 64,
+      "post_complete_plus_1s": {
+        "frames": 178,
+        "start_s": 4.92,
+        "duration_s": 3.56,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.19697612835964504,
+          "LF": 0.11773238735581623,
+          "RH": 0.08730509098638961,
+          "LH": 0.12871284867196342
+        },
+        "front_lr_dx_abs_mean_m": 0.07924374100382865,
+        "front_lr_dx_abs_max_m": 0.0798639042013396,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 11.746727091516457,
+          "RF_KFE": -94.26681684413214,
+          "LF_HFE": 29.89392316216275,
+          "LF_KFE": -105.6659873087306,
+          "RH_HFE": -70.42299439928027,
+          "RH_KFE": 106.79115836816526,
+          "LH_HFE": -75.65875245939283,
+          "LH_KFE": 102.65848418570107
+        },
+        "minimum_joint_hard_limit_margin_deg": 14.22234963927258,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 0,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": 0.038927105537502026,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.14925721644857007,
+        "max_root_tilt_deg": 0.5947902593105525,
+        "fk_four_wheel_rim_consistency_max_m": 1.3222452061034673e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/candidate_0.3/trace_0.300000.jsonl",
+      "episode": 0,
+      "first_front_up_s": 3.92,
+      "first_complete_s": 5.94,
+      "climb_phase_nonfoot_frames": 0,
+      "climb_phase_frames": 101,
+      "post_complete_plus_1s": {
+        "frames": 309,
+        "start_s": 6.94,
+        "duration_s": 6.18,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.17852033019996885,
+          "LF": 0.10833975728282179,
+          "RH": 0.10841139417383863,
+          "LH": 0.16571741382176616
+        },
+        "front_lr_dx_abs_mean_m": 0.07018057291714695,
+        "front_lr_dx_abs_max_m": 0.0712179211367796,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 16.489905577712126,
+          "RF_KFE": -102.84086061904387,
+          "LF_HFE": 30.691084039028254,
+          "LF_KFE": -101.38712846109964,
+          "RH_HFE": -73.5444257890971,
+          "RH_KFE": 105.23577986946682,
+          "LH_HFE": -71.14976277023678,
+          "LH_KFE": 87.61843737909119
+        },
+        "minimum_joint_hard_limit_margin_deg": 15.986881200021184,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 0,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": 0.03543789593528446,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.14548629930832063,
+        "max_root_tilt_deg": 5.212520063496278,
+        "fk_four_wheel_rim_consistency_max_m": 1.342636580803358e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/candidate_0.3/trace_0.300000.jsonl",
+      "episode": 1,
+      "first_front_up_s": 5.0,
+      "first_complete_s": 7.0200000000000005,
+      "climb_phase_nonfoot_frames": 0,
+      "climb_phase_frames": 101,
+      "post_complete_plus_1s": {
+        "frames": 354,
+        "start_s": 8.02,
+        "duration_s": 7.08,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.1681673571048683,
+          "LF": 0.1083502117030559,
+          "RH": 0.11418941268761947,
+          "LH": 0.14803260710801444
+        },
+        "front_lr_dx_abs_mean_m": 0.05981714540181231,
+        "front_lr_dx_abs_max_m": 0.06031737090551738,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 18.339109446964965,
+          "RF_KFE": -99.20161076067099,
+          "LF_HFE": 31.978248204342933,
+          "LF_KFE": -106.3432906498992,
+          "RH_HFE": -70.0507528388995,
+          "RH_KFE": 98.94778862133737,
+          "LH_HFE": -73.63546471442187,
+          "LH_KFE": 95.1882637265385
+        },
+        "minimum_joint_hard_limit_margin_deg": 16.27479416410473,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 0,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": 0.038337465229582285,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.16354232293905954,
+        "max_root_tilt_deg": 2.2303749508128945,
+        "fk_four_wheel_rim_consistency_max_m": 1.299182776498542e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/candidate_0.3/trace_0.300000.jsonl",
+      "episode": 2,
+      "first_front_up_s": 4.4,
+      "first_complete_s": 6.42,
+      "climb_phase_nonfoot_frames": 0,
+      "climb_phase_frames": 101,
+      "post_complete_plus_1s": {
+        "frames": 318,
+        "start_s": 7.42,
+        "duration_s": 6.36,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.17743894275489044,
+          "LF": 0.1091779302938082,
+          "RH": 0.10964033357251875,
+          "LH": 0.16274782040763827
+        },
+        "front_lr_dx_abs_mean_m": 0.06826101246108218,
+        "front_lr_dx_abs_max_m": 0.06949128033155004,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 16.69130560061461,
+          "RF_KFE": -102.2745324119494,
+          "LF_HFE": 30.71808922924927,
+          "LF_KFE": -102.07669609003288,
+          "RH_HFE": -73.28524724817957,
+          "RH_KFE": 104.55882231703349,
+          "LH_HFE": -71.71022751225001,
+          "LH_KFE": 89.07680995137558
+        },
+        "minimum_joint_hard_limit_margin_deg": 16.116962152764078,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 0,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": 0.03555708230337176,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.1466826511153773,
+        "max_root_tilt_deg": 4.663502748414906,
+        "fk_four_wheel_rim_consistency_max_m": 1.3498040972448333e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/parent_0.5/trace_0.030000.jsonl",
+      "episode": 0,
+      "first_front_up_s": 2.44,
+      "first_complete_s": 4.04,
+      "climb_phase_nonfoot_frames": 17,
+      "climb_phase_frames": 80,
+      "post_complete_plus_1s": {
+        "frames": 143,
+        "start_s": 5.04,
+        "duration_s": 2.86,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.1731884830575161,
+          "LF": 0.19539231582757885,
+          "RH": -0.1162729122334346,
+          "LH": 0.046585416048971096
+        },
+        "front_lr_dx_abs_mean_m": 0.022203832770062753,
+        "front_lr_dx_abs_max_m": 0.025366671793581846,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 14.29751345520767,
+          "RF_KFE": -124.29439020809971,
+          "LF_HFE": 9.102518118085806,
+          "LF_KFE": -119.08930976232338,
+          "RH_HFE": -32.32614813905533,
+          "RH_KFE": 123.37673834007921,
+          "LH_HFE": -78.13539361925211,
+          "LH_KFE": 130.5358806927201
+        },
+        "minimum_joint_hard_limit_margin_deg": 11.611250281846745,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 36,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": -0.0006126580641785291,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.04037867439603919,
+        "max_root_tilt_deg": 3.2019793732796415,
+        "fk_four_wheel_rim_consistency_max_m": 1.4193341815738059e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/parent_0.5/trace_0.030000.jsonl",
+      "episode": 1,
+      "first_front_up_s": 3.1,
+      "first_complete_s": 4.9,
+      "climb_phase_nonfoot_frames": 13,
+      "climb_phase_frames": 90,
+      "post_complete_plus_1s": {
+        "frames": 141,
+        "start_s": 5.9,
+        "duration_s": 2.82,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.1847771476134063,
+          "LF": 0.19370026933218437,
+          "RH": -0.11745077423529243,
+          "LH": 0.04762448028633752
+        },
+        "front_lr_dx_abs_mean_m": 0.008923121718778088,
+        "front_lr_dx_abs_max_m": 0.011545207107203498,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 11.370959699544418,
+          "RF_KFE": -121.93670095952633,
+          "LF_HFE": 9.284625368550442,
+          "LF_KFE": -119.87132567556887,
+          "RH_HFE": -32.00352931292119,
+          "RH_KFE": 120.79129044286178,
+          "LH_HFE": -77.44556689318836,
+          "LH_KFE": 129.2210389987827
+        },
+        "minimum_joint_hard_limit_margin_deg": 12.3954038098884,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 38,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": -0.0005000425993345325,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.04081906501952928,
+        "max_root_tilt_deg": 3.702003963054905,
+        "fk_four_wheel_rim_consistency_max_m": 1.5025629504505922e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/parent_0.5/trace_0.030000.jsonl",
+      "episode": 2,
+      "first_front_up_s": 2.74,
+      "first_complete_s": 4.42,
+      "climb_phase_nonfoot_frames": 16,
+      "climb_phase_frames": 84,
+      "post_complete_plus_1s": {
+        "frames": 143,
+        "start_s": 5.42,
+        "duration_s": 2.86,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.1754469039191992,
+          "LF": 0.19531076404186434,
+          "RH": -0.11652198436717463,
+          "LH": 0.04679993552939842
+        },
+        "front_lr_dx_abs_mean_m": 0.019863860122665247,
+        "front_lr_dx_abs_max_m": 0.023699739925940183,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 13.729754589435759,
+          "RF_KFE": -123.82366426954,
+          "LF_HFE": 9.086657290418916,
+          "LF_KFE": -119.17361856057013,
+          "RH_HFE": -32.265944105306104,
+          "RH_KFE": 122.89454417955817,
+          "LH_HFE": -78.00877805612356,
+          "LH_KFE": 130.28591793138978
+        },
+        "minimum_joint_hard_limit_margin_deg": 11.77939587883412,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 42,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": -0.0006454709128147426,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.040389592307408774,
+        "max_root_tilt_deg": 3.271776241964763,
+        "fk_four_wheel_rim_consistency_max_m": 1.4493055344733108e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/parent_0.5/trace_0.300000.jsonl",
+      "episode": 0,
+      "first_front_up_s": 2.44,
+      "first_complete_s": 4.0200000000000005,
+      "climb_phase_nonfoot_frames": 37,
+      "climb_phase_frames": 79,
+      "post_complete_plus_1s": {
+        "frames": 146,
+        "start_s": 5.0200000000000005,
+        "duration_s": 2.92,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.17002672336087662,
+          "LF": 0.19643058503331964,
+          "RH": -0.11607149249083071,
+          "LH": 0.046457030439241764
+        },
+        "front_lr_dx_abs_mean_m": 0.026403861672442953,
+        "front_lr_dx_abs_max_m": 0.029815200441053125,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 15.113701810469054,
+          "RF_KFE": -124.920479008956,
+          "LF_HFE": 8.910694404279077,
+          "LF_KFE": -118.75511210278901,
+          "RH_HFE": -32.36542170290111,
+          "RH_KFE": 123.96349512267022,
+          "LH_HFE": -78.30124808493022,
+          "LH_KFE": 130.80556928965996
+        },
+        "minimum_joint_hard_limit_margin_deg": 11.459340044516491,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 39,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": -0.0005435073398082045,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.040564331959686895,
+        "max_root_tilt_deg": 3.154860127023158,
+        "fk_four_wheel_rim_consistency_max_m": 1.4085678834430126e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/parent_0.5/trace_0.300000.jsonl",
+      "episode": 1,
+      "first_front_up_s": 2.98,
+      "first_complete_s": 4.74,
+      "climb_phase_nonfoot_frames": 42,
+      "climb_phase_frames": 88,
+      "post_complete_plus_1s": {
+        "frames": 141,
+        "start_s": 5.74,
+        "duration_s": 2.82,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.1844818934386134,
+          "LF": 0.19376387694026037,
+          "RH": -0.11738009158360178,
+          "LH": 0.047627998976759865
+        },
+        "front_lr_dx_abs_mean_m": 0.009281983501647084,
+        "front_lr_dx_abs_max_m": 0.01212956618649036,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 11.44698758878884,
+          "RF_KFE": -121.99319243688932,
+          "LF_HFE": 9.268387641336615,
+          "LF_KFE": -119.8592632708483,
+          "RH_HFE": -32.024118167337804,
+          "RH_KFE": 120.87140584912676,
+          "LH_HFE": -77.47526741372197,
+          "LH_KFE": 129.25982400999985
+        },
+        "minimum_joint_hard_limit_margin_deg": 12.276182857925827,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 34,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": -0.0005064978835862405,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.04086551726579642,
+        "max_root_tilt_deg": 3.681105574851955,
+        "fk_four_wheel_rim_consistency_max_m": 1.6843656412690589e-07
+      }
+    },
+    {
+      "trace": "backups/reward_v2_continue_20261116_scKcS4/paired/parent_0.5/trace_0.300000.jsonl",
+      "episode": 2,
+      "first_front_up_s": 2.68,
+      "first_complete_s": 4.34,
+      "climb_phase_nonfoot_frames": 41,
+      "climb_phase_frames": 83,
+      "post_complete_plus_1s": {
+        "frames": 145,
+        "start_s": 5.34,
+        "duration_s": 2.9,
+        "mean_wheel_hip_dx_body_m": {
+          "RF": 0.17342530902138692,
+          "LF": 0.1959051954815181,
+          "RH": -0.11658081271589295,
+          "LH": 0.04691152280550413
+        },
+        "front_lr_dx_abs_mean_m": 0.02247988646013112,
+        "front_lr_dx_abs_max_m": 0.026794642178749717,
+        "mean_leg_angles_deg": {
+          "RF_HFE": 14.251336228453585,
+          "RF_KFE": -124.22050544659247,
+          "LF_HFE": 8.9717160308163,
+          "LF_KFE": -118.99246998180938,
+          "RH_HFE": -32.24462651009674,
+          "RH_KFE": 123.19241369074345,
+          "LH_HFE": -78.14990923115631,
+          "LH_KFE": 130.43285464039656
+        },
+        "minimum_joint_hard_limit_margin_deg": 11.572325033766843,
+        "frames_with_any_joint_within_2_deg_hard_limit": 0,
+        "any_motor_saturated_frames": 0,
+        "any_nonfoot_contact_frames": 41,
+        "minimum_nonwheel_geom_bottom_above_rim_plane_m": -0.00048574076850128184,
+        "minimum_knee_joint_center_above_rim_plane_m": 0.04056505806397888,
+        "max_root_tilt_deg": 3.2171675120781713,
+        "fk_four_wheel_rim_consistency_max_m": 1.7893695133941456e-07
+      }
+    }
+  ],
+  "limits": [
+    "Video itself does not show checkpoint SHA or labeled legs; model2198/30cm/.5 provenance inferred from preceding user command, not independently proved by image",
+    "Startup right/left leg names cannot be verified from camera alone",
+    "Nonwheel bound is geometric primitive clearance, not actual hardware safety certification",
+    "Saved episode samples differ from this visual playback; no unique causal proof"
+  ],
+  "video_observations": [
+    {
+      "time_in_video_s": [
+        3,
+        5
+      ],
+      "observation": "A rear leg briefly lifts and returns during start-up; exact RH/LH labeling is not independently visible",
+      "status": "visual confirmation of transient lift, not causal diagnosis"
+    },
+    {
+      "time_in_video_s": [
+        12,
+        16
+      ],
+      "observation": "Front-leg reach differs left/right during climbing; limb labels absent",
+      "status": "visual confirmation; RF>LF persists in separate labeled saved traces"
+    },
+    {
+      "time_in_video_s": [
+        18,
+        20
+      ],
+      "observation": "Body near level while front and rear legs use different configurations",
+      "status": "visual confirmation; this clip has little settled time after climbing"
+    }
+  ],
+  "posture_assessment": "Saved 0.5 m/s episodes retain about 7.9 cm RF-LF difference in sagittal wheel-to-corresponding-hip offset after first complete plus 1 s; not solely an ascent transient. No nonfoot-contact or motor-saturation flags in those delayed windows; actual joint hard-limit margin >=14 degrees in sampled traces.",
+  "recommendation_not_started": {
+    "status": "recommendation pending user decision; no business-code edits or training authorized by this analysis alone",
+    "preferred_order": "First make a small, gated pose-objective refinement for straight, locally level settled motion, validate with a bounded fine-tune, then consider long training. Do not immediately run an unbounded long v2 continuation to fix posture appearance.",
+    "reason": "Same-signed front left/right reach bias persists across low/high terrain and saved seeds; v2 has no explicit preferred leg-configuration or symmetry objective. Printed mean reward does not show sustained late growth. Neither fact proves full convergence or that longer v2 training cannot improve capability.",
+    "first_problem": "Observe startup rear-leg lift; no new blanket airtime/always-grounded penalty.",
+    "second_third_problems": "Consider one weak nominal-leg-pose regularizer restricted to locally level, straight, settled operation; measure residual left/right bias before adding another term. Do not force raw front/rear joint angles equal or constrain obstacle/turning transients.",
+    "experimental_boundary": "Keep model2198 and v2 unchanged as a baseline; new candidate task/run and explicit warmstart handling to be designed only after user chooses to proceed. Verify pass rate, contact, clearance, torque/limit margins and pose measures, not total reward alone.",
+    "conditional_alternative": "If the user prioritizes v2 capability ceiling, first do a bounded +1000-update unchanged-v2 control with checkpoint review at +500/+1000, without promising symmetry will resolve."
+  },
+  "training_log_windows": [
+    {
+      "iteration_range": [
+        500,
+        999
+      ],
+      "unweighted_mean_of_printed_iteration_metrics": {
+        "Mean reward": 39.9217,
+        "Curriculum/pit_levels/mean": 6.2428112,
+        "Episode_Metrics/pit_nonfoot_contact_count": 0.0085146,
+        "Episode_Metrics/base_clearance_eligible": 0.5958944,
+        "Episode_Metrics/base_clearance_below_minimum": 0.0
+      },
+      "note": "Mixed curriculum/episode log aggregates, not paired success rates or proof of convergence"
+    },
+    {
+      "iteration_range": [
+        1000,
+        1499
+      ],
+      "unweighted_mean_of_printed_iteration_metrics": {
+        "Mean reward": 40.78232,
+        "Curriculum/pit_levels/mean": 5.9913682,
+        "Episode_Metrics/pit_nonfoot_contact_count": 0.0008585999999999999,
+        "Episode_Metrics/base_clearance_eligible": 0.5943348,
+        "Episode_Metrics/base_clearance_below_minimum": 0.0
+      },
+      "note": "Mixed curriculum/episode log aggregates, not paired success rates or proof of convergence"
+    },
+    {
+      "iteration_range": [
+        1500,
+        1999
+      ],
+      "unweighted_mean_of_printed_iteration_metrics": {
+        "Mean reward": 40.4218,
+        "Curriculum/pit_levels/mean": 6.0307138,
+        "Episode_Metrics/pit_nonfoot_contact_count": 0.001225,
+        "Episode_Metrics/base_clearance_eligible": 0.5908792,
+        "Episode_Metrics/base_clearance_below_minimum": 0.1235008
+      },
+      "note": "Mixed curriculum/episode log aggregates, not paired success rates or proof of convergence"
+    },
+    {
+      "iteration_range": [
+        2000,
+        2198
+      ],
+      "unweighted_mean_of_printed_iteration_metrics": {
+        "Mean reward": 40.30256281407035,
+        "Curriculum/pit_levels/mean": 6.017414070351759,
+        "Episode_Metrics/pit_nonfoot_contact_count": 0.0013020100502512562,
+        "Episode_Metrics/base_clearance_eligible": 0.5909452261306533,
+        "Episode_Metrics/base_clearance_below_minimum": 0.3180402010050251
+      },
+      "note": "Mixed curriculum/episode log aggregates, not paired success rates or proof of convergence"
+    }
+  ],
+  "kinematic_xml_matches_saved_source_manifest": true,
+  "validation": {
+    "saved_candidate_episodes": 9,
+    "saved_reference_episodes": 9,
+    "fast_candidate_post_complete_plus_1s_frames": 1059,
+    "fast_RF_minus_LF_offset_abs_mean_range_m": [
+      0.07924374100382865,
+      0.07945855730867159
+    ],
+    "fast_actual_joint_hard_limit_margin_min_deg": 14.164859937028583,
+    "fast_minimum_nonwheel_geom_bottom_above_rim_plane_m": 0.03747631252801549,
+    "maximum_wheel_fk_rim_consistency_m": 1.4945883132500004e-07,
+    "actual_simulation_or_policy_update": false,
+    "business_code_changes": false
+  }
+}

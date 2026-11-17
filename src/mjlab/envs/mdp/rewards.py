@@ -1,4 +1,9 @@
-"""Useful methods for MDP rewards."""
+"""各任务共用的基础奖励函数，包含动作平滑、关节限位和机身倾斜代价。
+
+任务env_cfg用函数和参数组成RewardTermCfg，再交给reward_manager.py汇总。
+Lego2的速度跟踪等项另在tasks/velocity/mdp/rewards.py实现。
+这里通常返回原始代价值；是否扣分、扣多少，由任务配置里的weight决定。
+"""
 
 from __future__ import annotations
 
@@ -58,11 +63,7 @@ def joint_acc_l2(
 def action_rate_l2(
   env: ManagerBasedRlEnv, action_name: str | None = None
 ) -> torch.Tensor:
-  """Penalize the rate of change of the actions using L2 squared kernel.
-
-  Operates on raw policy output (before per-term scale/offset).
-  If ``action_name`` is set, only that action term's slice is penalized.
-  """
+  """计算相邻两步raw动作之差的平方；可只选腿或轮动作，配负权重抑制突变。"""
   action = env.action_manager.action
   prev_action = env.action_manager.prev_action
   if action_name is not None:
@@ -131,7 +132,7 @@ def action_acc_l2(env: ManagerBasedRlEnv) -> torch.Tensor:
 def joint_pos_limits(
   env: ManagerBasedRlEnv, asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG
 ) -> torch.Tensor:
-  """Penalize joint positions if they cross the soft limits."""
+  """计算实际关节位置超过软限位的量；用于扣分，不会自动裁剪动作或修改硬限位。"""
   asset: Entity = env.scene[asset_cfg.name]
   soft_joint_pos_limits = asset.data.soft_joint_pos_limits
   assert soft_joint_pos_limits is not None
@@ -204,6 +205,6 @@ def flat_orientation_l2(
   env: ManagerBasedRlEnv,
   asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
 ) -> torch.Tensor:
-  """Penalize non-flat base orientation."""
+  """计算机身偏离水平的代价；当前v1启用，v2换为允许适度俯仰的版本。"""
   asset: Entity = env.scene[asset_cfg.name]
   return torch.sum(torch.square(asset.data.projected_gravity_b[:, :2]), dim=1)

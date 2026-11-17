@@ -1,7 +1,8 @@
-"""Velocity task configuration.
+"""速度类任务的通用环境模板，先搭好传感器、观测、动作和仿真步长。
 
-This module provides a factory function to create a base velocity task config.
-Robot-specific configurations call the factory and customize as needed.
+lego2/env_cfgs.py把模板接到具体机器人，再由blind_pit系列替换坑/奖励等设置。
+本文件的默认值可能被下游覆盖，不能把通用模板当成当前高台训练的最终参数。
+网络和PPO设置在rl_cfg.py；奖励公式在mdp中，日志由各manager汇总。
 """
 
 import math
@@ -37,7 +38,7 @@ from mjlab.viewer import ViewerConfig
 
 
 def make_velocity_env_cfg() -> ManagerBasedRlEnvCfg:
-  """Create base velocity tracking task configuration."""
+  """建立速度任务通用模板；后续由Lego2基础配置和Blind-Pit配置逐层调整。"""
 
   ##
   # Sensors
@@ -156,7 +157,7 @@ def make_velocity_env_cfg() -> ManagerBasedRlEnvCfg:
 
   metrics = {
     "mean_action_acc": MetricsTermCfg(
-      func=mdp.mean_action_acc,
+      func=mdp.mean_action_acc,  # raw动作二阶差分幅值，反映抖动，非实测关节加速度。
     ),
   }
 
@@ -447,11 +448,11 @@ def make_velocity_env_cfg() -> ManagerBasedRlEnvCfg:
       nconmax=35,
       njmax=1500,
       mujoco=MujocoCfg(
-        timestep=0.005,
+        timestep=0.005,  # 每个物理步5毫秒。
         iterations=10,
         ls_iterations=20,
       ),
     ),
-    decimation=4,
+    decimation=4,  # 一个动作保持4个物理步；控制周期0.02秒，即50 Hz。
     episode_length_s=20.0,
   )

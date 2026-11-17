@@ -1,0 +1,13 @@
+{
+  "kind": "local synthetic install and shell flow; no remote training or GPU result",
+  "fixture": "/tmp/lego2_v2_trial_validation_yffzjja5",
+  "bundle_sha256": "b593ff441092af184e7b7a7961c4e1507ea844265f0aeef3577005e593e024d3",
+  "checks": {
+    "install_preserves_results_env_context": true,
+    "old_evaluator_backed_up": true,
+    "repeat_install_noop": true,
+    "success_flow": true,
+    "check_only_flow": true,
+    "cpu_failure_flow": true
+  }
+}

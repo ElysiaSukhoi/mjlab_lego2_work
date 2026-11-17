@@ -1,0 +1,110 @@
+{
+  "src/mjlab/tasks/velocity/config/lego2/__init__.py": {
+    "sha256": "16d28398346f991a9e7ff8130f3c63bf40420d9626d8d25538a54bbe7849c23f",
+    "runtime_ast_sha256": "820f4e82551c3510c07ebbb3f6bc0c2b03436d3701e0993c246d3ca5ff559743"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": {
+    "sha256": "b6198dc9815c1e426ec6f7c79bf55525a52a5b53a46e317b66ccba728fa77921",
+    "runtime_ast_sha256": "7f20b948bfe09f7b9478e5c43dc44e9fc87b4bd763508089129333c662d6c4d5"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/blind_pit_reward_v2_env_cfg.py": {
+    "sha256": "37507b388599fa88a730eca520dc3bff8971d27ba1896b87d904ef649998b540",
+    "runtime_ast_sha256": "f844396347ed28d50d030b38e277cc18f5d272ef9285f09f5a573a2755bd3738"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/blind_pit_rewards.py": {
+    "sha256": "2d0815b79bf90c28d86e22aff6e146f8a22e9ad83605b11811961884e0acb159",
+    "runtime_ast_sha256": "a6cbdacee4bd0481f3973786cd6784f0b4919701cca66e1e63850a50255d5262"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/blind_pit_curriculums.py": {
+    "sha256": "b2b19581d733c40f99a836682277b74cb715b0ef8dec05190317c081ade7753a",
+    "runtime_ast_sha256": "0eaa657ee93c5903aecd6d9c2f47a845282ee4f7438a64b0eb69c88a8c07ca86"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/blind_pit_metrics.py": {
+    "sha256": "b312a6999ec2ae7eba7d1b2772a6633c755dc01df603233e672b637a417c913e",
+    "runtime_ast_sha256": "db8312fabfea85e33908ddcfaaba09f9194e6ec81f9296ae0b36f9bfa9e84dcb"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/blind_pit_warmstart.py": {
+    "sha256": "041e6ddde95377ced3769645dcfd4268eb9db5f6ff1d2cd580c95e63dce9de6c",
+    "runtime_ast_sha256": "be98ff50d5d7b690f37487f5f9f762b3e974f5c3798e96d97b4f76100c6cd991"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/rl_cfg.py": {
+    "sha256": "72e1b033d621f3f4af52374e0c045aebc4e961e28ec018953ce5daa964a637ac",
+    "runtime_ast_sha256": "67be95c715899c7b8980ba808caa488dedd2c70f264afbf5d938fb23f05d6d21"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/env_cfgs.py": {
+    "sha256": "76e12c772072d35bd5a7942bfc66b56ed470ad2299d413604742d8366a0878b2",
+    "runtime_ast_sha256": "04367d37fe4cc52b86ded7b0ffa7f028fbb9de73ce37bcd80feac71298106700"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/platform_climb_env_cfg.py": {
+    "sha256": "e80d877d1655aa1ef53c6172b5ef7c9f9041f9de14359d5acdab96388e3d18ca",
+    "runtime_ast_sha256": "7c918bb19af5a9228e4245e9d87aae2d159d4ab992db17a403b5a5fba64abe31"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/platform_climb_rewards.py": {
+    "sha256": "3c1f4d5b93ec0e4901e42d7b97120fde2f0565379a56eb2a1036bb63930a1cce",
+    "runtime_ast_sha256": "edb818977034163ca056baea2f15730f128bdf3224994c5a829db7309a4de8b9"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/platform_climb_metrics.py": {
+    "sha256": "022cfa2d3c98144be6d2deb12f38bb8feb31dabbf0d671e700866ed25d5e2a81",
+    "runtime_ast_sha256": "7a4505183faacba0e9d241735f32050e028b1555ee5d302897d0e4c8247011d7"
+  },
+  "src/mjlab/tasks/velocity/config/lego2/platform_climb_terminations.py": {
+    "sha256": "0e9fe8113630d59b2770cd07487babd9c87607b62369d7cdafcb40e990c9d9ed",
+    "runtime_ast_sha256": "7d1f68408d504ab18324af000897b2426440d0d6aee603dc3e24b70cafdb5b61"
+  },
+  "src/mjlab/rl/config.py": {
+    "sha256": "7d391cc0d7a37a4f86c3c4f4a0adc6d75c546273085feed0ddf597aedba6134a",
+    "runtime_ast_sha256": "8fd5eba53e4fadb4cde453dec9995d15408ee10929d628a76d6f282125ab5094"
+  },
+  "src/mjlab/rl/runner.py": {
+    "sha256": "61e9200bf304e3df71096cd69f28f4d5973157e61cdc549fc21b6f156326f77e",
+    "runtime_ast_sha256": "b7a3dc981ff9398c7cb74fa3efadb4de49dd0fd7d2d873bd8c58e80cec488229"
+  },
+  "src/mjlab/tasks/velocity/rl/runner.py": {
+    "sha256": "ad48677e7bdd2d87d942cbe7f6140b11aeb479c5129105d367f6714f3af91982",
+    "runtime_ast_sha256": "d0f324dcc2185f3fb53a57a6de82643d31ef3bd0d0639a689b8a453705a7cc91"
+  },
+  "scripts/tools/train_lego2_blind_pit_reward_v2.py": {
+    "sha256": "7c3f7c65d45c8536c73001f0683d3da93465dd7e39a6d81f780ca5fdacb98b13",
+    "runtime_ast_sha256": "707f1e83fbfd0c713783228b1bd46d69c9f72c5386bfd60c21272a71659cb127"
+  },
+  "scripts/tools/evaluate_lego2_blind_pit.py": {
+    "sha256": "b7cab68c715f01e4dcd511158b342170f2f1adf1e0e0f72505958c7f63b60a1c",
+    "runtime_ast_sha256": "121984a3e9462c38cdb112ae4107b7aefd012ad6dc5b5873b7dad16dd714286c"
+  },
+  "scripts/tools/compare_lego2_reward_v2.py": {
+    "sha256": "67b2a7094872742087a2c34367f6d1911b5c46724749c429ee8f9db10624310f",
+    "runtime_ast_sha256": "907dd53855f1e8e2aa8e1251cbf736b964bf2a390d288709a4cf4064ec980bf2"
+  },
+  "src/mjlab/scripts/train.py": {
+    "sha256": "30c54158e544099beb343d76ce7041dbd88245303f203fa0616a5956fb0e2ae7",
+    "runtime_ast_sha256": "db2310398e77d843dfc082e6aa587bf9aa1c3a7df234ac9a3ac2c8c16cdc0577"
+  },
+  "src/mjlab/scripts/play.py": {
+    "sha256": "606f537c568247c5e9ba2e94ac1a197675411b360fb1db3231f1b46710539456",
+    "runtime_ast_sha256": "2d1908752a45fcad06ae522357ddf956191db868dbbc773453ff52f303f21bea"
+  },
+  "src/mjlab/tasks/velocity/mdp/rewards.py": {
+    "sha256": "374c3583d668ec5e8d4906fc145c2f96316b40264014057e8c233f370991145f",
+    "runtime_ast_sha256": "0e57e50498ea5045a449bf0687ec45f6da2df63a36cf3734e3d374c17b70430a"
+  },
+  "src/mjlab/envs/mdp/rewards.py": {
+    "sha256": "4fc0b756e22363c9b61813b945d049f2225cb7ef2f6846d4d94b6afbd705645d",
+    "runtime_ast_sha256": "136c3c3126f404fe372b745ca434777891de1f27f6236e8c8c680b4fc5b67cad"
+  },
+  "src/mjlab/tasks/registry.py": {
+    "sha256": "f1c82c8f1ff5d24263787f4cfc2805b7b4103253fe59c054bf649d24c7cc9476",
+    "runtime_ast_sha256": "73f9f62e374b78673f0cbb7ebe1f4b3b505a9296397bbe05a2e59745d0466524"
+  },
+  "src/mjlab/tasks/velocity/velocity_env_cfg.py": {
+    "sha256": "6bc79f7fcce79a1b7b929aff4139ed977012b7b4b9161c4546619316a4f6b8bf",
+    "runtime_ast_sha256": "747f6d8f8299dc2faf9fab5957e785eabe39cd1952d97db942a8d4a789dd312a"
+  },
+  "src/mjlab/managers/reward_manager.py": {
+    "sha256": "6130dbc34c730fe36362eb75f65184bc6729daab14cd50ffaff70243947788cb",
+    "runtime_ast_sha256": "f19f70d03fc5f0a019571f56c7f2ae7dd0011a0906350b39c168287dbe2a331e"
+  },
+  "src/mjlab/managers/metrics_manager.py": {
+    "sha256": "5c1f24e75fd21220b5c96f974127568150ce6e9ee16d0abb97dcd933173f6723",
+    "runtime_ast_sha256": "46da2fb9ba2c6ca425cdd1428bd2c020fac9a716e95ad808aba5aa2617a3e449"
+  }
+}

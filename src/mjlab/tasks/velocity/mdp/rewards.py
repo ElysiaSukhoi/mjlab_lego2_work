@@ -1,3 +1,11 @@
+"""速度类任务可复用的奖励计算，提供跟速、姿态、能耗等原始分数。
+
+Lego2的env_cfg文件选择函数并指定权重，reward_manager.py负责乘权重和dt。
+当前Blind-Pit只选其中一部分；还有关节限位等通用项来自envs/mdp/rewards.py。
+v2新增的俯仰容许区间/最低净空计算在lego2/blind_pit_rewards.py，不在这里。
+多数跟速和运动代价还乘直立程度系数，解释日志时需结合所选函数。
+"""
+
 from __future__ import annotations
 
 import math
@@ -369,9 +377,7 @@ def feet_slide(
   asset: Entity = env.scene[asset_cfg.name]
 
   assert contact_sensor.data.force is not None
-  contacts = (
-    torch.linalg.norm(contact_sensor.data.force, dim=-1) > force_threshold
-  )
+  contacts = torch.linalg.norm(contact_sensor.data.force, dim=-1) > force_threshold
 
   foot_vel_w = asset.data.body_link_lin_vel_w[:, asset_cfg.body_ids, :]
   rel_vel_w = foot_vel_w - asset.data.root_link_lin_vel_w.unsqueeze(1)
@@ -513,6 +519,7 @@ def _upright_scale(env: ManagerBasedRlEnv) -> torch.Tensor:
 def lin_vel_z_l2(
   env: ManagerBasedRlEnv, asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG
 ) -> torch.Tensor:
+  """计算机身自身上下方向的速度平方，配负权重可减少竖直抖动。"""
   asset: Entity = env.scene[asset_cfg.name]
   return torch.square(asset.data.root_link_lin_vel_b[:, 2]) * _upright_scale(env)
 
@@ -520,6 +527,7 @@ def lin_vel_z_l2(
 def ang_vel_xy_l2(
   env: ManagerBasedRlEnv, asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG
 ) -> torch.Tensor:
+  """计算机身侧倾/俯仰转动速度的平方和，配负权重限制剧烈摆动。"""
   asset: Entity = env.scene[asset_cfg.name]
   return torch.sum(
     torch.square(asset.data.root_link_ang_vel_b[:, :2]), dim=1
@@ -543,10 +551,9 @@ def base_height_l2(
   asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
   sensor_name: str | None = None,
 ) -> torch.Tensor:
-  """Penalize base height from target (robot_lab ``base_height_l2``).
+  """计算机身高度与目标的双向平方差，是旧Rough等任务可选项。
 
-  If ``sensor_name`` is set, target is adjusted by the mean ray hit height
-  (rough terrain). Otherwise the absolute world-z target is used (flat).
+  可按扫描均值调整目标；当前Blind-Pit v1未启用，v2最低净空使用另一个单向函数。
   """
   asset: Entity = env.scene[asset_cfg.name]
   if sensor_name is not None:
@@ -572,6 +579,7 @@ def track_lin_vel_xy_exp(
   command_name: str,
   asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
 ) -> torch.Tensor:
+  """前进/横向速度越接近命令，分数越接近1；std控制偏差容许程度。"""
   asset: Entity = env.scene[asset_cfg.name]
   command = env.command_manager.get_command(command_name)
   assert command is not None
@@ -587,6 +595,7 @@ def track_ang_vel_z_exp(
   command_name: str,
   asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
 ) -> torch.Tensor:
+  """转向速度越接近命令，分数越高；最后还乘原有直立程度系数。"""
   asset: Entity = env.scene[asset_cfg.name]
   command = env.command_manager.get_command(command_name)
   assert command is not None
@@ -884,12 +893,12 @@ def wheel_skid_steer_exp(
     left_m = side_t > 0
     right_m = side_t < 0
     if torch.any(left_m) and torch.any(right_m):
-      env.extras["log"]["Metrics/wheel_skid_target_left_mean"] = (
-        expected_wheel_vel[:, left_m].mean()
-      )
-      env.extras["log"]["Metrics/wheel_skid_target_right_mean"] = (
-        expected_wheel_vel[:, right_m].mean()
-      )
+      env.extras["log"]["Metrics/wheel_skid_target_left_mean"] = expected_wheel_vel[
+        :, left_m
+      ].mean()
+      env.extras["log"]["Metrics/wheel_skid_target_right_mean"] = expected_wheel_vel[
+        :, right_m
+      ].mean()
 
   env.extras["log"]["Metrics/wheel_skid_steer_mse"] = mse.mean()
   return torch.exp(-mse / std**2) * active * _upright_scale(env)
@@ -977,7 +986,10 @@ def undesired_contacts(
   sensor_name: str,
   threshold: float = 1.0,
 ) -> torch.Tensor:
-  """Penalize non-foot contacts reported by a contact sensor."""
+  """按非轮接触通道数计算代价，并乘直立程度系数。
+
+  当前Blind-Pit使用curriculums中的原始接触计数，避免翻倒后计数被压低。
+  """
   sensor: ContactSensor = env.scene[sensor_name]
   assert sensor.data.found is not None
   is_contact = sensor.data.found > 0

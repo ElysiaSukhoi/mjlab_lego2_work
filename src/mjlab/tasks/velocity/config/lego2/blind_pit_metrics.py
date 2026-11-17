@@ -1,4 +1,11 @@
-"""Privileged pit progress diagnostics; never policy inputs or rewards."""
+"""记录出坑过程，帮助区分没有爬上与爬上后不稳定。
+
+借用blind_pit_curriculums.py的四轮支撑检查，由环境配置登记到指标管理器。
+训练日志root_out/front_up/rear_up/complete是满足条件的帧占比，
+stable_pass记录一回合是否曾连续稳定支撑0.5秒，不是同一种统计。
+达到后即使后来翻倒，成功标记也保留；还需同时查看fell_over/failed。
+评估脚本也用PitProgress记录阶段；这里的通过判断不会直接增加奖励。
+"""
 
 from __future__ import annotations
 
@@ -27,6 +34,10 @@ def pit_stages(
   front: list[int],
   rear: list[int],
 ) -> dict[str, torch.Tensor]:
+  """把当前位置/支撑分成机身出坑、前轮上台、后轮上台和四轮完成几个阶段。
+
+  complete要求四轮有效支撑；stable_now还要求机身倾角小于45°。
+  """
   # E个环境、W=4个轮；坐标均为世界坐标，距离单位m。
   # 前后轮按传感器名称解析，不假定传感器和动作使用相同排列。
   args = (origins[:, :2], rim_z)
@@ -59,7 +70,10 @@ def pit_stages(
 
 
 class PitProgress(_PitWheels):
-  """Per-env, per-control-step progress with partial-reset isolation."""
+  """为每个环境累计连续稳定支撑时间，并记住本回合是否曾通过。
+
+  达到0.5秒后保持成功标记到reset；中间掉一次支撑就重新计时。
+  """
 
   def __init__(self, cfg: MetricsTermCfg, env: ManagerBasedRlEnv):
     del cfg
@@ -81,6 +95,7 @@ class PitProgress(_PitWheels):
     self.values: dict[str, torch.Tensor] = {}
 
   def reset(self, env_ids: torch.Tensor | slice | None = None) -> None:
+    """清除指定环境的保持时间和成功标记，其他环境继续保留自己的进度。"""
     ids = slice(None) if env_ids is None else env_ids
     # 只清被重置的行；其他环境的连续支撑时长和已达成事件必须保留。
     self.hold[ids] = 0
@@ -92,6 +107,7 @@ class PitProgress(_PitWheels):
   def __call__(
     self, env: ManagerBasedRlEnv, field: str = "stable_pass"
   ) -> torch.Tensor:
+    """每控制步最多更新一次阶段/保持时间，重复读取不会重复加时间。"""
     # 同一控制步可被logger/评估器多次读取；不能每读一次就多累计一次dt。
     fresh = self.last_step != env.common_step_counter
     if fresh.any():

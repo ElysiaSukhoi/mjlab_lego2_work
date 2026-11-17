@@ -1,0 +1,8 @@
+src/mjlab/tasks/velocity/config/lego2/blind_pit_rewards.py
+src/mjlab/tasks/velocity/config/lego2/blind_pit_reward_v2_env_cfg.py
+tests/test_lego2_blind_pit_reward_v2.py
+docs/codex/artifacts/check_phase3_reward_v2_20261115.sh
+docs/codex/artifacts/reward_v2_prerequisites_20261115.sha256
+docs/codex/artifacts/reward_v2_20261115_files.txt
+docs/codex/artifacts/reward_v2_sources_20261115.sha256
+src/mjlab/tasks/velocity/config/lego2/__init__.py

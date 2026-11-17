@@ -1,4 +1,10 @@
-"""Script to play RL agent with RSL-RL."""
+"""通用模型回放入口，通过本机窗口或Viser网页查看动作。
+
+按任务名读取注册的play配置，加载指定checkpoint的actor后让环境持续运行。
+play读取当前源码中的地形/资产配置，不会自动恢复checkpoint当时的env.yaml。
+当前Blind-Pit普通play仍从3厘米等级出生；固定30厘米须用固定高度工厂。
+本文件调用viewer显示画面，不执行PPO参数更新。
+"""
 
 import os
 import sys
@@ -32,6 +38,8 @@ def _parse_wandb_dt(value: str | datetime) -> datetime:
 
 @dataclass(frozen=True)
 class PlayConfig:
+  """回放选择：模型文件、环境数量、设备、录像和网页/本机窗口等。"""
+
   agent: Literal["zero", "random", "trained"] = "trained"
   registry_name: str | None = None
   wandb_run_path: str | None = None
@@ -57,6 +65,7 @@ class PlayConfig:
 
 
 def run_play(task_id: str, cfg: PlayConfig):
+  """加载当前任务的play配置及策略，把环境和策略交给所选viewer显示。"""
   configure_torch_backends()
 
   device = cfg.device or ("cuda:0" if torch.cuda.is_available() else "cpu")

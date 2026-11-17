@@ -1,4 +1,9 @@
-"""RSL-RL configuration."""
+"""定义网络、PPO和训练器可配置的字段，相当于配置表的格式。
+
+本文件给通用默认值；Lego2的实际默认组合由任务目录rl_cfg.py覆盖。
+train.py或独立v2训练入口再把配置交给runner，PPO更新由rsl_rl依赖包执行。
+看具体实验时应以其params/agent.yaml为准，不能只看这里的默认数值。
+"""
 
 from dataclasses import dataclass, field
 from typing import Any, Literal, Tuple
@@ -6,7 +11,7 @@ from typing import Any, Literal, Tuple
 
 @dataclass
 class RslRlModelCfg:
-  """Config for a single neural network model (Actor or Critic)."""
+  """一张网络的配置表；actor和critic各有一份，Lego2具体宽度看rl_cfg.py。"""
 
   hidden_dims: Tuple[int, ...] = (128, 128, 128)
   """The hidden dimensions of the network."""
@@ -40,7 +45,7 @@ class RslRlModelCfg:
 
 @dataclass
 class RslRlPpoAlgorithmCfg:
-  """Config for the PPO algorithm."""
+  """PPO怎么更新网络的配置表；这里是通用默认值，任务可覆盖。"""
 
   num_learning_epochs: int = 5
   """The number of learning epochs per update."""
@@ -83,6 +88,8 @@ class RslRlPpoAlgorithmCfg:
 
 @dataclass
 class RslRlBaseRunnerCfg:
+  """训练预算、保存频率、日志目录和恢复模型等公共设置。"""
+
   seed: int = 42
   """The seed for the experiment. Default is 42."""
   num_steps_per_env: int = 24
@@ -127,6 +134,8 @@ class RslRlBaseRunnerCfg:
 
 @dataclass
 class RslRlOnPolicyRunnerCfg(RslRlBaseRunnerCfg):
+  """把actor、critic与PPO配置组合成可交给训练器的一份设置。"""
+
   class_name: str = "OnPolicyRunner"
   """The runner class name. Default is OnPolicyRunner."""
   actor: RslRlModelCfg = field(

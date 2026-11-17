@@ -1,0 +1,79 @@
+{
+  "baseline_git_commit": "63f293a",
+  "baseline_preservation": "User reports commit and push; local HEAD and origin/main tracking reference both 63f293a before this batch. No Git writes by Codex.",
+  "video": {
+    "path": "/home/asus/视频/录屏/录屏 2026年11月15日 22时17分45秒.webm",
+    "sha256": "8162a9fe50aa7a17999c0d7eabc23a4ed4ad9619f90deddc2745fbd790e1a7d2",
+    "duration_s": 23.242798,
+    "sampled_wall_time_s": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22
+    ],
+    "checkpoint_identity_independently_visible": false,
+    "interpretation": "Visual low rear-leg passage/low posture; contact force and reward causation cannot be measured from the video alone"
+  },
+  "user_report": {
+    "floor_locomotion": "basically normal",
+    "front_leg_climb": "basically correct",
+    "rear_leg_climb": "joints brace/scrape up edge",
+    "after_climb": "body and joints too close to ground",
+    "causal_hypothesis": "horizontal-posture incentive dominates; not independently proven"
+  },
+  "implementation": {
+    "task": "Mjlab-Blind-Pit-Lego2-RewardV2",
+    "experiment_name": "lego2_blind_pit_reward_v2",
+    "v1_task_unchanged": true,
+    "v2_rewards": 13,
+    "actor_dim": 144,
+    "critic_dim": 254,
+    "actions": 12,
+    "free_pitch_deg": 25,
+    "roll_component_weight": -0.5,
+    "nonfoot_force_norm_threshold_N": 1,
+    "nonfoot_channel_weight": -0.5,
+    "minimum_root_ground_clearance_m": 0.34,
+    "level_ground_max_scan_relief_m": 0.03,
+    "clearance_weight": -2.0,
+    "parameters_are_provisional": true
+  },
+  "local_validation": {
+    "cpu_tests": 24,
+    "cpu_duration_s": 10.28,
+    "warnings": "4 existing ONNX deprecation warnings",
+    "test_log": "docs/codex/diagnostics/20261115_reward_v2_cpu_tests_passed.txt",
+    "ruff_format_lint": "passed",
+    "ty": "passed",
+    "pyright": "0 errors",
+    "gpu_available": false,
+    "memory_available_GiB_approx": 21,
+    "real_v2_integration_envs": 2,
+    "real_v2_integration_control_steps": 4,
+    "first_attempt": "Cache path pointed to read-only home; corrected XDG_CACHE_HOME. An isolation test compared fresh terrain lambda identities; changed it to compare actual terrain configuration."
+  },
+  "illustrative_weighted_reward_rates": {
+    "pitch_only_25deg_v1": -0.08930309757836517,
+    "pitch_only_25deg_v2": 0,
+    "clearance_0.22m_v2": -0.24913494809688586,
+    "one_nonfoot_contact_v2": -0.5
+  },
+  "remote_synced": false,
+  "remote_cpu_gpu_validation": false,
+  "ppo_training_started": false,
+  "trained_v2_checkpoint": null,
+  "limitations": [
+    "Minimum root clearance is a soft cost, not a guarantee of every joint clearance",
+    "Local-level scan gating intentionally leaves high step transitions to contact/posture costs",
+    "Height and contact weights are untrained candidates",
+    "Current standalone policy evaluator still selects v1; v2 policy evaluation/transfer/training launcher must be handled before actual v2 experiment"
+  ]
+}

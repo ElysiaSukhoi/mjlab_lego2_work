@@ -1,4 +1,9 @@
-"""Script to train RL agent with RSL-RL."""
+"""通用训练入口，命令形式为uv run train 任务名。
+
+通过tasks/registry.py找到env配置、rl配置和runner，建立环境、日志后调用learn。
+Lego2奖励/地形由任务env_cfg提供，网络/PPO默认值由lego2/rl_cfg.py提供。
+这里的resume用于恢复训练状态；v2只继承actor的试训走独立tools入口。
+"""
 
 import logging
 import os
@@ -24,6 +29,8 @@ from mjlab.utils.wrappers import VideoRecorder
 
 @dataclass(frozen=True)
 class TrainConfig:
+  """通用训练入口的参数，包含环境配置和网络/PPO配置两部分。"""
+
   env: ManagerBasedRlEnvCfg
   agent: RslRlBaseRunnerCfg
   registry_name: str | None = None
@@ -41,12 +48,14 @@ class TrainConfig:
 
   @staticmethod
   def from_task(task_id: str) -> "TrainConfig":
+    """按已注册任务名取得环境与学习配置，作为命令行覆盖前的默认值。"""
     env_cfg = load_env_cfg(task_id)
     agent_cfg = load_rl_cfg(task_id)
     return TrainConfig(env=env_cfg, agent=agent_cfg)
 
 
 def run_train(task_id: str, cfg: TrainConfig, log_dir: Path) -> None:
+  """创建环境和训练器、保存参数；需要resume时加载旧状态，再执行学习循环。"""
   cuda_visible = os.environ.get("CUDA_VISIBLE_DEVICES", "")
   if cuda_visible == "":
     device = "cpu"
@@ -104,9 +113,7 @@ def run_train(task_id: str, cfg: TrainConfig, log_dir: Path) -> None:
     cfg.env.sim.nan_guard.enabled = True
     cfg.env.sim.nan_guard.output_dir = str(log_dir / "nan_dumps")
     if rank == 0:
-      print(
-        f"[INFO] NaN guard enabled, output dir: {cfg.env.sim.nan_guard.output_dir}"
-      )
+      print(f"[INFO] NaN guard enabled, output dir: {cfg.env.sim.nan_guard.output_dir}")
 
   if rank == 0:
     print(f"[INFO] Logging experiment in directory: {log_dir}")
@@ -184,6 +191,7 @@ def run_train(task_id: str, cfg: TrainConfig, log_dir: Path) -> None:
 
 
 def launch_training(task_id: str, args: TrainConfig | None = None):
+  """为新run分配日志目录和GPU，并启动单卡或多卡训练。"""
   args = args or TrainConfig.from_task(task_id)
 
   # Create log directory once before launching workers.

@@ -1,0 +1,6 @@
+src/mjlab/tasks/velocity/config/lego2/env_cfgs.py:427:41: error[invalid-argument-type] Argument is incorrect: Expected `str | list[str] | None`, found `tuple[Literal[".*_HFE"], Literal[".*_KFE"]]`
+src/mjlab/tasks/velocity/mdp/rewards.py:380:13: error[invalid-argument-type] Argument to function `len` is incorrect: Expected `Sized`, found `list[int] | slice[Any, Any, Any]`
+src/mjlab/tasks/velocity/mdp/rewards.py:856:18: error[invalid-argument-type] Argument to function `len` is incorrect: Expected `Sized`, found `list[int] | slice[Any, Any, Any]`
+src/mjlab/tasks/velocity/mdp/rewards.py:871:15: error[invalid-argument-type] Argument to function `len` is incorrect: Expected `Sized`, found `list[int] | slice[Any, Any, Any]`
+src/mjlab/tasks/velocity/mdp/rewards.py:934:18: error[invalid-argument-type] Argument to function `len` is incorrect: Expected `Sized`, found `list[int] | slice[Any, Any, Any]`
+Found 5 diagnostics

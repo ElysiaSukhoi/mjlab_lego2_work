@@ -1,3 +1,10 @@
+"""项目对rsl_rl训练器的封装，负责保存/加载和导出模型。
+
+真正的采样、PPO更新循环由依赖包OnPolicyRunner执行，参数来自任务rl_cfg.py。
+本文件额外保存环境步数并兼容旧checkpoint格式；VelocityOnPolicyRunner再补导出信息。
+注意load除了模型还可能恢复环境计数，v2只迁移actor时因此走专用warmstart模块。
+"""
+
 import os
 from pathlib import Path
 
@@ -9,7 +16,7 @@ from mjlab.rl.vecenv_wrapper import RslRlVecEnvWrapper
 
 
 class MjlabOnPolicyRunner(OnPolicyRunner):
-  """Base runner that persists environment state across checkpoints."""
+  """封装训练器的模型保存/恢复，额外保留环境步数并支持旧文件格式。"""
 
   env: RslRlVecEnvWrapper
 
@@ -65,11 +72,7 @@ class MjlabOnPolicyRunner(OnPolicyRunner):
     return export_dir, filename, export_dir / filename
 
   def save(self, path: str, infos=None) -> None:
-    """Save checkpoint.
-
-    Extends the base implementation to persist the environment's
-    common_step_counter and to respect the ``upload_model`` config flag.
-    """
+    """保存模型/优化器/迭代及环境计数；是否上传由upload_model控制。"""
     env_state = {"common_step_counter": self.env.unwrapped.common_step_counter}
     infos = {**(infos or {}), "env_state": env_state}
     # Inline base OnPolicyRunner.save() to conditionally gate W&B upload.
@@ -87,12 +90,9 @@ class MjlabOnPolicyRunner(OnPolicyRunner):
     strict: bool = True,
     map_location: str | None = None,
   ) -> dict:
-    """Load checkpoint.
+    """加载所选模型状态，并兼容旧checkpoint命名。
 
-    Extends the base implementation to:
-    1. Restore common_step_counter to preserve curricula state.
-    2. Migrate legacy checkpoints (actor.* -> mlp.*, actor_obs_normalizer.*
-      -> obs_normalizer.*) to the current format (rsl-rl>=4.0).
+    即使load_cfg只选actor，下方仍会读取infos里的环境计数；v2专用迁移因此绕开此方法。
     """
     loaded_dict = torch.load(path, map_location=map_location, weights_only=False)
 

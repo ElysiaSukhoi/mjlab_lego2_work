@@ -1,4 +1,9 @@
-"""Metrics used by the incremental Lego2 platform-climb task."""
+"""观察旧固定高台任务的位置、接触和台面保持情况。
+
+platform_climb_env_cfg.py把这些函数登记为日志指标；本文件本身不加分。
+位置相对旧任务的台面中心，长度单位为米；接触数按传感器通道统计。
+当前Blind-Pit的四轮几何支撑与0.5秒判据位于blind_pit_metrics.py。
+"""
 
 from __future__ import annotations
 
@@ -17,7 +22,7 @@ def platform_relative_root_x(
   env: ManagerBasedRlEnv,
   asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
 ) -> torch.Tensor:
-  """Return root x relative to the platform center."""
+  """记录机身相对旧台面中心的前后位置，单位米。"""
   asset: Entity = env.scene[asset_cfg.name]
   return asset.data.root_link_pos_w[:, 0] - env.scene.env_origins[:, 0]
 
@@ -26,7 +31,7 @@ def platform_relative_root_z(
   env: ManagerBasedRlEnv,
   asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
 ) -> torch.Tensor:
-  """Return root z relative to the platform-top environment origin."""
+  """记录机身相对旧台面原点的高度，单位米。"""
   asset: Entity = env.scene[asset_cfg.name]
   return asset.data.root_link_pos_w[:, 2] - env.scene.env_origins[:, 2]
 
@@ -36,7 +41,7 @@ def platform_contact_count(
   sensor_name: str,
   force_threshold: float = 1.0,
 ) -> torch.Tensor:
-  """Return the number of feet with valid terrain contact."""
+  """记录四轮中有多少个满足有效接触条件。"""
   sensor = env.scene[sensor_name]
   found = sensor.data.found
   assert found is not None
@@ -52,7 +57,7 @@ def platform_front_contact_count(
   sensor_name: str,
   force_threshold: float = 1.0,
 ) -> torch.Tensor:
-  """Return valid contact count for the front RF/LF feet."""
+  """记录RF/LF两个前轮的有效接触数，便于判断是否卡在台沿。"""
   sensor = env.scene[sensor_name]
   found = sensor.data.found
   assert found is not None
@@ -72,12 +77,7 @@ def platform_top_reached(
   root_z_threshold: float | None = None,
   asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
 ) -> torch.Tensor:
-  """Return one when the base is inside the platform-top region.
-
-  This is deliberately a metric only.  It does not provide reward and does
-  not terminate an episode.  A later step can add contact and hold-time
-  requirements after this geometric detector has been checked in play mode.
-  """
+  """仅按机身位置/高度判断是否进入旧台面区域，不保证四轮都上台。"""
   asset: Entity = env.scene[asset_cfg.name]
   relative_pos = asset.data.root_link_pos_w - env.scene.env_origins
   inside_x = (relative_pos[:, 0] >= top_x_range[0]) & (
@@ -85,16 +85,14 @@ def platform_top_reached(
   )
   inside_y = torch.abs(relative_pos[:, 1]) <= top_y_half_width
   threshold = (
-    platform_height + root_z_margin
-    if root_z_threshold is None
-    else root_z_threshold
+    platform_height + root_z_margin if root_z_threshold is None else root_z_threshold
   )
   above_top = relative_pos[:, 2] >= threshold
   return (inside_x & inside_y & above_top).float()
 
 
 class platform_top_stable:
-  """Metric for holding the top region with multiple supported feet."""
+  """记录旧任务是否在台面区域维持了指定接触数和连续步数。"""
 
   def __init__(self, cfg, env: ManagerBasedRlEnv):
     del cfg
@@ -120,6 +118,7 @@ class platform_top_stable:
     root_z_threshold: float | None = None,
     asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
   ) -> torch.Tensor:
+    """满足区域和接触条件就累加保持步数，中断时清零；仅输出指标。"""
     asset: Entity = env.scene[asset_cfg.name]
     relative_pos = asset.data.root_link_pos_w - env.scene.env_origins
     inside_x = (relative_pos[:, 0] >= top_x_range[0]) & (
@@ -127,9 +126,7 @@ class platform_top_stable:
     )
     inside_y = torch.abs(relative_pos[:, 1]) <= top_y_half_width
     threshold = (
-      platform_height + root_z_margin
-      if root_z_threshold is None
-      else root_z_threshold
+      platform_height + root_z_margin if root_z_threshold is None else root_z_threshold
     )
     above_top = relative_pos[:, 2] >= threshold
     in_top_region = inside_x & inside_y & above_top

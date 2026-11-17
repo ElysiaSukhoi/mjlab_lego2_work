@@ -1,17 +1,10 @@
-"""Lego2 wheel-legged velocity environment configurations.
+"""Lego2的基础机器人任务配置，提供Rough和Flat两条入口。
 
-Aligned with robot_lab LegoWheel2 velocity rewards and actuator kp/kd.
-Command velocity curriculum and terrain-level curriculum are both enabled.
-Terrain generator uses curriculum mode (one column per sub-terrain; rows =
-difficulty). Two columns (flat|rough) with size=(10, 20): length 100 m,
-width 20 m/col (40 m total). ``random_rough`` uses ``scale_with_difficulty``
-so amplitude ramps from flat (row 0) to full ``noise_range`` (last row).
-Actuator gains match LEGOWHEEL2_CFG. Command is 2D [lin_x, ang_z].
-
-Rough terrain is inspired by sim2sim ``scene_random_rough`` but uses a
-sparser/taller Lego2-friendly heightfield (``horizontal_scale=0.2`` to stay
-under MuJoCo's hfield mjMAXCONPAIR=50; ``downsampled_scale=1.5`` for longer
-wavelength bumps).
+把velocity_env_cfg.py的通用设置接到Lego2机器人、腿/轮动作和传感器上。
+当前中央坑任务从这里的Rough训练配置派生，再明确重设地形、观测和奖励；
+所以不能把本文件的Rough奖励权重当成Blind-Pit的最终权重。
+当前Rough模板登记平地、上台阶坑、下台阶平台三类，每块10×10米。
+下方随机粗糙高度场函数是备用定义，当前地形表没有选它。
 """
 
 import math
@@ -55,10 +48,9 @@ _LEGO2_SPAWN_PATCH_CFG = FlatPatchSamplingCfg(
   max_height_diff=0.08,
 )
 
-# Lego2 rough terrain: sparser/taller random_rough + terrain curriculum grid.
-# curriculum=True → one column per sub-terrain; num_rows = difficulty levels.
-# 2 columns (flat|rough), size=(10, 20): length = 10*10 = 100 m, width/col = 20 m.
-# scale_with_difficulty → noise amplitude 0→full across rows.
+
+# 下方两函数可生成平地/随机粗糙面；当前地形表只使用前者，并另配上/下台阶。
+# curriculum=True时每个sub_terrain占一列，行表示难度；具体类型以地形表为准。
 def _lego2_flat_terrain(*, proportion: float) -> terrain_gen.BoxFlatTerrainCfg:
   return terrain_gen.BoxFlatTerrainCfg(
     proportion=proportion,
@@ -137,7 +129,10 @@ _FOOT_BODY_WHEEL_ORDER = tuple(f"{leg}_FOOT" for leg in ("LF", "RF", "LH", "RH")
 
 
 def lego2_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
-  """Create Lego2 rough terrain velocity configuration (LegoWheel2-aligned rewards)."""
+  """给通用速度模板配置Lego2机器人、腿/轮动作、观测与Rough奖励。
+
+  Blind-Pit借用这份训练配置后会重建地形/奖励，所以这里不是当前坑式任务的最终配置。
+  """
   cfg = make_velocity_env_cfg()
 
   cfg.sim.mujoco.ccd_iterations = 300
@@ -262,18 +257,18 @@ def lego2_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
     params={"command_name": "twist", "cmd_threshold": 0.3},
   )
 
-  # Dual action space (LegoWheel2 scales: leg 0.25, wheel 5.0).
+  # 8个腿位置动作和4个轮速度动作；raw动作各自缩放后送到电机。
   cfg.actions["joint_pos"] = JointPositionActionCfg(
     entity_name="robot",
     actuator_names=_LEG_JOINT_ORDER,
-    scale=0.45,
+    scale=0.45,  # 腿位置偏移=raw动作×0.45弧度，再加默认关节位置。
     use_default_offset=True,
     preserve_order=True,
   )
   cfg.actions["joint_vel"] = JointVelocityActionCfg(
     entity_name="robot",
     actuator_names=_WHEEL_JOINT_ORDER,
-    scale=LEGO2_WHEEL_ACTION_SCALE,
+    scale=LEGO2_WHEEL_ACTION_SCALE,  # 当前为5：raw动作换成轮角速度（弧度/秒）。
     use_default_offset=True,
     preserve_order=True,
   )
@@ -505,7 +500,7 @@ def lego2_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
     ),
     "joint_pos_penalty_std": RewardTermCfg(
       func=mdp.joint_pos_penalty_std,
-      weight= 0.5,
+      weight=0.5,
       params={
         "command_name": "twist",
         "asset_cfg": leg_cfg,
@@ -626,7 +621,10 @@ def lego2_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
 
 
 def lego2_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
-  """Create Lego2 flat terrain velocity configuration (LegoWheel2-aligned rewards)."""
+  """从Lego2基础配置派生平地任务，去掉地形扫描等不需要的部分。
+
+  这是旧Flat任务入口；当前中央坑训练不会自动把它用作预训练。
+  """
   cfg = lego2_rough_env_cfg(play=play)
 
   cfg.sim.njmax = 300

@@ -1,4 +1,10 @@
-"""Pit traversal curriculum and tile boundary checks, privileged training only."""
+"""判断四轮是否真正上台，并决定下一回合用多深的坑。
+
+blind_pit_env_cfg.py把这里的课程/越界检查接入环境，metrics模块复用支撑判断。
+课程只是调整下一回合难度，不会因为晋级直接给策略加奖励。
+日志pit_levels的mean/max是等级；promoted/demoted是本次结算环境的升降级比例。
+nonfoot_contact_count在v1中用于记录碰撞，在v2中也作为奖励代价。
+"""
 
 from __future__ import annotations
 
@@ -20,7 +26,7 @@ if TYPE_CHECKING:
 # 本模块使用仿真中的几何/接触真值，供课程、截断和诊断使用，不送入actor。
 # 下文E表示环境数，W表示轮子数（本任务为4）；长度单位m，力单位N。
 def cylinder_extents(axis: torch.Tensor, sizes: torch.Tensor) -> torch.Tensor:
-  """World XYZ support distances for cylinders, including tilted wheel axles."""
+  """计算轮子倾斜后在世界XYZ方向占多大空间，供轮底和出坑判断使用。"""
   # axis形状(E,W,3)，是圆柱轴在世界坐标中的单位方向；sizes为(W,2)：半径r、半宽h。
   # 某坐标轴上的最大伸出距离为r*sqrt(1-axis_i²)+h*|axis_i|，倾斜时也适用。
   # clamp_min只防止浮点误差使根号内略小于0，避免由此产生NaN。
@@ -41,10 +47,9 @@ def rim_supported(
   pit_half_width: float = 1.5,
   tile_half_width: float = 5.0,
 ) -> torch.Tensor:
-  """All wheels clear the pit and support on the assigned tile's upper rim.
+  """判断所选轮子是否全部离开坑并实际支撑在本地块台面上。
 
-  Sensor normals point primary wheel -> secondary terrain, hence negative Z
-  for support from below. Wall contact or unsupported geometric height fails.
+  同时核对轮子外缘、轮底高度、接触点、法向和力；仅轮心升高或顶着侧壁不算。
   """
   # centers/extents均为(E,W,3)，使用轮碰撞圆柱中心，而非关节原点或机身位置。
   # 先转成相对本地块中心的XY距离，避免把相邻难度地块上的支撑也当成本轮出坑。
@@ -74,7 +79,10 @@ def level_changes(
   eligible: torch.Tensor,
   promote_distance: float = 3.0,
 ) -> tuple[torch.Tensor, torch.Tensor]:
-  """Per-episode decisions, never rewards or batch-mean success estimates."""
+  """按每个已结束回合决定升/降一级。
+
+  走够距离且四轮支撑才晋级；失败或行程不足则降级，人工中途reset不结算。
+  """
   # 所有输入按环境独立排列；eligible表示该行确有一个可结算的完整episode。
   finite = torch.isfinite(distance) & torch.isfinite(expected_distance)
   # 晋级要求距离、四轮支撑、正常状态同时成立，不能只凭走远或到达边界判成功。
@@ -85,17 +93,22 @@ def level_changes(
 
 
 def nonfoot_contact_count(env: ManagerBasedRlEnv) -> torch.Tensor:
-  """Count terrain-contacting non-foot geom channels, even when tipped over."""
+  """数有多少个非轮碰撞体正在接触地形，接触力须超过1牛。
+
+  用于训练日志观察刮擦/撑地；v2也用这个数扣分，不因翻倒而减少计数。
+  """
   sensor: ContactSensor = env.scene["undesired_ground_contact"]
   data = sensor.data
   assert data.found is not None and data.force is not None
   # 每个非足部碰撞几何通道计0/1，并非统计独立link数或所有物理接触点数量。
-  # 不乘直立姿态系数，保证翻倒后仍能记录碰撞；配置中只把它作为episode均值指标。
+  # 不乘直立姿态系数，保证翻倒后仍能记录碰撞；v1作均值指标，v2也用于扣分。
   contact = (data.found > 0) & (torch.linalg.vector_norm(data.force, dim=-1) > 1.0)
   return contact.sum(dim=-1).float()
 
 
 class _PitWheels:
+  """按轮子名称取得几何和接触数据，供课程、指标和越界检查共同使用。"""
+
   def __init__(self, env: ManagerBasedRlEnv):
     self.robot: Entity = env.scene["robot"]
     self.contact: ContactSensor = env.scene["pit_rim_contact"]
@@ -116,6 +129,7 @@ class _PitWheels:
     )
 
   def wheels(self) -> tuple[torch.Tensor, torch.Tensor]:
+    """返回四轮的世界位置与外形包络，避免把轮心当成轮底。"""
     # pose为(E,W,7)：世界坐标xyz和wxyz四元数，顺序与接触数据一致。
     pose = self.robot.data.geom_pose_w[:, self.geom_ids]
     local_axis = torch.zeros_like(pose[..., :3])
@@ -126,7 +140,10 @@ class _PitWheels:
 
 
 class PitTerrainLevels(_PitWheels):
-  """Run before reset, without depending on the later-created metrics manager."""
+  """在回合重置前结算难度，并把下一回合出生点移到相应坑深。
+
+  只依据该环境的实际表现；日志mean/max不能作为单个环境是否晋级的依据。
+  """
 
   def __init__(self, cfg: CurriculumTermCfg, env: ManagerBasedRlEnv):
     del cfg
@@ -148,6 +165,7 @@ class PitTerrainLevels(_PitWheels):
     command_name: str = "twist",
     promote_distance: float = 3.0,
   ) -> dict[str, torch.Tensor]:
+    """只处理本次需要重置的环境，记录升降级比例并更新其出生原点。"""
     terrain = env.scene.terrain
     assert terrain is not None and terrain.env_origins is not None
     # 只更新本次真正重置的env_ids；其他环境即使正在行走，也不能被连带升降级。
@@ -213,13 +231,14 @@ class PitTerrainLevels(_PitWheels):
 
 
 class PitTileBoundary(_PitWheels):
-  """Truncate before root or a wheel reaches neighboring tiles; not success."""
+  """接近地块边界时截断回合，避免进入相邻坑；触发不等于成功。"""
 
   def __init__(self, cfg: TerminationTermCfg, env: ManagerBasedRlEnv):
     del cfg
     super().__init__(env)
 
   def __call__(self, env: ManagerBasedRlEnv) -> torch.Tensor:
+    """检查机身相对位置及轮子外缘，任一达到本地块余量线就截断。"""
     centers, extents = self.wheels()
     origin_xy = env.scene.env_origins[:, :2]
     # 检查轮子的最外缘（中心距+半包络），而非只看轮心；任一轴/任一轮触线即截断。

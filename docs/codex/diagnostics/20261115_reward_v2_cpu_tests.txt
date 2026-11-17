@@ -1,0 +1,565 @@
+F...F..E..EE...E...EEE.F                                                 [100%]
+==================================== ERRORS ====================================
+______ ERROR at setup of test_real_height_rewards_state_and_partial_reset ______
+
+    @pytest.fixture
+    def stage3_env():
+      cfg = lego2_blind_pit_eval_cfg(0.05)
+      cfg.scene.num_envs = 2
+      cfg.seed = 7
+>     env = ManagerBasedRlEnv(cfg, device=get_test_device())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lego2_blind_pit_stage3.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/mjlab/envs/manager_based_rl_env.py:187: in __init__
+    self.cfg.seed = self.seed(self.cfg.seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:538: in seed
+    random_utils.seed_rng(seed)
+src/mjlab/utils/random.py:20: in seed_rng
+    wp.rand_init(wp.int32(seed))
+.venv/lib/python3.13/site-packages/warp/_src/context.py:365: in __call__
+    builtin_desc = self.get_builtin(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:533: in get_builtin
+    desc = get_builtin_call_desc(overload, bound_arg_types)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:657: in get_builtin_call_desc
+    init()
+.venv/lib/python3.13/site-packages/warp/_src/context.py:11953: in init
+    runtime = Runtime()
+              ^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:6098: in __init__
+    warp._src.build.init_kernel_cache(warp.config.kernel_cache_dir)
+.venv/lib/python3.13/site-packages/warp/_src/build.py:187: in init_kernel_cache
+    os.makedirs(warp.config.kernel_cache_dir, exist_ok=True)
+<frozen os>:218: in makedirs
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = '/home/asus/.cache/warp/1.14.0', mode = 511, exist_ok = True
+
+>   ???
+E   OSError: [Errno 30] Read-only file system: '/home/asus/.cache/warp/1.14.0'
+
+<frozen os>:228: OSError
+---------------------------- Captured stdout setup -----------------------------
+Setting seed: 7
+---------------------------- Captured stderr setup -----------------------------
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+_________ ERROR at setup of test_inference_checkpoint_contract[False] __________
+
+    @pytest.fixture
+    def stage3_env():
+      cfg = lego2_blind_pit_eval_cfg(0.05)
+      cfg.scene.num_envs = 2
+      cfg.seed = 7
+>     env = ManagerBasedRlEnv(cfg, device=get_test_device())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lego2_blind_pit_stage3.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/mjlab/envs/manager_based_rl_env.py:187: in __init__
+    self.cfg.seed = self.seed(self.cfg.seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:538: in seed
+    random_utils.seed_rng(seed)
+src/mjlab/utils/random.py:20: in seed_rng
+    wp.rand_init(wp.int32(seed))
+.venv/lib/python3.13/site-packages/warp/_src/context.py:365: in __call__
+    builtin_desc = self.get_builtin(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:533: in get_builtin
+    desc = get_builtin_call_desc(overload, bound_arg_types)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:657: in get_builtin_call_desc
+    init()
+.venv/lib/python3.13/site-packages/warp/_src/context.py:11953: in init
+    runtime = Runtime()
+              ^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:6098: in __init__
+    warp._src.build.init_kernel_cache(warp.config.kernel_cache_dir)
+.venv/lib/python3.13/site-packages/warp/_src/build.py:187: in init_kernel_cache
+    os.makedirs(warp.config.kernel_cache_dir, exist_ok=True)
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = '/home/asus/.cache/warp/1.14.0', mode = 511, exist_ok = True
+
+>   ???
+E   OSError: [Errno 30] Read-only file system: '/home/asus/.cache/warp/1.14.0'
+
+<frozen os>:228: OSError
+---------------------------- Captured stdout setup -----------------------------
+Setting seed: 7
+---------------------------- Captured stderr setup -----------------------------
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+__________ ERROR at setup of test_inference_checkpoint_contract[True] __________
+
+    @pytest.fixture
+    def stage3_env():
+      cfg = lego2_blind_pit_eval_cfg(0.05)
+      cfg.scene.num_envs = 2
+      cfg.seed = 7
+>     env = ManagerBasedRlEnv(cfg, device=get_test_device())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lego2_blind_pit_stage3.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/mjlab/envs/manager_based_rl_env.py:187: in __init__
+    self.cfg.seed = self.seed(self.cfg.seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:538: in seed
+    random_utils.seed_rng(seed)
+src/mjlab/utils/random.py:20: in seed_rng
+    wp.rand_init(wp.int32(seed))
+.venv/lib/python3.13/site-packages/warp/_src/context.py:365: in __call__
+    builtin_desc = self.get_builtin(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:533: in get_builtin
+    desc = get_builtin_call_desc(overload, bound_arg_types)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:657: in get_builtin_call_desc
+    init()
+.venv/lib/python3.13/site-packages/warp/_src/context.py:11953: in init
+    runtime = Runtime()
+              ^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:6098: in __init__
+    warp._src.build.init_kernel_cache(warp.config.kernel_cache_dir)
+.venv/lib/python3.13/site-packages/warp/_src/build.py:187: in init_kernel_cache
+    os.makedirs(warp.config.kernel_cache_dir, exist_ok=True)
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = '/home/asus/.cache/warp/1.14.0', mode = 511, exist_ok = True
+
+>   ???
+E   OSError: [Errno 30] Read-only file system: '/home/asus/.cache/warp/1.14.0'
+
+<frozen os>:228: OSError
+---------------------------- Captured stdout setup -----------------------------
+Setting seed: 7
+---------------------------- Captured stderr setup -----------------------------
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+____ ERROR at setup of test_real_observations_term_major_and_partial_reset _____
+
+    @pytest.fixture
+    def observation_env():
+      # Diagnostic-only plane/reset overrides avoid building Rough's entire grid.
+      # Keep real action, command, actor/critic, sensor and environment reset paths.
+      cfg = deepcopy(lego2_blind_pit_env_cfg(play=True))
+      cfg.scene.num_envs = 2
+      assert cfg.scene.terrain is not None
+      cfg.scene.terrain.terrain_type = "plane"
+      cfg.scene.terrain.terrain_generator = None
+      cfg.events = {"reset": EventTermCfg(func=mdp.reset_scene_to_default, mode="reset")}
+      cfg.curriculum = {}
+      cfg.rewards = {}
+      cfg.metrics = {}
+      cfg.terminations = {}
+      cfg.seed = 7
+      for group in cfg.observations.values():
+        group.nan_policy = "error"
+>     env = ManagerBasedRlEnv(cfg, device=get_test_device())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lego2_blind_pit.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/mjlab/envs/manager_based_rl_env.py:187: in __init__
+    self.cfg.seed = self.seed(self.cfg.seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:538: in seed
+    random_utils.seed_rng(seed)
+src/mjlab/utils/random.py:20: in seed_rng
+    wp.rand_init(wp.int32(seed))
+.venv/lib/python3.13/site-packages/warp/_src/context.py:365: in __call__
+    builtin_desc = self.get_builtin(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:533: in get_builtin
+    desc = get_builtin_call_desc(overload, bound_arg_types)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:657: in get_builtin_call_desc
+    init()
+.venv/lib/python3.13/site-packages/warp/_src/context.py:11953: in init
+    runtime = Runtime()
+              ^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:6098: in __init__
+    warp._src.build.init_kernel_cache(warp.config.kernel_cache_dir)
+.venv/lib/python3.13/site-packages/warp/_src/build.py:187: in init_kernel_cache
+    os.makedirs(warp.config.kernel_cache_dir, exist_ok=True)
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = '/home/asus/.cache/warp/1.14.0', mode = 511, exist_ok = True
+
+>   ???
+E   OSError: [Errno 30] Read-only file system: '/home/asus/.cache/warp/1.14.0'
+
+<frozen os>:228: OSError
+---------------------------- Captured stdout setup -----------------------------
+Setting seed: 7
+---------------------------- Captured stderr setup -----------------------------
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+________ ERROR at setup of test_all_ten_heights_and_repeated_pit_spawns ________
+
+    @pytest.fixture
+    def pit_env():
+      cfg = lego2_blind_pit_env_cfg()
+      cfg.scene.num_envs = 2
+      cfg.seed = 7
+      # Rewards are a separate stage; keep full terrain/reset/command/curriculum.
+      cfg.rewards = {}
+      cfg.metrics = {"pit_nonfoot_contact_count": cfg.metrics["pit_nonfoot_contact_count"]}
+>     env = ManagerBasedRlEnv(cfg, device=get_test_device())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lego2_blind_pit_terrain.py:96: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/mjlab/envs/manager_based_rl_env.py:187: in __init__
+    self.cfg.seed = self.seed(self.cfg.seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:538: in seed
+    random_utils.seed_rng(seed)
+src/mjlab/utils/random.py:20: in seed_rng
+    wp.rand_init(wp.int32(seed))
+.venv/lib/python3.13/site-packages/warp/_src/context.py:365: in __call__
+    builtin_desc = self.get_builtin(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:533: in get_builtin
+    desc = get_builtin_call_desc(overload, bound_arg_types)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:657: in get_builtin_call_desc
+    init()
+.venv/lib/python3.13/site-packages/warp/_src/context.py:11953: in init
+    runtime = Runtime()
+              ^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:6098: in __init__
+    warp._src.build.init_kernel_cache(warp.config.kernel_cache_dir)
+.venv/lib/python3.13/site-packages/warp/_src/build.py:187: in init_kernel_cache
+    os.makedirs(warp.config.kernel_cache_dir, exist_ok=True)
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = '/home/asus/.cache/warp/1.14.0', mode = 511, exist_ok = True
+
+>   ???
+E   OSError: [Errno 30] Read-only file system: '/home/asus/.cache/warp/1.14.0'
+
+<frozen os>:228: OSError
+---------------------------- Captured stdout setup -----------------------------
+Setting seed: 7
+---------------------------- Captured stderr setup -----------------------------
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+__ ERROR at setup of test_real_rim_support_curriculum_and_partial_auto_reset ___
+
+    @pytest.fixture
+    def pit_env():
+      cfg = lego2_blind_pit_env_cfg()
+      cfg.scene.num_envs = 2
+      cfg.seed = 7
+      # Rewards are a separate stage; keep full terrain/reset/command/curriculum.
+      cfg.rewards = {}
+      cfg.metrics = {"pit_nonfoot_contact_count": cfg.metrics["pit_nonfoot_contact_count"]}
+>     env = ManagerBasedRlEnv(cfg, device=get_test_device())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lego2_blind_pit_terrain.py:96: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/mjlab/envs/manager_based_rl_env.py:187: in __init__
+    self.cfg.seed = self.seed(self.cfg.seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:538: in seed
+    random_utils.seed_rng(seed)
+src/mjlab/utils/random.py:20: in seed_rng
+    wp.rand_init(wp.int32(seed))
+.venv/lib/python3.13/site-packages/warp/_src/context.py:365: in __call__
+    builtin_desc = self.get_builtin(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:533: in get_builtin
+    desc = get_builtin_call_desc(overload, bound_arg_types)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:657: in get_builtin_call_desc
+    init()
+.venv/lib/python3.13/site-packages/warp/_src/context.py:11953: in init
+    runtime = Runtime()
+              ^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:6098: in __init__
+    warp._src.build.init_kernel_cache(warp.config.kernel_cache_dir)
+.venv/lib/python3.13/site-packages/warp/_src/build.py:187: in init_kernel_cache
+    os.makedirs(warp.config.kernel_cache_dir, exist_ok=True)
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = '/home/asus/.cache/warp/1.14.0', mode = 511, exist_ok = True
+
+>   ???
+E   OSError: [Errno 30] Read-only file system: '/home/asus/.cache/warp/1.14.0'
+
+<frozen os>:228: OSError
+---------------------------- Captured stdout setup -----------------------------
+Setting seed: 7
+---------------------------- Captured stderr setup -----------------------------
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+_______ ERROR at setup of test_fall_demotes_and_local_boundary_truncates _______
+
+    @pytest.fixture
+    def pit_env():
+      cfg = lego2_blind_pit_env_cfg()
+      cfg.scene.num_envs = 2
+      cfg.seed = 7
+      # Rewards are a separate stage; keep full terrain/reset/command/curriculum.
+      cfg.rewards = {}
+      cfg.metrics = {"pit_nonfoot_contact_count": cfg.metrics["pit_nonfoot_contact_count"]}
+>     env = ManagerBasedRlEnv(cfg, device=get_test_device())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lego2_blind_pit_terrain.py:96: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/mjlab/envs/manager_based_rl_env.py:187: in __init__
+    self.cfg.seed = self.seed(self.cfg.seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:538: in seed
+    random_utils.seed_rng(seed)
+src/mjlab/utils/random.py:20: in seed_rng
+    wp.rand_init(wp.int32(seed))
+.venv/lib/python3.13/site-packages/warp/_src/context.py:365: in __call__
+    builtin_desc = self.get_builtin(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:533: in get_builtin
+    desc = get_builtin_call_desc(overload, bound_arg_types)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:657: in get_builtin_call_desc
+    init()
+.venv/lib/python3.13/site-packages/warp/_src/context.py:11953: in init
+    runtime = Runtime()
+              ^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:6098: in __init__
+    warp._src.build.init_kernel_cache(warp.config.kernel_cache_dir)
+.venv/lib/python3.13/site-packages/warp/_src/build.py:187: in init_kernel_cache
+    os.makedirs(warp.config.kernel_cache_dir, exist_ok=True)
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = '/home/asus/.cache/warp/1.14.0', mode = 511, exist_ok = True
+
+>   ???
+E   OSError: [Errno 30] Read-only file system: '/home/asus/.cache/warp/1.14.0'
+
+<frozen os>:228: OSError
+---------------------------- Captured stdout setup -----------------------------
+Setting seed: 7
+---------------------------- Captured stderr setup -----------------------------
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+=================================== FAILURES ===================================
+_______________ test_v2_isolation_and_shared_train_play_contract _______________
+
+    def test_v2_isolation_and_shared_train_play_contract():
+      baseline = lego2_blind_pit_env_cfg()
+      candidate = load_env_cfg("Mjlab-Blind-Pit-Lego2-RewardV2")
+      play = lego2_blind_pit_reward_v2_env_cfg(play=True)
+      assert len(baseline.rewards) == 11 and len(candidate.rewards) == 13
+      assert baseline.rewards["flat_orientation_l2"].weight == -0.5
+      assert "flat_orientation_l2" not in candidate.rewards
+      assert candidate.rewards == play.rewards
+      assert candidate.actions == baseline.actions
+      assert candidate.observations == baseline.observations
+>     assert candidate.scene == baseline.scene
+E     AssertionError: assert SceneCfg(num_... spec_fn=None) == SceneCfg(num_... spec_fn=None)
+E       
+E       Omitting 6 identical items, use -vv to show
+E       Differing attributes:
+E       ['terrain']
+E       
+E       Drill down into differing attribute terrain:
+E         terrain: TerrainEntityCfg(init_state=EntityCfg.InitialStateCfg(pos=(0.0, 0.0, 0.0), rot=(1.0, 0.0, 0.0, 0.0), lin_vel=(0.0, 0.0, 0.0), ang_vel=(0.0, 0.0, 0.0), joint_pos={'.*': 0.0}, joint_vel={'.*': 0.0}), spec_fn=<function EntityCfg.<lambda>.<locals>.<lambda> at 0x7be62c2e9da0>, articulation=None, sort_actuators=False, lights=(LightCfg(name='sun', body='world', mode='fixed', target=None, type='directional', castshadow=True, pos=(0.0, 0.0, 1.5), dir=...
+E       
+E       ...Full output truncated (8 lines hidden), use '-vv' to show
+
+tests/test_lego2_blind_pit_reward_v2.py:39: AssertionError
+____________ test_real_v2_rewards_observations_and_inference_reset _____________
+
+    def test_real_v2_rewards_observations_and_inference_reset():
+      cfg = lego2_blind_pit_reward_v2_eval_cfg(0.03, 0.5)
+      cfg.scene.num_envs = 2
+      cfg.seed = 7
+>     env = ManagerBasedRlEnv(cfg, device=get_test_device())
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lego2_blind_pit_reward_v2.py:130: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/mjlab/envs/manager_based_rl_env.py:187: in __init__
+    self.cfg.seed = self.seed(self.cfg.seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:538: in seed
+    random_utils.seed_rng(seed)
+src/mjlab/utils/random.py:20: in seed_rng
+    wp.rand_init(wp.int32(seed))
+.venv/lib/python3.13/site-packages/warp/_src/context.py:365: in __call__
+    builtin_desc = self.get_builtin(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:533: in get_builtin
+    desc = get_builtin_call_desc(overload, bound_arg_types)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:657: in get_builtin_call_desc
+    init()
+.venv/lib/python3.13/site-packages/warp/_src/context.py:11953: in init
+    runtime = Runtime()
+              ^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:6098: in __init__
+    warp._src.build.init_kernel_cache(warp.config.kernel_cache_dir)
+.venv/lib/python3.13/site-packages/warp/_src/build.py:187: in init_kernel_cache
+    os.makedirs(warp.config.kernel_cache_dir, exist_ok=True)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = '/home/asus/.cache/warp/1.14.0', mode = 511, exist_ok = True
+
+>   ???
+E   OSError: [Errno 30] Read-only file system: '/home/asus/.cache/warp/1.14.0'
+
+<frozen os>:228: OSError
+----------------------------- Captured stdout call -----------------------------
+Setting seed: 7
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+________________ test_real_paired_resets_and_capped_accounting _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-asus/pytest-3/test_real_paired_resets_and_ca0')
+
+    def test_real_paired_resets_and_capped_accounting(tmp_path):
+      tool = runpy.run_path(
+        str(
+          Path(__file__).resolve().parents[1] / "scripts/tools/evaluate_lego2_blind_pit.py"
+        )
+      )
+      reports = []
+      for steps, speed in enumerate((0.3, 0.4, 0.5), start=2):
+        output = tmp_path / f"vx_{speed:.2f}"
+>       report = tool["run"](
+          tool["EvalConfig"](
+            output=output,
+            heights=(0.30,),
+            forward_speed=speed,
+            paired_seed_base=7,
+            episodes=2,
+            device="cpu",
+            max_steps=steps,
+          )
+        )
+
+tests/test_lego2_blind_pit_speed_eval.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/tools/evaluate_lego2_blind_pit.py:82: in run
+    env = ManagerBasedRlEnv(env_cfg, device=cfg.device)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:187: in __init__
+    self.cfg.seed = self.seed(self.cfg.seed)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+src/mjlab/envs/manager_based_rl_env.py:538: in seed
+    random_utils.seed_rng(seed)
+src/mjlab/utils/random.py:20: in seed_rng
+    wp.rand_init(wp.int32(seed))
+.venv/lib/python3.13/site-packages/warp/_src/context.py:365: in __call__
+    builtin_desc = self.get_builtin(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:533: in get_builtin
+    desc = get_builtin_call_desc(overload, bound_arg_types)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:657: in get_builtin_call_desc
+    init()
+.venv/lib/python3.13/site-packages/warp/_src/context.py:11953: in init
+    runtime = Runtime()
+              ^^^^^^^^^
+.venv/lib/python3.13/site-packages/warp/_src/context.py:6098: in __init__
+    warp._src.build.init_kernel_cache(warp.config.kernel_cache_dir)
+.venv/lib/python3.13/site-packages/warp/_src/build.py:187: in init_kernel_cache
+    os.makedirs(warp.config.kernel_cache_dir, exist_ok=True)
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+<frozen os>:218: in makedirs
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = '/home/asus/.cache/warp/1.14.0', mode = 511, exist_ok = True
+
+>   ???
+E   OSError: [Errno 30] Read-only file system: '/home/asus/.cache/warp/1.14.0'
+
+<frozen os>:228: OSError
+----------------------------- Captured stdout call -----------------------------
+Fixed pit depth: 0.300000 m; requested episodes: 2
+Setting seed: 7
+----------------------------- Captured stderr call -----------------------------
+Warp CUDA error 100: no CUDA-capable device is detected (in function init_cuda_driver, /builds/omniverse/warp/warp/native/cuda_util.cpp:309)
+=========================== short test summary info ============================
+FAILED tests/test_lego2_blind_pit_reward_v2.py::test_v2_isolation_and_shared_train_play_contract
+FAILED tests/test_lego2_blind_pit_reward_v2.py::test_real_v2_rewards_observations_and_inference_reset
+FAILED tests/test_lego2_blind_pit_speed_eval.py::test_real_paired_resets_and_capped_accounting
+ERROR tests/test_lego2_blind_pit_stage3.py::test_real_height_rewards_state_and_partial_reset
+ERROR tests/test_lego2_blind_pit_stage3.py::test_inference_checkpoint_contract[False]
+ERROR tests/test_lego2_blind_pit_stage3.py::test_inference_checkpoint_contract[True]
+ERROR tests/test_lego2_blind_pit.py::test_real_observations_term_major_and_partial_reset
+ERROR tests/test_lego2_blind_pit_terrain.py::test_all_ten_heights_and_repeated_pit_spawns
+ERROR tests/test_lego2_blind_pit_terrain.py::test_real_rim_support_curriculum_and_partial_auto_reset
+ERROR tests/test_lego2_blind_pit_terrain.py::test_fall_demotes_and_local_boundary_truncates
+3 failed, 14 passed, 7 errors in 2.88s

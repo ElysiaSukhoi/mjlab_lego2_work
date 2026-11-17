@@ -1,4 +1,10 @@
-"""Lego2 platform-climb task configuration, built in incremental steps."""
+"""旧固定高台任务配置，仅对应Mjlab-Platform-Climb-Lego2。
+
+从env_cfgs.py借用机器人基础，在固定15厘米高台前出生，并加入靠近台沿、
+抬前轮等专项奖励。奖励计算、指标、成功结束分别在同名rewards/metrics/
+terminations文件中；网络仍来自rl_cfg.py。
+当前中央坑盲走训练使用blind_pit系列文件，不经过本文件。
+"""
 
 from __future__ import annotations
 
@@ -43,8 +49,9 @@ if TYPE_CHECKING:
   from mjlab.envs import ManagerBasedRlEnv
 
 
-_PLATFORM_HEIGHT = 0.15
-_DEFAULT_ROOT_Z = 0.47
+_PLATFORM_HEIGHT = 0.15  # 旧任务固定15厘米高台，不是当前30厘米中央坑评估。
+_DEFAULT_ROOT_Z = 0.47  # 机器人默认root离所在平面的名义高度，米。
+# 以下高度与旧地形的台面原点比较，不能直接当世界Z或当前坑底净空。
 _LOW_ROOT_Z = _DEFAULT_ROOT_Z - _PLATFORM_HEIGHT
 _TOP_ROOT_Z = _DEFAULT_ROOT_Z
 _TOP_ROOT_Z_THRESHOLD = _LOW_ROOT_Z + 0.5 * _PLATFORM_HEIGHT
@@ -53,7 +60,7 @@ _LIFT_REWARD_LOW_ROOT_Z = _LOW_ROOT_Z - 0.05
 
 PLATFORM_CLIMB_TERRAIN_CFG = TerrainGeneratorCfg(
   curriculum=True,
-  size=(10.0, 10.0),
+  size=(10.0, 10.0),  # 旧任务每块地形的长宽，米。
   border_width=0.0,
   num_rows=1,
   num_cols=1,
@@ -62,7 +69,7 @@ PLATFORM_CLIMB_TERRAIN_CFG = TerrainGeneratorCfg(
   sub_terrains={
     "platform": terrain_gen.BoxPyramidStairsTerrainCfg(
       proportion=1.0,
-      step_height_range=(_PLATFORM_HEIGHT, _PLATFORM_HEIGHT),
+      step_height_range=(_PLATFORM_HEIGHT, _PLATFORM_HEIGHT),  # 上下限相同，固定台高。
       step_width=2.0,
       platform_width=3.0,
       border_width=3.5,
@@ -79,12 +86,9 @@ def reset_platform_climb_root_state(
   spawn_y_range: tuple[float, float] = (-0.15, 0.15),
   asset_cfg: SceneEntityCfg = SceneEntityCfg("robot"),
 ) -> None:
-  """Reset the robot on low ground in front of the platform.
+  """把旧任务机器人放在固定高台前的低地，面朝前方。
 
-  The terrain origin for ``BoxPyramidStairsTerrainCfg`` is the top platform
-  center.  The negative z offset therefore places the robot's default root
-  height back on the surrounding low ground.  The x offset approaches the
-  platform from its negative-x side and the yaw offset remains zero.
+  旧地形原点在台面中心，因此出生Z要减台高；Blind-Pit原点在坑底，不能照搬这一步。
   """
   env_ids = envs_mdp.resolve_env_ids(env, env_ids)
   asset: Entity = env.scene[asset_cfg.name]
@@ -98,9 +102,7 @@ def reset_platform_climb_root_state(
   pose_samples[:, 2] = -platform_height
 
   positions = (
-    root_states[:, 0:3]
-    + pose_samples[:, 0:3]
-    + env.scene.env_origins[env_ids]
+    root_states[:, 0:3] + pose_samples[:, 0:3] + env.scene.env_origins[env_ids]
   )
   orientations_delta = quat_from_euler_xyz(
     pose_samples[:, 3], pose_samples[:, 4], pose_samples[:, 5]
@@ -114,7 +116,10 @@ def reset_platform_climb_root_state(
 
 
 def lego2_platform_climb_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
-  """Create the deterministic single-platform climbing configuration."""
+  """组装旧15厘米固定高台、正向命令、专项奖励和成功结束条件。
+
+  奖励公式在platform_climb_rewards.py；这套设置不参与当前中央坑v1/v2训练。
+  """
   cfg = deepcopy(lego2_rough_env_cfg(play=play))
 
   assert cfg.scene.terrain is not None
@@ -143,7 +148,7 @@ def lego2_platform_climb_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   twist_cmd = cfg.commands["twist"]
   assert isinstance(twist_cmd, UniformVelocityCommandCfg)
   twist_cmd.heading_command = False
-  twist_cmd.ranges.lin_vel_x = (0.30, 0.80)
+  twist_cmd.ranges.lin_vel_x = (0.30, 0.80)  # 旧任务前进速度范围，米/秒。
   twist_cmd.ranges.lin_vel_y = (0.0, 0.0)
   twist_cmd.ranges.ang_vel_z = (0.0, 0.0)
   twist_cmd.ranges.heading = None
@@ -159,7 +164,7 @@ def lego2_platform_climb_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   # success reward and termination logic.
   cfg.rewards["platform_approach"] = RewardTermCfg(
     func=platform_approach,
-    weight=0.5,
+    weight=0.5,  # 旧任务靠近固定台沿的进度奖励。
     params={
       "start_x": -3.0,
       "platform_edge_x": -1.5,
@@ -167,7 +172,7 @@ def lego2_platform_climb_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   )
   cfg.rewards["platform_edge_lift"] = RewardTermCfg(
     func=platform_edge_lift,
-    weight=1.0,
+    weight=1.0,  # 台沿区域的机身抬升奖励。
     params={
       "edge_gate_x_range": (-2.1, -1.5),
       "low_root_z": _LIFT_REWARD_LOW_ROOT_Z,
@@ -176,17 +181,17 @@ def lego2_platform_climb_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   )
   cfg.rewards["platform_front_lift"] = RewardTermCfg(
     func=platform_front_lift,
-    weight=0.75,
+    weight=0.75,  # 台沿区域的前轮离地高度奖励。
     params={
       "edge_gate_x_range": (-2.1, -1.5),
       "height_sensor_name": "foot_height_scan",
-      "target_height": 0.05,
-      "top_height": 0.20,
+      "target_height": 0.05,  # 前轮高度计分的低端，米。
+      "top_height": 0.20,  # 此项高度计分的高端，超过后不继续加分。
     },
   )
   cfg.rewards["platform_front_contact_advance"] = RewardTermCfg(
     func=platform_front_contact_advance,
-    weight=1.5,
+    weight=1.5,  # 前轮有接触时，越过台沿位置区域的进度奖励。
     params={
       # Extend beyond the platform edge so contact continues to reward body
       # translation instead of saturating at x=-1.5.
@@ -222,9 +227,9 @@ def lego2_platform_climb_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
       "root_z_margin": 0.02,
       "root_z_threshold": _TOP_ROOT_Z_THRESHOLD,
       "sensor_name": "feet_ground_contact",
-      "min_contacts": 2,
+      "min_contacts": 2,  # 旧标准至少2轮接触，区别于Blind-Pit的四轮要求。
       "force_threshold": 1.0,
-      "hold_steps": 10,
+      "hold_steps": 10,  # 连续10个控制步，默认相当于0.2秒。
     },
   )
 
@@ -262,7 +267,7 @@ def lego2_platform_climb_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   }
   cfg.rewards["platform_top_bonus"] = RewardTermCfg(
     func=platform_top_bonus,
-    weight=8.0,
+    weight=8.0,  # 每步满足旧台面/接触条件时给分，非仅首次到达奖励。
     params=top_support_params,
   )
   cfg.terminations["platform_success"] = TerminationTermCfg(

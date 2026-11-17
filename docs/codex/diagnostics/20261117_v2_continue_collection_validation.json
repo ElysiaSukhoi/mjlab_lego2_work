@@ -1,0 +1,12 @@
+{
+  "script_sha256": "709e3a2126a87d4524eda368296a5f168c4a615efefac066cf6fd7e83d8fef66",
+  "syntax": "local and remote bash passed",
+  "mock_ssh": [
+    "success twice without overwriting",
+    "checksum sidecars",
+    "failure retains partial and previous archives"
+  ],
+  "payload": "explicit current and first-trial evidence paths; excludes model weights/cache/context snapshots",
+  "actual_remote_download": false,
+  "simulation_or_training": false
+}
