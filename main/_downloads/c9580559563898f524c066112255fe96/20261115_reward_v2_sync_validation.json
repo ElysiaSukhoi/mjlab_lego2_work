@@ -1,0 +1,14 @@
+{
+  "kind": "local synthetic install checks; not remote execution",
+  "fixture_root": "/tmp/lego2_reward_v2_install_validation_rt9fbsln",
+  "bundle_sha256": "a11777d6efe5105aa1e03177f502b47eb0bbf09e5a26c977cd2ce4459d7aa0d9",
+  "checks": {
+    "known_baseline_install_and_preserved_old_results": true,
+    "old_init_backed_up_before_overwrite": true,
+    "already_installed_is_idempotent": true,
+    "unknown_source_rejected_without_source_edits": true,
+    "unknown_new_file_rejected_without_source_edits": true,
+    "corrupt_bundle_rejected": true,
+    "bundle_has_no_context_or_training_results": true
+  }
+}

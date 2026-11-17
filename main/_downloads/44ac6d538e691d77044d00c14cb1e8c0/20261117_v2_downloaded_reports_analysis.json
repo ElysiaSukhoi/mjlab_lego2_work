@@ -1,0 +1,178 @@
+{
+  "archive": "docs/codex/diagnostics/20261117_reward_v2_continue_remote/remote_evidence_tCcuUA.tar.gz",
+  "archive_sha256": "775e111e57cf2e9296578f46eadcd058868059b52bccf9c709065bd80b248f4f",
+  "report_audits": [
+    {
+      "stage": "backups/reward_v2_trial_20261116_AuHs5A",
+      "speed": "0.3",
+      "report_hashes_matched": true,
+      "source_hashes_match_frozen_manifest": true,
+      "actual_reset_pairing_verified": true,
+      "recomputed_summary_equal": true
+    },
+    {
+      "stage": "backups/reward_v2_trial_20261116_AuHs5A",
+      "speed": "0.5",
+      "report_hashes_matched": true,
+      "source_hashes_match_frozen_manifest": true,
+      "actual_reset_pairing_verified": true,
+      "recomputed_summary_equal": true
+    },
+    {
+      "stage": "backups/reward_v2_continue_20261116_scKcS4",
+      "speed": "0.3",
+      "report_hashes_matched": true,
+      "source_hashes_match_frozen_manifest": true,
+      "actual_reset_pairing_verified": true,
+      "recomputed_summary_equal": true
+    },
+    {
+      "stage": "backups/reward_v2_continue_20261116_scKcS4",
+      "speed": "0.5",
+      "report_hashes_matched": true,
+      "source_hashes_match_frozen_manifest": true,
+      "actual_reset_pairing_verified": true,
+      "recomputed_summary_equal": true
+    }
+  ],
+  "current_results": [
+    {
+      "height_m": 0.3,
+      "speed_m_s": 0.3,
+      "reference": {
+        "n": 3,
+        "passed": 2,
+        "complete": 3,
+        "failed": 0,
+        "mean_speed_rmse": 0.02529424194315438,
+        "clearance_eligible_fraction": 0.5828824397442204,
+        "low_fraction_of_eligible_frames": 0.7071729957805907,
+        "nonfoot_fraction_after_first_complete": 0.3928944618599791,
+        "min_root_rim_m_after_first_complete": 0.21599851548671722
+      },
+      "candidate": {
+        "n": 3,
+        "passed": 3,
+        "complete": 3,
+        "failed": 0,
+        "mean_speed_rmse": 0.029421547741987963,
+        "clearance_eligible_fraction": 0.6022889842632332,
+        "low_fraction_of_eligible_frames": 0.007125890736342043,
+        "nonfoot_fraction_after_first_complete": 0.0,
+        "min_root_rim_m_after_first_complete": 0.3385159373283386
+      }
+    },
+    {
+      "height_m": 0.03,
+      "speed_m_s": 0.5,
+      "reference": {
+        "n": 3,
+        "passed": 3,
+        "complete": 3,
+        "failed": 0,
+        "mean_speed_rmse": 0.04848073390193741,
+        "clearance_eligible_fraction": 0.5780998389694042,
+        "low_fraction_of_eligible_frames": 0.7047353760445683,
+        "nonfoot_fraction_after_first_complete": 0.268630849220104,
+        "min_root_rim_m_after_first_complete": 0.21829554438591003
+      },
+      "candidate": {
+        "n": 3,
+        "passed": 3,
+        "complete": 3,
+        "failed": 0,
+        "mean_speed_rmse": 0.04227743905404208,
+        "clearance_eligible_fraction": 0.5963808025177026,
+        "low_fraction_of_eligible_frames": 0.7203166226912929,
+        "nonfoot_fraction_after_first_complete": 0.0,
+        "min_root_rim_m_after_first_complete": 0.3249231278896332
+      }
+    },
+    {
+      "height_m": 0.3,
+      "speed_m_s": 0.5,
+      "reference": {
+        "n": 3,
+        "passed": 1,
+        "complete": 3,
+        "failed": 0,
+        "mean_speed_rmse": 0.03198280928572577,
+        "clearance_eligible_fraction": 0.5826580226904376,
+        "low_fraction_of_eligible_frames": 0.7051460361613352,
+        "nonfoot_fraction_after_first_complete": 0.26288659793814434,
+        "min_root_rim_m_after_first_complete": 0.21746085584163666
+      },
+      "candidate": {
+        "n": 3,
+        "passed": 3,
+        "complete": 3,
+        "failed": 0,
+        "mean_speed_rmse": 0.036419626423098095,
+        "clearance_eligible_fraction": 0.5979543666404405,
+        "low_fraction_of_eligible_frames": 0.7210526315789474,
+        "nonfoot_fraction_after_first_complete": 0.0,
+        "min_root_rim_m_after_first_complete": 0.3255670368671417
+      }
+    }
+  ],
+  "limits": [
+    "Report hashes/reset pairs/source-manifest agreement and summaries audited; frame-by-frame trace not yet reconstructed",
+    "Model weights not included; no independent weight rehash",
+    "No same-start reward ablation; small paired screen"
+  ],
+  "verified_training_stdout": [
+    {
+      "stage": "backups/reward_v2_trial_20261116_AuHs5A",
+      "logged_iterations": 300,
+      "first": [
+        "0",
+        "300"
+      ],
+      "last": [
+        "299",
+        "300"
+      ],
+      "last_total_steps": 3686400
+    },
+    {
+      "stage": "backups/reward_v2_continue_20261116_scKcS4",
+      "logged_iterations": 1900,
+      "first": [
+        "299",
+        "2199"
+      ],
+      "last": [
+        "2198",
+        "2199"
+      ],
+      "last_total_steps": 46694400
+    }
+  ],
+  "verified_v2_reward_total_steps": 50380800,
+  "cross_run_parent_checks": [
+    {
+      "height_m": 0.3,
+      "speed_m_s": 0.3,
+      "max_cross_run_parent_initial_state_difference": 0.0,
+      "source_hashes_identical": true,
+      "old_passed": 1,
+      "new_passed": 2
+    },
+    {
+      "height_m": 0.03,
+      "speed_m_s": 0.5,
+      "max_cross_run_parent_initial_state_difference": 0.0,
+      "source_hashes_identical": true,
+      "old_passed": 3,
+      "new_passed": 3
+    },
+    {
+      "height_m": 0.3,
+      "speed_m_s": 0.5,
+      "max_cross_run_parent_initial_state_difference": 0.0,
+      "source_hashes_identical": true,
+      "old_passed": 2,
+      "new_passed": 1
+    }
+  ]
+}

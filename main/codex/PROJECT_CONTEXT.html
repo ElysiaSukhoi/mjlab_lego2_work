@@ -57,7 +57,7 @@
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Nov 15, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 17, 2026"/>
   </head>
   
   
@@ -586,16 +586,19 @@ URDF不是训练时的实时转换入口；两格式的资产修复需要分别�
 <tr class="row-even"><td><p>远程训练源码</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>历史Git接入候选目录</p></td>
+<tr class="row-odd"><td><p>远程脚本/配套上传物默认目录</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2/docs/codex/artifacts/</span></code>；不再上传到<code class="docutils literal notranslate"><span class="pre">~/zrq/</span></code>顶层</p></td>
+</tr>
+<tr class="row-even"><td><p>历史Git接入候选目录</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2_git*</span></code>；接入计划已停用，已有目录或失败现场保留，不作为训练入口</p></td>
 </tr>
-<tr class="row-even"><td><p>旧远程只读快照</p></td>
+<tr class="row-odd"><td><p>旧远程只读快照</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project/高台训练/remote_snapshot/20261015_204549/mjlab_lego2</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>历史工作副本，非编辑入口</p></td>
+<tr class="row-even"><td><p>历史工作副本，非编辑入口</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">/home/asus/work/Jiche_Project/高台训练/working_copy/mjlab_lego2</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>远程源码备份记录</p></td>
+<tr class="row-odd"><td><p>远程源码备份记录</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">~/zrq/backups/mjlab_lego2_pre_platform_climb_20261015_215244/</span></code>，内有 <code class="docutils literal notranslate"><span class="pre">source.tar.gz</span></code> 和 <code class="docutils literal notranslate"><span class="pre">remote_state.txt</span></code></p></td>
 </tr>
 </tbody>
@@ -664,8 +667,16 @@ URDF不是训练时的实时转换入口；两格式的资产修复需要分别�
 <code class="docutils literal notranslate"><span class="pre">lego2_blind_pit</span></code>。actor与critic分别deepcopy，避免基础工厂共享term造成历史污染。
 actor按角速度/重力/腿位置/全关节速度排列，各5帧；动作12维和xz命令2维只保留当前值。
 原生历史按term-major、各term内旧到新拼接，actor共144维；部分reset按环境回填新首帧。
-train/play共用工厂，play关闭actor噪声及高度课程。保持12维动作和现有PPO参数，
-不直接加载旧checkpoint继续训练；阶段验收及是否具备开训条件以CURRENT_STATUS为准。</p>
+train/play共用工厂，play关闭actor噪声及高度课程。保持12维动作和现有PPO参数。
+最初144维盲走任务不直接迁移旧Flat/Platform模型；同接口续训/迁移需明确配置及状态处理，
+阶段验收及是否具备开训条件以CURRENT_STATUS为准。</p>
+<p>奖励v2独立入口为<code class="docutils literal notranslate"><span class="pre">Mjlab-Blind-Pit-Lego2-RewardV2</span></code>，工厂位于
+<code class="docutils literal notranslate"><span class="pre">blind_pit_reward_v2_env_cfg.py</span></code>，实验目录<code class="docutils literal notranslate"><span class="pre">lego2_blind_pit_reward_v2</span></code>；
+原<code class="docutils literal notranslate"><span class="pre">Mjlab-Blind-Pit-Lego2</span></code>继续保存v1配置。v2只调整奖励/诊断，接口和资产与v1相同，
+不得把旧模型加载新奖励配置的回放称为已学到v2；训练/效果状态查CURRENT_STATUS。
+v2迁移工具为<code class="docutils literal notranslate"><span class="pre">blind_pit_warmstart.py</span></code>和<code class="docutils literal notranslate"><span class="pre">scripts/tools/train_lego2_blind_pit_reward_v2.py</span></code>：
+仅迁移actor/归一化/动作分布，critic/优化器/计数新建，并在独立run保存迁移审计。
+通用评估器以可选reward_version区分v1/v2，默认v1；配对质量比较工具核对真实reset并记录净空/非轮接触。</p>
 <p>新任务地形由十行独立10×10 m地块组成，每块中央3×3 m单级坑，深度3～30 cm。
 origin已在坑底，出生采用origin加默认root高度0.47 m，无二次减深度。
 20 s episode保持固定vx命令，heading反馈修正yaw；训练从等级0开始。
@@ -687,6 +698,10 @@ GitHub连接、CI状态及Git提交号均不充当服务器传输门槛，本地
 此前GitHub中转、固定SHA bootstrap以及stage1下载方案均已停用，历史脚本/归档/失败现场保留。
 新/更新的远程测试.sh只执行当批验证，不包含Git下载/更新，不硬编码期望commit SHA。
 同步与验证分开；使用传输清单、实际文件SHA256和真实run配置追溯实验，不需要为同步创建提交。
+远程.sh及配套清单/包统一传到<code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2/docs/codex/artifacts/</span></code>，同名目标先备份。
+脚本在cd前解析自身绝对路径，资源位置依据源码根目录或该绝对路径，不依赖启动目录。
+顶层历史上传物按清单先备份，再移入artifacts/_legacy_uploads/独立目录；保留重复和冲突版本，
+不覆盖artifacts根目录现有文件。部分旧脚本仍硬编码~/zrq路径，归档只留存，不直接重新执行。
 同步前按清单备份旧源码，传输不覆盖logs/checkpoint/.venv或无关文件，不自动解压旧文档快照。
 代码/观测/资产变更须按实际模型来源核对；运行中的训练或评估使用的源码在进程结束前不更新。
 依赖清单变化时另行安排环境核验，不因传输源码而自动更新依赖。
@@ -823,7 +838,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 15, 2026.
+  Last updated on Nov 17, 2026.
   <br/>
 </p>
   </div>

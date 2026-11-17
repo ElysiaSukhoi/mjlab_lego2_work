@@ -1,0 +1,13 @@
+{
+  "evidence_level": "user-pasted remote error output",
+  "remote_evidence_dir": "/home/ajifang/zrq/backups/reward_v2_continue_20261116_zNd3XT",
+  "launcher_self_sha_check": "passed by user report",
+  "failure": "cp: cannot stat relative continue_reward_v2_2200_20261116.sh after changing directory",
+  "reported_line": 26,
+  "exit_code": 1,
+  "training_started": false,
+  "reason_for_training_status": "script stopped at self-backup before source/resource checks and training command",
+  "fix": "resolve BASH_SOURCE absolute path before cd",
+  "new_default_remote_upload_dir": "~/zrq/mjlab_lego2/docs/codex/artifacts/",
+  "remote_repair_or_cleanup_executed_locally": false
+}

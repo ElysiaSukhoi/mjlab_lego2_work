@@ -67,6 +67,7 @@ critic、奖励和评估可以使用训练特权信息。其他机器人80 cm演
 | 外层研究项目 | `/home/asus/work/Jiche_Project`；旧中文项目路径已迁移，非Jicha_Project |
 | 远程SSH | `ajifang@27.128.203.222`，端口 `10395` |
 | 远程训练源码 | `~/zrq/mjlab_lego2` |
+| 远程脚本/配套上传物默认目录 | `~/zrq/mjlab_lego2/docs/codex/artifacts/`；不再上传到`~/zrq/`顶层 |
 | 历史Git接入候选目录 | `~/zrq/mjlab_lego2_git*`；接入计划已停用，已有目录或失败现场保留，不作为训练入口 |
 | 旧远程只读快照 | `/home/asus/work/Jiche_Project/高台训练/remote_snapshot/20261015_204549/mjlab_lego2` |
 | 历史工作副本，非编辑入口 | `/home/asus/work/Jiche_Project/高台训练/working_copy/mjlab_lego2` |
@@ -104,8 +105,17 @@ critic、奖励和评估可以使用训练特权信息。其他机器人80 cm演
 `lego2_blind_pit`。actor与critic分别deepcopy，避免基础工厂共享term造成历史污染。
 actor按角速度/重力/腿位置/全关节速度排列，各5帧；动作12维和xz命令2维只保留当前值。
 原生历史按term-major、各term内旧到新拼接，actor共144维；部分reset按环境回填新首帧。
-train/play共用工厂，play关闭actor噪声及高度课程。保持12维动作和现有PPO参数，
-不直接加载旧checkpoint继续训练；阶段验收及是否具备开训条件以CURRENT_STATUS为准。
+train/play共用工厂，play关闭actor噪声及高度课程。保持12维动作和现有PPO参数。
+最初144维盲走任务不直接迁移旧Flat/Platform模型；同接口续训/迁移需明确配置及状态处理，
+阶段验收及是否具备开训条件以CURRENT_STATUS为准。
+
+奖励v2独立入口为`Mjlab-Blind-Pit-Lego2-RewardV2`，工厂位于
+`blind_pit_reward_v2_env_cfg.py`，实验目录`lego2_blind_pit_reward_v2`；
+原`Mjlab-Blind-Pit-Lego2`继续保存v1配置。v2只调整奖励/诊断，接口和资产与v1相同，
+不得把旧模型加载新奖励配置的回放称为已学到v2；训练/效果状态查CURRENT_STATUS。
+v2迁移工具为`blind_pit_warmstart.py`和`scripts/tools/train_lego2_blind_pit_reward_v2.py`：
+仅迁移actor/归一化/动作分布，critic/优化器/计数新建，并在独立run保存迁移审计。
+通用评估器以可选reward_version区分v1/v2，默认v1；配对质量比较工具核对真实reset并记录净空/非轮接触。
 
 新任务地形由十行独立10×10 m地块组成，每块中央3×3 m单级坑，深度3～30 cm。
 origin已在坑底，出生采用origin加默认root高度0.47 m，无二次减深度。
@@ -129,6 +139,10 @@ GitHub连接、CI状态及Git提交号均不充当服务器传输门槛，本地
 此前GitHub中转、固定SHA bootstrap以及stage1下载方案均已停用，历史脚本/归档/失败现场保留。
 新/更新的远程测试.sh只执行当批验证，不包含Git下载/更新，不硬编码期望commit SHA。
 同步与验证分开；使用传输清单、实际文件SHA256和真实run配置追溯实验，不需要为同步创建提交。
+远程.sh及配套清单/包统一传到`~/zrq/mjlab_lego2/docs/codex/artifacts/`，同名目标先备份。
+脚本在cd前解析自身绝对路径，资源位置依据源码根目录或该绝对路径，不依赖启动目录。
+顶层历史上传物按清单先备份，再移入artifacts/_legacy_uploads/独立目录；保留重复和冲突版本，
+不覆盖artifacts根目录现有文件。部分旧脚本仍硬编码~/zrq路径，归档只留存，不直接重新执行。
 同步前按清单备份旧源码，传输不覆盖logs/checkpoint/.venv或无关文件，不自动解压旧文档快照。
 代码/观测/资产变更须按实际模型来源核对；运行中的训练或评估使用的源码在进程结束前不更新。
 依赖清单变化时另行安排环境核验，不因传输源码而自动更新依赖。

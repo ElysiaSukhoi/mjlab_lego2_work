@@ -1,0 +1,13 @@
+{
+  "fixed_height_m": 0.3,
+  "fixed_vx_m_s": 0.5,
+  "auto_reset": true,
+  "num_envs": 1,
+  "seed": 7,
+  "factory": "lego2_blind_pit_reward_v2_eval_cfg",
+  "temporary_process_registration": "Mjlab-Blind-Pit-Lego2-RewardV2-View30cm",
+  "default_viser_port": 8080,
+  "actual_remote_port": "must read startup log if occupied",
+  "validated": "actual registry/config/PlayConfig API; no simulation or viewer launched",
+  "remote_model_sha256": "27c1bdf3a05fa3455a16932dd4d5493fef526680575caee01e31a5c0d169248c"
+}

@@ -57,7 +57,7 @@
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Nov 15, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 17, 2026"/>
   </head>
   
   
@@ -464,10 +464,16 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">当前阶段</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">最新配对结果与解释</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">已完成的配对工具与核验</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">本地核验</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">训练/复评状态与下一步</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v2">最新v2原始证据核对</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">当前训练状态与回放</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">最新录屏与姿态评估（建议，尚未实施）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">已有目录与注释约定</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">本批阅读注释</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v1">既有v1配对结果与解释</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">本批奖励v2候选</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">已完成的配对工具与核验</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">本地核验</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">训练/复评状态与下一步</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git">Git、同步与实验边界</a></li>
 </ul>
             </nav>
@@ -482,17 +488,138 @@ document.write(`
                   
   <section id="id1">
 <h1>当前状态<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p>更新时间：2026-11-15（Asia/Shanghai）。唯一跨会话入口：<a class="reference internal" href="HANDOFF.html"><span class="std std-doc">HANDOFF.md</span></a>。</p>
+<p>更新时间：2026-11-17（Asia/Shanghai）。唯一跨会话入口：<a class="reference internal" href="HANDOFF.html"><span class="std std-doc">HANDOFF.md</span></a>。</p>
 <section id="id2">
 <h2>当前阶段<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<p><strong>model2197原始配对证据已下载并离线核验：三速度9/10、10/10、8/10成立；三个未通过样本均由轮接触记录间歇使连续支撑不足0.5 s，暂不追加训练。</strong>
-用户当前要求先看Viser实际效果并反馈，再进行下一步；暂不开展子步回放开发或后续训练。
+<p><strong>用户新录屏已查看；起步单腿抬落、左右前腿伸展差异与出坑后前后构型差异可见。离线轨迹确认高速前轮相对髋部前伸差约7.9 cm持续存在；建议先小幅、带适用条件地补姿态目标，再长训，尚待用户选择。</strong>
+前批远程候选奖励软件核验通过（用户回传）：CPU24/GPU1；迁移试验已回传结束行，新工具预检明细待原始文件核对。
+证据目录<code class="docutils literal notranslate"><span class="pre">/home/ajifang/zrq/backups/reward_v2_resume_20261116_v4TczG</span></code>，详见
+<a class="reference download internal" download="" href="../_downloads/19da35ca1cf78ffdfa49554856cef8a4/20261116_reward_v2_remote_receipt.json"><span class="xref download myst">结构化回执</span></a>和EXPERIMENT_LOG；原始远程文件未下载。
+此前list-envs的任务计数退出码问题已由模块入口修复，补验完整结束；不用重装或重复跑这批软件测试。
+用户已回传Viser录屏：坑底/前腿基本正常，后腿借关节低位爬台、出坑后机身和关节过低，建议修改奖励。
+初版已由用户commit/push保留；原任务/11项奖励与旧模型继续可用，不改写为v2结果。
 原model_1198的3/6/9/12/15/20 cm初筛各10/10，30 cm为8/10；尚非正式大样本/直线高台验收。
 阶段0～2及阶段3原核验、首次短训/低阶续训已有用户回传，原始实验路径及参数归
 <a class="reference internal" href="EXPERIMENT_LOG.html"><span class="std std-doc">EXPERIMENT_LOG</span></a>。阶段4未触发，不引入平地预训练或接触引导机制。</p>
 </section>
+<section id="v2">
+<h2>最新v2原始证据核对<a class="headerlink" href="#v2" title="Link to this heading">#</a></h2>
+<p>实际下载<code class="docutils literal notranslate"><span class="pre">diagnostics/20261117_reward_v2_continue_remote/remote_evidence_tCcuUA.tar.gz</span></code>，
+SHA256=<code class="docutils literal notranslate"><span class="pre">775e111e57cf2e9296578f46eadcd058868059b52bccf9c709065bd80b248f4f</span></code>，98成员、85文件。
+归档含初始trial及续训报告/trace/stdout/配置/迁移恢复审计，不含模型。
+<a class="reference download internal" download="" href="../_downloads/44ac6d538e691d77044d00c14cb1e8c0/20261117_v2_downloaded_reports_analysis.json"><span class="xref download myst">报告核对</span></a>重算两轮四组比较：
+输入报告hash一致，报告来源hash与归档冻结清单一致，实际reset在1e-6内配对，汇总完全一致。
+这不是逐帧动力学/FK重建，也未取得权重独立rehash；来源清单不等于远程当前源码重新读取。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>当前配对条件，各3回合</p></th>
+<th class="head"><p>父2197通过</p></th>
+<th class="head"><p>v2模型2198通过</p></th>
+<th class="head"><p>v2低净空/有效帧</p></th>
+<th class="head"><p>v2出坑后非轮接触</p></th>
+<th class="head"><p>v2出坑后最低root-台面</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3 cm，0.5 m/s</p></td>
+<td><p>3/3</p></td>
+<td><p>3/3</p></td>
+<td><p>72.03%</p></td>
+<td><p>0</p></td>
+<td><p>0.324923 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>30 cm，0.5 m/s</p></td>
+<td><p>1/3</p></td>
+<td><p>3/3</p></td>
+<td><p>72.11%</p></td>
+<td><p>0</p></td>
+<td><p>0.325567 m</p></td>
+</tr>
+<tr class="row-even"><td><p>30 cm，0.3 m/s</p></td>
+<td><p>2/3</p></td>
+<td><p>3/3</p></td>
+<td><p>0.71%</p></td>
+<td><p>0</p></td>
+<td><p>0.338516 m</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>当前v2共9/9、均完整出坑、failed=0；三回合/条件不是正式验收。
+非轮接触0仅覆盖首次complete后的记录帧及&gt;1 N判据，不能证明后腿上台全程无刮擦。
+速度RMSE低台0.048481→0.042277，高台0.5为0.031983→0.036420，低速0.025294→0.029422。
+低净空占比覆盖全回合有效扫描帧；高速净空仍略低，不能把低速0.71%推广到全部速度。
+同父跨轮实际初态最大差0、报告来源hash一致，30 cm通过仍从1→2及2→1；复现波动根因待逐帧核查。</p>
+</section>
 <section id="id3">
-<h2>最新配对结果与解释<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<h2>当前训练状态与回放<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>实际续训run：<code class="docutils literal notranslate"><span class="pre">logs/rsl_rl/lego2_blind_pit_reward_v2/2026-11-16_22-25-03_v2_continue_1024x1900_20261116_222451_3365307/model_2198.pt</span></code>。
+SHA=<code class="docutils literal notranslate"><span class="pre">27c1bdf3a05fa3455a16932dd4d5493fef526680575caee01e31a5c0d169248c</span></code>，报告/归档文本一致，非本地重算权重。
+stdout核对trial有300条更新、Total steps=3686400；续训有1900条更新、Total steps=46694400，
+v2新奖励合计2200次、50380800样本由日志支持，非仅计划推算；初始actor继承父2197，仍非同起点消融。</p>
+<p>此前用户要求看Viser，已给出进程内临时注册v2固定工厂：真实0.30 m、vx=0.50 m/s，
+1环境、seed7、auto_reset=True、课程关闭，复用run_play，不写源码、不更新PPO。
+<a class="reference download internal" download="" href="../_downloads/f8ce9b68c09b853926b16bf77f0fdc81/20261117_v2_play_entry_validation.json"><span class="xref download myst">回放入口核验</span></a>仅配置/API，无本地仿真或网页启动。
+默认Viser端口8080，实际服务器端口以启动日志为准；本地SSH隧道后浏览http://localhost:8080。
+给出改forward_speed为0.30的低速观察方式；人工回放不当作新增配对评估。
+保持父2197、v2模型299/2198和旧结果，不因当前9次初筛立即改权重或追加训练。</p>
+</section>
+<section id="id4">
+<h2>最新录屏与姿态评估（建议，尚未实施）<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>用户提供20.224607 s的2026-11-17 17:21:06录屏。录像3～5 s可见起步后腿抬落，
+12～16 s左右前腿伸展不同，18～20 s机身近水平但前后构型不同；画面无腿名/模型SHA标签。
+结合此前2198/30 cm/.5指令理解来源，但不把录像独立当作模型hash证明。
+20 s处界面约222控制步，即约4.44 s仿真；不能把20 s录像当20 s稳定行驶。
+<a class="reference download internal" download="" href="../_downloads/32df628c4ebaebf8b400dcb09b7f3db9/20261117_v2_video_keyframes.jpg"><span class="xref download myst">关键帧</span></a>、
+<a class="reference download internal" download="" href="../_downloads/9f610019efdf11eb0f995cb5f8b1bb16/20261117_v2_video_posture_review.json"><span class="xref download myst">视频/轨迹核查记录</span></a>保存SHA、方法与限制。</p>
+<p>对归档18回合（9父/9候选）作运动学检查，非推进物理时间。比较首次complete再过1 s后的窗口：
+候选0.5 m/s六回合（3/30 cm各3），RF轮相对自身HFE髋关节的机身前向偏移
+比LF多0.07924～0.07946 m，持续3.44～3.58 s；不是单次台沿过渡或视角假象。
+这不是录像同一episode；录像自身未标RF/LF，具体名称由带名轨迹核实。
+这些窗口1059帧无非轮接触/电机饱和标记，实际腿关节距硬限位最小14.16°，
+碰撞体底部相对延伸台面平面最小约3.75 cm；不等于真机安全认证或完整过沿几何距离。
+重建用的XML hash匹配冻结清单，四轮反算台面一致性误差≤1.495e-7 m。
+9个候选在首次front_up至首次complete的所取窗口非轮接触标记均0，仍不能排除采样间碰撞。</p>
+<p>当前奖励管跟速/机身姿态/最低高度/接触和动作平滑，没有偏好某套腿构型或左右一致的显式目标。
+前后默认关节角本来正负相反，不能直接强迫四腿原始角度相等；前后外观不同也不自动代表错误。
+后段打印Mean reward的分段均值约39.92、40.78、40.42、40.30，无持续上升趋势，
+但这是混合课程日志，不能据此声称策略已严格收敛。继续长训不保证去掉未被奖励区分的姿态偏置。</p>
+<p>建议先将第2/3点转化为平地、直行、稳定窗口内的弱默认姿态回归候选，先只动一项，
+保留过沿/转向时的俯仰与不对称自由；第1点先观察，不加全程四轮贴地/抬腿惩罚。
+新候选需独立run、明确warmstart处理，并以2198为参照先作有限微调/配对核验，再安排长训。
+若用户优先验证v2能力上限，可改选原奖励新增1000更新、+500/+1000检查的对照；不承诺自然消除偏置。
+以上均为本次建议，未改src/奖励/PPO、未准备新的开训命令或启动训练，用户尚未选择方案。</p>
+</section>
+<section id="id5">
+<h2>已有目录与注释约定<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>远程执行.sh及配套清单/包传到<code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2/docs/codex/artifacts/</span></code>，同名目标先备份。
+脚本切目录前固定自身绝对路径；旧顶层上传物按已知清单快照后移至artifacts/_legacy_uploads/，
+现有根目录版本不覆盖。整理实际完成情况未回传，不因续训成功推测全部旧文件已整理。
+本地注释版仍不同步；旧包/旧清单保留，后续同步须另建来源证据。</p>
+</section>
+<section id="id6">
+<h2>本批阅读注释<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>按用户要求，27个重点文件在模块/函数开头说明用途、配置范围和调用关系；
+地形、v1/v2权重、网络/PPO、预算、指标口径等关键参数加行旁说明，较长内容分多行。</p></li>
+<li><p>用户随后要求将完整偏好整理为长期规范；已归入
+<span class="xref myst">AGENTS链接目标的“中文代码注释规范”</span>。
+该处统一维护覆盖范围、开头用途/文件关系、参数行旁解释、指标口径、通俗表述及分行规则；
+交接文件只保留入口引用，不重复维护另一套条款。本次只更新规范和上下文索引。</p></li>
+<li><p>区分当前中央坑与旧15 cm固定高台、通用默认值与任务覆盖值；
+核对并修正旧Rough“两列10×20米”及腿scale0.25等过时文字，实际代码为三类10×10米和scale0.45。
+这些是说明修正，不是更换地形或驱动参数。长期注释偏好已写入AGENTS链接目标CLAUDE.md，链接保留。</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/be3d1810bdafaba49c8a3b89c1ddf4bc/20261116_training_comments_before.tar.gz"><span class="xref download myst">修改前源码归档</span></a>仅含27个.py，无Markdown备份。
+<a class="reference download internal" download="" href="../_downloads/7d5c98da9520020401284abc1fcb2648/20261116_training_comments_validation.json"><span class="xref download myst">核验记录</span></a>逐文件去除说明字符串比较AST，
+参数/执行结构全部一致；格式通过、新增行均≤88字符，没有运行仿真或训练。
+Ruff原13条、ty原5条、Pyright原5条问题与修改前完全相同，无新增问题；未声称全库检查通过。</p></li>
+<li><p>注释改变文本hash，本地注释版不再匹配旧运行清单是预期现象；旧清单/安装包均未改写。
+已交付trial_v2包仍为b593ff44…024d3；未同步本批注释，用户原远程试验继续使用已冻结的版本。
+后续同步须新建清单/包，不把本地新注释混入当前远程结果的来源证明。</p></li>
+</ul>
+</section>
+<section id="v1">
+<h2>既有v1配对结果与解释<a class="headerlink" href="#v1" title="Link to this heading">#</a></h2>
 <p>同30 cm/三速度/10组初态，原始报告中的组内/跨模型初态已本地复核，最大差0（排除actor的vx输入）。
 model2197稳定通过9/10、10/10、8/10，父model1198为4/10、10/10、10/10。
 三速度速度RMSE均下降至0.02533/0.02921/0.03117，但稳定通过未全面改善。
@@ -510,12 +637,39 @@ model2197 SHA为<code class="docutils literal notranslate"><span class="pre">b8b
 两模型均存在RF/LF前大腿box接触台面（力范数&gt;1 N，重建box最低点近台面）；
 该传感器force是接触坐标系，不能把其第3分量称为世界竖直力。
 大腿接触不是新模型独有，也未证明是轮接触间歇的原因；20 ms采样不能区分真实卸载与传感/求解现象。
-先让用户查看30 cm交互回放并反馈；后续再判断是否需要两模型小规模视频/5 ms子步接触核对。
-保持原判据，不先改奖励。
+用户反馈和录像已收到，低位姿态与旧非轮接触证据相符；“水平惩罚导致后腿卡台”仍是因果假设。
+已据明确缺口新增独立v2奖励候选；原稳定判据保持，未实施额外接触抬升机制或子步回放工具。
 两模型均保留，各10组初态不是正式大样本/多训练seed/直线高台泛化验收。</p>
 </section>
-<section id="id4">
-<h2>已完成的配对工具与核验<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<section id="id7">
+<h2>本批奖励v2候选<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>新任务<code class="docutils literal notranslate"><span class="pre">Mjlab-Blind-Pit-Lego2-RewardV2</span></code>，日志名<code class="docutils literal notranslate"><span class="pre">lego2_blind_pit_reward_v2</span></code>；
+<a class="reference download internal" download="" href="../_downloads/9532c3c5736adac84685519f0e7f14f3/blind_pit_reward_v2_env_cfg.py"><span class="xref download myst">独立工厂</span></a>
+从v1工厂派生，只修改奖励及两个诊断指标，旧入口仍为v1。</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/425ad7a767a9346875a8abf78702fc94/blind_pit_rewards.py"><span class="xref download myst">奖励实现</span></a>：
+用俯仰±25°死区替换全水平惩罚（权重-0.5，原侧倾分量保留）；
+非轮geom通道接触力范数&gt;1 N时每通道-0.5；
+复用已有terrain_scan，在全部射线有效且局部高差≤0.03 m时，
+对root距局部地面不足0.34 m的归一化缺口平方施加-2.0权重，最多-2速率。
+高于下限不扣分、不提供抬高奖金；较高台沿跨层扫描时关闭该高度项。</p></li>
+<li><p>共13项奖励，actor144/critic254、12维动作、传感器/课程/PPO/资产/原通过定义保持。
+<code class="docutils literal notranslate"><span class="pre">base_clearance_eligible</span></code>与<code class="docutils literal notranslate"><span class="pre">base_clearance_below_minimum</span></code>记录高度项覆盖和低净空帧占比。
+权重/阈值是候选起点，不是已验证最优；软净空代价不保证每个关节绝对安全距离。</p></li>
+<li><p>新增<a class="reference download internal" download="" href="../_downloads/ee6c50136c7ae80a17dc570178a2f295/blind_pit_warmstart.py"><span class="xref download myst">actor迁移审计</span></a>及
+<a class="reference download internal" download="" href="../_downloads/c95b698957116f16ce7dec26eff24d12/train_lego2_blind_pit_reward_v2.py"><span class="xref download myst">独立训练入口</span></a>，完整继承actor参数/归一化/动作分布，
+critic（含归一化）、优化器、迭代、环境计数及课程新建，不走会恢复旧计数的runner.load。
+按新run保存initial_transfer.pt、warmstart.json及params；拒绝已有输出目录，旧run不覆盖。</p></li>
+<li><p>计划512环境×rollout24×300新增更新=3686400样本，seed7、课程从3 cm起，原PPO配置不变；
+新优化器学习率从配置1e-3重新开始、adaptive沿用，非父模型末尾优化器状态续训。</p></li>
+<li><p>评估工具新增可选reward_version（默认v1不变），记录局部有效净空、非轮接触和出坑后最低root高度。
+新<a class="reference download internal" download="" href="../_downloads/6490cd5c8f885b22c82319d305d03d1e/compare_lego2_reward_v2.py"><span class="xref download myst">配对质量汇总</span></a>核对实际reset再比较；
+两模型均在v2配置下无PPO复评：3/30 cm的vx0.5及30 cm的vx0.3，各seeds11～13，合计18个episode。
+每条件仅3次是动作质量初筛；父模型未更新参照不是同预算v1再训练消融。</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>已完成的配对工具与核验<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference download internal" download="" href="../_downloads/3700101fc176bcdaa85d77cba1fcbbe8/blind_pit_env_cfg.py"><span class="xref download myst">固定高度工厂</span></a>：
 可选forward_speed只固定评估vx范围，合法范围0.3～0.6 m/s；保留heading反馈。
@@ -528,16 +682,33 @@ model2197 SHA为<code class="docutils literal notranslate"><span class="pre">b8b
 <li><p><a class="reference download internal" download="" href="../_downloads/412c3300aade632c15e662964d90cfc0/test_lego2_blind_pit_speed_eval.py"><span class="xref download myst">新回归</span></a>：
 三组用不同截断步数测试下一回合配对；调试片段n=0，且故意改动初态可被汇总器拒绝。</p></li>
 </ul>
-<p>actor144/critic254、12维动作、奖励权重、训练速度分布、课程、机器人资产及PPO均保持。
+<p>以上为已完成的v1配对工具；其11项权重和入口保持。v2奖励差异仅在上节独立任务。
+actor144/critic254、12维动作、训练速度分布、课程、机器人资产及PPO保持。
 评估工具不更新PPO；已有零动作/随机权重软件核验不当作真实模型策略能力。</p>
 </section>
-<section id="id5">
-<h2>本地核验<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id9">
+<h2>本地核验<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
 <ul class="simple">
+<li><p>本批<a class="reference download internal" download="" href="../_downloads/b1bb64b6e44736f2465c5c304e89f427/20261116_v2_warmstart_cpu_tests.txt"><span class="xref download myst">迁移链路/旧功能测试</span></a>26 passed（12.41 s）；
+最终<a class="reference download internal" download="" href="../_downloads/6a4e1a67878460504e2d79502d0527f8/20261116_v2_warmstart_verified_tests.txt"><span class="xref download myst">迁移/单次合成CPU更新/质量汇总</span></a>3 passed（4.13 s）。
+定向5个Python文件格式/Ruff/ty/Pyright通过；只有合成checkpoint的2环境×24步软件更新，不是真实2197效果。</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/5d8359b710e1dbd3b4cfe8af1a3ee54b/20261116_v2_trial_validation.json"><span class="xref download myst">新交付核验</span></a>及
+<a class="reference download internal" download="" href="../_downloads/2468e27aa3160171d692c8a508f1b4b1/20261116_v2_trial_launcher_validation.json"><span class="xref download myst">安装/脚本模拟</span></a>通过。
+正式交付<code class="docutils literal notranslate"><span class="pre">lego2_reward_v2_trial_20261116_v2.tar.gz</span></code>，9项文件、50项来源校验；本地中间v1包不交付。
+改前评估器/changelog归档<code class="docutils literal notranslate"><span class="pre">backups/20261116_v2_warmstart_before.tar.gz</span></code>及同名JSON；无新Markdown备份。</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/b2c465d62be611db0d753b0561f1e3d1/20261115_reward_v2_cpu_tests_passed.txt"><span class="xref download myst">v2测试</span></a>：24 passed，10.28 s，
+含原19项及5项v2测试；4个既有ONNX弃用警告。真实两环境CPU步进、奖励dt汇总、
+推理后reset、原入口隔离、跨台沿/无效射线逐环境过滤通过；定向Ruff/格式/ty/Pyright通过。
+本机可用内存约21 GiB，GPU驱动不可用；远程GPU软件测试已回传通过，最新v2训练结果见上节。
+<a class="reference download internal" download="" href="../_downloads/2d5f4d2d2f8261e7960e442874a79105/20261115_reward_v2_validation.json"><span class="xref download myst">配置/录像证据层级</span></a>保留数值与限制。</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/c9580559563898f524c066112255fe96/20261115_reward_v2_sync_validation.json"><span class="xref download myst">v2增量安装核验</span></a>：
+合成目录中验证旧文件备份、重复安装、未知源码/同名文件/损坏包拒绝，旧模型/.venv/交接不变。
+新源码包8项、核对43项文件，不含上下文Markdown、日志或模型；改前源码归档在
+<code class="docutils literal notranslate"><span class="pre">backups/20261115_reward_v2_before.tar.gz</span></code>及同名JSON。</p></li>
 <li><p>本次只读配置核对：普通注册play为3～30 cm十级、初始level0且课程关闭，出生在3 cm，非固定30 cm。
 已验证临时进程内注册30 cm/0.50 m/s/单环境/自动reset配置，复用标准run_play及model2197；
 不改源码或原注册任务。Viser本地依赖默认监听8080，实际服务器监听端口以启动日志为准。
-配置/调用连接已离线核对，未在本机启动GPU回放；实际观看和反馈待用户执行。</p></li>
+配置/调用连接已离线核对，未在本机启动GPU回放；用户之后已提供录屏反馈，见EXPERIMENT_LOG。</p></li>
 <li><p>新增<a class="reference download internal" download="" href="../_downloads/c83b83589ea59a69c728705a91fafac7/analyze_phase3_paired_comparison_20261115.py"><span class="xref download myst">离线分析脚本</span></a>：
 原归档只读，不解压覆盖源码；60回合一致性断言通过，定向Ruff/格式/ty/Pyright通过。
 <a class="reference download internal" download="" href="../_downloads/e28bd8895501babe75b83066c3259372/20261115_model2197_comparison_analysis.png"><span class="xref download myst">连续支撑对照图</span></a>已渲染检查，无仿真/PPO或远程操作。</p></li>
@@ -552,8 +723,8 @@ model2197 SHA为<code class="docutils literal notranslate"><span class="pre">b8b
 <a class="reference download internal" download="" href="../_downloads/85cf50949bbb9e8041b96fe637eb7041/20261115_phase3_speed_eval_before.json"><span class="xref download myst">改前hash</span></a>保留；旧报告/模型/归档未改写。</p></li>
 </ul>
 </section>
-<section id="id6">
-<h2>训练/复评状态与下一步<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<section id="id10">
+<h2>训练/复评状态与下一步<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
 <p>第二轮续训退出码0、34:02、model2197.pt及params均有用户回传，详情归EXPERIMENT_LOG。
 末尾2197符合恢复1198后新增1000更新；24576000仍为计划采样推算，完整Total timesteps未下载。
 训练pit_complete=0.3408是阶段时间占比，不与固定评估的episode稳定率混用。
@@ -566,9 +737,10 @@ model2197的GPU组内/跨模型配对原始证据已核对，本地模拟报告�
 <a class="reference download internal" download="" href="../_downloads/9904a5a52d0c4500969943a2489b987a/20261115_phase3_collection_validation.json"><span class="xref download myst">本地核验</span></a>包含两次独立下载与中断保留，
 采用模拟SSH，仅证明指令连线/本地归档保护；本次实际下载证据另见离线分析JSON。</p>
 <ol class="arabic simple">
-<li><p>用户通过SSH隧道/Viser观看model2197的30 cm中央坑出坑效果（提供临时进程内固定配置指令）。</p></li>
-<li><p>收到用户反馈后，再决定是否实现两模型配对视频/5 ms子步接触核对，不自动放宽原0.5 s判据。</p></li>
-<li><p>暂不替换父模型或追加第三轮训练；正式大样本/直线高台/平地能力仍待后续。</p></li>
+<li><p>用户选择先补平地稳定姿态目标，还是保留v2做有上限的续训对照；当前只完成评估，未实施。</p></li>
+<li><p>若选姿态候选，先核对适用条件/权重量级及加载边界，再独立小批验证，比较能力、安全余量和姿态，不全程强制对称。</p></li>
+<li><p>原2198继续保留，配对筛查扩至每条件约10回合后再决定长训/正式泛化；不把9/9当最终验收。</p></li>
+<li><p>父2197、v2模型299/2198及旧结果保留；正式大样本/直线高台/平地验收仍待后续。</p></li>
 </ol>
 </section>
 <section id="git">
@@ -576,13 +748,15 @@ model2197的GPU组内/跨模型配对原始证据已核对，本地模拟报告�
 <p><strong>GitHub仅供用户自行版本管理；是否commit/push由用户决定。服务器固定采用SCP/SSH直传，
 GitHub连通、CI、提交号或push均不作为机器人开发/同步/验证前置条件。</strong>
 规范归AGENTS链接目标及PROJECT_CONTEXT，DECISIONS已移除冲突的旧操作规则，只留失效历史说明。
-用户回传GitHub已回退initial；本地HEAD与origin/main跟踪引用也为3592c9e，未另行联网核实。
-后续小提交的文件改动仍保留在工作区，本批未commit/push；不要求每批生成Git版本阶段。
+用户已将初版奖励commit/push保留；v2开发前的63f293a及当时干净状态是历史核对，非本批干净声明。
+当前工作区已有v2/注释/文档及工具改动，均保留；Codex未commit/push，不要求每批形成Git版本阶段。
 恢复资料仍在<code class="docutils literal notranslate"><span class="pre">artifacts/git_history_before_20261115_jlp8m7cp/</span></code>，禁止自动清理。
 服务器继续使用<code class="docutils literal notranslate"><span class="pre">~/zrq/mjlab_lego2</span></code>及其现有环境；Git候选目录/失败现场保留，不再接入或切换环境。
-训练完成来自用户回传；两模型配对评估原始明细已下载核验。完整训练stdout/Total timesteps仍未下载。
+v1原始配对及v2两轮报告已下载核对；v2完整stdout及Total steps已核对，旧v1完整stdout仍缺。
 归档检查：历史<code class="docutils literal notranslate"><span class="pre">lego2_phase3_20261031_v1.tar.gz</span></code>及<code class="docutils literal notranslate"><span class="pre">lego2_phase3_reset_fix_20261101_v1.tar.gz</span></code>
-含旧HANDOFF/CURRENT_STATUS，仅作历史保留，不重放覆盖当前交接；新speed_eval包无上下文快照。</p>
+含旧HANDOFF/CURRENT_STATUS，仅作历史保留，不重放覆盖当前交接；新speed_eval包无上下文快照。
+v2注册及新评估器分别改变__init__/工具内容hash，历史清单保持为旧证据，不盲跑旧入口。
+本批trial包无上下文快照，安装后以v2_trial_sources_20261116.sha256核对新版本。</p>
 </section>
 </section>
 
@@ -614,10 +788,16 @@ GitHub连通、CI、提交号或push均不作为机器人开发/同步/验证前
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">当前阶段</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">最新配对结果与解释</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">已完成的配对工具与核验</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">本地核验</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">训练/复评状态与下一步</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v2">最新v2原始证据核对</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">当前训练状态与回放</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">最新录屏与姿态评估（建议，尚未实施）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">已有目录与注释约定</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">本批阅读注释</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v1">既有v1配对结果与解释</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">本批奖励v2候选</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">已完成的配对工具与核验</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">本地核验</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">训练/复评状态与下一步</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git">Git、同步与实验边界</a></li>
 </ul>
   </nav></div>
@@ -652,7 +832,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 15, 2026.
+  Last updated on Nov 17, 2026.
   <br/>
 </p>
   </div>

@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "bash syntax: local collector and remote here-document",
+    "mock SSH success twice without overwrite",
+    "mock SSH failure preserves partial and previous downloads",
+    "explicit tar payload excludes weights/cache/Git",
+    "receipt JSON, HANDOFF line limit, AGENTS symlink"
+  ],
+  "passed": true,
+  "actual_remote_download": false,
+  "simulation_or_training": false
+}

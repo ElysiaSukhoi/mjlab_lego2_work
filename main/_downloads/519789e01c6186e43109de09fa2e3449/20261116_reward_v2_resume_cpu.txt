@@ -1,0 +1,89 @@
+奖励v2验证目录：/tmp/lego2_reward_v2_resume_validation/reward_v2_resume_20261116_UoXgnU
+docs/codex/artifacts/check_phase3_reward_v2_20261115.sh: 成功
+docs/codex/artifacts/reward_v2_20261115_files.txt: 成功
+docs/codex/artifacts/reward_v2_prerequisites_20261115.sha256: 成功
+scripts/tools/evaluate_lego2_blind_pit.py: 成功
+scripts/tools/summarize_lego2_speed_eval.py: 成功
+src/mjlab/actuator/actuator.py: 成功
+src/mjlab/actuator/builtin_actuator.py: 成功
+src/mjlab/actuator/builtin_group.py: 成功
+src/mjlab/asset_zoo/robots/lego2/lego2_constants.py: 成功
+src/mjlab/asset_zoo/robots/lego2/urdf/urdf_legowheel2.urdf: 成功
+src/mjlab/asset_zoo/robots/lego2/xmls/lego2.xml: 成功
+src/mjlab/entity/data.py: 成功
+src/mjlab/entity/entity.py: 成功
+src/mjlab/envs/mdp/actions/actions.py: 成功
+src/mjlab/managers/action_manager.py: 成功
+src/mjlab/rl/config.py: 成功
+src/mjlab/rl/runner.py: 成功
+src/mjlab/rl/vecenv_wrapper.py: 成功
+src/mjlab/scene/scene.py: 成功
+src/mjlab/scripts/train.py: 成功
+src/mjlab/sensor/contact_sensor.py: 成功
+src/mjlab/sensor/raycast_sensor.py: 成功
+src/mjlab/sensor/terrain_height_sensor.py: 成功
+src/mjlab/sim/sim.py: 成功
+src/mjlab/tasks/registry.py: 成功
+src/mjlab/tasks/velocity/config/lego2/__init__.py: 成功
+src/mjlab/tasks/velocity/config/lego2/blind_pit_curriculums.py: 成功
+src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py: 成功
+src/mjlab/tasks/velocity/config/lego2/blind_pit_metrics.py: 成功
+src/mjlab/tasks/velocity/config/lego2/blind_pit_reward_v2_env_cfg.py: 成功
+src/mjlab/tasks/velocity/config/lego2/blind_pit_rewards.py: 成功
+src/mjlab/tasks/velocity/config/lego2/env_cfgs.py: 成功
+src/mjlab/tasks/velocity/config/lego2/platform_climb_env_cfg.py: 成功
+src/mjlab/tasks/velocity/config/lego2/platform_climb_metrics.py: 成功
+src/mjlab/tasks/velocity/config/lego2/platform_climb_rewards.py: 成功
+src/mjlab/tasks/velocity/config/lego2/platform_climb_terminations.py: 成功
+src/mjlab/tasks/velocity/config/lego2/rl_cfg.py: 成功
+src/mjlab/utils/lab_api/string.py: 成功
+tests/test_lego2_blind_pit.py: 成功
+tests/test_lego2_blind_pit_reward_v2.py: 成功
+tests/test_lego2_blind_pit_speed_eval.py: 成功
+tests/test_lego2_blind_pit_stage3.py: 成功
+tests/test_lego2_blind_pit_terrain.py: 成功
+               total        used        free      shared  buff/cache   available
+内存：      31703        5935       18005        1228        7761       24078
+交换：       2047           0        2047
+[1/4] 列出任务（Python模块入口）
++---------------------------------------------------------+
+|             Available Environments in mjlab             |
++----+----------------------------------------------------+
+| #  | Task ID                                            |
++----+----------------------------------------------------+
+| 1  | Mjlab-Blind-Pit-Lego2                              |
+| 2  | Mjlab-Blind-Pit-Lego2-RewardV2                     |
+| 3  | Mjlab-Cartpole-Balance                             |
+| 4  | Mjlab-Cartpole-Swingup                             |
+| 5  | Mjlab-Lift-Cube-Yam                                |
+| 6  | Mjlab-Lift-Cube-Yam-Depth                          |
+| 7  | Mjlab-Lift-Cube-Yam-Rgb                            |
+| 8  | Mjlab-Multi-Cube-Seg-Yam                           |
+| 9  | Mjlab-Platform-Climb-Lego2                         |
+| 10 | Mjlab-Tracking-Flat-Unitree-G1                     |
+| 11 | Mjlab-Tracking-Flat-Unitree-G1-No-State-Estimation |
+| 12 | Mjlab-Velocity-Flat-Lego2                          |
+| 13 | Mjlab-Velocity-Flat-Unitree-G1                     |
+| 14 | Mjlab-Velocity-Flat-Unitree-Go1                    |
+| 15 | Mjlab-Velocity-Rough-Lego2                         |
+| 16 | Mjlab-Velocity-Rough-Unitree-G1                    |
+| 17 | Mjlab-Velocity-Rough-Unitree-Go1                   |
++----+----------------------------------------------------+
+[2/4] 开始CPU测试
+........................                                                 [100%]
+=============================== warnings summary ===============================
+tests/test_lego2_blind_pit_stage3.py::test_inference_checkpoint_contract[False]
+tests/test_lego2_blind_pit_stage3.py::test_inference_checkpoint_contract[True]
+  /home/asus/work/mjlab_lego2_work/src/mjlab/rl/runner.py:47: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter will be the default. To switch now, set dynamo=True in torch.onnx.export. This new exporter supports features like exporting LLMs with DynamicCache. We encourage you to try it and share feedback to help improve the experience. Learn more about the new export logic: https://pytorch.org/docs/stable/onnx_dynamo.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html.
+    torch.onnx.export(
+
+tests/test_lego2_blind_pit_stage3.py::test_inference_checkpoint_contract[False]
+tests/test_lego2_blind_pit_stage3.py::test_inference_checkpoint_contract[True]
+  /home/asus/work/mjlab_lego2_work/.venv/lib/python3.13/site-packages/torch/onnx/_internal/torchscript_exporter/utils.py:217: DeprecationWarning: The feature will be removed. Please remove usage of this function
+    setup_onnx_logging(verbose) as log_ctx,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+24 passed, 4 warnings in 29.08s
+GPU核验未启用；不计入GPU通过。
+候选奖励软件核验结束；GPU仅在gpu_tests通过时计入；尚无v2训练/效果结论。
+证据目录：/tmp/lego2_reward_v2_resume_validation/reward_v2_resume_20261116_UoXgnU

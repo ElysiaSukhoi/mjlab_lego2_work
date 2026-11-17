@@ -1,4 +1,11 @@
-"""Blind Lego2 pit with explicit generic rewards and privileged diagnostics."""
+"""当前中央坑任务的总配置，保存11项奖励的v1基线。
+
+从env_cfgs.py借用机器人、驱动和基础传感器，再重新设置坑、出生位置、
+速度命令、盲走观测、奖励和结束条件；并非直接沿用Rough的全部设置。
+blind_pit_curriculums.py决定难度升降，blind_pit_metrics.py记录越障阶段。
+网络/PPO参数看rl_cfg.py；v2在blind_pit_reward_v2_env_cfg.py中派生。
+普通play从3厘米等级出生；固定高度回放应使用下方eval工厂。
+"""
 
 import math
 from copy import deepcopy
@@ -35,10 +42,11 @@ _ACTOR_TERMS = (*_PROPRIOCEPTION, "actions", "command")
 
 
 def lego2_blind_pit_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
-  """Use five proprioceptive frames and current action/command, term-major.
+  """组装中央坑v1的训练或普通回放配置。
 
-  Train/play share geometry and observations. Play disables actor corruption
-  and curriculum; it does not inherit Rough's play-only overrides.
+  机器人从坑底出生，坑深由3厘米逐级到30厘米；命令要求向前走并保持朝向。
+  actor只看本体近5帧、上次动作和当前速度命令，critic保留训练用地形信息。
+  play关闭观测噪声和课程，但普通play仍从最低等级开始。
   """
   # 阶段1：从Rough训练配置派生独立对象，修改新任务不会改到旧任务。
   # 不采用Rough的play分支，避免一并继承超长episode等回放专用覆盖。
@@ -69,37 +77,37 @@ def lego2_blind_pit_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   assert cfg.scene.terrain is not None
   cfg.scene.terrain.terrain_type = "generator"
   cfg.scene.terrain.terrain_generator = TerrainGeneratorCfg(
-    curriculum=True,
-    size=(10.0, 10.0),
-    num_rows=10,
-    num_cols=1,
-    merge_curriculum_rows=False,
+    curriculum=True,  # 地形按等级生成，课程模块决定每个环境使用哪一级。
+    size=(10.0, 10.0),  # 每块地形长宽，单位米；不是坑底的尺寸。
+    num_rows=10,  # 10个坑深等级，包含3和30厘米两个端点。
+    num_cols=1,  # 只有中央坑这一种地形。
+    merge_curriculum_rows=False,  # 各等级地块独立，避免合并后混淆出生原点。
     sub_terrains={
       "pit": BoxInvertedPyramidStairsTerrainCfg(
-        proportion=1.0,
-        step_height_range=(0.03, 0.30),
-        step_width=2.0,
-        platform_width=3.0,
-        border_width=3.5,
+        proportion=1.0,  # 所有地块都用此类型。
+        step_height_range=(0.03, 0.30),  # 坑底到周围台面的高差，单位米。
+        step_width=2.0,  # 台阶宽度参数；结合下方坑底/边框尺寸形成单级坑。
+        platform_width=3.0,  # 中央坑底为3×3米。
+        border_width=3.5,  # 周围保留3.5米宽区域，构成坑外台面。
       )
     },
   )
-  cfg.scene.terrain.max_init_terrain_level = 0
-  cfg.episode_length_s = 20.0
+  cfg.scene.terrain.max_init_terrain_level = 0  # 新环境从最低3厘米开始。
+  cfg.episode_length_s = 20.0  # 一回合最长20秒，提前失败/越界也会结束。
   command = cfg.commands["twist"]
   assert isinstance(command, UniformVelocityCommandCfg)
-  command.resampling_time_range = (20.0, 20.0)
-  command.ranges.lin_vel_x = (0.3, 0.6)
-  command.ranges.lin_vel_y = (0.0, 0.0)
-  command.ranges.ang_vel_z = (-0.5, 0.5)
-  command.ranges.heading = (0.0, 0.0)
-  command.heading_command = True
-  command.heading_control_stiffness = 0.5
+  command.resampling_time_range = (20.0, 20.0)  # 每回合前进速度基本固定。
+  command.ranges.lin_vel_x = (0.3, 0.6)  # 前进命令，单位米/秒。
+  command.ranges.lin_vel_y = (0.0, 0.0)  # 不要求横移。
+  command.ranges.ang_vel_z = (-0.5, 0.5)  # 转向角速度范围，单位弧度/秒。
+  command.ranges.heading = (0.0, 0.0)  # 目标朝向固定为0弧度。
+  command.heading_command = True  # 根据朝向偏差生成转向命令。
+  command.heading_control_stiffness = 0.5  # 朝向偏差转换成转向命令的力度。
   command.rel_heading_envs = 1.0
   command.rel_standing_envs = command.rel_spin_envs = 0.0
   command.rel_world_envs = command.rel_forward_envs = 0.0
   command.init_velocity_prob = 0.0
-  # Origin is already on the pit floor: do not subtract pit depth again.
+  # 出生原点已经在坑底，不能再减一次坑深；root默认高度0.47 m来自机器人配置。
   cfg.events = {
     "reset_base": EventTermCfg(
       func=envs_mdp.reset_root_state_uniform,
@@ -113,7 +121,7 @@ def lego2_blind_pit_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   }
   cfg.events["reset_robot_joints"].params["position_range"] = (0.0, 0.0)
   cfg.events["reset_robot_joints"].params["velocity_range"] = (0.0, 0.0)
-  # Contact geometry already has fixed slide friction 0.4; no DR is applied.
+  # 轮碰撞几何已有固定滑动摩擦0.4；此任务不另加随机摩擦。
   contact = next(s for s in cfg.scene.sensors if s.name == "feet_ground_contact")
   assert isinstance(contact, ContactSensorCfg)
   rim_contact = deepcopy(contact)
@@ -128,19 +136,21 @@ def lego2_blind_pit_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
     if play
     else {
       "pit_levels": CurriculumTermCfg(
-        func=PitTerrainLevels, params={"promote_distance": 3.0}
+        func=PitTerrainLevels,
+        params={"promote_distance": 3.0},  # 晋级还要求走出3米。
       )
     }
   )
   cfg.terminations = {
     "time_out": TerminationTermCfg(func=envs_mdp.time_out, time_out=True),
     "fell_over": TerminationTermCfg(
-      func=envs_mdp.bad_orientation, params={"limit_angle": math.radians(70)}
+      func=envs_mdp.bad_orientation,
+      params={"limit_angle": math.radians(70)},  # 倾斜超过70°结束；成功保持另用45°。
     ),
     "nan": TerminationTermCfg(func=envs_mdp.nan_detection),
     "tile_boundary": TerminationTermCfg(func=PitTileBoundary, time_out=True),
   }
-  # Log non-foot collisions without a reward weight or a contact termination.
+  # v1只记录非轮碰撞，不因它直接扣分/结束；v2在派生配置中另外加入接触代价。
   cfg.metrics["pit_nonfoot_contact_count"] = MetricsTermCfg(
     func=nonfoot_contact_count, reduce="mean"
   )
@@ -152,51 +162,59 @@ def lego2_blind_pit_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   cfg.rewards = {
     "track_lin_vel_xy_exp": RewardTermCfg(
       func=mdp.track_lin_vel_xy_exp,
-      weight=3.0,
-      params={"command_name": "twist", "std": 0.5},
+      weight=3.0,  # 前进/横向跟速奖励的权重。
+      params={"command_name": "twist", "std": 0.5},  # 速度误差容许尺度，米/秒。
     ),
     "track_ang_vel_z_exp": RewardTermCfg(
       func=mdp.track_ang_vel_z_exp,
-      weight=1.5,
-      params={"command_name": "twist", "std": 0.5},
+      weight=1.5,  # 转向跟速奖励，帮助保持目标朝向。
+      params={"command_name": "twist", "std": 0.5},  # 误差容许尺度，弧度/秒。
     ),
     # 两项速度平方沿用原函数的机体系语义和直立缩放，不提供向上运动奖金。
-    "lin_vel_z_l2": RewardTermCfg(func=mdp.lin_vel_z_l2, weight=-0.3),
-    "ang_vel_xy_l2": RewardTermCfg(func=mdp.ang_vel_xy_l2, weight=-0.05),
-    "flat_orientation_l2": RewardTermCfg(func=mdp.flat_orientation_l2, weight=-0.5),
+    "lin_vel_z_l2": RewardTermCfg(func=mdp.lin_vel_z_l2, weight=-0.3),  # 少上下抖动。
+    "ang_vel_xy_l2": RewardTermCfg(
+      func=mdp.ang_vel_xy_l2, weight=-0.05
+    ),  # 少剧烈摆动。
+    "flat_orientation_l2": RewardTermCfg(
+      func=mdp.flat_orientation_l2,
+      weight=-0.5,  # v1倾斜代价；v2替换此项。
+    ),
     "joint_torques_l2": RewardTermCfg(
       func=mdp.joint_torques_l2,
-      weight=-2.5e-5,
+      weight=-2.5e-5,  # 限制8个腿电机的力矩平方和，不含轮电机。
       params={"asset_cfg": leg_motors},
     ),
     "joint_acc_l2": RewardTermCfg(
       func=mdp.joint_acc_l2,
-      weight=-2.5e-7,
+      weight=-2.5e-7,  # 腿关节加速度代价，减轻急动。
       params={"asset_cfg": legs},
     ),
     "joint_acc_wheel_l2": RewardTermCfg(
       func=mdp.joint_acc_l2,
-      weight=-2.5e-9,
+      weight=-2.5e-9,  # 轮关节加速度单独计分，使用较小权重。
       params={"asset_cfg": wheels},
     ),
     # 按动作term分开统计raw动作一阶差分，不对缩放后的角度/轮速混算。
     "action_rate_l2": RewardTermCfg(
       func=mdp.action_rate_l2,
-      weight=-0.01,
+      weight=-0.01,  # 腿动作相邻两步变化的代价。
       params={"action_name": "joint_pos"},
     ),
     "action_rate_wheel_l2": RewardTermCfg(
       func=mdp.action_rate_l2,
-      weight=-0.01,
+      weight=-0.01,  # 轮动作变化代价；与腿分开统计raw动作。
       params={"action_name": "joint_vel"},
     ),
     "joint_pos_limits": RewardTermCfg(
       func=mdp.joint_pos_limits,
-      weight=-5.0,
+      weight=-5.0,  # 实际腿关节越过软限位时扣分，不是动作硬裁剪。
       params={"asset_cfg": legs},
     ),
   }
-  # 每项独立状态由MetricsManager按env_ids重置；普通阶段记录时间占比。
+  # Episode_Metrics/pit_*：普通阶段记录满足条件的帧占比，而非完整回合成功率。
+  # pit_stable_pass用last输出本回合是否曾通过，非轮计数则是每帧平均通道数。
+  # Metrics/twist/error_vel_xy来自命令模块，表示速度跟踪误差，课程等级看Curriculum日志。
+  # Episode_Reward是加权速率的回合累计/最大时长，不能直接与这些比例指标混比。
   # 稳定通过必须连续支撑0.5 s，课程仍使用阶段2纯判据，不依赖metrics初始化。
   for field in ("root_out", "front_up", "rear_up", "complete", "stable_pass"):
     cfg.metrics[f"pit_{field}"] = MetricsTermCfg(
@@ -210,7 +228,11 @@ def lego2_blind_pit_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
 def lego2_blind_pit_eval_cfg(
   height: float, forward_speed: float | None = None
 ) -> ManagerBasedRlEnvCfg:
-  """Build a real fixed-depth pit with the same actor and actions as training."""
+  """生成指定坑深的评估配置，可选固定前进速度。
+
+  height单位为米，forward_speed单位为米/秒；传入0.30才是固定30厘米。
+  保留终止帧，调用者结算后显式reset，用于统计完整回合和配对复评。
+  """
   if not math.isfinite(height) or not 0 < height <= 0.30:
     raise ValueError("Pit evaluation height must be in (0, 0.30] metres")
   if forward_speed is not None and (

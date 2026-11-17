@@ -58,7 +58,7 @@
     <link rel="prev" title="Research" href="research.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-    <meta name="docbuild:last-update" content="Nov 15, 2026"/>
+    <meta name="docbuild:last-update" content="Nov 17, 2026"/>
   </head>
   
   
@@ -544,6 +544,16 @@ document.write(`
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Added read-only collection of reward-v2 continuation and earlier trial evidence
+for paired quality and cross-run reproducibility review.</p></li>
+<li><p>Added reward-v2 full-state continuation to a planned 2200 updates under the
+new rewards, retaining earlier runs and performing paired quality screening.</p></li>
+<li><p>Added audited actor-only Lego2 reward-v2 fine-tuning with fresh critic,
+optimizer and counters, and paired policy evaluation with clearance and
+non-wheel contact quality metrics.</p></li>
+<li><p>Added an isolated Lego2 blind-pit reward-v2 candidate with a pitch deadband,
+non-wheel contact costs and a minimum base clearance on locally level ground,
+retaining the original reward task and all existing training results.</p></li>
 <li><p>Added read-only SSH collection of paired evaluation reports and traces,
 retaining interrupted downloads and existing server results.</p></li>
 <li><p>Added source-checked Lego2 continuation and paired re-evaluation launchers
@@ -572,6 +582,9 @@ traces. Existing tasks, assets, and training results are preserved.</p></li>
 <section id="changed">
 <h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Expanded plain Chinese module/function guides and key-parameter comments
+across Lego2 terrain, rewards, diagnostics, networks, training and evaluation,
+distinguishing the active blind-pit tasks from the legacy fixed-platform task.</p></li>
 <li><p>Restore direct SSH transfer for remote development, independent of optional
 user-managed GitHub commits and pushes; keep synchronization and verification
 separate and preserve existing training outputs.</p></li>
@@ -583,6 +596,10 @@ while keeping sync archives, training logs and virtual environments ignored.</p>
 <section id="fixed">
 <h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">#</a></h3>
 <ul class="simple">
+<li><p>Fixed reward-v2 continuation self-backup when launched by a relative path.</p></li>
+<li><p>Added a reward-v2 verification recovery launcher using the task-list module
+entry point, avoiding the console command’s task-count exit status, with
+explicit progress and error reporting.</p></li>
 <li><p>Added checkpoint, episode and periodic step progress to blind-pit evaluation,
 flushing traces at progress updates so long runs can be monitored.</p></li>
 <li><p>Fixed blind-pit metric caches so resets outside PyTorch inference mode
@@ -1786,7 +1803,7 @@ By The mjlab Developers
   
   <div class="footer-item">
     <p class="last-updated">
-  Last updated on Nov 15, 2026.
+  Last updated on Nov 17, 2026.
   <br/>
 </p>
   </div>

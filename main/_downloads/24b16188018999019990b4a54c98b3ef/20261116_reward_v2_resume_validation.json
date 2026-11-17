@@ -1,0 +1,33 @@
+{
+  "local_actual_cli_exit": {
+    "console": 17,
+    "module": 0,
+    "same_task_table": true
+  },
+  "shell_control_flow_only_not_gpu_execution": {
+    "success": {
+      "exit": 0,
+      "uv_calls": 4,
+      "expected_exit_and_stop_verified": true
+    },
+    "cpu": {
+      "exit": 7,
+      "uv_calls": 2,
+      "expected_exit_and_stop_verified": true
+    },
+    "gpu": {
+      "exit": 9,
+      "uv_calls": 4,
+      "expected_exit_and_stop_verified": true
+    }
+  },
+  "fixture": "/tmp/lego2_reward_v2_resume_flow_lan9t4gq",
+  "resume_script_sha256": "8793063fa5373d6a602f779700e8a12becb89e4e76c3b52e7b03ac55e629fcb9",
+  "actual_local_resume": {
+    "cpu_passed": 24,
+    "duration_s": 29.08,
+    "gpu_run": false,
+    "exit_code": 0,
+    "log": "docs/codex/diagnostics/20261116_reward_v2_resume_cpu.txt"
+  }
+}

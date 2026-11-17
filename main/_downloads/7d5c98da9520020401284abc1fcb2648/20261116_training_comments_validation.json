@@ -1,0 +1,149 @@
+{
+  "scope": "comments/docstrings and formatting only; no remote synchronization or new training",
+  "files": {
+    "src/mjlab/tasks/velocity/config/lego2/__init__.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "16d28398346f991a9e7ff8130f3c63bf40420d9626d8d25538a54bbe7849c23f",
+      "after_sha256": "f42008af38feef6b3a16fbcf9c7c6c18bd4e4693b84285814c3b6917910ca021"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_env_cfg.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "b6198dc9815c1e426ec6f7c79bf55525a52a5b53a46e317b66ccba728fa77921",
+      "after_sha256": "889fd9be74cf035bb0f6bf5991469ba5eb44200e35e946189d193056b77ae0de"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_reward_v2_env_cfg.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "37507b388599fa88a730eca520dc3bff8971d27ba1896b87d904ef649998b540",
+      "after_sha256": "182d323414236f4276421d27fa3c51a5d604c8a396c23308d807c88a3b607cf5"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_rewards.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "2d0815b79bf90c28d86e22aff6e146f8a22e9ad83605b11811961884e0acb159",
+      "after_sha256": "7821327399f8068bddf6e5e13bda02e0c90b9ae0e0f0918b42549f7d049cc935"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_curriculums.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "b2b19581d733c40f99a836682277b74cb715b0ef8dec05190317c081ade7753a",
+      "after_sha256": "12fb65fb7642c643bcff1ec43001d3d0d4a0e0d0d870e0d4021aeada6a565ca8"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_metrics.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "b312a6999ec2ae7eba7d1b2772a6633c755dc01df603233e672b637a417c913e",
+      "after_sha256": "155559e034d728378be35f9f2eec2053ae4e32f3bf6a0d587d32a0c87b56fb57"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/blind_pit_warmstart.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "041e6ddde95377ced3769645dcfd4268eb9db5f6ff1d2cd580c95e63dce9de6c",
+      "after_sha256": "fe4f7c8e1b9cf3c62c78b2450eba121f427eb9c247c9b52fd3caacaa05cd19d2"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/rl_cfg.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "72e1b033d621f3f4af52374e0c045aebc4e961e28ec018953ce5daa964a637ac",
+      "after_sha256": "022617e2076d4c816acd6edb5c670ae72df067f77e059c0e5dc97f6dd793d669"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/env_cfgs.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "76e12c772072d35bd5a7942bfc66b56ed470ad2299d413604742d8366a0878b2",
+      "after_sha256": "e8e8e57fa8f830135f6cc6191214451b06dc675a2c3b49ad7c591429286957e8"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_env_cfg.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "e80d877d1655aa1ef53c6172b5ef7c9f9041f9de14359d5acdab96388e3d18ca",
+      "after_sha256": "195c4357eeb383d1ec095bc994cdfff6704267cb9de4c0b4a3e286c0e595d3c3"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_rewards.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "3c1f4d5b93ec0e4901e42d7b97120fde2f0565379a56eb2a1036bb63930a1cce",
+      "after_sha256": "cb75dee0e8754f75e4300a07d0a6aec3d341d1302542d3f567720e64fb7ddbe9"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_metrics.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "022cfa2d3c98144be6d2deb12f38bb8feb31dabbf0d671e700866ed25d5e2a81",
+      "after_sha256": "425f42d7da669384ef2aa1ce08f844a2660c29624c98a1f2d7eb7e60ebb650cd"
+    },
+    "src/mjlab/tasks/velocity/config/lego2/platform_climb_terminations.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "0e9fe8113630d59b2770cd07487babd9c87607b62369d7cdafcb40e990c9d9ed",
+      "after_sha256": "c3343a2591db82c49b46177efd1d7e0ad9d59df8df7d287fa3ffea1923c82a29"
+    },
+    "src/mjlab/rl/config.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "7d391cc0d7a37a4f86c3c4f4a0adc6d75c546273085feed0ddf597aedba6134a",
+      "after_sha256": "6e2edc683a06cb72ea35b61b15ef0d973a2ee446d2973545156a4c94d265e8b4"
+    },
+    "src/mjlab/rl/runner.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "61e9200bf304e3df71096cd69f28f4d5973157e61cdc549fc21b6f156326f77e",
+      "after_sha256": "65dd5ce251d13550adb8dd36257d3af5e4b437369514d86c706a3cca0afeffde"
+    },
+    "src/mjlab/tasks/velocity/rl/runner.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "ad48677e7bdd2d87d942cbe7f6140b11aeb479c5129105d367f6714f3af91982",
+      "after_sha256": "e236f9d67e5f1dd9bcf040ee3d275bd549adeb5e4f982049d2a1e7652ff58115"
+    },
+    "scripts/tools/train_lego2_blind_pit_reward_v2.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "7c3f7c65d45c8536c73001f0683d3da93465dd7e39a6d81f780ca5fdacb98b13",
+      "after_sha256": "f50d7d7449a3c67d2af7c24335e9d82953433e3df50ce1cec9607dd82216db6a"
+    },
+    "scripts/tools/evaluate_lego2_blind_pit.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "b7cab68c715f01e4dcd511158b342170f2f1adf1e0e0f72505958c7f63b60a1c",
+      "after_sha256": "d92ec0494d8517b370779d5f80239df881215780eff9e603934f5af9d8740ea7"
+    },
+    "scripts/tools/compare_lego2_reward_v2.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "67b2a7094872742087a2c34367f6d1911b5c46724749c429ee8f9db10624310f",
+      "after_sha256": "02272e3d06f2a13780d27af9516e40db2789a307d13f34e5e865fcdb5aeb9f59"
+    },
+    "src/mjlab/scripts/train.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "30c54158e544099beb343d76ce7041dbd88245303f203fa0616a5956fb0e2ae7",
+      "after_sha256": "2cb7921a56eea7d5a318b087550754dfae21dcceb7ed35788f1b916098e935ca"
+    },
+    "src/mjlab/scripts/play.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "606f537c568247c5e9ba2e94ac1a197675411b360fb1db3231f1b46710539456",
+      "after_sha256": "f569aedd9934f730482c8403b43ab4f74305620fdeb72b5bbd481d7d1590004f"
+    },
+    "src/mjlab/tasks/velocity/mdp/rewards.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "374c3583d668ec5e8d4906fc145c2f96316b40264014057e8c233f370991145f",
+      "after_sha256": "7322ec3615a5f8eaed0943c270ab1922cd567f2487db73ba1f80666c47dfef14"
+    },
+    "src/mjlab/envs/mdp/rewards.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "4fc0b756e22363c9b61813b945d049f2225cb7ef2f6846d4d94b6afbd705645d",
+      "after_sha256": "4a3965b80fb311ec15f900776acc4ddcfbbf0b05f2b18a4bd2b9444ff34ead8f"
+    },
+    "src/mjlab/tasks/registry.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "f1c82c8f1ff5d24263787f4cfc2805b7b4103253fe59c054bf649d24c7cc9476",
+      "after_sha256": "b8a53277a79b4e8d9ab8e7660963fcee91482f7b42df6a23d4732e2be9dfa19c"
+    },
+    "src/mjlab/tasks/velocity/velocity_env_cfg.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "6bc79f7fcce79a1b7b929aff4139ed977012b7b4b9161c4546619316a4f6b8bf",
+      "after_sha256": "ed2c957b711b39e5b2c027bd9a42945b3e11fd5b1458a673c37e71cabf01a16a"
+    },
+    "src/mjlab/managers/reward_manager.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "6130dbc34c730fe36362eb75f65184bc6729daab14cd50ffaff70243947788cb",
+      "after_sha256": "ed63cf50d44d78f4ecac9f561a1461eae467a89be469a178f0bed07b290ef075"
+    },
+    "src/mjlab/managers/metrics_manager.py": {
+      "runtime_ast_unchanged": true,
+      "before_sha256": "5c1f24e75fd21220b5c96f974127568150ce6e9ee16d0abb97dcd933173f6723",
+      "after_sha256": "ac21400416c21855748063ee63a80be11bf43455b6e823967af86f6e2fae97e7"
+    }
+  },
+  "new_lines_over_88": [],
+  "unchanged_existing_diagnostics": {
+    "pyright": 5,
+    "ruff": 13,
+    "ty": 5
+  },
+  "issued_trial_bundle_preserved": true,
+  "no_simulation_or_training_tests_run": true,
+  "rules_symlink_preserved": true
+}

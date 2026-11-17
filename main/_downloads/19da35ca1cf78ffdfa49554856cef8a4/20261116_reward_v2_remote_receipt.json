@@ -1,0 +1,33 @@
+{
+  "evidence_level": "user-pasted remote completion output; raw files not downloaded",
+  "reported_on": "2026-11-16",
+  "remote_evidence_dir": "/home/ajifang/zrq/backups/reward_v2_resume_20261116_v4TczG",
+  "cpu": {
+    "passed": 24,
+    "warnings": 4,
+    "duration_s": 40.63,
+    "warning_kind": "existing ONNX/TorchScript deprecation warnings"
+  },
+  "gpu": {
+    "passed": 1,
+    "deselected": 4,
+    "duration_s": 10.15,
+    "name": "NVIDIA GeForce RTX 4090",
+    "driver": "550.144.03",
+    "reported_free_MiB": 20956,
+    "other_compute_process": {
+      "pid": 3324546,
+      "path_shown": "/home/ajifang/yhy/mjlab/.venv/bin/python3",
+      "memory_MiB": 2846,
+      "gpu_util_percent_at_snapshot": 68
+    }
+  },
+  "software_validation_passed_by_user_report": true,
+  "training_started": false,
+  "v2_checkpoint": null,
+  "limits": [
+    "Software/inference-reset integration only, not trained-policy quality",
+    "No fresh source/model hash audit from raw remote files in this receipt",
+    "Resources are a snapshot; must be rechecked before training; leave other process untouched"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "evidence_level": "user-pasted partial comparison and continuation completion output; raw files not downloaded",
+  "reported_on": "2026-11-17",
+  "remote_evidence_dir": "/home/ajifang/zrq/backups/reward_v2_continue_20261116_scKcS4",
+  "candidate_checkpoint": "logs/rsl_rl/lego2_blind_pit_reward_v2/2026-11-16_22-25-03_v2_continue_1024x1900_20261116_222451_3365307/model_2198.pt",
+  "reference_checkpoint_sha256": "b8bc52a8ee370eb94e359bc71d310f5f1cd0ec013cae9e5982b44fb13b8a54a4",
+  "candidate_checkpoint_sha256": "27c1bdf3a05fa3455a16932dd4d5493fef526680575caee01e31a5c0d169248c",
+  "input_report_sha256": {
+    "paired/parent_0.3/report.json": "310301d825a3759a82060d3c7a9bebff22eaee21711681b5a534cd574295ba97",
+    "paired/candidate_0.3/report.json": "ca1681483acada3da94ae714101a0429c19c24a7f30ae11caac24492357c969d"
+  },
+  "condition": {"height_m": 0.3, "speed_m_s": 0.3},
+  "reference": {
+    "n": 3,
+    "passed": 2,
+    "complete": 3,
+    "failed": 0,
+    "mean_speed_rmse": 0.02529424194315438,
+    "clearance_eligible_fraction": 0.5828824397442204,
+    "low_fraction_of_eligible_frames": 0.7071729957805907,
+    "nonfoot_fraction_after_first_complete": 0.3928944618599791,
+    "min_root_rim_m_after_first_complete": 0.21599851548671722
+  },
+  "candidate": {
+    "n": 3,
+    "passed": 3,
+    "complete": 3,
+    "failed": 0,
+    "mean_speed_rmse": 0.029421547741987963,
+    "clearance_eligible_fraction": 0.6022889842632332,
+    "low_fraction_of_eligible_frames": 0.007125890736342043,
+    "nonfoot_fraction_after_first_complete": 0.0,
+    "min_root_rim_m_after_first_complete": 0.3385159373283386
+  },
+  "continuation_completed_by_user_report": true,
+  "limits": [
+    "Only 30 cm at 0.3 m/s was pasted; 3 cm and 30 cm at 0.5 m/s remain unknown",
+    "Full stdout, saved params, resume audit, source/model hashes and actual initial states not independently verified locally",
+    "Low-clearance ratio uses eligible frames across the episode; post-complete contact/height use a different time window",
+    "Zero post-complete nonfoot-contact frames is limited to sampled frames and the sensor force threshold",
+    "Reference has the same reported checkpoint SHA as the previous trial but passed 2/3 rather than 1/3; cross-run reproducibility needs raw initial-state/source/trace checks",
+    "Three episodes are screening only; no formal acceptance or single-term causal conclusion"
+  ]
+}

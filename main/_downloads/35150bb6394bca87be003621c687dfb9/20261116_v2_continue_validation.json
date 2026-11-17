@@ -1,0 +1,46 @@
+{
+  "shell_syntax": true,
+  "mocked_remote_flows": [
+    {
+      "mode": "full",
+      "exit": 0,
+      "uv_calls": 8
+    },
+    {
+      "mode": "check",
+      "exit": 0,
+      "uv_calls": 1
+    },
+    {
+      "mode": "precheck",
+      "exit": 8,
+      "uv_calls": 1
+    },
+    {
+      "mode": "train",
+      "exit": 7,
+      "uv_calls": 2
+    }
+  ],
+  "real_remote_training": false,
+  "budget": {
+    "v1_inferred_samples": 49766400,
+    "v2_planned_samples": 50380800,
+    "v2_reward_updates": 2200
+  },
+  "real_local_cli_and_resume_cpu": "passed; 2-environment update then restore to 4 environments and two updates; synthetic checkpoint only",
+  "restored_states": [
+    "actor including normalization/distribution",
+    "critic including normalization",
+    "optimizer",
+    "actual learning rate",
+    "iteration",
+    "common_step_counter"
+  ],
+  "curriculum_and_simulator_reset": true,
+  "source_or_reward_changes": false,
+  "script_sha256": "21a02bdfdd60d32575b61c89d84803656df574271a67515eea527d626b61b1bc",
+  "frozen_remote_source_manifest_sha256": "eefba622156bc8717e2fbe233718f51ea770daf5097b47517b23ac9471e46261",
+  "local_gpu_available": false,
+  "raw_remote_trial_evidence_downloaded": false
+}
